@@ -5,11 +5,14 @@ import java.util.List;
 
 /**
  *
+ * @param T the type of the elements
+ * @param C the type of the context
+ * 
  * @author fra
  */
 public class Calculator<T,C> {
     private final Interpreter interpreter;
-    private final DefaultSolver<T,C> solver;
+    private final Solver<T,C> solver;
 
     public Calculator(final List<GrammarElement> grammar) {
         this.interpreter = new Interpreter(grammar);
@@ -17,7 +20,7 @@ public class Calculator<T,C> {
     }
 
     public Calculator(final List<GrammarElement> grammar,
-            final DefaultSolver<T,C> solver) {
+            final Solver<T,C> solver) {
         this.interpreter = new Interpreter(grammar);
         this.solver = solver;
     }

@@ -7,8 +7,9 @@ import java.util.List;
  *
  * @author fra
  */
-public abstract class AbstractSolver<T,C> {
+public abstract class AbstractSolver<T,C> implements Solver<T, C> {
 
+    @Override
     public List<T> solve(final List<Node> nodeTree, final C context) {
         final List<T> params = new ArrayList<T>();
         for (Node node : nodeTree) {

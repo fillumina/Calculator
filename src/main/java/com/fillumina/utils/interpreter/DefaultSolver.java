@@ -4,7 +4,10 @@ import com.fillumina.utils.interpreter.grammar.EvaluableGrammarElement;
 import com.fillumina.utils.interpreter.grammar.GrammarElement;
 import java.util.List;
 
-/** 
+/**
+ * @param T the type of the elements
+ * @param C the type of the context
+ *
  * @author fra
  */
 public class DefaultSolver<T,C> extends AbstractSolver<T,C> {
