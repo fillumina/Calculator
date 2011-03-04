@@ -15,7 +15,8 @@ public class UnrecognizedElementParser implements Serializable {
     private final UnrecognizedElement<?,?> unrecognizedElement;
 
     public UnrecognizedElementParser(final List<GrammarElement> grammar) {
-         unrecognizedElement = getUnrecognizeElement(grammar);
+        assertGrammarNotNull(grammar);
+        unrecognizedElement = getUnrecognizeElement(grammar);
     }
 
     public void parse(final List<Node> nodes) {
@@ -30,12 +31,20 @@ public class UnrecognizedElementParser implements Serializable {
 
     private UnrecognizedElement getUnrecognizeElement(
             final List<GrammarElement> grammar) {
-        for (GrammarElement ge: grammar) {
-            if (ge instanceof UnrecognizedElement<?,?>) {
-                return (UnrecognizedElement<?,?>) ge;
+        if (grammar != null) {
+            for (GrammarElement ge: grammar) {
+                if (ge instanceof UnrecognizedElement<?,?>) {
+                    return (UnrecognizedElement<?,?>) ge;
+                }
             }
         }
         return null;
+    }
+
+    private void assertGrammarNotNull(final List<GrammarElement> grammar) {
+        if (grammar == null) {
+            throw new NullPointerException("grammar must not be null");
+        }
     }
 
 }

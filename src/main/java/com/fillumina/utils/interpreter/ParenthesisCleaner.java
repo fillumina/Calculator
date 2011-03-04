@@ -20,7 +20,7 @@ public class ParenthesisCleaner {
                     iterator.add(child.getNodes().get(0));
                     iterator = nodes.listIterator(); // restart the parsing
                 } else if (child.isChildrenNumber(0)) {
-                    throw new SyntaxErrorException("parenthesis mismatched");
+                    throw new ParenthesisMismatchedException("number mismatch");
                 }
             } else {
                 clean(child.getNodes());

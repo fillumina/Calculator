@@ -261,8 +261,8 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
                     final Map<String, Double> context) {
                 final Double value = context.get(node.getValue());
                 if (value == null) {
-                    throw new SyntaxErrorException("variable '" +
-                            node.getValue() + "' not in context");
+                    throw new SyntaxErrorException(node.getValue(),
+                            "variable not in context");
                 }
                 return value;
             }

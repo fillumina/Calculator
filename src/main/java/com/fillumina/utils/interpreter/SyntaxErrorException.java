@@ -7,12 +7,29 @@ package com.fillumina.utils.interpreter;
 public class SyntaxErrorException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    public SyntaxErrorException(final String message) {
-        super(message);
+    private final String offendingElement;
+
+    /** the message is there just for help, should not be used because of I18N */
+    public SyntaxErrorException(final String offendingElement,
+            final String message) {
+        super(createMessage(message, offendingElement));
+        this.offendingElement = offendingElement;
     }
 
-    public SyntaxErrorException(final String message, final Throwable cause) {
-        super(message, cause);
+    /** the message is there just for help, should not be used because of I18N */
+    public SyntaxErrorException(final String offendingElement,
+            final String message, final Throwable e) {
+        super(createMessage(message, offendingElement), e);
+        this.offendingElement = offendingElement;
+    }
+
+    public String getOffendingElement() {
+        return offendingElement;
+    }
+
+    private static String createMessage(final String message,
+            final String offendingElement) {
+        return message + ": " + offendingElement;
     }
 
 }

@@ -18,6 +18,7 @@ public class Tokenizer implements Serializable {
     private final List<GrammarElement> grammar;
 
     public Tokenizer(final List<GrammarElement> grammar) {
+        assertGrammarNotNull(grammar);
         this.grammar = grammar;
     }
 
@@ -78,6 +79,12 @@ public class Tokenizer implements Serializable {
             if (end != length) {
                 iterator.add(new Node(value.substring(end, length)));
             }
+        }
+    }
+
+    private void assertGrammarNotNull(final List<GrammarElement> grammar) {
+        if (grammar == null) {
+            throw new NullPointerException("grammar must not be null");
         }
     }
 
