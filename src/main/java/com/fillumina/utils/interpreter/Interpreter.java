@@ -1,5 +1,6 @@
 package com.fillumina.utils.interpreter;
 
+import com.fillumina.utils.interpreter.treebuilder.ParenthesisCleaner;
 import com.fillumina.utils.interpreter.treebuilder.TreeBuilder;
 import com.fillumina.utils.interpreter.grammar.GrammarElement;
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public class Interpreter implements Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     private final Tokenizer tokenizer;
     private final UnrecognizedElementParser unrecognizedElementParser;
     private final TreeBuilder treeBuilder;

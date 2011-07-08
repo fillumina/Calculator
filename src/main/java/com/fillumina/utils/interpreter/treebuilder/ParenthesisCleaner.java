@@ -1,5 +1,6 @@
-package com.fillumina.utils.interpreter;
+package com.fillumina.utils.interpreter.treebuilder;
 
+import com.fillumina.utils.interpreter.Node;
 import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
 import java.util.List;
 import java.util.ListIterator;
@@ -20,7 +21,7 @@ public class ParenthesisCleaner {
                     iterator.add(child.getNodes().get(0));
                     iterator = nodes.listIterator(); // restart the parsing
                 } else if (child.isChildrenNumber(0)) {
-                    throw new ParenthesisMismatchedException("number mismatch");
+                    throw new ParenthesisMismatchedException();
                 }
             } else {
                 clean(child.getNodes());

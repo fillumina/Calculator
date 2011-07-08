@@ -1,7 +1,8 @@
 package com.fillumina.utils.interpreter.arithmetic;
 
+import com.fillumina.utils.interpreter.treebuilder.ParenthesisMismatchedException;
 import java.util.Map;
-import com.fillumina.utils.interpreter.SyntaxErrorException;
+import com.fillumina.utils.interpreter.EvaluationException;
 import com.fillumina.utils.interpreter.Calculator;
 import org.junit.Before;
 import org.junit.Test;
@@ -187,22 +188,22 @@ public class ArithmeticGrammarTest {
         assertEvaluateTo(-13, "-3 * sin(pi/2) -(8 + 2)");
     }
 
-    @Test(expected=SyntaxErrorException.class)
+    @Test(expected=ParenthesisMismatchedException.class)
     public void shouldDetectTheMissingClosingParenthesis() {
         assertEvaluateTo(-13, "-3 * sin(pi/2 -(8 + 2)");
     }
 
-    @Test(expected=SyntaxErrorException.class)
+    @Test(expected=ContextException.class)
     public void shouldDetectAnInexistentFunction() {
         assertEvaluateTo(-13, "-3 * sinto(pi/2 -(8 + 2))");
     }
 
-    @Test(expected=SyntaxErrorException.class)
+    @Test(expected=ContextException.class)
     public void shouldDetectAnInexistentSymbol() {
         assertEvaluateTo(-13, "-3 @ sin(pi/2 -(8 + 2))");
     }
 
-    @Test(expected=SyntaxErrorException.class)
+    @Test(expected=ContextException.class)
     public void shouldDetectAnEmptyExpression() {
         assertEvaluateTo(-13, "");
     }

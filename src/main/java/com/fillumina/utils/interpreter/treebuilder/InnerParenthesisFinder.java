@@ -28,8 +28,13 @@ public class InnerParenthesisFinder {
             } else if (isCloseParenthesis(node)) {
                 iterator.remove();
                 // extract the list of tokens comprises in the inner parenthesis
-                final List<Node> innerParenthesisList = list.subList(
-                        prevParenthesis.getIndex(), getCurrentIndex(iterator));
+                final List<Node> innerParenthesisList;
+                try {
+                    innerParenthesisList = list.subList(
+                            prevParenthesis.getIndex(), getCurrentIndex(iterator));
+                } catch (IndexOutOfBoundsException e) {
+                    throw new ParenthesisMismatchedException(e);
+                }
                 // add them all to the list of the open parenthesis
                 prevParenthesis.getNode().addAll(innerParenthesisList);
                 // remove them from the main list

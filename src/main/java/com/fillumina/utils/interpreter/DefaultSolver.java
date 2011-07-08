@@ -17,14 +17,14 @@ public class DefaultSolver<T,C> extends AbstractSolver<T,C> {
     public T evaluate(final Node node, final List<T> params, final C context) {
         final GrammarElement grammarElement = node.getGrammarElement();
         if (!(grammarElement instanceof EvaluableGrammarElement<?,?>)) {
-            throw new SyntaxErrorException(node.getValue(), "evaluation error");
+            throw new EvaluationException(node.getValue());
         }
 
         try {
             return ((EvaluableGrammarElement<T,C>)grammarElement)
                     .evaluate(node, params, context);
         } catch (java.lang.IndexOutOfBoundsException e) {
-            throw new SyntaxErrorException(node.getValue(), "evaluation error");
+            throw new EvaluationException(node.getValue());
         }
     }
 }

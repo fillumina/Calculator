@@ -2,7 +2,6 @@ package com.fillumina.utils.interpreter.arithmetic;
 
 import static java.lang.Math.*;
 import com.fillumina.utils.interpreter.Node;
-import com.fillumina.utils.interpreter.SyntaxErrorException;
 import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
 import com.fillumina.utils.interpreter.grammar.EvaluableGrammarElement;
 import com.fillumina.utils.interpreter.grammar.Grammar;
@@ -261,8 +260,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
                     final Map<String, Double> context) {
                 final Double value = context.get(node.getValue());
                 if (value == null) {
-                    throw new SyntaxErrorException(node.getValue(),
-                            "variable not in context");
+                    throw new ContextException(node.getValue());
                 }
                 return value;
             }
