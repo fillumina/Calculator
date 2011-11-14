@@ -12,8 +12,8 @@ import java.util.List;
 public class ReadOperatorParameters {
 
     public void read(final List<Node> list,
-            final int higherPriorityIndex) {
-        int index = higherPriorityIndex;
+            final IndexedNode higherPriority) {
+        int index = higherPriority.getIndex();
         final Node node = list.get(index);
         final Operator<?,?> operator = (Operator<?,?>) node.getGrammarElement();
 
@@ -21,7 +21,7 @@ public class ReadOperatorParameters {
             if (index -1 < 0) {
                 break; // no more operands
             }
-            node.add(list.get(index - 1));
+            node.addChildren(list.get(index - 1));
             list.remove(index - 1);
             index--;
         }
@@ -32,11 +32,11 @@ public class ReadOperatorParameters {
             }
             final Node childNode = list.get(index + 1);
             if (childNode.isOfType(OpenParenthesis.class) && childNode.hasChildren()) {
-                node.addAll(childNode.getNodes());
+                node.addAllChildren(childNode.getChildren());
                 list.remove(index + 1);
                 break;
             }
-            node.add(childNode);
+            node.addChildren(childNode);
             list.remove(index + 1);
         }
     }

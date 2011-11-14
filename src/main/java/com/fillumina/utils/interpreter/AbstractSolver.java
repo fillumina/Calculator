@@ -13,7 +13,7 @@ public abstract class AbstractSolver<T,C> implements Solver<T, C> {
     public List<T> solve(final List<Node> nodeTree, final C context) {
         final List<T> params = new ArrayList<T>();
         for (Node node : nodeTree) {
-            params.add(evaluate(node, solve(node.getNodes(), context), context));
+            params.add(evaluate(node, solve(node.getChildren(), context), context));
         }
         return params;
     }

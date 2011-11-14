@@ -14,6 +14,9 @@ import java.util.ArrayList;
  * name is 'cos' and a variable name which name is 'constant' the constant
  * element should come first.
  *
+ * <b>IMPORTANT:</b> There could be only <b>one</b> (on none at all)
+ * <code>UnrecognizedElement</code> defined in a grammar.
+ *
  * @author fra
  */
 public class Grammar<T,C>

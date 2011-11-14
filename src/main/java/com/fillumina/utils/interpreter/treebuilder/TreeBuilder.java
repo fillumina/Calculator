@@ -11,12 +11,10 @@ import java.util.List;
 public class TreeBuilder implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final InnerParenthesisFinder innerParenthesisFinder;
     private final HigherPriorityOperatorFinder higherPriorityOperatorFinder;
     private final ReadOperatorParameters readOperatorParameters;
 
     public TreeBuilder() {
-        innerParenthesisFinder = new InnerParenthesisFinder();
         higherPriorityOperatorFinder = new HigherPriorityOperatorFinder();
         readOperatorParameters = new ReadOperatorParameters();
     }
@@ -24,23 +22,23 @@ public class TreeBuilder implements Serializable {
     public void createTree(final List<Node> tokenList) {
         Node innerParenthesis;
         while( notNull( innerParenthesis =
-                innerParenthesisFinder.find(tokenList))) {
-            readOperatorsByPriority(innerParenthesis.getNodes());
+                new InnerParenthesisFinder(tokenList).find())) {
+            readOperatorsByPriority(innerParenthesis.getChildren());
         }
 
         readOperatorsByPriority(tokenList);
     }
 
     private void readOperatorsByPriority(final List<Node> list) {
-        int higherPriorityOperatorIndex;
-        while( exists( higherPriorityOperatorIndex =
+        IndexedNode higherPriorityOperator;
+        while( exists( higherPriorityOperator =
                 higherPriorityOperatorFinder.findIndex(list))) {
-            readOperatorParameters.read(list, higherPriorityOperatorIndex);
+            readOperatorParameters.read(list, higherPriorityOperator);
         }
     }
 
-    private boolean exists(final int index) {
-        return index != -1;
+    private boolean exists(final IndexedNode node) {
+        return node != IndexedNode.NULL;
     }
 
     private boolean notNull(final Object obj) {

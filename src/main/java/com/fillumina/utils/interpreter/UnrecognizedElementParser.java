@@ -6,6 +6,11 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * An {@link UnrecognizedElement} is something the {@link Tokenizer} could not
+ * recognize as part of the grammar. It can be use to represents
+ * variables.<br />
+ * This parser assign to unrecognized tokens the {@link UnrecognizedElement}
+ * grammar element.
  *
  * @author fra
  */

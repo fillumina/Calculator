@@ -6,8 +6,9 @@ import java.io.Serializable;
 
 final class IndexedNode implements Comparable<Node>, Serializable {
     private static final long serialVersionUID = 1L;
-    public static final IndexedNode NULL = new IndexedNode(null, -1);
-    
+    public static final IndexedNode NULL =
+            new IndexedNode(null, Integer.MIN_VALUE);
+
     private final Node node;
     private final int index;
 

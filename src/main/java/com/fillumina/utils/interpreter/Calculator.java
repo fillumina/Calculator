@@ -5,9 +5,9 @@ import java.util.List;
 
 /**
  *
- * @param T the type of the elements
- * @param C the type of the context
- * 
+ * @param T the type of the elements (i.e. <code>Double</code>)
+ * @param C the type of the context (i.e. <code>Map&lt;String, Double&gt;</code>)
+ *
  * @author fra
  */
 public class Calculator<T,C> {

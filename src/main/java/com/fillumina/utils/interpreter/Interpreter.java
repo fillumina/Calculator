@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * It parses a string expression and build a solving tree according to the
+ * given grammar.
  *
  * @author fra
  */

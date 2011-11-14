@@ -18,13 +18,13 @@ public class ParenthesisCleaner {
             if (child.isOfType(OpenParenthesis.class)) {
                 if (child.hasOnlyOneChild()) {
                     iterator.remove();
-                    iterator.add(child.getNodes().get(0));
+                    iterator.add(child.getChildren().get(0));
                     iterator = nodes.listIterator(); // restart the parsing
                 } else if (child.isChildrenNumber(0)) {
                     throw new ParenthesisMismatchedException();
                 }
             } else {
-                clean(child.getNodes());
+                clean(child.getChildren());
             }
         }
     }

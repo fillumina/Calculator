@@ -9,7 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *
+ * Uses the grammar to recognize the grammar's element in a string expression.
+ * 
  * @author fra
  */
 public class Tokenizer implements Serializable {
@@ -30,7 +31,7 @@ public class Tokenizer implements Serializable {
         for (GrammarElement ge: grammar) {
             recognizeGrammarElement(list, ge);
         }
-        
+
         return list;
     }
 
@@ -57,15 +58,15 @@ public class Tokenizer implements Serializable {
             final Node node,
             final Matcher matcher,
             final GrammarElement ge) {
-        
+
         final int start = matcher.start();
         final int end = matcher.end();
         final String value = node.getValue();
-        final int length = value.length();
+        final int valueLength = value.length();
 
         if (start == end) {
             throw new RuntimeException("* jolly not allowed in " + ge);
-        } else if (start == 0 && end == length) {
+        } else if (start == 0 && end == valueLength) {
             node.setGrammarElement(ge);
         } else {
             iterator.remove();
@@ -76,15 +77,15 @@ public class Tokenizer implements Serializable {
 
             iterator.add(new Node(value.substring(start, end), ge));
 
-            if (end != length) {
-                iterator.add(new Node(value.substring(end, length)));
+            if (end != valueLength) {
+                iterator.add(new Node(value.substring(end, valueLength)));
             }
         }
     }
 
     private void assertGrammarNotNull(final List<GrammarElement> grammar) {
         if (grammar == null) {
-            throw new NullPointerException("grammar must not be null");
+            throw new IllegalArgumentException("grammar must not be null");
         }
     }
 

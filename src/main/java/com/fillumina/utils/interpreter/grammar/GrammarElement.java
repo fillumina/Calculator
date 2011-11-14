@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.regex.Pattern;
 
 /**
- * 
+ *
  * @author fra
  */
 public class GrammarElement
@@ -16,12 +16,17 @@ public class GrammarElement
 
     private final Pattern regexp;
 
+    /**
+     *
+     * @param symbolRegexp  to recognize the element in a string
+     * @param priority      the highest the number the more priority has
+     *                      the element.
+     */
     public GrammarElement(final String symbolRegexp,
             final int priority) {
         this.symbolRegexp = symbolRegexp;
         this.priority = priority;
-
-        regexp = Pattern.compile(symbolRegexp);
+        this.regexp = Pattern.compile(symbolRegexp);
     }
 
     public Pattern getPattern() {
@@ -50,5 +55,5 @@ public class GrammarElement
     public String toString() {
         return symbolRegexp;
     }
-    
+
 }

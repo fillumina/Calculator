@@ -2,7 +2,6 @@ package com.fillumina.utils.interpreter.arithmetic;
 
 import com.fillumina.utils.interpreter.treebuilder.ParenthesisMismatchedException;
 import java.util.Map;
-import com.fillumina.utils.interpreter.EvaluationException;
 import com.fillumina.utils.interpreter.Calculator;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,8 +18,9 @@ public class ArithmeticGrammarTest {
 
     @Before
     public void init() {
-        calculator = new Calculator<Double,Map<String, Double>>(ArithmeticGrammar.INSTANCE);
-        context = ArithmeticGrammar.INSTANCE.createContext();
+        final ArithmeticGrammar grammar = ArithmeticGrammar.INSTANCE;
+        calculator = new Calculator<Double,Map<String, Double>>(grammar);
+        context = grammar.createContext();
     }
 
     private void assertEvaluateTo(final double expected, final String expression) {
@@ -108,6 +108,10 @@ public class ArithmeticGrammarTest {
         assertEvaluateTo(0, "2 - ((8 + 4) / (2 * 3))");
     }
 
+    public void shouldManageAnEmptyParenthesis() {
+        assertEvaluateTo(-1, "2 - ()3");
+    }
+
     @Test
     public void shouldSolveAMixOfFunctionAndOperators() {
         assertEvaluateTo(1.7, "sin(pi/(4/2)) + 0.7");
@@ -116,6 +120,12 @@ public class ArithmeticGrammarTest {
     @Test
     public void shouldEvaluateSqr() {
         assertEvaluateTo(32, "sqr(1024)");
+    }
+
+    @Test
+    public void shouldSolveANoParameterOperator() {
+        final Double result = calculator.solve("rnd()", context).get(0);
+        assertTrue(result > 0 && result < 1);
     }
 
     @Test

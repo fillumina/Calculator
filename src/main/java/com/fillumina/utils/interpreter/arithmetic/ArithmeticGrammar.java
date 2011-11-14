@@ -144,8 +144,19 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             }
         });
 
+        // doesn't accept any parameter
+        add(new Operator<Double,Map<String, Double>>("rnd", 4, 0, 0) {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public Double evaluate(final Node node, final List<Double> params,
+                    final Map<String, Double> context) {
+                return Math.random();
+            }
+        });
+
         // accepts many parameters
-        add(new Operator<Double,Map<String, Double>>("avg", 4, 0, 1000) {
+        add(new Operator<Double,Map<String, Double>>("avg", 4, 0, Integer.MAX_VALUE) {
             private static final long serialVersionUID = 1L;
 
             @Override

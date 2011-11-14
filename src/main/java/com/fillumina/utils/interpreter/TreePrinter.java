@@ -28,7 +28,7 @@ public class TreePrinter {
             final int level,
             final Node node) {
         builder.append(spaces(level)).append(node.getValue()).append("\n");
-        for (Node n: node.getNodes()) {
+        for (Node n: node.getChildren()) {
             addSubNodes(builder, level + 1, n);
         }
     }

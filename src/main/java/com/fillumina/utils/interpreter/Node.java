@@ -14,11 +14,13 @@ import java.util.List;
 public class Node implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static final Node NULL = new Node(null);
+
     private final String value;
     private GrammarElement grammarElement;
 
     @SuppressWarnings("unchecked")
-    private List<Node> nodes = Collections.EMPTY_LIST;
+    private List<Node> children = Collections.EMPTY_LIST;
 
     public Node(final String value) {
         this.value = value;
@@ -29,16 +31,27 @@ public class Node implements Serializable {
         this.grammarElement = grammarElement;
     }
 
+    public Node addChildren(final Node node) {
+        if (children == Collections.EMPTY_LIST) {
+            children = new ArrayList<Node>();
+        }
+        children.add(node);
+        return this;
+    }
+
+    public Node addAllChildren(final Collection<Node> nodes) {
+        for (Node node: nodes) {
+            addChildren(node);
+        }
+        return this;
+    }
+
+    public List<Node> getChildren() {
+        return children;
+    }
+
     public String getValue() {
         return value;
-    }
-
-    public boolean isUnrecognized() {
-        return grammarElement == null;
-    }
-
-    public boolean hasNoParameters() {
-        return nodes == Collections.EMPTY_LIST;
     }
 
     public GrammarElement getGrammarElement() {
@@ -49,45 +62,34 @@ public class Node implements Serializable {
         this.grammarElement = grammarElement;
     }
 
-    public Node add(final Node node) {
-        if (nodes == Collections.EMPTY_LIST) {
-            nodes = new ArrayList<Node>();
-        }
-        nodes.add(node);
-        return this;
+    public boolean isUnrecognized() {
+        return grammarElement == null;
     }
 
-    public Node addAll(final Collection<Node> nodes) {
-        for (Node node: nodes) {
-            add(node);
-        }
-        return this;
-    }
-
-    public List<Node> getNodes() {
-        return nodes;
-    }
-
-    @Override
-    public String toString() {
-        return "{" + value + 
-                (nodes == Collections.EMPTY_LIST ? "" : (" -> " + nodes)) + '}';
+    public boolean hasNoChildren() {
+        return getChildren().isEmpty();
     }
 
     public boolean hasChildren() {
-        return getNodes().size() != 0;
+        return !hasNoChildren();
     }
 
     public boolean hasOnlyOneChild() {
-        return getNodes().size() == 1;
+        return getChildren().size() == 1;
     }
 
     public boolean isChildrenNumber(final int number) {
-        return getNodes().size() == number;
+        return getChildren().size() == number;
     }
 
     public boolean isOfType(final Class<? extends GrammarElement> clazz) {
         return clazz.isInstance(getGrammarElement());
+    }
+
+    @Override
+    public String toString() {
+        return "{" + value +
+                (children == Collections.EMPTY_LIST ? "" : (" -> " + children)) + '}';
     }
 
 }

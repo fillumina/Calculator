@@ -10,7 +10,8 @@ import java.util.ListIterator;
  * @author fra
  */
 public class HigherPriorityOperatorFinder {
-    public int findIndex(final List<Node> list) {
+
+    public IndexedNode findIndex(final List<Node> list) {
         IndexedNode higherPriorityNode = IndexedNode.NULL;
 
         if (list.size() > 1) {
@@ -22,13 +23,12 @@ public class HigherPriorityOperatorFinder {
                         (isNull(higherPriorityNode) ||
                         higherPriorityNode.lessThan(currentNode))) {
 
-                    higherPriorityNode =
-                            new IndexedNode(currentNode,
-                            iterator.previousIndex());
+                    higherPriorityNode = new IndexedNode(
+                            currentNode, iterator.previousIndex());
                 }
             }
         }
-        return higherPriorityNode.getIndex();
+        return higherPriorityNode;
     }
 
     private boolean isNull(final IndexedNode higherPriorityNode) {
@@ -37,6 +37,6 @@ public class HigherPriorityOperatorFinder {
 
     private boolean isEmptyOperator(final Node currentNode) {
         return currentNode.getGrammarElement() instanceof Operator<?, ?> &&
-                currentNode.hasNoParameters();
+                currentNode.hasNoChildren();
     }
 }
