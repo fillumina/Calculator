@@ -4,6 +4,12 @@ import com.fillumina.utils.interpreter.Node;
 import com.fillumina.utils.interpreter.grammar.GrammarElement;
 import java.io.Serializable;
 
+/**
+ * It's an helper bean that contains both the node and node's index
+ * in a given list.
+ *
+ * @author fra
+ */
 class IndexedNode implements Comparable<Node>, Serializable {
     private static final long serialVersionUID = 1L;
     public static final IndexedNode NULL =

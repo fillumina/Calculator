@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- *
+ * Removes the parenthesis with only one children (parameter)
  * @author fra
  */
 public class ParenthesisCleaner {

@@ -13,8 +13,8 @@ import java.util.ListIterator;
 public class InnerParenthesisFinder {
 
     /**
-     * Extract a sublist of the inner parenthesis content and put it
-     * in the parameters of the open parenthesis (the close one is removed).
+     * Extracts a sublist of the inner parenthesis content and put it
+     * in the children of the open parenthesis while the close one is removed.
      */
     public Node find(final List<Node> nodeList) {
         FinderNode openPar = null;
@@ -27,7 +27,7 @@ public class InnerParenthesisFinder {
                 openPar = node;
 
             } else if (node.isACloseParenthesis()) {
-                assertThereIsAnOpenParenthesisBefore(openPar);
+                assertThereWasAnOpenParenthesisBefore(openPar);
                 node.remove();
                 if (openPar.isPreviousThan(node)) {
                     openPar.remove();
@@ -48,14 +48,13 @@ public class InnerParenthesisFinder {
         }
     }
 
-    private void assertThereIsAnOpenParenthesisBefore(final FinderNode openPar) {
+    private void assertThereWasAnOpenParenthesisBefore(final FinderNode openPar) {
         if (openPar == null) {
             throw new ParenthesisMismatchedException();
         }
     }
 
     private static class FinderNode extends IndexedNode {
-
         private static final long serialVersionUID = 1L;
         private final ListIterator<Node> iterator;
 
@@ -74,10 +73,6 @@ public class InnerParenthesisFinder {
         private void remove() {
             iterator.remove();
             iterator.previous();
-        }
-
-        private boolean isPreviousThan(final FinderNode node) {
-            return getIndex() == node.getIndex() - 1;
         }
 
         private class Extractor {
@@ -105,6 +100,10 @@ public class InnerParenthesisFinder {
 
         private Extractor fromList(final List<Node> nodeList) {
             return new Extractor(nodeList);
+        }
+
+        private boolean isPreviousThan(final FinderNode node) {
+            return getIndex() == node.getIndex() - 1;
         }
 
         private boolean isACloseParenthesis() {
