@@ -2,9 +2,9 @@ package com.fillumina.utils.interpreter;
 
 import com.fillumina.utils.interpreter.grammar.GrammarElement;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -33,7 +33,7 @@ public class Node implements Serializable {
 
     public Node addChildren(final Node node) {
         if (children == Collections.EMPTY_LIST) {
-            children = new ArrayList<Node>();
+            children = new LinkedList<Node>();
         }
         children.add(node);
         return this;

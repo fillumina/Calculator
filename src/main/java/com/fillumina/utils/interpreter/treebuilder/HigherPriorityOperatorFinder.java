@@ -1,7 +1,6 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
 import com.fillumina.utils.interpreter.Node;
-import com.fillumina.utils.interpreter.grammar.Operator;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -17,26 +16,17 @@ public class HigherPriorityOperatorFinder {
         if (list.size() > 1) {
             final ListIterator<Node> iterator = list.listIterator();
             while (iterator.hasNext()) {
-                final Node currentNode = iterator.next();
+                final IndexedNode currentNode = IndexedNode.nextFrom(iterator);
 
-                if (isEmptyOperator(currentNode) &&
-                        (isNull(higherPriorityNode) ||
+                if (currentNode.isEmptyOperator() &&
+                        (higherPriorityNode.isNull() ||
                         higherPriorityNode.lessThan(currentNode))) {
 
-                    higherPriorityNode = new IndexedNode(
-                            currentNode, iterator.previousIndex());
+                    higherPriorityNode = currentNode;
                 }
             }
         }
         return higherPriorityNode;
     }
 
-    private boolean isNull(final IndexedNode higherPriorityNode) {
-        return IndexedNode.NULL == higherPriorityNode;
-    }
-
-    private boolean isEmptyOperator(final Node currentNode) {
-        return currentNode.getGrammarElement() instanceof Operator<?, ?> &&
-                currentNode.hasNoChildren();
-    }
 }
