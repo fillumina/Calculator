@@ -89,10 +89,11 @@ public class InnerParenthesisFinder {
 
             private void extractInnerNodesUpTo(final IndexedNode upTo) {
                 try {
-                    final List<Node> innerParenthesisList = nodeList.subList(
-                            getIndex() + 1, upTo.getIndex());
+                    final int start = getIndex() + 1;
+                    final int end = upTo.getIndex();
+                    final List<Node> innerParenthesisList =
+                            nodeList.subList(start, end);
                     getNode().addAllChildren(innerParenthesisList);
-                    // remove them from the main list
                     // NOTE: removing from a sublist removes from the list
                     // it belongs from (a sublist is a view of the belonging-from list)
                     innerParenthesisList.clear();
@@ -100,7 +101,6 @@ public class InnerParenthesisFinder {
                     throw new ParenthesisMismatchedException(e);
                 }
             }
-
         }
 
         private Extractor fromList(final List<Node> nodeList) {

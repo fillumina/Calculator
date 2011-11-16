@@ -22,9 +22,9 @@ public class InnerParenthesisFinderTest
 
     @Test
     public void shouldRecognizeOneParenthesisWithOneNodeInIt() {
-        final List<Node> list = buildNodeList("1(2)");
+        final List<Node> list = buildNodeList("1(23)");
         ipf.find(list);
-        assertEquals(1, list.get(1).getChildren().size());
+        assertEquals(2, list.get(1).getChildren().size());
     }
 
     @Test
@@ -55,9 +55,9 @@ public class InnerParenthesisFinderTest
 
     @Test
     public void shouldDoubleParenthesisBeManaged() {
-        final List<Node> list = buildNodeList("12((3)4)5");
+        final List<Node> list = buildNodeList("12((34)5)6");
         ipf.find(list);
-        assertEquals("12((4)5", buildExpression(list));
+        assertEquals("12((5)6", buildExpression(list));
     }
 
     @Test

@@ -224,6 +224,16 @@ public class ArithmeticGrammarTest {
     }
 
     @Test
+    public void shouldCalculateTheAverageOfOneOperand() {
+        assertEvaluateTo(6, "avg(6)");
+    }
+
+    @Test
+    public void shouldCalculateTheAverageOfOneOperandInAnExpression() {
+        assertEvaluateTo(6, "2 * avg(6) / 2");
+    }
+
+    @Test
     public void shouldCalculateTheAverageOfTwoOperands() {
         assertEvaluateTo(5, "avg(4 6)");
     }
