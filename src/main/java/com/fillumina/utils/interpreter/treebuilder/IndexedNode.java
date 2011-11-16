@@ -4,7 +4,7 @@ import com.fillumina.utils.interpreter.Node;
 import com.fillumina.utils.interpreter.grammar.GrammarElement;
 import java.io.Serializable;
 
-final class IndexedNode implements Comparable<Node>, Serializable {
+class IndexedNode implements Comparable<Node>, Serializable {
     private static final long serialVersionUID = 1L;
     public static final IndexedNode NULL =
             new IndexedNode(null, Integer.MIN_VALUE);
@@ -33,5 +33,10 @@ final class IndexedNode implements Comparable<Node>, Serializable {
     public int compareTo(final Node o) {
         final GrammarElement ge = o.getGrammarElement();
         return this.node.getGrammarElement().compareTo(ge);
+    }
+
+    @Override
+    public String toString() {
+        return "IndexedNode{" + "node=" + node + ", index=" + index + '}';
     }
 }
