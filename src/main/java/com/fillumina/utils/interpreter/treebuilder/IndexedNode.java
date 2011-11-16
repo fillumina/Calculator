@@ -19,7 +19,7 @@ class IndexedNode implements Comparable<Node>, Serializable {
 
     private static final long serialVersionUID = 1L;
     public static final IndexedNode NULL =
-            new IndexedNode(null, Integer.MIN_VALUE);
+            new IndexedNode(null, Integer.MIN_VALUE, null);
 
     private final Node node;
     private final int index;
@@ -36,10 +36,6 @@ class IndexedNode implements Comparable<Node>, Serializable {
         this.node = node;
         this.index = index;
         this.iterator = iterator;
-    }
-
-    public IndexedNode(final Node node, final int index) {
-        this(node, index, null);
     }
 
     public int getIndex() {
