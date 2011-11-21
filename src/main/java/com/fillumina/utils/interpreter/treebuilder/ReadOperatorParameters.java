@@ -55,7 +55,6 @@ public class ReadOperatorParameters {
             operandsAfter = operator.getRequiredOperandsAfter();
             final int leftOperands = operator.getRequiredOperandsBefore();
             final int startIndex = indexedNode.getIndex() - leftOperands;
-            
             if (startIndex < 0 ) {
                 startOperandsIndex = 0;
                 operandsBefore = indexedNode.getIndex() - 1;

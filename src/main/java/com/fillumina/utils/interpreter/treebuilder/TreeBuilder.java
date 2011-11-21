@@ -39,12 +39,11 @@ public class TreeBuilder implements Serializable {
         }
     }
 
-    private boolean exists(final IndexedNode node) {
-        return node != IndexedNode.NULL;
-    }
-
     private boolean notNull(final Object obj) {
         return obj != null;
     }
 
+    private boolean exists(final IndexedNode node) {
+        return node != IndexedNode.NULL;
+    }
 }

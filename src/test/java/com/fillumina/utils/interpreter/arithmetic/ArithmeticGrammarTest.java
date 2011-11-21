@@ -285,4 +285,14 @@ public class ArithmeticGrammarTest {
         assertEquals(7.0, context.get("x"), 1E-7);
         assertEquals(35.0, context.get("y"), 1E-7);
     }
+
+    @Test
+    public void shouldCalculateTheFactorial() {
+        assertEvaluateTo(24.0, "4!");
+    }
+
+    @Test
+    public void shouldCalculateTheFactorialOfAParenthesis() {
+        assertEvaluateTo(24.0, "(1 / 2 * 8)!");
+    }
 }

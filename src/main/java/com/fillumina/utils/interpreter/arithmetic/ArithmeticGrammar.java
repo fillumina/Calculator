@@ -52,6 +52,22 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             }
         });
 
+        add(new Operator<Double,Map<String, Double>>("!", 5, 1, 0) {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public Double evaluate(final Node node, final List<Double> params,
+                    final Map<String, Double> context) {
+                final Double value = params.get(0);
+                final long ivalue = round(value);
+                long result = 1;
+                for (long l=1; l<=ivalue; l++) {
+                    result *= l;
+                }
+                return Double.valueOf(String.valueOf(result));
+            }
+        });
+
         add(new Operator<Double,Map<String, Double>>("asin", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
