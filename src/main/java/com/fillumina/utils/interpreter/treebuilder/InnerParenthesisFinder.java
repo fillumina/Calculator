@@ -32,7 +32,7 @@ public class InnerParenthesisFinder {
                     openPar = null;
                 } else {
                     getList(nodeList).from(openPar).to(node)
-                            .extractInnerNodesTo(openPar);
+                            .extractInnerNodesToChildrenOf(openPar);
                     return openPar.getNode();
                 }
             }
@@ -71,7 +71,7 @@ public class InnerParenthesisFinder {
             return this;
         }
 
-        private void extractInnerNodesTo(final IndexedNode target) {
+        private void extractInnerNodesToChildrenOf(final IndexedNode target) {
             try {
                 final int startIdx = start.getIndex() + 1;
                 final int endIdx = end.getIndex();

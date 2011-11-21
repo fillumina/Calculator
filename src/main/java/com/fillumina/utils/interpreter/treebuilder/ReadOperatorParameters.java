@@ -13,32 +13,57 @@ public class ReadOperatorParameters {
 
     public void read(final List<Node> list,
             final IndexedNode higherPriority) {
-        int index = higherPriority.getIndex();
+        final int index = higherPriority.getIndex();
         final Node node = list.get(index);
-        final Operator<?,?> operator = (Operator<?,?>) node.getGrammarElement();
 
-        for (int i=0, max=operator.getRequiredOperandsBefore(); i<max; i++) {
-            if (index -1 < 0) {
-                break; // no more operands
+        final OperatorParameters operator =
+                new OperatorParameters(higherPriority);
+
+        final ExtendedListIterator<Node> iterator =
+                new ExtendedListIterator<Node>(list, operator.startOperandsIndex);
+
+        for (int i=0; i<operator.operandsBefore; i++) {
+            if (!iterator.hasNext()) {
+                break;
             }
-            node.addChildren(list.get(index - 1));
-            list.remove(index - 1);
-            index--;
+            node.addChildren(iterator.nextAndRemove());
         }
 
-        for (int i=0, max=operator.getRequiredOperandsAfter(); i<max; i++) {
-            if (index + 1 >= list.size()) {
-                break; // no more operands
+        iterator.next(); // jump over the node
+
+        for (int i=0; i<operator.operandsAfter; i++) {
+            if (!iterator.hasNext()) {
+                break;
             }
-            final Node childNode = list.get(index + 1);
+            final Node childNode = iterator.nextAndRemove();
             if (childNode.isOfType(OpenParenthesis.class) && childNode.hasChildren()) {
                 node.addAllChildren(childNode.getChildren());
-                list.remove(index + 1);
                 break;
             }
             node.addChildren(childNode);
-            list.remove(index + 1);
         }
     }
 
+    private static class OperatorParameters {
+        private final int startOperandsIndex;
+        private final int operandsBefore;
+        private final int operandsAfter;
+
+        public OperatorParameters(final IndexedNode indexedNode) {
+            final Operator<?,?> operator = (Operator<?,?>)
+                    indexedNode.getNode().getGrammarElement();
+            operandsAfter = operator.getRequiredOperandsAfter();
+            final int leftOperands = operator.getRequiredOperandsBefore();
+            final int startIndex = indexedNode.getIndex() - leftOperands;
+            
+            if (startIndex < 0 ) {
+                startOperandsIndex = 0;
+                operandsBefore = indexedNode.getIndex() - 1;
+            } else {
+                startOperandsIndex = startIndex;
+                operandsBefore = leftOperands;
+            }
+        }
+
+    }
 }
