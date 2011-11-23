@@ -10,7 +10,7 @@ import java.util.ListIterator;
  */
 public class HigherPriorityOperatorFinder {
 
-    public IndexedNode findIndex(final List<Node> list) {
+    public IndexedNode find(final List<Node> list) {
         IndexedNode higherPriorityNode = IndexedNode.NULL;
 
         if (list.size() > 1) {

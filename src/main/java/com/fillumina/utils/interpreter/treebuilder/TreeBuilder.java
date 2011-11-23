@@ -21,21 +21,21 @@ public class TreeBuilder implements Serializable {
         readOperatorParameters = new ReadOperatorParameters();
     }
 
-    public void createTree(final List<Node> tokenList) {
+    public void createTree(final List<Node> nodeList) {
         Node innerParenthesis;
         while( notNull( innerParenthesis =
-                innerParenthesisFinder.find(tokenList))) {
+                innerParenthesisFinder.find(nodeList))) {
             readOperatorsByPriority(innerParenthesis.getChildren());
         }
 
-        readOperatorsByPriority(tokenList);
+        readOperatorsByPriority(nodeList);
     }
 
-    private void readOperatorsByPriority(final List<Node> list) {
+    private void readOperatorsByPriority(final List<Node> nodeList) {
         IndexedNode higherPriorityOperator;
         while( exists( higherPriorityOperator =
-                higherPriorityOperatorFinder.findIndex(list))) {
-            readOperatorParameters.read(list, higherPriorityOperator);
+                higherPriorityOperatorFinder.find(nodeList))) {
+            readOperatorParameters.read(nodeList, higherPriorityOperator);
         }
     }
 
