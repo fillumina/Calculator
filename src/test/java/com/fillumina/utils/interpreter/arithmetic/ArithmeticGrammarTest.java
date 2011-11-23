@@ -301,4 +301,19 @@ public class ArithmeticGrammarTest {
         assertEvaluateTo(4.0, "4! / 8 + 1");
     }
 
+    @Test
+    public void shoudFlatifyTheArgumentsOnParenthesis() {
+        assertEvaluateTo(2.0, "avg 1 (2 3)");
+    }
+
+    @Test
+    public void shoudReadOnlyTheArgumentsOnParenthesis() {
+        assertEvaluateTo(2.5, "avg(2 3) 1");
+    }
+
+    @Test
+    public void shouldSimplifyPartialSolvableExpressions() {
+        assertEvaluateTo(0.0, "x - 2");
+    }
+
 }

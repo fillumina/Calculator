@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * {@link GrammarElement}s should be added in order of parsing priority,
  * higher priority first. This means that if you have a function which
  * name is 'cos' and a variable name which name is 'constant' the constant
- * element should come first.
+ * element should come first.<br />
  *
  * <b>IMPORTANT:</b> There could be only <b>one</b> (on none at all)
  * <code>UnrecognizedElement</code> defined in a grammar.

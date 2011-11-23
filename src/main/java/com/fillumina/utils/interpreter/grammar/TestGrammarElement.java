@@ -1,13 +1,15 @@
 package com.fillumina.utils.interpreter.grammar;
 
 /**
+ * Used mainly in tests to return elements as they are without further
+ * processing.
  *
  * @author fra
  */
-public class NotExecutableGrammarElement extends GrammarElement {
+public class TestGrammarElement extends GrammarElement {
     private static final long serialVersionUID = 1L;
 
-    public NotExecutableGrammarElement(final String symbolRegexp,
+    public TestGrammarElement(final String symbolRegexp,
             final int priority) {
         super(symbolRegexp, priority);
     }

@@ -1,6 +1,8 @@
 package com.fillumina.utils.interpreter.grammar;
 
 /**
+ * Defines characters that will be ignored during parsing (usually spaces,
+ * commas, tabs, linefeeds and the like).
  *
  * @author fra
  */

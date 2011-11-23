@@ -4,7 +4,7 @@ import com.fillumina.utils.interpreter.Node;
 import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
 import com.fillumina.utils.interpreter.grammar.GrammarElement;
 import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
-import com.fillumina.utils.interpreter.grammar.Operator;
+import com.fillumina.utils.interpreter.grammar.AbstractOperator;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ListIterator;
@@ -107,7 +107,7 @@ class IndexedNode implements Comparable<Node>, Serializable {
     }
 
     public boolean isEmptyOperator() {
-        return getNode().getGrammarElement() instanceof Operator<?, ?> &&
+        return getNode().getGrammarElement() instanceof AbstractOperator<?, ?> &&
                 getNode().hasNoChildren();
     }
 

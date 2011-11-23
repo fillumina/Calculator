@@ -1,7 +1,7 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.grammar.NotExecutableGrammarElement;
-import com.fillumina.utils.interpreter.grammar.NotExecutableOperator;
+import com.fillumina.utils.interpreter.grammar.TestGrammarElement;
+import com.fillumina.utils.interpreter.grammar.TestOperator;
 import com.fillumina.utils.interpreter.grammar.Grammar;
 import com.fillumina.utils.interpreter.grammar.GrammarElement;
 import java.util.List;
@@ -16,8 +16,8 @@ public class TokenizerTest {
 
     @Test
     public void shouldTokenizeThreeOperands() {
-        final GrammarElement operator = new NotExecutableOperator("\\*", 0, 1, 1);
-        final GrammarElement number = new NotExecutableGrammarElement("\\d+", 0);
+        final GrammarElement operator = new TestOperator("\\*", 0, 1, 1);
+        final GrammarElement number = new TestGrammarElement("\\d+", 0);
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(number).put(operator);
 
@@ -29,9 +29,9 @@ public class TokenizerTest {
 
     @Test
     public void shouldTokenizeTwoOperations() {
-        final GrammarElement multiply = new NotExecutableOperator("\\*", 0, 1, 1);
-        final GrammarElement sum = new NotExecutableOperator("\\+", 0, 1, 1);
-        final GrammarElement number = new NotExecutableGrammarElement("\\d+", 0);
+        final GrammarElement multiply = new TestOperator("\\*", 0, 1, 1);
+        final GrammarElement sum = new TestOperator("\\+", 0, 1, 1);
+        final GrammarElement number = new TestGrammarElement("\\d+", 0);
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(number).put(multiply).put(sum);
 
@@ -43,9 +43,9 @@ public class TokenizerTest {
 
     @Test
     public void shouldTokenizeUnrecognizedStrings() {
-        final GrammarElement multiply = new NotExecutableOperator("\\*", 0, 1, 1);
-        final GrammarElement sum = new NotExecutableOperator("\\+", 0, 1, 1);
-        final GrammarElement number = new NotExecutableGrammarElement("\\d+", 0);
+        final GrammarElement multiply = new TestOperator("\\*", 0, 1, 1);
+        final GrammarElement sum = new TestOperator("\\+", 0, 1, 1);
+        final GrammarElement number = new TestGrammarElement("\\d+", 0);
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(number).put(multiply).put(sum);
 

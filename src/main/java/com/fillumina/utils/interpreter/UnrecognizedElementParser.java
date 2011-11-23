@@ -1,7 +1,7 @@
 package com.fillumina.utils.interpreter;
 
 import com.fillumina.utils.interpreter.grammar.GrammarElement;
-import com.fillumina.utils.interpreter.grammar.UnrecognizedElement;
+import com.fillumina.utils.interpreter.grammar.AbstractUnrecognizedElement;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class UnrecognizedElementParser implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final UnrecognizedElement<?,?> unrecognizedElement;
+    private final AbstractUnrecognizedElement<?,?> unrecognizedElement;
 
     public UnrecognizedElementParser(final List<GrammarElement> grammar) {
         assertGrammarNotNull(grammar);
@@ -34,12 +34,12 @@ public class UnrecognizedElementParser implements Serializable {
         }
     }
 
-    private UnrecognizedElement getUnrecognizeElement(
+    private AbstractUnrecognizedElement getUnrecognizeElement(
             final List<GrammarElement> grammar) {
         if (grammar != null) {
             for (GrammarElement ge: grammar) {
-                if (ge instanceof UnrecognizedElement<?,?>) {
-                    return (UnrecognizedElement<?,?>) ge;
+                if (ge instanceof AbstractUnrecognizedElement<?,?>) {
+                    return (AbstractUnrecognizedElement<?,?>) ge;
                 }
             }
         }

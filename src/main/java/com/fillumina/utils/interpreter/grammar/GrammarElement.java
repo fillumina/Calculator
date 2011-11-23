@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.regex.Pattern;
 
 /**
+ * It's a element in the grammar that has a specific priority over other elements
+ * and a regular expression which is used to identify it in a string expression.
  *
  * @author fra
  */
@@ -14,11 +16,12 @@ public class GrammarElement
     private final String symbolRegexp; // regexp expression
     private final int priority; // priority
 
-    private final Pattern regexp;
+    private final Pattern pattern;
 
     /**
      *
-     * @param symbolRegexp  to recognize the element in a string
+     * @param symbolRegexp  a regular expression used to recognize the element
+     *                      in a string
      * @param priority      the highest the number the more priority has
      *                      the element.
      */
@@ -26,11 +29,11 @@ public class GrammarElement
             final int priority) {
         this.symbolRegexp = symbolRegexp;
         this.priority = priority;
-        this.regexp = Pattern.compile(symbolRegexp);
+        this.pattern = Pattern.compile(symbolRegexp);
     }
 
     public Pattern getPattern() {
-        return regexp;
+        return pattern;
     }
 
     public int getPriority() {

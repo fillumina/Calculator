@@ -1,17 +1,24 @@
 package com.fillumina.utils.interpreter.grammar;
 
 /**
+ * An operator is an evaluable element that expects some arguments
+ * possibly before and/or after its symbol.
+ * The argument's number is only a maximal, the actual number
+ * depends on their effective availability.
  *
  * @param <T> the base element type this operator work on
+ * @param <C> the type of the context
+ *
  * @author fra
  */
-public abstract class Operator<T,C> extends EvaluableGrammarElement<T,C> {
+public abstract class AbstractOperator<T,C>
+        extends AbstractEvaluableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     private final int requiredOperandsBefore;
     private final int requiredOperandsAfter;
 
-    public Operator(final String symbolRegexp,
+    public AbstractOperator(final String symbolRegexp,
             final int priority,
             final int requiredOperandsBefore,
             final int requiredOperandsAfter) {

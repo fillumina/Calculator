@@ -2,7 +2,7 @@ package com.fillumina.utils.interpreter.treebuilder;
 
 import com.fillumina.utils.interpreter.Node;
 import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
-import com.fillumina.utils.interpreter.grammar.EvaluableGrammarElement;
+import com.fillumina.utils.interpreter.grammar.AbstractEvaluableGrammarElement;
 import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class InnerParenthesisFinderTestHelper {
         private static final long serialVersionUID = 1L;
 
         public EvaluableNode(final String value) {
-            super(value, new EvaluableGrammarElement<Long, Void>("\\" +value, 1) {
+            super(value, new AbstractEvaluableGrammarElement<Long, Void>("\\" +value, 1) {
 
                 private static final long serialVersionUID = 1L;
 
