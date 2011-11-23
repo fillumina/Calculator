@@ -13,12 +13,12 @@ public class TreeBuilder implements Serializable {
 
     private final InnerParenthesisFinder innerParenthesisFinder;
     private final HigherPriorityOperatorFinder higherPriorityOperatorFinder;
-    private final ReadOperatorParameters readOperatorParameters;
+    private final ReadOperatorParameters loadOperatorParameters;
 
     public TreeBuilder() {
         innerParenthesisFinder = new InnerParenthesisFinder();
         higherPriorityOperatorFinder = new HigherPriorityOperatorFinder();
-        readOperatorParameters = new ReadOperatorParameters();
+        loadOperatorParameters = new ReadOperatorParameters();
     }
 
     public void createTree(final List<Node> nodeList) {
@@ -35,7 +35,7 @@ public class TreeBuilder implements Serializable {
         IndexedNode higherPriorityOperator;
         while( exists( higherPriorityOperator =
                 higherPriorityOperatorFinder.find(nodeList))) {
-            readOperatorParameters.read(nodeList, higherPriorityOperator);
+            loadOperatorParameters.read(nodeList, higherPriorityOperator);
         }
     }
 

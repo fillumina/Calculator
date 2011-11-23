@@ -295,4 +295,10 @@ public class ArithmeticGrammarTest {
     public void shouldCalculateTheFactorialOfAParenthesis() {
         assertEvaluateTo(24.0, "(1 / 2 * 8)!");
     }
+
+    @Test
+    public void shouldRecognizePriorities() {
+        assertEvaluateTo(4.0, "4! / 8 + 1");
+    }
+
 }
