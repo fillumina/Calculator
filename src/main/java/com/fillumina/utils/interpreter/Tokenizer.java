@@ -1,24 +1,22 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.grammar.GrammarElement;
+import com.fillumina.utils.interpreter.GrammarElement.MatchedIndexes;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Uses the grammar to recognize the grammar's element in a string expression.
- * 
+ *
  * @author fra
  */
-public class Tokenizer implements Serializable {
+public class Tokenizer<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final List<GrammarElement> grammar;
+    private final List<GrammarElement<T,C>> grammar;
 
-    public Tokenizer(final List<GrammarElement> grammar) {
+    public Tokenizer(final List<GrammarElement<T,C>> grammar) {
         assertGrammarNotNull(grammar);
         this.grammar = grammar;
     }
@@ -36,8 +34,7 @@ public class Tokenizer implements Serializable {
     }
 
     private void recognizeGrammarElement(final List<Node> list,
-            final GrammarElement ge) {
-        final Pattern pattern = ge.getPattern();
+            final GrammarElement<?,?> ge) {
 
         ListIterator<Node> iterator = list.listIterator();
         while (iterator.hasNext()) {
@@ -45,8 +42,8 @@ public class Tokenizer implements Serializable {
 
             if (node.isUnrecognized()) {
                 final String value = node.getValue();
-                final Matcher matcher = pattern.matcher(value);
-                if (matcher.find()) {
+                final MatchedIndexes matcher = ge.match(value);
+                if (matcher.found()) {
                     splitNode(iterator, node, matcher, ge);
                     iterator = list.listIterator(); // starts it over again
                 }
@@ -56,8 +53,8 @@ public class Tokenizer implements Serializable {
 
     private void splitNode(final ListIterator<Node> iterator,
             final Node node,
-            final Matcher matcher,
-            final GrammarElement ge) {
+            final MatchedIndexes matcher,
+            final GrammarElement<?,?> ge) {
 
         final int start = matcher.start();
         final int end = matcher.end();
@@ -83,7 +80,7 @@ public class Tokenizer implements Serializable {
         }
     }
 
-    private void assertGrammarNotNull(final List<GrammarElement> grammar) {
+    private void assertGrammarNotNull(final List<GrammarElement<T,C>> grammar) {
         if (grammar == null) {
             throw new IllegalArgumentException("grammar must not be null");
         }

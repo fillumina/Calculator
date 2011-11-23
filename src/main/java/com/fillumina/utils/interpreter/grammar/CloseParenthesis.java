@@ -6,7 +6,7 @@ package com.fillumina.utils.interpreter.grammar;
  *
  * @author fra
  */
-public class CloseParenthesis extends GrammarElement {
+public class CloseParenthesis extends PatternGrammarElement {
     private static final long serialVersionUID = 1L;
 
     public CloseParenthesis(final String symbolRegexp) {

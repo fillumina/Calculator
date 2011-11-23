@@ -6,7 +6,7 @@ package com.fillumina.utils.interpreter.grammar;
  *
  * @author fra
  */
-public class TestGrammarElement extends GrammarElement {
+public class TestGrammarElement extends PatternGrammarElement {
     private static final long serialVersionUID = 1L;
 
     public TestGrammarElement(final String symbolRegexp,

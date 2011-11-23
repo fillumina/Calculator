@@ -1,6 +1,5 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.grammar.GrammarElement;
 import com.fillumina.utils.interpreter.grammar.AbstractUnrecognizedElement;
 import java.io.Serializable;
 import java.util.List;
@@ -14,12 +13,12 @@ import java.util.List;
  *
  * @author fra
  */
-public class UnrecognizedElementParser implements Serializable {
+public class UnrecognizedElementParser<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final AbstractUnrecognizedElement<?,?> unrecognizedElement;
+    private final AbstractUnrecognizedElement<T,C> unrecognizedElement;
 
-    public UnrecognizedElementParser(final List<GrammarElement> grammar) {
+    public UnrecognizedElementParser(final List<GrammarElement<T,C>> grammar) {
         assertGrammarNotNull(grammar);
         unrecognizedElement = getUnrecognizeElement(grammar);
     }
@@ -35,9 +34,9 @@ public class UnrecognizedElementParser implements Serializable {
     }
 
     private AbstractUnrecognizedElement getUnrecognizeElement(
-            final List<GrammarElement> grammar) {
+            final List<GrammarElement<T,C>> grammar) {
         if (grammar != null) {
-            for (GrammarElement ge: grammar) {
+            for (GrammarElement<?,?> ge: grammar) {
                 if (ge instanceof AbstractUnrecognizedElement<?,?>) {
                     return (AbstractUnrecognizedElement<?,?>) ge;
                 }
@@ -46,7 +45,7 @@ public class UnrecognizedElementParser implements Serializable {
         return null;
     }
 
-    private void assertGrammarNotNull(final List<GrammarElement> grammar) {
+    private void assertGrammarNotNull(final List<GrammarElement<T,C>> grammar) {
         if (grammar == null) {
             throw new NullPointerException("grammar must not be null");
         }

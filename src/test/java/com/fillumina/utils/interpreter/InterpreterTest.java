@@ -4,7 +4,7 @@ import com.fillumina.utils.interpreter.grammar.TestOperator;
 import com.fillumina.utils.interpreter.grammar.TestGrammarElement;
 import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
 import com.fillumina.utils.interpreter.grammar.WhiteSpace;
-import com.fillumina.utils.interpreter.grammar.GrammarElement;
+import com.fillumina.utils.interpreter.grammar.PatternGrammarElement;
 import com.fillumina.utils.interpreter.grammar.Grammar;
 import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
 import java.util.List;
@@ -19,7 +19,7 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateASingleNode() {
-        final GrammarElement grammarElement = new TestGrammarElement("\\d+", 0);
+        final PatternGrammarElement grammarElement = new TestGrammarElement("\\d+", 0);
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(grammarElement);
 
@@ -31,7 +31,7 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateASingleNodeAndMatchTheValue() {
-        final GrammarElement grammarElement = new TestGrammarElement("\\d+", 0);
+        final PatternGrammarElement grammarElement = new TestGrammarElement("\\d+", 0);
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(grammarElement);
 
@@ -43,8 +43,8 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateAnOperatorAndAValueNode() {
-        final GrammarElement operator = new TestGrammarElement("\\$", 0);
-        final GrammarElement number = new TestGrammarElement("[\\d]+", 0);
+        final PatternGrammarElement operator = new TestGrammarElement("\\$", 0);
+        final PatternGrammarElement number = new TestGrammarElement("[\\d]+", 0);
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(number).put(operator);
 
@@ -57,9 +57,9 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateATreeWithOneOperator() {
-        final GrammarElement operator =
+        final PatternGrammarElement operator =
                 new TestOperator("\\*", 0, 1, 1);
-        final GrammarElement number =
+        final PatternGrammarElement number =
                 new TestGrammarElement("\\d+", 0);
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(number).put(operator);
@@ -72,11 +72,11 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateATreeWithTwoOperators() {
-        final GrammarElement multiply =
+        final PatternGrammarElement multiply =
                 new TestOperator("\\*", 0, 1, 1);
-        final GrammarElement minus =
+        final PatternGrammarElement minus =
                 new TestOperator("\\-", 1, 0, 1);
-        final GrammarElement number =
+        final PatternGrammarElement number =
                 new TestGrammarElement("\\d+", 0);
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(number).put(multiply).put(minus);
@@ -89,9 +89,9 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateATreeWithAFunctionAndAString() {
-        final GrammarElement upper =
+        final PatternGrammarElement upper =
                 new TestOperator("upper", 1, 0, 1);
-        final GrammarElement string =
+        final PatternGrammarElement string =
                 new TestGrammarElement("\\'.+\\'", 0);
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(string).put(upper);
@@ -104,11 +104,11 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateATreeWithTwoDualOperators() {
-        final GrammarElement multiply =
+        final PatternGrammarElement multiply =
                 new TestOperator("\\*", 1, 1, 1);
-        final GrammarElement minus =
+        final PatternGrammarElement minus =
                 new TestOperator("\\-", 0, 1, 1);
-        final GrammarElement number =
+        final PatternGrammarElement number =
                 new TestGrammarElement("\\d+", 0);
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(number).put(multiply).put(minus);
@@ -121,15 +121,15 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateATreeWithTwoDualOperatorsAndParenthesys() {
-        final GrammarElement multiply =
+        final PatternGrammarElement multiply =
                 new TestOperator("\\*", 1, 1, 1);
-        final GrammarElement minus =
+        final PatternGrammarElement minus =
                 new TestOperator("\\-", 0, 1, 1);
-        final GrammarElement number =
+        final PatternGrammarElement number =
                 new TestGrammarElement("\\d+", 0);
-        final GrammarElement openPar =
+        final PatternGrammarElement openPar =
                 new OpenParenthesis("\\(");
-        final GrammarElement closePar =
+        final PatternGrammarElement closePar =
                 new CloseParenthesis("\\)");
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(number).put(multiply).put(minus).put(openPar).put(closePar);
@@ -143,17 +143,17 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateATreeWithAFunction() {
-        final GrammarElement sin =
+        final PatternGrammarElement sin =
                 new TestOperator("sin", 3, 0, 1);
-        final GrammarElement multiply =
+        final PatternGrammarElement multiply =
                 new TestOperator("\\*", 2, 1, 1);
-        final GrammarElement minus =
+        final PatternGrammarElement minus =
                 new TestOperator("\\-", 1, 1, 1);
-        final GrammarElement number =
+        final PatternGrammarElement number =
                 new TestGrammarElement("\\d+", 0);
-        final GrammarElement openPar =
+        final PatternGrammarElement openPar =
                 new OpenParenthesis("\\(");
-        final GrammarElement closePar =
+        final PatternGrammarElement closePar =
                 new CloseParenthesis("\\)");
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
 
@@ -169,14 +169,14 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateATreeWithAFunctionAndWhiteSpace() {
-        final GrammarElement sin = new TestOperator("sin", 3, 0, 1);
-        final GrammarElement multiply = new TestOperator("\\*", 2, 1, 1);
-        final GrammarElement sum = new TestOperator("\\+", 1, 1, 1);
-        final GrammarElement minus = new TestOperator("\\-", 1, 1, 1);
-        final GrammarElement number = new TestGrammarElement("\\d+", 0);
-        final GrammarElement openPar = new OpenParenthesis("\\(");
-        final GrammarElement closePar = new CloseParenthesis("\\)");
-        final GrammarElement whiteSpace = new WhiteSpace("[\\ ]+");
+        final PatternGrammarElement sin = new TestOperator("sin", 3, 0, 1);
+        final PatternGrammarElement multiply = new TestOperator("\\*", 2, 1, 1);
+        final PatternGrammarElement sum = new TestOperator("\\+", 1, 1, 1);
+        final PatternGrammarElement minus = new TestOperator("\\-", 1, 1, 1);
+        final PatternGrammarElement number = new TestGrammarElement("\\d+", 0);
+        final PatternGrammarElement openPar = new OpenParenthesis("\\(");
+        final PatternGrammarElement closePar = new CloseParenthesis("\\)");
+        final PatternGrammarElement whiteSpace = new WhiteSpace("[\\ ]+");
 
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(number).put(multiply).put(sin).put(minus).put(sum)

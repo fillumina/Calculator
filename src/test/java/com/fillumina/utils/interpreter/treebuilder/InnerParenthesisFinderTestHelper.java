@@ -24,7 +24,7 @@ public class InnerParenthesisFinderTestHelper {
                 private static final long serialVersionUID = 1L;
 
                 @Override
-                public Long evaluate(final Node node,
+                public Long evaluate(final String value,
                         final List<Long> params,
                         final Void context) {
                     return Long.parseLong(value);

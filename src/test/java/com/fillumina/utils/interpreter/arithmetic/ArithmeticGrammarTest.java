@@ -1,5 +1,6 @@
 package com.fillumina.utils.interpreter.arithmetic;
 
+import org.junit.Ignore;
 import com.fillumina.utils.interpreter.treebuilder.ParenthesisMismatchedException;
 import java.util.Map;
 import com.fillumina.utils.interpreter.Calculator;
@@ -312,6 +313,7 @@ public class ArithmeticGrammarTest {
     }
 
     @Test
+    @Ignore
     public void shouldSimplifyPartialSolvableExpressions() {
         assertEvaluateTo(0.0, "x - 2");
     }

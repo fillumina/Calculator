@@ -1,7 +1,6 @@
 package com.fillumina.utils.interpreter.arithmetic;
 
 import static java.lang.Math.*;
-import com.fillumina.utils.interpreter.Node;
 import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
 import com.fillumina.utils.interpreter.grammar.AbstractEvaluableGrammarElement;
 import com.fillumina.utils.interpreter.grammar.Grammar;
@@ -46,9 +45,9 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
-                return Double.parseDouble(node.getValue());
+                return Double.parseDouble(value);
             }
         });
 
@@ -56,12 +55,12 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
-                final Double value = params.get(0);
-                final long ivalue = round(value);
+                final Double number = params.get(0);
+                final long ivalue = round(number);
                 long result = 1;
-                for (long l=1; l<=ivalue; l++) {
+                for (long l=1; l<=number; l++) {
                     result *= l;
                 }
                 return Double.valueOf(String.valueOf(result));
@@ -72,7 +71,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return asin(params.get(0));
             }
@@ -82,7 +81,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return acos(params.get(0));
             }
@@ -93,7 +92,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return atan(params.get(0));
             }
@@ -103,7 +102,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return sin(params.get(0));
             }
@@ -113,7 +112,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return cos(params.get(0));
             }
@@ -124,7 +123,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return tan(params.get(0));
             }
@@ -134,7 +133,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return log10(params.get(0));
             }
@@ -144,7 +143,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return log(params.get(0));
             }
@@ -154,7 +153,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return sqrt(params.get(0));
             }
@@ -165,7 +164,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return Math.random();
             }
@@ -176,7 +175,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 final int size = params.size();
                 if (size == 0) {
@@ -194,7 +193,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return pow(params.get(0), params.get(1));
             }
@@ -204,7 +203,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return params.get(0) * params.get(1);
             }
@@ -214,7 +213,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return params.get(0) / params.get(1);
             }
@@ -224,7 +223,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return params.get(0) + params.get(1);
             }
@@ -234,7 +233,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 if (params.size() == 1) {
                     return - params.get(0);
@@ -247,9 +246,9 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
-                final String nodeValue = node.getValue();
+                final String nodeValue = value;
                 final String varName = nodeValue.substring(0,
                         nodeValue.length() - 1).trim();
                 final Double parameter = params.get(0);
@@ -263,7 +262,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return Math.E;
             }
@@ -273,7 +272,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return Math.PI;
             }
@@ -283,13 +282,13 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double evaluate(final Node node, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
-                final Double value = context.get(node.getValue());
-                if (value == null) {
-                    throw new ContextException(node.getValue());
+                final Double number = context.get(value);
+                if (number == null) {
+                    throw new ContextException(value);
                 }
-                return value;
+                return number;
             }
         });
 

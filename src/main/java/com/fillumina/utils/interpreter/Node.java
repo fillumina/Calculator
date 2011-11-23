@@ -1,6 +1,5 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.grammar.GrammarElement;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;

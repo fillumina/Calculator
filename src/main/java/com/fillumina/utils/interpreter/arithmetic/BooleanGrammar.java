@@ -30,7 +30,7 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Boolean evaluate(final Node node, final List<Boolean> params,
+            public Boolean evaluate(final String value, final List<Boolean> params,
                     final Void context) {
                 return params.get(0) && params.get(1);
             }
@@ -40,7 +40,7 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Boolean evaluate(final Node node, final List<Boolean> params,
+            public Boolean evaluate(final String value, final List<Boolean> params,
                     final Void context) {
                 return params.get(0) || params.get(1);
             }
@@ -50,7 +50,7 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Boolean evaluate(final Node node, final List<Boolean> params,
+            public Boolean evaluate(final String value, final List<Boolean> params,
                     final Void context) {
                 return !params.get(0);
             }
@@ -60,7 +60,7 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Boolean evaluate(final Node node, final List<Boolean> params,
+            public Boolean evaluate(final String value, final List<Boolean> params,
                     final Void context) {
                 return true;
             }
@@ -70,7 +70,7 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Boolean evaluate(final Node node, final List<Boolean> params,
+            public Boolean evaluate(final String value, final List<Boolean> params,
                     final Void context) {
                 return false;
             }

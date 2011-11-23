@@ -4,7 +4,7 @@ import com.fillumina.utils.interpreter.grammar.TestGrammarElement;
 import com.fillumina.utils.interpreter.grammar.TestOperator;
 import org.junit.Before;
 import com.fillumina.utils.interpreter.grammar.Grammar;
-import com.fillumina.utils.interpreter.grammar.GrammarElement;
+import com.fillumina.utils.interpreter.grammar.PatternGrammarElement;
 import com.fillumina.utils.interpreter.grammar.WhiteSpace;
 import java.util.List;
 import org.junit.Test;
@@ -25,10 +25,10 @@ public class WhiteSpaceCleanerTest {
 
     @Test
     public void shouldCleanTheWhiteSpaces() {
-        final GrammarElement multiply = new TestOperator("\\*", 0, 1, 1);
-        final GrammarElement sum = new TestOperator("\\+", 0, 1, 1);
-        final GrammarElement number = new TestGrammarElement("\\d+", 0);
-        final GrammarElement whiteSpace = new WhiteSpace("\\ +");
+        final PatternGrammarElement multiply = new TestOperator("\\*", 0, 1, 1);
+        final PatternGrammarElement sum = new TestOperator("\\+", 0, 1, 1);
+        final PatternGrammarElement number = new TestGrammarElement("\\d+", 0);
+        final PatternGrammarElement whiteSpace = new WhiteSpace("\\ +");
         final Grammar<Node,Void> grammar = new Grammar<Node,Void>();
         grammar.put(number).put(multiply).put(sum).put(whiteSpace);
 

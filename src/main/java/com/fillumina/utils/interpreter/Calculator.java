@@ -1,6 +1,5 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.grammar.GrammarElement;
 import java.util.List;
 
 /**
@@ -14,14 +13,14 @@ public class Calculator<T,C> {
     private final Interpreter interpreter;
     private final Solver<T,C> solver;
 
-    public Calculator(final List<GrammarElement> grammar) {
-        this.interpreter = new Interpreter(grammar);
+    public Calculator(final List<GrammarElement<T,C>> grammar) {
+        this.interpreter = new Interpreter<T,C>(grammar);
         this.solver = new DefaultSolver<T,C>();
     }
 
-    public Calculator(final List<GrammarElement> grammar,
+    public Calculator(final List<GrammarElement<T,C>> grammar,
             final Solver<T,C> solver) {
-        this.interpreter = new Interpreter(grammar);
+        this.interpreter = new Interpreter<T,C>(grammar);
         this.solver = solver;
     }
 

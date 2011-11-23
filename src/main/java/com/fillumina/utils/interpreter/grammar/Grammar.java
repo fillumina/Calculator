@@ -1,5 +1,6 @@
 package com.fillumina.utils.interpreter.grammar;
 
+import com.fillumina.utils.interpreter.GrammarElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -20,11 +21,11 @@ import java.util.ArrayList;
  * @author fra
  */
 public class Grammar<T,C>
-        extends ArrayList<GrammarElement>
+        extends ArrayList<GrammarElement<T,C>>
         implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public Grammar<T,C> put(final GrammarElement ge) {
+    public Grammar<T,C> put(final PatternGrammarElement ge) {
         add(ge);
         return this;
     }

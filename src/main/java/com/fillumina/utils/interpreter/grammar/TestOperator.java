@@ -5,10 +5,10 @@ import java.util.List;
 
 /**
  * It's an operator that doesn't evaluate. It is useful in tests.
- * 
+ *
  * @author fra
  */
-public class TestOperator extends AbstractOperator<Node,Void> {
+public class TestOperator extends AbstractOperator<String,Void> {
     private static final long serialVersionUID = 1L;
 
     public TestOperator(final String symbolRegexp,
@@ -19,9 +19,9 @@ public class TestOperator extends AbstractOperator<Node,Void> {
     }
 
     @Override
-    public Node evaluate(final Node node, final List<Node> params,
+    public String evaluate(final String value, final List<String> params,
             final Void context) {
-        return node;
+        return value;
     }
 
 }
