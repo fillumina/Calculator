@@ -1,10 +1,10 @@
 package com.fillumina.utils.interpreter;
 
 import com.fillumina.utils.interpreter.GrammarElement.MatchIndex;
+import com.fillumina.utils.interpreter.util.ExtendedListIterator;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  * Uses the grammar to recognize the grammar's element in a string expression.
@@ -36,48 +36,74 @@ public class Tokenizer<T,C> implements Serializable {
     private void recognizeGrammarElement(final List<Node<T,C>> list,
             final GrammarElement<T,C> ge) {
 
-        ListIterator<Node<T,C>> iterator = list.listIterator();
+        final SplittingIterator<T,C> iterator = new SplittingIterator<T,C>(list);
         while (iterator.hasNext()) {
             final Node<T,C> node = iterator.next();
 
             if (node.isUnrecognized()) {
-                final String value = node.getValue();
-                final MatchIndex matcher = ge.match(value);
+                final MatchIndex matcher = ge.match(node.getValue());
                 if (matcher.found()) {
-                    splitNode(iterator, node, matcher, ge);
-                    iterator = list.listIterator(); // starts it over again
+                    assertMatchANotEmptyRegion(matcher, ge);
+                    final Node<T, C> matchedNode = iterator.splitNode(node, matcher);
+                    matchedNode.setGrammarElement(ge);
+                    iterator.reset();
                 }
             }
         }
     }
 
-    private void splitNode(final ListIterator<Node<T,C>> iterator,
-            final Node<T,C> node,
-            final MatchIndex matcher,
-            final GrammarElement<T,C> ge) {
+    private static class SplittingIterator<T,C>
+            extends ExtendedListIterator<Node<T,C>> {
+        private static final long serialVersionUID = 1L;
 
-        final int start = matcher.start();
-        final int end = matcher.end();
-        final String value = node.getValue();
-        final int valueLength = value.length();
+        private final List<Node<T,C>> list;
 
-        if (start == end) {
-            throw new RuntimeException("* jolly not allowed in " + ge);
-        } else if (start == 0 && end == valueLength) {
-            node.setGrammarElement(ge);
-        } else {
-            iterator.remove();
+        public SplittingIterator(final List<Node<T, C>> list) {
+            super(list);
+            this.list = list;
+        }
 
-            if (start != 0) {
-                iterator.add(new Node<T,C>(value.substring(0, start)));
-            }
+        public void reset() {
+            delegate = list.listIterator();
+        }
 
-            iterator.add(new Node<T,C>(value.substring(start, end), ge));
+        public Node<T,C> splitNode(
+                final Node<T,C> node,
+                final MatchIndex matcher) {
 
-            if (end != valueLength) {
-                iterator.add(new Node(value.substring(end, valueLength)));
+            final int start = matcher.start();
+            final int end = matcher.end();
+            final String value = node.getValue();
+            final int valueLength = value.length();
+
+            if (start == 0 && end == valueLength) {
+                return node;
+            } else {
+                remove();
+
+                if (start != 0) {
+                    add(new Node<T,C>(value.substring(0, start)));
+                }
+
+                final Node<T, C> createdNode =
+                        new Node<T,C>(value.substring(start, end));
+                add(createdNode);
+
+                if (end != valueLength) {
+                    add(new Node<T,C>(value.substring(end, valueLength)));
+                }
+
+                return createdNode;
             }
         }
+    }
+
+    private void assertMatchANotEmptyRegion(final MatchIndex matcher,
+            final GrammarElement<T,C> ge) {
+        if (matcher.start() == matcher.end()) {
+            throw new GrammarException("* jollies not allowed in " + ge);
+        }
+
     }
 
     private void assertGrammarNotNull(final List<GrammarElement<T,C>> grammar) {

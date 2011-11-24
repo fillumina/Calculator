@@ -2,7 +2,8 @@ package com.fillumina.utils.interpreter.grammar;
 
 /**
  * Defines the symbols that open a parenthesis. Note that unbalanced different
- * kind of parenthesis will actually work. i.e.: <code>([2+1) *3]</code> is all right.
+ * kind of parenthesis will actually work. i.e.: <code>([2+1) *3]</code> is
+ * all right.
  * <br />
  * This class is also used internally as the parameters holder when a parenthesis
  * is discovered.

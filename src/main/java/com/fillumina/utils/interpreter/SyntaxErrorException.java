@@ -7,15 +7,15 @@ package com.fillumina.utils.interpreter;
 public class SyntaxErrorException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    public SyntaxErrorException(Throwable cause) {
+    public SyntaxErrorException(final Throwable cause) {
         super(cause);
     }
 
-    public SyntaxErrorException(String message, Throwable cause) {
+    public SyntaxErrorException(final String message, final Throwable cause) {
         super(message, cause);
     }
 
-    public SyntaxErrorException(String message) {
+    public SyntaxErrorException(final String message) {
         super(message);
     }
 

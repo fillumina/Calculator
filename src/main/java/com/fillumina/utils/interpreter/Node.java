@@ -30,7 +30,7 @@ public class Node<T,C> implements Serializable {
         this.grammarElement = grammarElement;
     }
 
-    public Node addChildren(final Node node) {
+    public Node addChildren(final Node<T,C> node) {
         if (children == Collections.EMPTY_LIST) {
             children = new LinkedList<Node<T,C>>();
         }

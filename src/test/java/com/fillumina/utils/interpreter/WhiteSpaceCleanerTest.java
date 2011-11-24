@@ -24,7 +24,7 @@ public class WhiteSpaceCleanerTest {
         final GrammarElement<String, Void> multiply = new TestOperator("\\*", 0, 1, 1);
         final GrammarElement<String, Void> sum = new TestOperator("\\+", 0, 1, 1);
         final GrammarElement<String, Void> number = new TestOperand("\\d+", 0);
-        final GrammarElement<String, Void> whiteSpace = new WhiteSpace<String, Void>("\\ +");
+        final GrammarElement<String, Void> whiteSpace = new WhiteSpace<String, Void>("[\\ ,]+");
         final Grammar<String, Void> grammar = new Grammar<String, Void>();
         grammar.put(number).put(multiply).put(sum).put(whiteSpace);
 
@@ -34,7 +34,7 @@ public class WhiteSpaceCleanerTest {
         whiteSpaceCleaner.clean(list);
 
         assertEquals(
-                "[{12}, {,}, {3}, {*}, {7}, {+}, {9}, {.}, {33}]",
+                "[{12}, {3}, {*}, {7}, {+}, {9}, {.}, {33}]",
                 list.toString());
 
     }

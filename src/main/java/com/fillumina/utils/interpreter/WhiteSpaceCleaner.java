@@ -1,6 +1,5 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.grammar.WhiteSpace;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -25,7 +24,8 @@ public class WhiteSpaceCleaner<T,C> {
     }
 
     private boolean isAWhiteSpace(final Node<T,C> node) {
-        return node.getGrammarElement() instanceof WhiteSpace;
+        final GrammarElement<T, C> ge = node.getGrammarElement();
+        return ge == null ? false : ge.isType(GrammarElement.Type.WHITE_SPACE);
     }
 
 }

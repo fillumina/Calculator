@@ -1,8 +1,8 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
+import com.fillumina.utils.interpreter.util.ExtendedListIterator;
 import com.fillumina.utils.interpreter.GrammarElement.Type;
 import com.fillumina.utils.interpreter.Node;
-import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
 import com.fillumina.utils.interpreter.grammar.AbstractOperator;
 import java.util.List;
 

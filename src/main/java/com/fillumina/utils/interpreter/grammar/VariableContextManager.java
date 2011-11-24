@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Using this class requires the context to be of type
+ * <code>Map&lt;String,T&gt;</code>.
+ * 
  * @author fra
  */
 public class VariableContextManager<T>

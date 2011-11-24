@@ -1,4 +1,4 @@
-package com.fillumina.utils.interpreter.treebuilder;
+package com.fillumina.utils.interpreter.util;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,10 +8,10 @@ import java.util.ListIterator;
  *
  * @author fra
  */
-class ExtendedListIterator<T> implements ListIterator<T>, Serializable {
+public class ExtendedListIterator<T> implements ListIterator<T>, Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final ListIterator<T> delegate;
+    protected ListIterator<T> delegate;
 
     public ExtendedListIterator(final List<T> list, final int startIndex) {
         this.delegate = list.listIterator(startIndex);

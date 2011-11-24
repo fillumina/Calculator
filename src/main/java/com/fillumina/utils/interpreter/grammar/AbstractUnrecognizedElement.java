@@ -9,6 +9,8 @@ import com.fillumina.utils.interpreter.GrammarElement.Type;
  *
  * <b>IMPORTANT:</b> There could be only <b>one</b>
  * <code>UnrecognizedElement</code> defined in a grammar.
+ *
+ * @see VariableContextManager
  * @author fra
  */
 public abstract class AbstractUnrecognizedElement<T,C>
