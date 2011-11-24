@@ -1,5 +1,6 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
+import com.fillumina.utils.interpreter.GrammarElement.Type;
 import com.fillumina.utils.interpreter.Node;
 import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
 import com.fillumina.utils.interpreter.grammar.AbstractOperator;
@@ -9,18 +10,18 @@ import java.util.List;
  *
  * @author fra
  */
-public class ReadOperatorParameters {
+public class ReadOperatorParameters<T,C> {
 
-    public void read(final List<Node> list,
-            final IndexedNode higherPriority) {
+    public void read(final List<Node<T,C>> list,
+            final IndexedNode<T,C> higherPriority) {
         final int index = higherPriority.getIndex();
-        final Node node = list.get(index);
+        final Node<T,C> node = list.get(index);
 
-        final OperatorParameters operator =
-                new OperatorParameters(higherPriority);
+        final OperatorParameters<T,C> operator =
+                new OperatorParameters<T,C>(higherPriority);
 
-        final ExtendedListIterator<Node> iterator =
-                new ExtendedListIterator<Node>(list, operator.startOperandsIndex);
+        final ExtendedListIterator<Node<T,C>> iterator =
+                new ExtendedListIterator<Node<T,C>>(list, operator.startOperandsIndex);
 
         for (int i=0; i<operator.operandsBefore; i++) {
             if (!iterator.hasNext()) {
@@ -35,8 +36,8 @@ public class ReadOperatorParameters {
             if (!iterator.hasNext()) {
                 break;
             }
-            final Node childNode = iterator.nextAndRemove();
-            if (childNode.isOfType(OpenParenthesis.class) && childNode.hasChildren()) {
+            final Node<T,C> childNode = iterator.nextAndRemove();
+            if (childNode.isOfType(Type.OPEN_PAR) && childNode.hasChildren()) {
                 node.addAllChildren(childNode.getChildren());
                 break;
             }
@@ -44,12 +45,12 @@ public class ReadOperatorParameters {
         }
     }
 
-    private static class OperatorParameters {
+    private static class OperatorParameters<T,C> {
         private final int startOperandsIndex;
         private final int operandsBefore;
         private final int operandsAfter;
 
-        public OperatorParameters(final IndexedNode indexedNode) {
+        public OperatorParameters(final IndexedNode<T,C> indexedNode) {
             final AbstractOperator<?,?> operator = (AbstractOperator<?,?>)
                     indexedNode.getNode().getGrammarElement();
             operandsAfter = operator.getRequiredOperandsAfter();

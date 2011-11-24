@@ -6,14 +6,14 @@ import java.util.Arrays;
  *
  * @author fra
  */
-public class TreePrinter {
-    private final Node tree;
+public class TreePrinter<T,C> {
+    private final Node<T,C> tree;
 
-    public static String prettyPrint(final Node node) {
-        return new TreePrinter(node).toString();
+    public static <T,C> String prettyPrint(final Node<T,C> node) {
+        return new TreePrinter<T,C>(node).toString();
     }
 
-    public TreePrinter(final Node node) {
+    public TreePrinter(final Node<T,C> node) {
         this.tree = node;
     }
 
@@ -26,9 +26,9 @@ public class TreePrinter {
 
     private void addSubNodes(final StringBuilder builder,
             final int level,
-            final Node node) {
+            final Node<T,C> node) {
         builder.append(spaces(level)).append(node.getValue()).append("\n");
-        for (Node n: node.getChildren()) {
+        for (Node<T,C> n: node.getChildren()) {
             addSubNodes(builder, level + 1, n);
         }
     }

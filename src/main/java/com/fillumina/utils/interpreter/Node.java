@@ -10,42 +10,42 @@ import java.util.List;
  *
  * @author fra
  */
-public class Node implements Serializable {
+public class Node<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final Node NULL = new Node(null);
+    public static final Node<?,?> NULL = new Node(null);
 
     private final String value;
-    private GrammarElement grammarElement;
+    private GrammarElement<T,C> grammarElement;
 
     @SuppressWarnings("unchecked")
-    private List<Node> children = Collections.EMPTY_LIST;
+    private List<Node<T,C>> children = Collections.EMPTY_LIST;
 
     public Node(final String value) {
         this.value = value;
     }
 
-    public Node(final String value, final GrammarElement grammarElement) {
+    public Node(final String value, final GrammarElement<T,C> grammarElement) {
         this.value = value;
         this.grammarElement = grammarElement;
     }
 
     public Node addChildren(final Node node) {
         if (children == Collections.EMPTY_LIST) {
-            children = new LinkedList<Node>();
+            children = new LinkedList<Node<T,C>>();
         }
         children.add(node);
         return this;
     }
 
-    public Node addAllChildren(final Collection<Node> nodes) {
-        for (Node node: nodes) {
+    public Node<T,C> addAllChildren(final Collection<Node<T,C>> nodes) {
+        for (Node<T,C> node: nodes) {
             addChildren(node);
         }
         return this;
     }
 
-    public List<Node> getChildren() {
+    public List<Node<T,C>> getChildren() {
         return children;
     }
 
@@ -53,11 +53,11 @@ public class Node implements Serializable {
         return value;
     }
 
-    public GrammarElement getGrammarElement() {
+    public GrammarElement<T,C> getGrammarElement() {
         return grammarElement;
     }
 
-    public void setGrammarElement(final GrammarElement grammarElement) {
+    public void setGrammarElement(final GrammarElement<T,C> grammarElement) {
         this.grammarElement = grammarElement;
     }
 
@@ -81,8 +81,9 @@ public class Node implements Serializable {
         return getChildren().size() == number;
     }
 
-    public boolean isOfType(final Class<? extends GrammarElement> clazz) {
-        return clazz.isInstance(getGrammarElement());
+    public boolean isOfType(final GrammarElement.Type type) {
+        final GrammarElement<T, C> ge = getGrammarElement();
+        return ge == null ? false : ge.isType(type);
     }
 
     @Override

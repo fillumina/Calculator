@@ -1,6 +1,7 @@
-package com.fillumina.utils.interpreter.grammar;
+package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.Node;
+import com.fillumina.utils.interpreter.GrammarElement.Type;
+import com.fillumina.utils.interpreter.grammar.AbstractOperator;
 import java.util.List;
 
 /**
@@ -19,9 +20,14 @@ public class TestOperator extends AbstractOperator<String,Void> {
     }
 
     @Override
-    public String evaluate(final String value, final List<String> params,
-            final Void context) {
+    public String eval(final String value,
+            final List<String> params, final Void context) {
         return value;
+    }
+
+    @Override
+    public boolean isType(final Type type) {
+        return Type.OPERATOR.equals(type);
     }
 
 }

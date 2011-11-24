@@ -1,7 +1,7 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
+import com.fillumina.utils.interpreter.GrammarElement.Type;
 import com.fillumina.utils.interpreter.Node;
-import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -9,13 +9,13 @@ import java.util.ListIterator;
  * Removes the parenthesis with only one children (parameter)
  * @author fra
  */
-public class ParenthesisCleaner {
+public class ParenthesisCleaner<T,C> {
 
-    public void clean(final List<Node> nodes) {
-        ListIterator<Node> iterator = nodes.listIterator();
+    public void clean(final List<Node<T,C>> nodes) {
+        ListIterator<Node<T,C>> iterator = nodes.listIterator();
         while(iterator.hasNext()) {
-            final Node node = iterator.next();
-            if (node.isOfType(OpenParenthesis.class)) {
+            final Node<T,C> node = iterator.next();
+            if (node.isOfType(Type.OPEN_PAR)) {
                 if (node.hasOnlyOneChild()) {
                     iterator.remove();
                     iterator.add(node.getChildren().get(0));

@@ -23,9 +23,9 @@ public class UnrecognizedElementParser<T,C> implements Serializable {
         unrecognizedElement = getUnrecognizeElement(grammar);
     }
 
-    public void parse(final List<Node> nodes) {
+    public void parse(final List<Node<T,C>> nodes) {
         if (unrecognizedElement != null) {
-            for (Node node: nodes) {
+            for (Node<T,C> node: nodes) {
                 if (node.isUnrecognized()) {
                     node.setGrammarElement(unrecognizedElement);
                 }
@@ -33,12 +33,12 @@ public class UnrecognizedElementParser<T,C> implements Serializable {
         }
     }
 
-    private AbstractUnrecognizedElement getUnrecognizeElement(
+    private AbstractUnrecognizedElement<T,C> getUnrecognizeElement(
             final List<GrammarElement<T,C>> grammar) {
         if (grammar != null) {
             for (GrammarElement<?,?> ge: grammar) {
                 if (ge instanceof AbstractUnrecognizedElement<?,?>) {
-                    return (AbstractUnrecognizedElement<?,?>) ge;
+                    return (AbstractUnrecognizedElement<T,C>) ge;
                 }
             }
         }

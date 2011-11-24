@@ -1,11 +1,11 @@
 package com.fillumina.utils.interpreter.arithmetic;
 
-import com.fillumina.utils.interpreter.Node;
 import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
-import com.fillumina.utils.interpreter.grammar.AbstractEvaluableGrammarElement;
-import com.fillumina.utils.interpreter.grammar.Grammar;
+import com.fillumina.utils.interpreter.grammar.AbstractOperand;
+import com.fillumina.utils.interpreter.Grammar;
 import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
 import com.fillumina.utils.interpreter.grammar.AbstractOperator;
+import com.fillumina.utils.interpreter.grammar.ConstantElement;
 import com.fillumina.utils.interpreter.grammar.WhiteSpace;
 import java.io.Serializable;
 import java.util.List;
@@ -30,7 +30,7 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Boolean evaluate(final String value, final List<Boolean> params,
+            public Boolean eval(final String value, final List<Boolean> params,
                     final Void context) {
                 return params.get(0) && params.get(1);
             }
@@ -40,7 +40,7 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Boolean evaluate(final String value, final List<Boolean> params,
+            public Boolean eval(final String value, final List<Boolean> params,
                     final Void context) {
                 return params.get(0) || params.get(1);
             }
@@ -50,35 +50,18 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Boolean evaluate(final String value, final List<Boolean> params,
+            public Boolean eval(final String value, final List<Boolean> params,
                     final Void context) {
                 return !params.get(0);
             }
         });
 
-        add(new AbstractEvaluableGrammarElement<Boolean,Void>("true|TRUE|True", 0) {
-            private static final long serialVersionUID = 1L;
+        add(new ConstantElement<Boolean,Void>("true|TRUE|True", true, 0));
+        add(new ConstantElement<Boolean,Void>("false|FALSE|False", false, 0));
 
-            @Override
-            public Boolean evaluate(final String value, final List<Boolean> params,
-                    final Void context) {
-                return true;
-            }
-        });
-
-        add(new AbstractEvaluableGrammarElement<Boolean,Void>("false|FALSE|False", 0) {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Boolean evaluate(final String value, final List<Boolean> params,
-                    final Void context) {
-                return false;
-            }
-        });
-
-        add(new OpenParenthesis("\\("));
-        add(new CloseParenthesis("\\)"));
-        add(new WhiteSpace("[\\ ,]+"));
+        add(new OpenParenthesis<Boolean,Void>("\\("));
+        add(new CloseParenthesis<Boolean,Void>("\\)"));
+        add(new WhiteSpace<Boolean,Void>("[\\ ,]+"));
 
     }
 }

@@ -6,11 +6,16 @@ package com.fillumina.utils.interpreter.grammar;
  *
  * @author fra
  */
-public class WhiteSpace extends PatternGrammarElement {
+public class WhiteSpace<T,C> extends AbstractPatternGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     public WhiteSpace(final String symbolRegexp) {
         super(symbolRegexp, 0);
+    }
+
+    @Override
+    public boolean isType(final Type type) {
+        return Type.WHITE_SPACE.equals(type);
     }
 
 }

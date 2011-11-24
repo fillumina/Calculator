@@ -1,8 +1,9 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
+import com.fillumina.utils.interpreter.grammar.AbstractOperand;
+import com.fillumina.utils.interpreter.GrammarElement.Type;
 import com.fillumina.utils.interpreter.Node;
 import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
-import com.fillumina.utils.interpreter.grammar.AbstractEvaluableGrammarElement;
 import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +16,16 @@ import static org.junit.Assert.*;
  */
 public class InnerParenthesisFinderTestHelper {
 
-    public static class EvaluableNode extends Node {
+    public static class EvaluableNode extends Node<Long, Void> {
         private static final long serialVersionUID = 1L;
 
         public EvaluableNode(final String value) {
-            super(value, new AbstractEvaluableGrammarElement<Long, Void>("\\" +value, 1) {
+            super(value, new AbstractOperand<Long, Void>("\\" +value, 1) {
 
                 private static final long serialVersionUID = 1L;
 
                 @Override
-                public Long evaluate(final String value,
-                        final List<Long> params,
+                public Long eval(final String value,
                         final Void context) {
                     return Long.parseLong(value);
                 }
@@ -65,9 +65,9 @@ public class InnerParenthesisFinderTestHelper {
     public String buildExpression(final List<Node> nodeList) {
         final StringBuilder builder = new StringBuilder();
         for (Node node: nodeList) {
-            if (node.isOfType(OpenParenthesis.class)) {
+            if (node.isOfType(Type.OPEN_PAR)) {
                 builder.append('(');
-            } else if (node.isOfType(CloseParenthesis.class)) {
+            } else if (node.isOfType(Type.CLOSED_PAR)) {
                 builder.append(')');
             } else {
                 builder.append(node.getValue());

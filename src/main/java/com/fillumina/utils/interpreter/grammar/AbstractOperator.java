@@ -1,5 +1,7 @@
 package com.fillumina.utils.interpreter.grammar;
 
+import com.fillumina.utils.interpreter.GrammarElement.Type;
+
 /**
  * An operator is an evaluable element that expects some arguments
  * possibly before and/or after its symbol.
@@ -33,5 +35,10 @@ public abstract class AbstractOperator<T,C>
 
     public int getRequiredOperandsBefore() {
         return requiredOperandsBefore;
+    }
+
+    @Override
+    public boolean isType(final Type type) {
+        return Type.OPERATOR.equals(type);
     }
 }

@@ -1,6 +1,6 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.GrammarElement.MatchedIndexes;
+import com.fillumina.utils.interpreter.GrammarElement.MatchIndex;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,28 +21,28 @@ public class Tokenizer<T,C> implements Serializable {
         this.grammar = grammar;
     }
 
-    public List<Node> tokenize(final String expression) {
+    public List<Node<T,C>> tokenize(final String expression) {
         // LinkedList is very efficient for this algorithm
-        final LinkedList<Node> list = new LinkedList<Node>();
-        list.add(new Node(expression));
+        final LinkedList<Node<T,C>> list = new LinkedList<Node<T,C>>();
+        list.add(new Node<T,C>(expression));
 
-        for (GrammarElement ge: grammar) {
+        for (GrammarElement<T,C> ge: grammar) {
             recognizeGrammarElement(list, ge);
         }
 
         return list;
     }
 
-    private void recognizeGrammarElement(final List<Node> list,
-            final GrammarElement<?,?> ge) {
+    private void recognizeGrammarElement(final List<Node<T,C>> list,
+            final GrammarElement<T,C> ge) {
 
-        ListIterator<Node> iterator = list.listIterator();
+        ListIterator<Node<T,C>> iterator = list.listIterator();
         while (iterator.hasNext()) {
-            final Node node = iterator.next();
+            final Node<T,C> node = iterator.next();
 
             if (node.isUnrecognized()) {
                 final String value = node.getValue();
-                final MatchedIndexes matcher = ge.match(value);
+                final MatchIndex matcher = ge.match(value);
                 if (matcher.found()) {
                     splitNode(iterator, node, matcher, ge);
                     iterator = list.listIterator(); // starts it over again
@@ -51,10 +51,10 @@ public class Tokenizer<T,C> implements Serializable {
         }
     }
 
-    private void splitNode(final ListIterator<Node> iterator,
-            final Node node,
-            final MatchedIndexes matcher,
-            final GrammarElement<?,?> ge) {
+    private void splitNode(final ListIterator<Node<T,C>> iterator,
+            final Node<T,C> node,
+            final MatchIndex matcher,
+            final GrammarElement<T,C> ge) {
 
         final int start = matcher.start();
         final int end = matcher.end();
@@ -69,10 +69,10 @@ public class Tokenizer<T,C> implements Serializable {
             iterator.remove();
 
             if (start != 0) {
-                iterator.add(new Node(value.substring(0, start)));
+                iterator.add(new Node<T,C>(value.substring(0, start)));
             }
 
-            iterator.add(new Node(value.substring(start, end), ge));
+            iterator.add(new Node<T,C>(value.substring(start, end), ge));
 
             if (end != valueLength) {
                 iterator.add(new Node(value.substring(end, valueLength)));

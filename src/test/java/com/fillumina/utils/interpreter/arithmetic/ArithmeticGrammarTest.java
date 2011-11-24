@@ -4,6 +4,7 @@ import org.junit.Ignore;
 import com.fillumina.utils.interpreter.treebuilder.ParenthesisMismatchedException;
 import java.util.Map;
 import com.fillumina.utils.interpreter.Calculator;
+import com.fillumina.utils.interpreter.EvaluationException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -204,17 +205,17 @@ public class ArithmeticGrammarTest {
         assertEvaluateTo(-13, "-3 * sin(pi/2 -(8 + 2)");
     }
 
-    @Test(expected=ContextException.class)
+    @Test(expected=EvaluationException.class)
     public void shouldDetectAnInexistentFunction() {
         assertEvaluateTo(-13, "-3 * sinto(pi/2 -(8 + 2))");
     }
 
-    @Test(expected=ContextException.class)
+    @Test(expected=EvaluationException.class)
     public void shouldDetectAnInexistentSymbol() {
         assertEvaluateTo(-13, "-3 @ sin(pi/2 -(8 + 2))");
     }
 
-    @Test(expected=ContextException.class)
+    @Test(expected=EvaluationException.class)
     public void shouldDetectAnEmptyExpression() {
         assertEvaluateTo(-13, "");
     }

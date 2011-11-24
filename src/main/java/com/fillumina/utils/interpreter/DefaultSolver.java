@@ -12,13 +12,13 @@ public class DefaultSolver<T,C> extends AbstractSolver<T,C> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public T evaluate(final Node node, final List<T> params, final C context) {
+    public T evaluate(final Node<T,C> node, final List<T> params, final C context) {
         final GrammarElement<T,C> grammarElement = node.getGrammarElement();
 
         try {
             return grammarElement.evaluate(node.getValue(), params, context);
-        } catch (java.lang.IndexOutOfBoundsException e) {
-            throw new EvaluationException(node.getValue());
+        } catch (Exception e) {
+            throw new EvaluationException(node.getValue(), e);
         }
     }
 

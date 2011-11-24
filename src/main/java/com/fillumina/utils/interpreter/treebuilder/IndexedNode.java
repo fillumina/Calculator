@@ -3,7 +3,6 @@ package com.fillumina.utils.interpreter.treebuilder;
 import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.Node;
 import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
-import com.fillumina.utils.interpreter.grammar.PatternGrammarElement;
 import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
 import com.fillumina.utils.interpreter.grammar.AbstractOperator;
 import java.io.Serializable;
@@ -16,24 +15,24 @@ import java.util.ListIterator;
  *
  * @author fra
  */
-class IndexedNode implements Comparable<Node>, Serializable {
+class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
 
     private static final long serialVersionUID = 1L;
-    public static final IndexedNode NULL =
+    public static final IndexedNode<?,?> NULL =
             new IndexedNode(null, Integer.MIN_VALUE, null);
 
-    private final Node node;
+    private final Node<T,C> node;
     private final int index;
-    private final ListIterator<Node> iterator;
+    private final ListIterator<Node<T,C>> iterator;
 
-    public static IndexedNode nextFrom(final ListIterator<Node> iterator) {
+    public static <T,C> IndexedNode<T,C> nextFrom(final ListIterator<Node<T,C>> iterator) {
         final int index = iterator.nextIndex();
-        final Node node = iterator.next();
-        return new IndexedNode(node, index, iterator);
+        final Node<T,C> node = iterator.next();
+        return new IndexedNode<T,C>(node, index, iterator);
     }
 
-    public IndexedNode(final Node node, final int index,
-            final ListIterator<Node> iterator) {
+    public IndexedNode(final Node<T,C> node, final int index,
+            final ListIterator<Node<T,C>> iterator) {
         this.node = node;
         this.index = index;
         this.iterator = iterator;
@@ -54,9 +53,9 @@ class IndexedNode implements Comparable<Node>, Serializable {
 
     public class Extractor {
 
-        private final List<Node> nodeList;
+        private final List<Node<T,C>> nodeList;
 
-        public Extractor(List<Node> nodeList) {
+        public Extractor(List<Node<T,C>> nodeList) {
             this.nodeList = nodeList;
         }
 
@@ -64,7 +63,7 @@ class IndexedNode implements Comparable<Node>, Serializable {
             try {
                 final int start = getIndex() + 1;
                 final int end = upTo.getIndex();
-                final List<Node> innerParenthesisList =
+                final List<Node<T,C>> innerParenthesisList =
                         nodeList.subList(start, end);
                 getNode().addAllChildren(innerParenthesisList);
                 // NOTE: removing from a sublist removes from the list
@@ -76,7 +75,7 @@ class IndexedNode implements Comparable<Node>, Serializable {
         }
     }
 
-    public Extractor fromList(final List<Node> nodeList) {
+    public Extractor fromList(final List<Node<T,C>> nodeList) {
         return new Extractor(nodeList);
     }
 

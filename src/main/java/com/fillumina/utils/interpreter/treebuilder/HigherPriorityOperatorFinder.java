@@ -8,15 +8,16 @@ import java.util.ListIterator;
  *
  * @author fra
  */
-public class HigherPriorityOperatorFinder {
+public class HigherPriorityOperatorFinder<T,C> {
 
-    public IndexedNode find(final List<Node> list) {
-        IndexedNode higherPriorityNode = IndexedNode.NULL;
+    public IndexedNode<T,C> find(final List<Node<T,C>> list) {
+        @SuppressWarnings("unchecked")
+        IndexedNode<T,C> higherPriorityNode = (IndexedNode<T,C>) IndexedNode.NULL;
 
         if (list.size() > 1) {
-            final ListIterator<Node> iterator = list.listIterator();
+            final ListIterator<Node<T,C>> iterator = list.listIterator();
             while (iterator.hasNext()) {
-                final IndexedNode currentNode = IndexedNode.nextFrom(iterator);
+                final IndexedNode<T,C> currentNode = IndexedNode.nextFrom(iterator);
 
                 if (currentNode.isEmptyOperator() &&
                         (higherPriorityNode.isNull() ||

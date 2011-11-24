@@ -9,11 +9,16 @@ package com.fillumina.utils.interpreter.grammar;
  *
  * @author fra
  */
-public class OpenParenthesis extends PatternGrammarElement {
+public class OpenParenthesis<T,C> extends AbstractPatternGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     public OpenParenthesis(final String symbolRegexp) {
         super(symbolRegexp, 0);
+    }
+
+    @Override
+    public boolean isType(final Type type) {
+        return Type.OPEN_PAR.equals(type);
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
  * @author fra
  */
 public class Calculator<T,C> {
-    private final Interpreter interpreter;
+    private final Interpreter<T,C> interpreter;
     private final Solver<T,C> solver;
 
     public Calculator(final List<GrammarElement<T,C>> grammar) {
@@ -25,7 +25,7 @@ public class Calculator<T,C> {
     }
 
     public List<T> solve(final String expression, final C context) {
-        final List<Node> solutionTree = interpreter.parse(expression);
+        final List<Node<T,C>> solutionTree = interpreter.parse(expression);
         return solver.solve(solutionTree, context);
     }
 }

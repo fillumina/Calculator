@@ -9,12 +9,12 @@ import java.util.ListIterator;
  *
  * @author fra
  */
-public class WhiteSpaceCleaner {
+public class WhiteSpaceCleaner<T,C> {
 
-    public void clean(final List<Node> list) {
-        final ListIterator<Node> iterator = list.listIterator();
+    public void clean(final List<Node<T,C>> list) {
+        final ListIterator<Node<T,C>> iterator = list.listIterator();
         while(iterator.hasNext()) {
-            final Node node = iterator.next();
+            final Node<T,C> node = iterator.next();
 
             if (isAWhiteSpace(node)) {
                 iterator.remove();
@@ -24,7 +24,7 @@ public class WhiteSpaceCleaner {
         }
     }
 
-    private boolean isAWhiteSpace(final Node node) {
+    private boolean isAWhiteSpace(final Node<T,C> node) {
         return node.getGrammarElement() instanceof WhiteSpace;
     }
 

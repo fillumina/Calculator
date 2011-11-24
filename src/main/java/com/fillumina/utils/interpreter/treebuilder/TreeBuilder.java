@@ -8,21 +8,21 @@ import java.util.List;
  *
  * @author fra
  */
-public class TreeBuilder implements Serializable {
+public class TreeBuilder<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final InnerParenthesisFinder innerParenthesisFinder;
-    private final HigherPriorityOperatorFinder higherPriorityOperatorFinder;
-    private final ReadOperatorParameters loadOperatorParameters;
+    private final InnerParenthesisFinder<T,C> innerParenthesisFinder;
+    private final HigherPriorityOperatorFinder<T,C> higherPriorityOperatorFinder;
+    private final ReadOperatorParameters<T,C> loadOperatorParameters;
 
     public TreeBuilder() {
-        innerParenthesisFinder = new InnerParenthesisFinder();
-        higherPriorityOperatorFinder = new HigherPriorityOperatorFinder();
-        loadOperatorParameters = new ReadOperatorParameters();
+        innerParenthesisFinder = new InnerParenthesisFinder<T,C>();
+        higherPriorityOperatorFinder = new HigherPriorityOperatorFinder<T,C>();
+        loadOperatorParameters = new ReadOperatorParameters<T,C>();
     }
 
-    public void createTree(final List<Node> nodeList) {
-        Node innerParenthesis;
+    public void createTree(final List<Node<T,C>> nodeList) {
+        Node<T,C> innerParenthesis;
         while( notNull( innerParenthesis =
                 innerParenthesisFinder.find(nodeList))) {
             readOperatorsByPriority(innerParenthesis.getChildren());
@@ -31,8 +31,8 @@ public class TreeBuilder implements Serializable {
         readOperatorsByPriority(nodeList);
     }
 
-    private void readOperatorsByPriority(final List<Node> nodeList) {
-        IndexedNode higherPriorityOperator;
+    private void readOperatorsByPriority(final List<Node<T,C>> nodeList) {
+        IndexedNode<T,C> higherPriorityOperator;
         while( exists( higherPriorityOperator =
                 higherPriorityOperatorFinder.find(nodeList))) {
             loadOperatorParameters.read(nodeList, higherPriorityOperator);
@@ -43,7 +43,7 @@ public class TreeBuilder implements Serializable {
         return obj != null;
     }
 
-    private boolean exists(final IndexedNode node) {
+    private boolean exists(final IndexedNode<T,C> node) {
         return node != IndexedNode.NULL;
     }
 }

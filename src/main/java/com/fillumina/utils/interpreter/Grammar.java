@@ -1,6 +1,5 @@
-package com.fillumina.utils.interpreter.grammar;
+package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.GrammarElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -25,7 +24,7 @@ public class Grammar<T,C>
         implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public Grammar<T,C> put(final PatternGrammarElement ge) {
+    public Grammar<T,C> put(final GrammarElement<T,C> ge) {
         add(ge);
         return this;
     }

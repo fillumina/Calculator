@@ -8,6 +8,6 @@ import java.util.List;
  */
 public interface Solver<T, C> {
 
-    List<T> solve(final List<Node> nodeTree, final C context);
+    List<T> solve(final List<Node<T,C>> nodeTree, final C context);
 
 }

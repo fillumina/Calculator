@@ -8,12 +8,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * It's a element in the grammar that has a specific priority over other elements
- * and a regular expression which is used to identify it in a string expression.
+ * It's the base class of a hierarchy based on the use of a regular expression
+ * to find elements in a string.
  *
  * @author fra
  */
-public class PatternGrammarElement<T,C> implements GrammarElement<T,C>, Serializable {
+public abstract class AbstractPatternGrammarElement<T,C>
+        implements GrammarElement<T,C>, Serializable {
     private static final long serialVersionUID = 1L;
 
     private final String symbolRegexp; // regexp expression
@@ -28,7 +29,7 @@ public class PatternGrammarElement<T,C> implements GrammarElement<T,C>, Serializ
      * @param priority      the highest the number the more priority has
      *                      the element.
      */
-    public PatternGrammarElement(final String symbolRegexp,
+    public AbstractPatternGrammarElement(final String symbolRegexp,
             final int priority) {
         this.symbolRegexp = symbolRegexp;
         this.priority = priority;
@@ -49,11 +50,11 @@ public class PatternGrammarElement<T,C> implements GrammarElement<T,C>, Serializ
 
     @Override
     public int compareTo(final GrammarElement<T,C> grammarElement) {
-        if (!(grammarElement instanceof PatternGrammarElement)) {
+        if (!(grammarElement instanceof AbstractPatternGrammarElement)) {
             return 0;
         }
-        final PatternGrammarElement<T,C> ge =
-                (PatternGrammarElement<T,C>) grammarElement;
+        final AbstractPatternGrammarElement<T,C> ge =
+                (AbstractPatternGrammarElement<T,C>) grammarElement;
         return priority < ge.priority ?
             -1 : (priority == ge.priority ? 0 : 1);
     }
@@ -69,12 +70,12 @@ public class PatternGrammarElement<T,C> implements GrammarElement<T,C>, Serializ
                 ", parameters: " + params);
     }
 
-    public class PatternMatchedIndexes implements MatchedIndexes, Serializable {
+    public class PatternMatchedIndexes implements MatchIndex, Serializable {
         private static final long serialVersionUID = 1L;
 
         private final Matcher matcher;
 
-        public PatternMatchedIndexes(Matcher matcher) {
+        public PatternMatchedIndexes(final Matcher matcher) {
             this.matcher = matcher;
         }
 
@@ -96,7 +97,7 @@ public class PatternGrammarElement<T,C> implements GrammarElement<T,C>, Serializ
     }
 
     @Override
-    public MatchedIndexes match(final String expression) {
+    public MatchIndex match(final String expression) {
         return new PatternMatchedIndexes(pattern.matcher(expression));
     }
 
