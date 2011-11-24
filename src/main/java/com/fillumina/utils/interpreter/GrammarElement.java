@@ -20,6 +20,9 @@ public interface GrammarElement<T,C> extends Comparable<GrammarElement<T, C>> {
 
     T evaluate(final String value, final List<T> params, final C context);
 
+    int getRequiredOperandsAfter();
+    int getRequiredOperandsBefore();
+
     public static enum Type {
         OPEN_PAR, CLOSED_PAR, OPERAND, OPERATOR, WHITE_SPACE, UNRECOGNIZED}
 

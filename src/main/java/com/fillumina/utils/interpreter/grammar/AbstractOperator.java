@@ -29,10 +29,12 @@ public abstract class AbstractOperator<T,C>
         this.requiredOperandsAfter = requiredOperandsAfter;
     }
 
+    @Override
     public int getRequiredOperandsAfter() {
         return requiredOperandsAfter;
     }
 
+    @Override
     public int getRequiredOperandsBefore() {
         return requiredOperandsBefore;
     }

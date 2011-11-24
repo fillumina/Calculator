@@ -2,9 +2,6 @@ package com.fillumina.utils.interpreter.treebuilder;
 
 import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.Node;
-import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
-import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
-import com.fillumina.utils.interpreter.grammar.AbstractOperator;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ListIterator;
@@ -42,7 +39,7 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
         return index;
     }
 
-    public Node getNode() {
+    public Node<T,C> getNode() {
         return node;
     }
 
@@ -59,7 +56,7 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
             this.nodeList = nodeList;
         }
 
-        private void extractInnerNodesUpTo(final IndexedNode upTo) {
+        private void extractInnerNodesUpTo(final IndexedNode<T,C> upTo) {
             try {
                 final int start = getIndex() + 1;
                 final int end = upTo.getIndex();
@@ -79,12 +76,12 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
         return new Extractor(nodeList);
     }
 
-    public boolean isPreviousThan(final IndexedNode node) {
+    public boolean isPreviousThan(final IndexedNode<T,C> node) {
         return getIndex() == node.getIndex() - 1;
     }
 
     public boolean isACloseParenthesis() {
-        return getNode().getGrammarElement() instanceof CloseParenthesis;
+        return getNode().getGrammarElement().isType(GrammarElement.Type.CLOSED_PAR);
     }
 
     /**
@@ -93,12 +90,12 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
      * nodes it means it is not processed yet.
      */
     public boolean isAnEmptyOpenParenthesis() {
-        final Node node = getNode();
-        return node.getGrammarElement() instanceof OpenParenthesis &&
+        final Node<T,C> node = getNode();
+        return node.getGrammarElement().isType(GrammarElement.Type.OPEN_PAR) &&
                 node.hasNoChildren();
     }
 
-    public boolean lessThan(final IndexedNode o) {
+    public boolean lessThan(final IndexedNode<T,C> o) {
         return compareTo(o.getNode()) < 0;
     }
 
@@ -107,13 +104,13 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
     }
 
     public boolean isEmptyOperator() {
-        return getNode().getGrammarElement() instanceof AbstractOperator<?, ?> &&
+        return getNode().getGrammarElement().isType(GrammarElement.Type.OPERATOR) &&
                 getNode().hasNoChildren();
     }
 
     @Override
-    public int compareTo(final Node o) {
-        final GrammarElement ge = o.getGrammarElement();
+    public int compareTo(final Node<T,C> o) {
+        final GrammarElement<T,C> ge = o.getGrammarElement();
         return this.node.getGrammarElement().compareTo(ge);
     }
 

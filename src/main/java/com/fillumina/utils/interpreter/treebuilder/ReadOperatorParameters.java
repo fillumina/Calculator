@@ -1,9 +1,9 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
+import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.util.ExtendedListIterator;
 import com.fillumina.utils.interpreter.GrammarElement.Type;
 import com.fillumina.utils.interpreter.Node;
-import com.fillumina.utils.interpreter.grammar.AbstractOperator;
 import java.util.List;
 
 /**
@@ -51,7 +51,7 @@ public class ReadOperatorParameters<T,C> {
         private final int operandsAfter;
 
         public OperatorParameters(final IndexedNode<T,C> indexedNode) {
-            final AbstractOperator<?,?> operator = (AbstractOperator<?,?>)
+            final GrammarElement<T,C> operator =
                     indexedNode.getNode().getGrammarElement();
             operandsAfter = operator.getRequiredOperandsAfter();
             final int leftOperands = operator.getRequiredOperandsBefore();

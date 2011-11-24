@@ -70,6 +70,16 @@ public abstract class AbstractPatternGrammarElement<T,C>
                 ", parameters: " + params);
     }
 
+    @Override
+    public int getRequiredOperandsAfter() {
+        return 0;
+    }
+
+    @Override
+    public int getRequiredOperandsBefore() {
+        return 0;
+    }
+
     public class PatternMatchedIndexes implements MatchIndex, Serializable {
         private static final long serialVersionUID = 1L;
 
