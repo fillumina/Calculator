@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * The {@link WhiteSpace} elements are of no use and must be removed.
+ * The {@link WhiteSpace} defines characters in the input that may be
+ * safely ignored. This class removes them from the list of tokens.
  *
  * @author fra
  */

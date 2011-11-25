@@ -28,7 +28,7 @@ public class Interpreter<T,C> implements Serializable {
         this.parenthesisCleaner = new ParenthesisCleaner<T,C>();
     }
 
-    /** can return a multi root tree */
+    /** Can return a multi root tree */
     public List<Node<T,C>> parse(final String expression) {
         final List<Node<T,C>> list = tokenizer.tokenize(expression);
         whiteSpaceCleaner.clean(list);

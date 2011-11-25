@@ -1,6 +1,7 @@
 package com.fillumina.utils.interpreter;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 /**
  *
@@ -9,11 +10,20 @@ import java.util.Arrays;
 public class TreePrinter<T,C> {
     private final Node<T,C> tree;
 
+    public static <T,C> String prettyPrint(
+            final Collection<Node<T,C>> collection) {
+        final StringBuilder builder = new StringBuilder();
+        for (Node<T,C> node : collection) {
+            builder.append(prettyPrint(node));
+        }
+        return builder.toString();
+    }
+
     public static <T,C> String prettyPrint(final Node<T,C> node) {
         return new TreePrinter<T,C>(node).toString();
     }
 
-    public TreePrinter(final Node<T,C> node) {
+    private TreePrinter(final Node<T,C> node) {
         this.tree = node;
     }
 

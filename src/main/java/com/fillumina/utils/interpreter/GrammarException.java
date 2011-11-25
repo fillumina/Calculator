@@ -8,6 +8,7 @@ public class GrammarException extends SyntaxErrorException {
     private static final long serialVersionUID = 1L;
 
     public GrammarException() {
+        super();
     }
 
     public GrammarException(final String message) {

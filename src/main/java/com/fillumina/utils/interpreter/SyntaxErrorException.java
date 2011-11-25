@@ -20,5 +20,6 @@ public class SyntaxErrorException extends RuntimeException {
     }
 
     public SyntaxErrorException() {
+        super();
     }
 }
