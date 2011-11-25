@@ -90,9 +90,9 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
      * nodes it means it is not processed yet.
      */
     public boolean isAnEmptyOpenParenthesis() {
-        final Node<T,C> node = getNode();
-        return node.getGrammarElement().isType(GrammarElement.Type.OPEN_PAR) &&
-                node.hasNoChildren();
+        final Node<T,C> n = getNode();
+        return n.getGrammarElement().isType(GrammarElement.Type.OPEN_PAR) &&
+                n.hasNoChildren();
     }
 
     public boolean lessThan(final IndexedNode<T,C> o) {

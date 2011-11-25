@@ -23,11 +23,13 @@ public class UnrecognizedElementParser<T,C> implements Serializable {
     }
 
     public void parse(final List<Node<T,C>> nodes) {
-        if (unrecognizedElement != null) {
-            for (Node<T,C> node: nodes) {
-                if (node.isUnrecognized()) {
-                    node.setGrammarElement(unrecognizedElement);
+        for (Node<T,C> node: nodes) {
+            if (node.isUnrecognized()) {
+                if (unrecognizedElement == null) {
+                    throw new SyntaxErrorException("Element '" + node.getValue() +
+                            "' not recognized");
                 }
+                node.setGrammarElement(unrecognizedElement);
             }
         }
     }

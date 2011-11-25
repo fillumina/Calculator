@@ -15,7 +15,7 @@ public class InnerParenthesisFinder<T,C> {
      * in the children of the open parenthesis while the close one is removed.
      */
     public Node<T,C> find(final List<Node<T,C>> nodeList) {
-        IndexedNode openPar = null;
+        IndexedNode<T,C> openPar = null;
 
         final ListIterator<Node<T,C>> iterator = nodeList.listIterator();
         while (iterator.hasNext()) {
