@@ -54,8 +54,10 @@ public class ReadOperatorParameters<T,C> {
             final GrammarElement<T,C> operator =
                     indexedNode.getNode().getGrammarElement();
             operandsAfter = operator.getRequiredOperandsAfter();
+
             final int leftOperands = operator.getRequiredOperandsBefore();
             final int startIndex = indexedNode.getIndex() - leftOperands;
+
             if (startIndex < 0 ) {
                 startOperandsIndex = 0;
                 operandsBefore = indexedNode.getIndex() - 1;
