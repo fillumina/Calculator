@@ -23,7 +23,7 @@ public class Tokenizer<T,C> implements Serializable {
 
     public List<Node<T,C>> tokenize(final String expression) {
         // LinkedList is very efficient for this algorithm
-        final LinkedList<Node<T,C>> list = new LinkedList<Node<T,C>>();
+        final LinkedList<Node<T,C>> list = new LinkedList<>();
         list.add(new Node<T,C>(expression));
 
         for (GrammarElement<T,C> ge: grammar) {
@@ -36,7 +36,7 @@ public class Tokenizer<T,C> implements Serializable {
     private void recognizeGrammarElement(final List<Node<T,C>> list,
             final GrammarElement<T,C> ge) {
 
-        final SplittingIterator<T,C> iterator = new SplittingIterator<T,C>(list);
+        final SplittingIterator<T,C> iterator = new SplittingIterator<>(list);
         while (iterator.hasNext()) {
             final Node<T,C> node = iterator.next();
 
@@ -86,7 +86,7 @@ public class Tokenizer<T,C> implements Serializable {
                 }
 
                 final Node<T, C> createdNode =
-                        new Node<T,C>(value.substring(start, end));
+                        new Node<>(value.substring(start, end));
                 add(createdNode);
 
                 if (end != valueLength) {

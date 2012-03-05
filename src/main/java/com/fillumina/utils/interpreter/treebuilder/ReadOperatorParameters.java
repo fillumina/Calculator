@@ -18,10 +18,10 @@ public class ReadOperatorParameters<T,C> {
         final Node<T,C> node = list.get(index);
 
         final OperatorParameters<T,C> operator =
-                new OperatorParameters<T,C>(higherPriority);
+                new OperatorParameters<>(higherPriority);
 
         final ExtendedListIterator<Node<T,C>> iterator =
-                new ExtendedListIterator<Node<T,C>>(list, operator.startOperandsIndex);
+                new ExtendedListIterator<>(list, operator.startOperandsIndex);
 
         for (int i=0; i<operator.operandsBefore; i++) {
             if (!iterator.hasNext()) {

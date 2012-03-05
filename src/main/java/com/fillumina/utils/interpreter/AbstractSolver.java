@@ -11,7 +11,7 @@ public abstract class AbstractSolver<T,C> implements Solver<T, C> {
 
     @Override
     public List<T> solve(final List<Node<T,C>> nodeTree, final C context) {
-        final List<T> params = new ArrayList<T>();
+        final List<T> params = new ArrayList<>();
         for (Node<T,C> node : nodeTree) {
             params.add(evaluate(node, solve(node.getChildren(), context), context));
         }

@@ -32,7 +32,7 @@ public class Node<T,C> implements Serializable {
 
     public Node addChildren(final Node<T,C> node) {
         if (children == Collections.EMPTY_LIST) {
-            children = new LinkedList<Node<T,C>>();
+            children = new LinkedList<>();
         }
         children.add(node);
         return this;

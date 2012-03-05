@@ -16,10 +16,10 @@ public class InterpreterTest {
     @Test
     public void shouldCreateASingleNode() {
         final GrammarElement<String,Void> grammarElement = new TestOperand("\\d+", 0);
-        final Grammar<String,Void> grammar = new Grammar<String,Void>();
+        final Grammar<String,Void> grammar = new Grammar<>();
         grammar.put(grammarElement);
 
-        final Interpreter<String,Void> interpreter = new Interpreter<String,Void>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("123");
 
         assertEquals(grammarElement, solution.get(0).getGrammarElement());
@@ -28,10 +28,10 @@ public class InterpreterTest {
     @Test
     public void shouldCreateASingleNodeAndMatchTheValue() {
         final GrammarElement<String,Void> grammarElement = new TestOperand("\\d+", 0);
-        final Grammar<String,Void> grammar = new Grammar<String,Void>();
+        final Grammar<String,Void> grammar = new Grammar<>();
         grammar.put(grammarElement);
 
-        final Interpreter<String,Void> interpreter = new Interpreter<String,Void>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("123");
 
         assertEquals("123", solution.get(0).getValue());
@@ -41,10 +41,10 @@ public class InterpreterTest {
     public void shouldCreateAnOperatorAndAValueNode() {
         final GrammarElement<String,Void> operator = new TestOperand("\\$", 0);
         final GrammarElement<String,Void> number = new TestOperand("[\\d]+", 0);
-        final Grammar<String,Void> grammar = new Grammar<String,Void>();
+        final Grammar<String,Void> grammar = new Grammar<>();
         grammar.put(number).put(operator);
 
-        final Interpreter<String,Void> interpreter = new Interpreter<String,Void>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("$123");
 
         assertEquals(operator, solution.get(0).getGrammarElement());
@@ -57,10 +57,10 @@ public class InterpreterTest {
                 new TestOperator("\\*", 0, 1, 1);
         final GrammarElement<String,Void> number =
                 new TestOperand("\\d+", 0);
-        final Grammar<String,Void> grammar = new Grammar<String,Void>();
+        final Grammar<String,Void> grammar = new Grammar<>();
         grammar.put(number).put(operator);
 
-        final Interpreter<String,Void> interpreter = new Interpreter<String,Void>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("5*2");
 
         assertEquals("[{* -> [{5}, {2}]}]", solution.toString());
@@ -74,10 +74,10 @@ public class InterpreterTest {
                 new TestOperator("\\-", 1, 0, 1);
         final GrammarElement<String,Void> number =
                 new TestOperand("\\d+", 0);
-        final Grammar<String,Void> grammar = new Grammar<String,Void>();
+        final Grammar<String,Void> grammar = new Grammar<>();
         grammar.put(number).put(multiply).put(minus);
 
-        final Interpreter<String,Void> interpreter = new Interpreter<String,Void>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("5*-2");
 
         assertEquals("[{* -> [{5}, {- -> [{2}]}]}]", solution.toString());
@@ -89,10 +89,10 @@ public class InterpreterTest {
                 new TestOperator("upper", 1, 0, 1);
         final GrammarElement<String,Void> string =
                 new TestOperand("\\'.+\\'", 0);
-        final Grammar<String,Void> grammar = new Grammar<String,Void>();
+        final Grammar<String,Void> grammar = new Grammar<>();
         grammar.put(string).put(upper);
 
-        final Interpreter<String,Void> interpreter = new Interpreter<String,Void>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("upper'hello world'");
 
         assertEquals("[{upper -> [{'hello world'}]}]", solution.toString());
@@ -106,10 +106,10 @@ public class InterpreterTest {
                 new TestOperator("\\-", 0, 1, 1);
         final GrammarElement<String,Void> number =
                 new TestOperand("\\d+", 0);
-        final Grammar<String,Void> grammar = new Grammar<String,Void>();
+        final Grammar<String,Void> grammar = new Grammar<>();
         grammar.put(number).put(multiply).put(minus);
 
-        final Interpreter<String,Void> interpreter = new Interpreter<String,Void>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("2*5-8");
 
         assertEquals("[{- -> [{* -> [{2}, {5}]}, {8}]}]", solution.toString());
@@ -127,10 +127,10 @@ public class InterpreterTest {
                 new OpenParenthesis("\\(");
         final GrammarElement<String,Void> closePar =
                 new CloseParenthesis("\\)");
-        final Grammar<String,Void> grammar = new Grammar<String,Void>();
+        final Grammar<String,Void> grammar = new Grammar<>();
         grammar.put(number).put(multiply).put(minus).put(openPar).put(closePar);
 
-        final Interpreter<String,Void> interpreter = new Interpreter<String,Void>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("2*(5-8)");
 
         assertEquals("[{* -> [{2}, {- -> [{5}, {8}]}]}]",
@@ -151,12 +151,12 @@ public class InterpreterTest {
                 new OpenParenthesis("\\(");
         final GrammarElement<String,Void> closePar =
                 new CloseParenthesis("\\)");
-        final Grammar<String,Void> grammar = new Grammar<String,Void>();
+        final Grammar<String,Void> grammar = new Grammar<>();
 
         grammar.put(number).put(multiply).put(sin).put(minus)
                 .put(openPar).put(closePar);
 
-        final Interpreter<String,Void> interpreter = new Interpreter<String,Void>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("2*sin(5-8)");
 
         assertEquals("[{* -> [{2}, {sin -> [{- -> [{5}, {8}]}]}]}]",
@@ -170,15 +170,15 @@ public class InterpreterTest {
         final GrammarElement<String,Void> sum = new TestOperator("\\+", 1, 1, 1);
         final GrammarElement<String,Void> minus = new TestOperator("\\-", 1, 1, 1);
         final GrammarElement<String,Void> number = new TestOperand("\\d+", 0);
-        final GrammarElement<String,Void> openPar = new OpenParenthesis<String,Void>("\\(");
-        final GrammarElement<String,Void> closePar = new CloseParenthesis<String,Void>("\\)");
-        final GrammarElement<String,Void> whiteSpace = new WhiteSpace<String,Void>("[\\ ]+");
+        final GrammarElement<String,Void> openPar = new OpenParenthesis<>("\\(");
+        final GrammarElement<String,Void> closePar = new CloseParenthesis<>("\\)");
+        final GrammarElement<String,Void> whiteSpace = new WhiteSpace<>("[\\ ]+");
 
-        final Grammar<String,Void> grammar = new Grammar<String,Void>();
+        final Grammar<String,Void> grammar = new Grammar<>();
         grammar.put(number).put(multiply).put(sin).put(minus).put(sum)
                 .put(openPar).put(closePar).put(whiteSpace);
 
-        final Interpreter<String,Void> interpreter = new Interpreter<String,Void>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("3 * sin( 3 + 5-8)-6");
 
         assertEquals("[{- -> [{* -> [{3}, {sin -> [{- -> [{+ -> [{3}, {5}]}, {8}]}]}]}, {6}]}]",

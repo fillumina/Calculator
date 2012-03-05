@@ -15,7 +15,7 @@ public class BooleanGrammarTest {
 
     @Before
     public void init() {
-        calculator = new Calculator<Boolean,Void>(BooleanGrammar.INSTANCE);
+        calculator = new Calculator<>(BooleanGrammar.INSTANCE);
     }
 
     private void assertEvaluateTo(final boolean expected, final String expression) {

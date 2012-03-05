@@ -14,13 +14,13 @@ public class Calculator<T,C> {
     private final Solver<T,C> solver;
 
     public Calculator(final List<GrammarElement<T,C>> grammar) {
-        this.interpreter = new Interpreter<T,C>(grammar);
-        this.solver = new DefaultSolver<T,C>();
+        this.interpreter = new Interpreter<>(grammar);
+        this.solver = new DefaultSolver<>();
     }
 
     public Calculator(final List<GrammarElement<T,C>> grammar,
             final Solver<T,C> solver) {
-        this.interpreter = new Interpreter<T,C>(grammar);
+        this.interpreter = new Interpreter<>(grammar);
         this.solver = solver;
     }
 

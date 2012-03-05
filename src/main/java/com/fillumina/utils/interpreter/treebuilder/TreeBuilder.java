@@ -16,9 +16,9 @@ public class TreeBuilder<T,C> implements Serializable {
     private final ReadOperatorParameters<T,C> loadOperatorParameters;
 
     public TreeBuilder() {
-        innerParenthesisFinder = new InnerParenthesisFinder<T,C>();
-        higherPriorityOperatorFinder = new HigherPriorityOperatorFinder<T,C>();
-        loadOperatorParameters = new ReadOperatorParameters<T,C>();
+        innerParenthesisFinder = new InnerParenthesisFinder<>();
+        higherPriorityOperatorFinder = new HigherPriorityOperatorFinder<>();
+        loadOperatorParameters = new ReadOperatorParameters<>();
     }
 
     public void createTree(final List<Node<T,C>> nodeList) {

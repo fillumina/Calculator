@@ -18,7 +18,7 @@ public class TreePrinterTest {
     @Before
     public void init() {
         final ArithmeticGrammar grammar = ArithmeticGrammar.INSTANCE;
-        interpreter = new Interpreter<Double,Map<String, Double>>(grammar);
+        interpreter = new Interpreter<>(grammar);
     }
 
     @Test

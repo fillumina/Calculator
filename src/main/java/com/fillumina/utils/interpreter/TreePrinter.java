@@ -20,7 +20,7 @@ public class TreePrinter<T,C> {
     }
 
     public static <T,C> String prettyPrint(final Node<T,C> node) {
-        return new TreePrinter<T,C>(node).toString();
+        return new TreePrinter<>(node).toString();
     }
 
     private TreePrinter(final Node<T,C> node) {

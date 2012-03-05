@@ -30,7 +30,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
     }
 
     public Map<String, Double> createContext() {
-        return new HashMap<String, Double>();
+        return new HashMap<>();
     }
 
     private void addGrammarElements() {

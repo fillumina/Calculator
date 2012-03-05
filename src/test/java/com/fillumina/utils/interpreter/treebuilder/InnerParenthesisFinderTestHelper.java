@@ -51,7 +51,7 @@ public class InnerParenthesisFinderTestHelper {
 
 
     public List<Node> buildNodeList(final String expression) {
-        final List<Node> list = new ArrayList<Node>();
+        final List<Node> list = new ArrayList<>();
         for (char c: expression.toCharArray()) {
             switch(c) {
                 case '(': list.add(new OpenParNode()); break;

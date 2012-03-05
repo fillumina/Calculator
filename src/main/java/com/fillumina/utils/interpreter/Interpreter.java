@@ -21,11 +21,11 @@ public class Interpreter<T,C> implements Serializable {
     private final ParenthesisCleaner<T,C> parenthesisCleaner;
 
     public Interpreter(final List<GrammarElement<T,C>> grammar) {
-        this.tokenizer = new Tokenizer<T,C>(grammar);
-        this.unrecognizedElementParser = new UnrecognizedElementParser<T,C>(grammar);
-        this.treeBuilder = new TreeBuilder<T,C>();
-        this.whiteSpaceCleaner = new WhiteSpaceCleaner<T,C>();
-        this.parenthesisCleaner = new ParenthesisCleaner<T,C>();
+        this.tokenizer = new Tokenizer<>(grammar);
+        this.unrecognizedElementParser = new UnrecognizedElementParser<>(grammar);
+        this.treeBuilder = new TreeBuilder<>();
+        this.whiteSpaceCleaner = new WhiteSpaceCleaner<>();
+        this.parenthesisCleaner = new ParenthesisCleaner<>();
     }
 
     /** Can return a multi root tree */

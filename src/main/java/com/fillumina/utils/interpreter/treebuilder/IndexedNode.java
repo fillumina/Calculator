@@ -25,7 +25,7 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
     public static <T,C> IndexedNode<T,C> nextFrom(final ListIterator<Node<T,C>> iterator) {
         final int index = iterator.nextIndex();
         final Node<T,C> node = iterator.next();
-        return new IndexedNode<T,C>(node, index, iterator);
+        return new IndexedNode<>(node, index, iterator);
     }
 
     public IndexedNode(final Node<T,C> node, final int index,

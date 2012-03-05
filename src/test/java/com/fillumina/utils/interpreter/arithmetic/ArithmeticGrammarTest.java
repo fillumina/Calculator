@@ -21,7 +21,7 @@ public class ArithmeticGrammarTest {
     @Before
     public void init() {
         final ArithmeticGrammar grammar = ArithmeticGrammar.INSTANCE;
-        calculator = new Calculator<Double,Map<String, Double>>(grammar);
+        calculator = new Calculator<>(grammar);
         context = grammar.createContext();
     }
 
