@@ -1,6 +1,6 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.GrammarElement.GrammarElementMatchIndex;
+import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.util.ExtendedListIterator;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -42,7 +42,7 @@ public class Tokenizer<T,C> implements Serializable {
             final Node<T,C> node = iterator.next();
 
             if (node.isUnrecognized()) {
-                final GrammarElementMatchIndex matcher = ge.match(node.getValue());
+                final GrammarElementMatcher matcher = ge.match(node.getValue());
                 if (matcher.found()) {
                     assertMatchANotEmptyRegion(matcher, ge);
                     final Node<T, C> matchedNode =
@@ -54,7 +54,7 @@ public class Tokenizer<T,C> implements Serializable {
         }
     }
 
-    private void assertMatchANotEmptyRegion(final GrammarElementMatchIndex matcher,
+    private void assertMatchANotEmptyRegion(final GrammarElementMatcher matcher,
             final GrammarElement<T,C> ge) {
         if (matcher.start() == matcher.end()) {
             throw new GrammarException("* jollies not allowed in " + ge);
@@ -78,7 +78,7 @@ public class Tokenizer<T,C> implements Serializable {
 
         public Node<T,C> splitNode(
                 final Node<T,C> node,
-                final GrammarElementMatchIndex matcher) {
+                final GrammarElementMatcher matcher) {
 
             final int start = matcher.start();
             final int end = matcher.end();

@@ -1,11 +1,11 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.GrammarElement.Type;
+import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.grammar.AbstractOperator;
 import java.util.List;
 
 /**
- * It's an operator that doesn't evaluate. It is useful in tests.
+ * It's an operator that doesn't evaluateuate. It is useful in tests.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
@@ -20,14 +20,14 @@ public class TestOperator extends AbstractOperator<String,Void> {
     }
 
     @Override
-    public String eval(final String value,
+    public String evaluate(final String value,
             final List<String> params, final Void context) {
         return value;
     }
 
     @Override
-    public boolean isType(final Type type) {
-        return Type.OPERATOR.equals(type);
+    public boolean isType(final GrammarElementType type) {
+        return GrammarElementType.OPERATOR.equals(type);
     }
 
 }

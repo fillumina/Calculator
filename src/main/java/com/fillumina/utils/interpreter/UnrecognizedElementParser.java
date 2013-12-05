@@ -37,7 +37,7 @@ public class UnrecognizedElementParser<T,C> implements Serializable {
             final Iterable<GrammarElement<T,C>> grammar) {
         if (grammar != null) {
             for (GrammarElement<T,C> ge: grammar) {
-                if (ge.isType(GrammarElement.Type.UNRECOGNIZED)) {
+                if (ge.isType(GrammarElementType.UNRECOGNIZED)) {
                     return ge;
                 }
             }

@@ -13,11 +13,14 @@ import java.util.List;
  * {@link GrammarElement}s should be added in order of parsing priority,
  * higher priority first. This means that if you have a function which
  * name is 'cos' and a variable which name is 'constant' the variable
- * element should come first in the list.<br />
+ * element should come first in the list.<p>
  *
  * <b>IMPORTANT:</b> There should be only <b>one</b> (or none at all)
  * <code>UnrecognizedElement</code> defined in a grammar. At any rate only
- * the first one will be considered.
+ * the first one will be considered.<p>
+ *
+ * <b>NOTE:</b> This class is just an helper and every method that works
+ * on grammars accepts simply an iterable over grammar elements.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

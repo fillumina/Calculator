@@ -86,7 +86,7 @@ public class Node<T,C> implements Serializable {
         return getChildren().size() == number;
     }
 
-    public boolean isOfType(final GrammarElement.Type type) {
+    public boolean isOfType(final GrammarElementType type) {
         final GrammarElement<T, C> ge = getGrammarElement();
         return ge == null ? false : ge.isType(type);
     }

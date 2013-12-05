@@ -1,4 +1,4 @@
-package com.fillumina.utils.interpreter.arithmetic;
+package com.fillumina.utils.interpreter.grammar;
 
 import com.fillumina.utils.interpreter.SyntaxErrorException;
 
@@ -27,7 +27,7 @@ public class ContextException extends SyntaxErrorException {
     }
 
     private static String createMessage(final String offendingElement) {
-        return "variable not in context on element : " + offendingElement;
+        return "variable not in context: " + offendingElement;
     }
 
 }

@@ -3,6 +3,8 @@ package com.fillumina.utils.interpreter;
 import java.util.List;
 
 /**
+ * The basic element that compose a grammar.
+ *
  * @param T     the type of the expected result
  * @param C     the type of the context
  *
@@ -10,23 +12,14 @@ import java.util.List;
  */
 public interface GrammarElement<T,C> extends Comparable<GrammarElement<T, C>> {
 
-    //TODO export GrammarElementMatchIndex
-    interface GrammarElementMatchIndex {
-        boolean found();
-        int start();
-        int end();
-    }
+    /** Search for the element in the string expression and reports the result. */
+    GrammarElementMatcher match(final String expression);
 
-    GrammarElementMatchIndex match(String expression);
-
+    /** Evaluate the element given the parameters and context. **/
     T evaluate(final String value, final List<T> params, final C context);
 
     int getRequiredOperandsAfter();
     int getRequiredOperandsBefore();
 
-    //TODO export Type
-    public static enum Type {
-        OPEN_PAR, CLOSED_PAR, OPERAND, OPERATOR, WHITE_SPACE, UNRECOGNIZED}
-
-    boolean isType(Type type);
+    boolean isType(GrammarElementType type);
 }

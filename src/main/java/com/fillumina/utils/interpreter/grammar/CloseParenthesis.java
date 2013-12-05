@@ -1,6 +1,6 @@
 package com.fillumina.utils.interpreter.grammar;
 
-import com.fillumina.utils.interpreter.GrammarElement.Type;
+import com.fillumina.utils.interpreter.GrammarElementType;
 
 /**
  * Defines the symbols that close a parenthesis. Note that unbalanced different
@@ -8,7 +8,7 @@ import com.fillumina.utils.interpreter.GrammarElement.Type;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class CloseParenthesis<T,C> extends AbstractPatternGrammarElement<T,C> {
+public class CloseParenthesis<T,C> extends UnevaluablePatternGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     public CloseParenthesis(final String symbolRegexp) {
@@ -16,8 +16,8 @@ public class CloseParenthesis<T,C> extends AbstractPatternGrammarElement<T,C> {
     }
 
     @Override
-    public boolean isType(final Type type) {
-        return Type.CLOSED_PAR.equals(type);
+    public boolean isType(final GrammarElementType type) {
+        return GrammarElementType.CLOSED_PAR.equals(type);
     }
 
 }

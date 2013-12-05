@@ -1,10 +1,10 @@
 package com.fillumina.utils.interpreter.arithmetic;
 
-import org.junit.Ignore;
 import com.fillumina.utils.interpreter.treebuilder.ParenthesisMismatchedException;
 import java.util.Map;
 import com.fillumina.utils.interpreter.Calculator;
 import com.fillumina.utils.interpreter.EvaluationException;
+import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -20,14 +20,13 @@ public class ArithmeticGrammarTest {
 
     @Before
     public void init() {
-        final ArithmeticGrammar grammar = ArithmeticGrammar.INSTANCE;
-        calculator = new Calculator<>(grammar);
-        context = grammar.createContext();
+        calculator = new Calculator<>(ArithmeticGrammar.INSTANCE);
+        context = new HashMap<>();
     }
 
     private void assertEvaluateTo(final double expected, final String expression) {
-        assertEquals("\"" + expression + "\"",
-                expected, calculator.solve(expression, context).get(0), 1E-7);
+        final Double result = calculator.solve(expression, context).get(0);
+        assertEquals("\"" + expression + "\"", expected, result, 1E-7);
     }
 
     @Test
@@ -317,11 +316,4 @@ public class ArithmeticGrammarTest {
     public void shoudReadOnlyTheArgumentsOnParenthesis() {
         assertEvaluateTo(2.5, "avg(2 3) 1");
     }
-
-    @Test
-    @Ignore
-    public void shouldSimplifyPartialSolvableExpressions() {
-        assertEvaluateTo(0.0, "x - 2");
-    }
-
 }

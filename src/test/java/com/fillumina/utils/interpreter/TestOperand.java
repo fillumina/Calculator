@@ -17,7 +17,7 @@ public class TestOperand extends AbstractOperand<String, Void> {
     }
 
     @Override
-    public String eval(final String value, final Void context) {
+    public String evaluate(final String value, final Void context) {
         return value;
     }
 

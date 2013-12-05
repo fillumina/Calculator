@@ -2,7 +2,7 @@ package com.fillumina.utils.interpreter.treebuilder;
 
 import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.util.ExtendedListIterator;
-import com.fillumina.utils.interpreter.GrammarElement.Type;
+import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.Node;
 import java.util.List;
 
@@ -39,8 +39,7 @@ class ReadOperatorParameters {
                 break;
             }
             final Node<T,C> childNode = iterator.nextAndRemove();
-            if (childNode.isOfType(Type.OPEN_PAR) && childNode.hasChildren()) {
-                // TODO what about 1 + ((2)) ??
+            if (childNode.isOfType(GrammarElementType.OPEN_PAR) && childNode.hasChildren()) {
                 node.addAllChildren(childNode.getChildren());
                 break;
             }

@@ -1,6 +1,6 @@
 package com.fillumina.utils.interpreter.grammar;
 
-import com.fillumina.utils.interpreter.GrammarElement.Type;
+import com.fillumina.utils.interpreter.GrammarElementType;
 import java.util.List;
 
 /**
@@ -8,7 +8,7 @@ import java.util.List;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class ConstantElement<T,C>
-        extends AbstractEvaluableGrammarElement<T,C> {
+        extends AbstractPatternGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
     private final T constant;
 
@@ -19,14 +19,14 @@ public class ConstantElement<T,C>
     }
 
     @Override
-    public T eval(final String value,
+    public T evaluate(final String value,
             final List<T> params, final C context) {
         return constant;
     }
 
     @Override
-    public boolean isType(final Type type) {
-        return Type.OPERAND.equals(type);
+    public boolean isType(final GrammarElementType type) {
+        return GrammarElementType.OPERAND.equals(type);
     }
 
 }

@@ -10,26 +10,25 @@ import com.fillumina.utils.interpreter.grammar.ConstantElement;
 import com.fillumina.utils.interpreter.grammar.VariableContextManager;
 import com.fillumina.utils.interpreter.grammar.WhiteSpace;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
+ * Defines a simple arithmetic grammar useful to perform simple calculations
+ * on double values. It supports variables that can be passed through a
+ * context.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
+public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
         implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final ArithmeticGrammar INSTANCE = new ArithmeticGrammar();
 
-    public Map<String, Double> createContext() {
-        return new HashMap<>();
-    }
-
     private ArithmeticGrammar() {
         super(
+        // DECIMAL in scientific notation
         // the problem here is that the - and + symbols shouldn't be included
         // in the number if there is a digit before (eventually separated by spaces)
         // see http://www.regular-expressions.info/refadv.html
@@ -37,12 +36,14 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
         // (\\D\\ {100}) is wrong but works recognizing non digit chars
         //
         new AbstractOperand<Double,Map<String, Double>>(
-                "((?<=(([\\*\\+\\-/^]\\ {0,100})|(\\D\\ {100})|(\\(\\ {0,100})))[\\+\\-])?" +
+                "((?<=(([\\*\\+\\-/^]\\ {0,100})|" +
+                "(\\D\\ {100})|(\\(\\ {0,100})))[\\+\\-])?" +
                 "\\d+(\\.\\d+)?([Ee][\\+\\-]?\\d+)?", 0) {
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final Map<String, Double> context) {
+            public Double evaluate(final String value,
+                    final Map<String, Double> context) {
                 return Double.parseDouble(value);
             }
         },
@@ -51,7 +52,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 final Double number = params.get(0);
                 final long ivalue = round(number);
@@ -67,7 +68,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return asin(params.get(0));
             }
@@ -77,7 +78,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return acos(params.get(0));
             }
@@ -88,7 +89,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return atan(params.get(0));
             }
@@ -98,7 +99,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return sin(params.get(0));
             }
@@ -108,7 +109,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return cos(params.get(0));
             }
@@ -119,7 +120,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return tan(params.get(0));
             }
@@ -129,7 +130,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return log10(params.get(0));
             }
@@ -139,7 +140,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return log(params.get(0));
             }
@@ -149,7 +150,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return sqrt(params.get(0));
             }
@@ -160,18 +161,19 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return Math.random();
             }
         },
 
         // accepts many parameters
-        new AbstractOperator<Double,Map<String, Double>>("avg", 4, 0, Integer.MAX_VALUE) {
+        new AbstractOperator<Double,Map<String, Double>>("avg", 4, 0,
+                Integer.MAX_VALUE) {
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 final int size = params.size();
                 if (size == 0) {
@@ -189,7 +191,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return pow(params.get(0), params.get(1));
             }
@@ -199,7 +201,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return params.get(0) * params.get(1);
             }
@@ -209,7 +211,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return params.get(0) / params.get(1);
             }
@@ -219,7 +221,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 return params.get(0) + params.get(1);
             }
@@ -229,7 +231,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 if (params.size() == 1) {
                     return - params.get(0);
@@ -242,7 +244,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
             private static final long serialVersionUID = 1L;
 
             @Override
-            public Double eval(final String value, final List<Double> params,
+            public Double evaluate(final String value, final List<Double> params,
                     final Map<String, Double> context) {
                 final String nodeValue = value;
                 final String varName = nodeValue.substring(0,
@@ -264,5 +266,4 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String, Double>>
         new WhiteSpace<Double,Map<String, Double>>("[\\ ,]+")
         );
     }
-
 }

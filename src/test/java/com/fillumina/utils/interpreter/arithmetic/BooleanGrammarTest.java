@@ -1,6 +1,8 @@
 package com.fillumina.utils.interpreter.arithmetic;
 
 import com.fillumina.utils.interpreter.Calculator;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -11,16 +13,18 @@ import static org.junit.Assert.*;
  */
 public class BooleanGrammarTest {
 
-    private Calculator<Boolean,Void> calculator;
+    private Calculator<Boolean,Map<String,Boolean>> calculator;
+    private Map<String,Boolean> context;
 
     @Before
     public void init() {
         calculator = new Calculator<>(BooleanGrammar.INSTANCE);
+        context = new HashMap<>();
     }
 
     private void assertEvaluateTo(final boolean expected, final String expression) {
         assertEquals("\"" + expression + "\"",
-                expected, calculator.solve(expression, null).get(0));
+                expected, calculator.solve(expression, context).get(0));
     }
 
     @Test
@@ -101,5 +105,11 @@ public class BooleanGrammarTest {
     @Test
     public void shouldRecognizeTheExpression() {
         assertEvaluateTo(false, "NOT (false OR(true AND true))");
+    }
+
+    @Test
+    public void shouldUseTheVariablePassedInTheContext() {
+        context.put("x", Boolean.FALSE);
+        assertEvaluateTo(false, "NOT (TRUE || x)");
     }
 }

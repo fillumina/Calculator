@@ -1,6 +1,6 @@
 package com.fillumina.utils.interpreter.grammar;
 
-import com.fillumina.utils.interpreter.GrammarElement.Type;
+import com.fillumina.utils.interpreter.GrammarElementType;
 
 /**
  * If the grammar supports them, this element is well suited to represents
@@ -14,7 +14,7 @@ import com.fillumina.utils.interpreter.GrammarElement.Type;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractUnrecognizedElement<T,C>
-        extends AbstractEvaluableGrammarElement<T,C> {
+        extends AbstractPatternGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     public AbstractUnrecognizedElement() {
@@ -24,8 +24,8 @@ public abstract class AbstractUnrecognizedElement<T,C>
     }
 
     @Override
-    public boolean isType(final Type type) {
-        return Type.UNRECOGNIZED.equals(type);
+    public boolean isType(final GrammarElementType type) {
+        return GrammarElementType.UNRECOGNIZED.equals(type);
     }
 
 }

@@ -28,6 +28,6 @@ public class WhiteSpaceCleaner {
 
     private <T,C> boolean isAWhiteSpace(final Node<T,C> node) {
         final GrammarElement<T, C> ge = node.getGrammarElement();
-        return ge == null ? false : ge.isType(GrammarElement.Type.WHITE_SPACE);
+        return ge == null ? false : ge.isType(GrammarElementType.WHITE_SPACE);
     }
 }

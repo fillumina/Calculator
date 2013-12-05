@@ -1,7 +1,7 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
 import com.fillumina.utils.interpreter.grammar.AbstractOperand;
-import com.fillumina.utils.interpreter.GrammarElement.Type;
+import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.Node;
 import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
 import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
@@ -25,7 +25,7 @@ public class InnerParenthesisFinderTestHelper {
                 private static final long serialVersionUID = 1L;
 
                 @Override
-                public Long eval(final String value,
+                public Long evaluate(final String value,
                         final Void context) {
                     return Long.parseLong(value);
                 }
@@ -65,9 +65,9 @@ public class InnerParenthesisFinderTestHelper {
     public String buildExpression(final List<Node<Long, Void>> nodeList) {
         final StringBuilder builder = new StringBuilder();
         for (Node<Long, Void> node: nodeList) {
-            if (node.isOfType(Type.OPEN_PAR)) {
+            if (node.isOfType(GrammarElementType.OPEN_PAR)) {
                 builder.append('(');
-            } else if (node.isOfType(Type.CLOSED_PAR)) {
+            } else if (node.isOfType(GrammarElementType.CLOSED_PAR)) {
                 builder.append(')');
             } else {
                 builder.append(node.getValue());

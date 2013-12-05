@@ -1,6 +1,7 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
 import com.fillumina.utils.interpreter.GrammarElement;
+import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.Node;
 import java.io.Serializable;
 import java.util.ListIterator;
@@ -53,7 +54,7 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
     }
 
     public boolean isACloseParenthesis() {
-        return getNode().getGrammarElement().isType(GrammarElement.Type.CLOSED_PAR);
+        return getNode().getGrammarElement().isType(GrammarElementType.CLOSED_PAR);
     }
 
     /**
@@ -63,7 +64,7 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
      */
     public boolean isAnEmptyOpenParenthesis() {
         final Node<T,C> n = getNode();
-        return n.getGrammarElement().isType(GrammarElement.Type.OPEN_PAR) &&
+        return n.getGrammarElement().isType(GrammarElementType.OPEN_PAR) &&
                 n.hasNoChildren();
     }
 
@@ -76,7 +77,7 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
     }
 
     public boolean isEmptyOperator() {
-        return getNode().getGrammarElement().isType(GrammarElement.Type.OPERATOR) &&
+        return getNode().getGrammarElement().isType(GrammarElementType.OPERATOR) &&
                 getNode().hasNoChildren();
     }
 

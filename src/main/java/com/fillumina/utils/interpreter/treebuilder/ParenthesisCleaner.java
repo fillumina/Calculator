@@ -1,6 +1,6 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
-import com.fillumina.utils.interpreter.GrammarElement.Type;
+import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.Node;
 import java.util.List;
 import java.util.ListIterator;
@@ -15,7 +15,7 @@ public class ParenthesisCleaner<T,C> {
         ListIterator<Node<T,C>> iterator = nodes.listIterator();
         while(iterator.hasNext()) {
             final Node<T,C> node = iterator.next();
-            if (node.isOfType(Type.OPEN_PAR)) {
+            if (node.isOfType(GrammarElementType.OPEN_PAR)) {
                 if (node.hasOnlyOneChild()) {
                     iterator.remove();
                     iterator.add(node.getChildren().get(0));

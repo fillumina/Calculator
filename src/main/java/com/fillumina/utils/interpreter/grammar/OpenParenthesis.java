@@ -1,5 +1,7 @@
 package com.fillumina.utils.interpreter.grammar;
 
+import com.fillumina.utils.interpreter.GrammarElementType;
+
 /**
  * Defines the symbols that open a parenthesis. Note that unbalanced different
  * kind of parenthesis will actually work. i.e.: <code>([2+1) *3]</code> is
@@ -10,7 +12,7 @@ package com.fillumina.utils.interpreter.grammar;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class OpenParenthesis<T,C> extends AbstractPatternGrammarElement<T,C> {
+public class OpenParenthesis<T,C> extends UnevaluablePatternGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     public OpenParenthesis(final String symbolRegexp) {
@@ -18,8 +20,8 @@ public class OpenParenthesis<T,C> extends AbstractPatternGrammarElement<T,C> {
     }
 
     @Override
-    public boolean isType(final Type type) {
-        return Type.OPEN_PAR.equals(type);
+    public boolean isType(final GrammarElementType type) {
+        return GrammarElementType.OPEN_PAR.equals(type);
     }
 
 }
