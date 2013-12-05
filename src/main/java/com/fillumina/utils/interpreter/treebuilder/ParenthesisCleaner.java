@@ -7,7 +7,7 @@ import java.util.ListIterator;
 
 /**
  * Removes the parenthesis with only one children (parameter)
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class ParenthesisCleaner<T,C> {
 

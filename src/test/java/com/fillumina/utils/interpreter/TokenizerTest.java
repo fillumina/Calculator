@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class TokenizerTest {
 
@@ -14,8 +14,8 @@ public class TokenizerTest {
     public void shouldTokenizeThreeOperands() {
         final GrammarElement<String, Void> operator = new TestOperator("\\*", 0, 1, 1);
         final GrammarElement<String, Void> number = new TestOperand("\\d+", 0);
-        final Grammar<String, Void> grammar = new Grammar<>();
-        grammar.put(number).put(operator);
+        @SuppressWarnings("unchecked")
+        final Grammar<String, Void> grammar = new Grammar<>(number, operator);
 
         final Tokenizer<String, Void> tokenizer = new Tokenizer<>(grammar);
         final List<Node<String,Void>> list = tokenizer.tokenize("12*3*2");
@@ -28,8 +28,8 @@ public class TokenizerTest {
         final GrammarElement<String, Void> multiply = new TestOperator("\\*", 0, 1, 1);
         final GrammarElement<String, Void> sum = new TestOperator("\\+", 0, 1, 1);
         final GrammarElement<String, Void> number = new TestOperand("\\d+", 0);
-        final Grammar<String, Void> grammar = new Grammar<>();
-        grammar.put(number).put(multiply).put(sum);
+        @SuppressWarnings("unchecked")
+        final Grammar<String, Void> grammar = new Grammar<>(number, sum);
 
         final Tokenizer<String, Void> tokenizer = new Tokenizer<>(grammar);
         final List<Node<String,Void>> list = tokenizer.tokenize("12*7+9");
@@ -42,8 +42,9 @@ public class TokenizerTest {
         final GrammarElement<String, Void> multiply = new TestOperator("\\*", 0, 1, 1);
         final GrammarElement<String, Void> sum = new TestOperator("\\+", 0, 1, 1);
         final GrammarElement<String, Void> number = new TestOperand("\\d+", 0);
-        final Grammar<String, Void> grammar = new Grammar<>();
-        grammar.put(number).put(multiply).put(sum);
+        @SuppressWarnings("unchecked")
+        final Grammar<String, Void> grammar =
+                new Grammar<>(number, multiply, sum);
 
         final Tokenizer<String, Void> tokenizer = new Tokenizer<>(grammar);
         final List<Node<String,Void>> list = tokenizer.tokenize("12,3*  7 + 9.33");

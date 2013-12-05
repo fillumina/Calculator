@@ -1,6 +1,5 @@
 package com.fillumina.utils.interpreter;
 
-import org.junit.Before;
 import com.fillumina.utils.interpreter.grammar.WhiteSpace;
 import java.util.List;
 import org.junit.Test;
@@ -8,16 +7,12 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class WhiteSpaceCleanerTest {
 
-    private WhiteSpaceCleaner<String, Void> whiteSpaceCleaner;
-
-    @Before
-    public void init() {
-        whiteSpaceCleaner = new WhiteSpaceCleaner<>();
-    }
+    private WhiteSpaceCleaner whiteSpaceCleaner =
+            WhiteSpaceCleaner.INSTANCE;
 
     @Test
     public void shouldCleanTheWhiteSpaces() {
@@ -25,8 +20,9 @@ public class WhiteSpaceCleanerTest {
         final GrammarElement<String, Void> sum = new TestOperator("\\+", 0, 1, 1);
         final GrammarElement<String, Void> number = new TestOperand("\\d+", 0);
         final GrammarElement<String, Void> whiteSpace = new WhiteSpace<>("[\\ ,]+");
-        final Grammar<String, Void> grammar = new Grammar<>();
-        grammar.put(number).put(multiply).put(sum).put(whiteSpace);
+        @SuppressWarnings("unchecked")
+        final Grammar<String, Void> grammar =
+                new Grammar<>(number, multiply, sum, whiteSpace);
 
         final Tokenizer<String, Void> tokenizer = new Tokenizer<>(grammar);
         final List<Node<String, Void>> list = tokenizer.tokenize("12,3*  7 + 9.33");

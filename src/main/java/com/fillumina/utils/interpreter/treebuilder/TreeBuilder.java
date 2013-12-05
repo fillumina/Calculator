@@ -6,19 +6,19 @@ import java.util.List;
 
 /**
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class TreeBuilder<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final InnerParenthesisFinder<T,C> innerParenthesisFinder;
-    private final HigherPriorityOperatorFinder<T,C> higherPriorityOperatorFinder;
-    private final ReadOperatorParameters<T,C> loadOperatorParameters;
+    private final InnerParenthesisFinder innerParenthesisFinder;
+    private final HigherPriorityOperatorFinder higherPriorityOperatorFinder;
+    private final ReadOperatorParameters loadOperatorParameters;
 
     public TreeBuilder() {
-        innerParenthesisFinder = new InnerParenthesisFinder<>();
-        higherPriorityOperatorFinder = new HigherPriorityOperatorFinder<>();
-        loadOperatorParameters = new ReadOperatorParameters<>();
+        innerParenthesisFinder = InnerParenthesisFinder.INSTANCE;
+        higherPriorityOperatorFinder = HigherPriorityOperatorFinder.INSTANCE;
+        loadOperatorParameters = ReadOperatorParameters.INSTANCE;
     }
 
     public void createTree(final List<Node<T,C>> nodeList) {

@@ -1,7 +1,6 @@
 package com.fillumina.utils.interpreter.arithmetic;
 
 import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
-import com.fillumina.utils.interpreter.grammar.AbstractOperand;
 import com.fillumina.utils.interpreter.Grammar;
 import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
 import com.fillumina.utils.interpreter.grammar.AbstractOperator;
@@ -12,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class BooleanGrammar extends Grammar<Boolean,Void>
         implements Serializable {
@@ -20,13 +19,9 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
 
     public static final BooleanGrammar INSTANCE = new BooleanGrammar();
 
-    protected BooleanGrammar() {
-        super();
-        addElements();
-    }
-
-    public final void addElements() {
-        add(new AbstractOperator<Boolean,Void>("(and|AND|And)", 1, 1, 1) {
+    private BooleanGrammar() {
+        super(
+        new AbstractOperator<Boolean,Void>("(and|AND|And)", 1, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -34,9 +29,9 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
                     final Void context) {
                 return params.get(0) && params.get(1);
             }
-        });
+        },
 
-        add(new AbstractOperator<Boolean,Void>("(or|OR|Or)", 1, 1, 1) {
+        new AbstractOperator<Boolean,Void>("(or|OR|Or)", 1, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -44,9 +39,9 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
                     final Void context) {
                 return params.get(0) || params.get(1);
             }
-        });
+        },
 
-        add(new AbstractOperator<Boolean,Void>("(not|NOT|Not)", 1, 0, 1) {
+        new AbstractOperator<Boolean,Void>("(not|NOT|Not)", 1, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -54,14 +49,15 @@ public class BooleanGrammar extends Grammar<Boolean,Void>
                     final Void context) {
                 return !params.get(0);
             }
-        });
+        },
 
-        add(new ConstantElement<Boolean,Void>("true|TRUE|True", true, 0));
-        add(new ConstantElement<Boolean,Void>("false|FALSE|False", false, 0));
+        new ConstantElement<Boolean,Void>("true|TRUE|True", true, 0),
+        new ConstantElement<Boolean,Void>("false|FALSE|False", false, 0),
 
-        add(new OpenParenthesis<Boolean,Void>("\\("));
-        add(new CloseParenthesis<Boolean,Void>("\\)"));
-        add(new WhiteSpace<Boolean,Void>("[\\ ,]+"));
+        new OpenParenthesis<Boolean,Void>("\\("),
+        new CloseParenthesis<Boolean,Void>("\\)"),
+        new WhiteSpace<Boolean,Void>("[\\ ,]+")
+        );
 
     }
 }

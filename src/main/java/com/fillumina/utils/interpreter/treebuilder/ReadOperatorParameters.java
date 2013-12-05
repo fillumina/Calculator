@@ -8,11 +8,13 @@ import java.util.List;
 
 /**
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ReadOperatorParameters<T,C> {
+class ReadOperatorParameters {
 
-    public void read(final List<Node<T,C>> list,
+    static final ReadOperatorParameters INSTANCE = new ReadOperatorParameters();
+
+    public <T,C> void read(final List<Node<T,C>> list,
             final IndexedNode<T,C> higherPriority) {
         final int index = higherPriority.getIndex();
         final Node<T,C> node = list.get(index);
@@ -38,6 +40,7 @@ public class ReadOperatorParameters<T,C> {
             }
             final Node<T,C> childNode = iterator.nextAndRemove();
             if (childNode.isOfType(Type.OPEN_PAR) && childNode.hasChildren()) {
+                // TODO what about 1 + ((2)) ??
                 node.addAllChildren(childNode.getChildren());
                 break;
             }

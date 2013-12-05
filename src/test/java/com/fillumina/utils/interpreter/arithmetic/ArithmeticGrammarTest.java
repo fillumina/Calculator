@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class ArithmeticGrammarTest {
 
@@ -268,6 +268,11 @@ public class ArithmeticGrammarTest {
     @Test
     public void shouldCalculateTheComplexExpression3() {
         assertEvaluateTo(7, "7^2 * 7^5 * 7^-6");
+    }
+
+    @Test
+    public void shouldIgnoreUnusedNestedParentheses() {
+        assertEvaluateTo(16, "4 * ((2 + 2))");
     }
 
     @Test

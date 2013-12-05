@@ -8,7 +8,7 @@ import java.util.Map;
  * Using this class requires the context to be of type
  * <code>Map&lt;String,T&gt;</code>.
  * 
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class VariableContextManager<T>
         extends AbstractUnrecognizedElement<T, Map<String, T>> {

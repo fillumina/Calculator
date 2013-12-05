@@ -4,10 +4,12 @@ import java.util.List;
 
 /**
  *
- * @author fra
+ * @param T     the type of the expected result
+ * @param C     the type of the context
+ *
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public interface Solver<T, C> {
 
     List<T> solve(final List<Node<T,C>> nodeTree, final C context);
-
 }

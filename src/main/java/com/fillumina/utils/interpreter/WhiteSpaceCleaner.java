@@ -7,11 +7,13 @@ import java.util.ListIterator;
  * The {@link WhiteSpace} defines characters in the input that may be
  * safely ignored. This class removes them from the list of tokens.
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class WhiteSpaceCleaner<T,C> {
+public class WhiteSpaceCleaner {
 
-    public void clean(final List<Node<T,C>> list) {
+    public static final WhiteSpaceCleaner INSTANCE = new WhiteSpaceCleaner();
+    
+    public <T,C> void clean(final List<Node<T,C>> list) {
         final ListIterator<Node<T,C>> iterator = list.listIterator();
         while(iterator.hasNext()) {
             final Node<T,C> node = iterator.next();
@@ -24,9 +26,8 @@ public class WhiteSpaceCleaner<T,C> {
         }
     }
 
-    private boolean isAWhiteSpace(final Node<T,C> node) {
+    private <T,C> boolean isAWhiteSpace(final Node<T,C> node) {
         final GrammarElement<T, C> ge = node.getGrammarElement();
         return ge == null ? false : ge.isType(GrammarElement.Type.WHITE_SPACE);
     }
-
 }

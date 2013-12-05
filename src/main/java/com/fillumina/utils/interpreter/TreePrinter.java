@@ -5,7 +5,7 @@ import java.util.Collection;
 
 /**
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class TreePrinter<T,C> {
     private final Node<T,C> tree;

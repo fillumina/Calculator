@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * It's the base class of a hierarchy based on the use of a regular expression
  * to find elements in a string.
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractPatternGrammarElement<T,C>
         implements GrammarElement<T,C>, Serializable {
@@ -80,7 +80,8 @@ public abstract class AbstractPatternGrammarElement<T,C>
         return 0;
     }
 
-    public class PatternMatchedIndexes implements MatchIndex, Serializable {
+    public static class PatternMatchedIndexes
+            implements GrammarElementMatchIndex, Serializable {
         private static final long serialVersionUID = 1L;
 
         private final Matcher matcher;
@@ -103,12 +104,10 @@ public abstract class AbstractPatternGrammarElement<T,C>
         public int end() {
             return matcher.end();
         }
-
     }
 
     @Override
-    public MatchIndex match(final String expression) {
+    public GrammarElementMatchIndex match(final String expression) {
         return new PatternMatchedIndexes(pattern.matcher(expression));
     }
-
 }

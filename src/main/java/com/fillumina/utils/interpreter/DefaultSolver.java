@@ -6,7 +6,7 @@ import java.util.List;
  * @param T the type of the elements
  * @param C the type of the context
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class DefaultSolver<T,C> extends AbstractSolver<T,C> {
 
@@ -21,5 +21,4 @@ public class DefaultSolver<T,C> extends AbstractSolver<T,C> {
             throw new EvaluationException(node.getValue(), e);
         }
     }
-
 }

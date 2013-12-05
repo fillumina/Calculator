@@ -3,7 +3,7 @@ package com.fillumina.utils.interpreter.grammar;
 import java.util.List;
 
 /**
- * Is an element that can be evaluated to give a result. It is almost
+ * It's an element that can be evaluated to give a result. It is almost
  * never needed to use this class directly, use one of its derived classes
  * instead.
  *
@@ -15,7 +15,7 @@ import java.util.List;
  * @param T     the type of the expected result
  * @param C     the type of the context
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractEvaluableGrammarElement<T,C>
         extends AbstractPatternGrammarElement<T,C> {

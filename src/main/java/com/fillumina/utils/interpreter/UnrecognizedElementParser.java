@@ -2,6 +2,7 @@ package com.fillumina.utils.interpreter;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This parser assigns to unrecognized tokens the {@link UnrecognizedElement}
@@ -10,15 +11,16 @@ import java.util.List;
  * recognize as part of the grammar. It can be used to represent
  * variables.<br />
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
+//TODO couldn't just assign it as default at the first pass?
 public class UnrecognizedElementParser<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final GrammarElement<T,C> unrecognizedElement;
 
-    public UnrecognizedElementParser(final List<GrammarElement<T,C>> grammar) {
-        assertGrammarNotNull(grammar);
+    public UnrecognizedElementParser(final Iterable<GrammarElement<T,C>> grammar) {
+        Objects.requireNonNull(grammar, "grammar must not be null");
         unrecognizedElement = getUnrecognizeElement(grammar);
     }
 
@@ -32,7 +34,7 @@ public class UnrecognizedElementParser<T,C> implements Serializable {
     }
 
     private GrammarElement<T,C> getUnrecognizeElement(
-            final List<GrammarElement<T,C>> grammar) {
+            final Iterable<GrammarElement<T,C>> grammar) {
         if (grammar != null) {
             for (GrammarElement<T,C> ge: grammar) {
                 if (ge.isType(GrammarElement.Type.UNRECOGNIZED)) {
@@ -49,11 +51,4 @@ public class UnrecognizedElementParser<T,C> implements Serializable {
                     node.getValue() + "' not recognized");
         }
     }
-
-    private void assertGrammarNotNull(final List<GrammarElement<T,C>> grammar) {
-        if (grammar == null) {
-            throw new NullPointerException("grammar must not be null");
-        }
-    }
-
 }

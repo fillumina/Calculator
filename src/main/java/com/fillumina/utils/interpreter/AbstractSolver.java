@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractSolver<T,C> implements Solver<T, C> {
 

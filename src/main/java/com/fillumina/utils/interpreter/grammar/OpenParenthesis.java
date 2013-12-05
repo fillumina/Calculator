@@ -8,7 +8,7 @@ package com.fillumina.utils.interpreter.grammar;
  * This class is also used internally as the parameters holder when a parenthesis
  * is discovered.
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class OpenParenthesis<T,C> extends AbstractPatternGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;

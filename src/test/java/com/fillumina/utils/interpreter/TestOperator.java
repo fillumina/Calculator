@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * It's an operator that doesn't evaluate. It is useful in tests.
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class TestOperator extends AbstractOperator<String,Void> {
     private static final long serialVersionUID = 1L;

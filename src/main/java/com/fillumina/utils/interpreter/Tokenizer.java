@@ -1,23 +1,24 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.GrammarElement.MatchIndex;
+import com.fillumina.utils.interpreter.GrammarElement.GrammarElementMatchIndex;
 import com.fillumina.utils.interpreter.util.ExtendedListIterator;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
- * Uses the grammar to recognize the grammar's element in a string expression.
+ * Uses the grammar to recognize the elements' hierarchy in a string expression.
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class Tokenizer<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final List<GrammarElement<T,C>> grammar;
+    private final Iterable<GrammarElement<T,C>> grammar;
 
-    public Tokenizer(final List<GrammarElement<T,C>> grammar) {
-        assertGrammarNotNull(grammar);
+    public Tokenizer(final Iterable<GrammarElement<T,C>> grammar) {
+        Objects.requireNonNull(grammar, "grammar must not be null.");
         this.grammar = grammar;
     }
 
@@ -41,14 +42,22 @@ public class Tokenizer<T,C> implements Serializable {
             final Node<T,C> node = iterator.next();
 
             if (node.isUnrecognized()) {
-                final MatchIndex matcher = ge.match(node.getValue());
+                final GrammarElementMatchIndex matcher = ge.match(node.getValue());
                 if (matcher.found()) {
                     assertMatchANotEmptyRegion(matcher, ge);
-                    final Node<T, C> matchedNode = iterator.splitNode(node, matcher);
+                    final Node<T, C> matchedNode =
+                            iterator.splitNode(node, matcher);
                     matchedNode.setGrammarElement(ge);
                     iterator.reset();
                 }
             }
+        }
+    }
+
+    private void assertMatchANotEmptyRegion(final GrammarElementMatchIndex matcher,
+            final GrammarElement<T,C> ge) {
+        if (matcher.start() == matcher.end()) {
+            throw new GrammarException("* jollies not allowed in " + ge);
         }
     }
 
@@ -69,7 +78,7 @@ public class Tokenizer<T,C> implements Serializable {
 
         public Node<T,C> splitNode(
                 final Node<T,C> node,
-                final MatchIndex matcher) {
+                final GrammarElementMatchIndex matcher) {
 
             final int start = matcher.start();
             final int end = matcher.end();
@@ -97,19 +106,4 @@ public class Tokenizer<T,C> implements Serializable {
             }
         }
     }
-
-    private void assertMatchANotEmptyRegion(final MatchIndex matcher,
-            final GrammarElement<T,C> ge) {
-        if (matcher.start() == matcher.end()) {
-            throw new GrammarException("* jollies not allowed in " + ge);
-        }
-
-    }
-
-    private void assertGrammarNotNull(final List<GrammarElement<T,C>> grammar) {
-        if (grammar == null) {
-            throw new IllegalArgumentException("grammar must not be null");
-        }
-    }
-
 }

@@ -6,18 +6,21 @@ import java.util.ListIterator;
 
 /**
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class HigherPriorityOperatorFinder<T,C> {
+class HigherPriorityOperatorFinder {
 
-    public IndexedNode<T,C> find(final List<Node<T,C>> list) {
+    public static final HigherPriorityOperatorFinder INSTANCE =
+            new HigherPriorityOperatorFinder();
+
+    public <T,C> IndexedNode<T,C> find(final List<Node<T,C>> list) {
         @SuppressWarnings("unchecked")
         IndexedNode<T,C> higherPriorityNode = (IndexedNode<T,C>) IndexedNode.NULL;
 
         if (list.size() > 1) {
             final ListIterator<Node<T,C>> iterator = list.listIterator();
             while (iterator.hasNext()) {
-                final IndexedNode<T,C> currentNode = IndexedNode.nextFrom(iterator);
+                final IndexedNode<T,C> currentNode = IndexedNode.getFrom(iterator);
 
                 if (currentNode.isEmptyOperator() &&
                         (higherPriorityNode.isNull() ||
@@ -29,5 +32,4 @@ public class HigherPriorityOperatorFinder<T,C> {
         }
         return higherPriorityNode;
     }
-
 }

@@ -6,29 +6,32 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * It parses a string expression and build a solving tree according to the
+ * Parses a string expression and builds a solving tree according to the
  * given grammar.
  *
- * @author fra
+ * @param T     the type of the expected result
+ * @param C     the type of the context
+ *
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class Interpreter<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final Tokenizer<T,C> tokenizer;
+    private final WhiteSpaceCleaner whiteSpaceCleaner;
     private final UnrecognizedElementParser<T,C> unrecognizedElementParser;
     private final TreeBuilder<T,C> treeBuilder;
-    private final WhiteSpaceCleaner<T,C> whiteSpaceCleaner;
     private final ParenthesisCleaner<T,C> parenthesisCleaner;
 
-    public Interpreter(final List<GrammarElement<T,C>> grammar) {
+    public Interpreter(final Iterable<GrammarElement<T,C>> grammar) {
         this.tokenizer = new Tokenizer<>(grammar);
+        this.whiteSpaceCleaner = WhiteSpaceCleaner.INSTANCE;
         this.unrecognizedElementParser = new UnrecognizedElementParser<>(grammar);
         this.treeBuilder = new TreeBuilder<>();
-        this.whiteSpaceCleaner = new WhiteSpaceCleaner<>();
         this.parenthesisCleaner = new ParenthesisCleaner<>();
     }
 
-    /** Can return a multi root tree */
+    /** Parses the expression and return a (eventually multi-) node tree. */
     public List<Node<T,C>> parse(final String expression) {
         final List<Node<T,C>> list = tokenizer.tokenize(expression);
         whiteSpaceCleaner.clean(list);
@@ -37,5 +40,4 @@ public class Interpreter<T,C> implements Serializable {
         parenthesisCleaner.clean(list);
         return list;
     }
-
 }

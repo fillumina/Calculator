@@ -3,26 +3,26 @@ package com.fillumina.utils.interpreter.treebuilder;
 import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.Node;
 import java.io.Serializable;
-import java.util.List;
 import java.util.ListIterator;
 
 /**
- * It's an helper bean that contains both the node and node's index
+ * It's an helper that contains both the node and node index
  * in a given list.
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
-
     private static final long serialVersionUID = 1L;
+
     public static final IndexedNode<?,?> NULL =
-            new IndexedNode(null, Integer.MIN_VALUE, null);
+            new IndexedNode<>(null, Integer.MIN_VALUE, null);
 
     private final Node<T,C> node;
     private final int index;
     private final ListIterator<Node<T,C>> iterator;
 
-    public static <T,C> IndexedNode<T,C> nextFrom(final ListIterator<Node<T,C>> iterator) {
+    public static <T,C> IndexedNode<T,C> getFrom(
+            final ListIterator<Node<T,C>> iterator) {
         final int index = iterator.nextIndex();
         final Node<T,C> node = iterator.next();
         return new IndexedNode<>(node, index, iterator);
@@ -46,34 +46,6 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
     public void remove() {
         iterator.remove();
         iterator.previous();
-    }
-
-    public class Extractor {
-
-        private final List<Node<T,C>> nodeList;
-
-        public Extractor(List<Node<T,C>> nodeList) {
-            this.nodeList = nodeList;
-        }
-
-        private void extractInnerNodesUpTo(final IndexedNode<T,C> upTo) {
-            try {
-                final int start = getIndex() + 1;
-                final int end = upTo.getIndex();
-                final List<Node<T,C>> innerParenthesisList =
-                        nodeList.subList(start, end);
-                getNode().addAllChildren(innerParenthesisList);
-                // NOTE: removing from a sublist removes from the list
-                // it belongs from (a sublist is a view of the belonging-from list)
-                innerParenthesisList.clear();
-            } catch (IndexOutOfBoundsException e) {
-                throw new ParenthesisMismatchedException(e);
-            }
-        }
-    }
-
-    public Extractor fromList(final List<Node<T,C>> nodeList) {
-        return new Extractor(nodeList);
     }
 
     public boolean isPreviousThan(final IndexedNode<T,C> node) {

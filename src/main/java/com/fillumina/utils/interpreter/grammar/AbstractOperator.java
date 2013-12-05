@@ -5,13 +5,13 @@ import com.fillumina.utils.interpreter.GrammarElement.Type;
 /**
  * An operator is an evaluable element that expects some arguments
  * possibly before and/or after its symbol.
- * The argument's number is only a maximal, the actual number
- * depends on their effective availability.
+ * The argument's number defines only the maximum, the actual number
+ * depends on the effective availability.
  *
  * @param <T> the base element type this operator work on
  * @param <C> the type of the context
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractOperator<T,C>
         extends AbstractEvaluableGrammarElement<T,C> {

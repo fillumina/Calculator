@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class InnerParenthesisFinderTestHelper {
 
@@ -33,25 +33,25 @@ public class InnerParenthesisFinderTestHelper {
         }
     }
 
-    public static class OpenParNode extends Node {
+    public static class OpenParNode extends Node<Long, Void> {
         private static final long serialVersionUID = 1L;
 
         public OpenParNode() {
-            super("(", new OpenParenthesis("\\("));
+            super("(", new OpenParenthesis<Long, Void>("\\("));
         }
     }
 
-    public static class CloseParNode extends Node {
+    public static class CloseParNode extends Node<Long, Void> {
         private static final long serialVersionUID = 1L;
 
         public CloseParNode() {
-            super(")", new CloseParenthesis("\\)"));
+            super(")", new CloseParenthesis<Long, Void>("\\)"));
         }
     }
 
 
-    public List<Node> buildNodeList(final String expression) {
-        final List<Node> list = new ArrayList<>();
+    public List<Node<Long, Void>> buildNodeList(final String expression) {
+        final List<Node<Long, Void>> list = new ArrayList<>();
         for (char c: expression.toCharArray()) {
             switch(c) {
                 case '(': list.add(new OpenParNode()); break;
@@ -62,9 +62,9 @@ public class InnerParenthesisFinderTestHelper {
         return list;
     }
 
-    public String buildExpression(final List<Node> nodeList) {
+    public String buildExpression(final List<Node<Long, Void>> nodeList) {
         final StringBuilder builder = new StringBuilder();
-        for (Node node: nodeList) {
+        for (Node<Long, Void> node: nodeList) {
             if (node.isOfType(Type.OPEN_PAR)) {
                 builder.append('(');
             } else if (node.isOfType(Type.CLOSED_PAR)) {
@@ -79,7 +79,7 @@ public class InnerParenthesisFinderTestHelper {
     @Test
     public void shouldBuildTheRightNodeListFromExpression() {
         final String expression = "1+12-(7-3)";
-        final List<Node> list = buildNodeList(expression);
+        final List<Node<Long, Void>> list = buildNodeList(expression);
         assertEquals(expression, buildExpression(list));
     }
 }

@@ -11,7 +11,7 @@ import com.fillumina.utils.interpreter.GrammarElement.Type;
  * <code>UnrecognizedElement</code> defined in a grammar.
  *
  * @see VariableContextManager
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractUnrecognizedElement<T,C>
         extends AbstractEvaluableGrammarElement<T,C> {

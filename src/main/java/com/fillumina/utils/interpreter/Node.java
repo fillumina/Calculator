@@ -7,15 +7,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * Represents a node in a tree.
  *
- * @author fra
+ * @param T     the type of the expected result
+ * @param C     the type of the context
+ *
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class Node<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final Node<?,?> NULL = new Node(null);
+    public static final Node<?,?> NULL = new Node<>(null);
 
     private final String value;
+    // TODO inherit a GrammarNode with grammarElement defined?
     private GrammarElement<T,C> grammarElement;
 
     @SuppressWarnings("unchecked")
@@ -30,7 +35,7 @@ public class Node<T,C> implements Serializable {
         this.grammarElement = grammarElement;
     }
 
-    public Node addChildren(final Node<T,C> node) {
+    public Node<T,C> addChildren(final Node<T,C> node) {
         if (children == Collections.EMPTY_LIST) {
             children = new LinkedList<>();
         }
@@ -89,7 +94,7 @@ public class Node<T,C> implements Serializable {
     @Override
     public String toString() {
         return "{" + value +
-                (children == Collections.EMPTY_LIST ? "" : (" -> " + children)) + '}';
+            (children == Collections.EMPTY_LIST ?
+                "" : (" -> " + children)) + '}';
     }
-
 }

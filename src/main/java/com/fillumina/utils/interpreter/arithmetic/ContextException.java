@@ -4,7 +4,7 @@ import com.fillumina.utils.interpreter.SyntaxErrorException;
 
 /**
  *
- * @author fra
+ * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class ContextException extends SyntaxErrorException {
     private static final long serialVersionUID = 1L;
