@@ -1,4 +1,4 @@
-package com.fillumina.utils.interpreter.grammar;
+package com.fillumina.utils.interpreter.grammar.pattern;
 
 import java.util.List;
 import java.util.Map;

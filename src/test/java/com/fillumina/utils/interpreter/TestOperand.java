@@ -1,6 +1,6 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.grammar.AbstractOperand;
+import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
 
 /**
  * Used mainly in tests to return elements as they are without further

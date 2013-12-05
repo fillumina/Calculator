@@ -1,8 +1,8 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
-import com.fillumina.utils.interpreter.grammar.WhiteSpace;
-import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.OpenParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.WhiteSpace;
+import com.fillumina.utils.interpreter.grammar.pattern.CloseParenthesis;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;

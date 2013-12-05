@@ -1,7 +1,7 @@
 package com.fillumina.utils.interpreter;
 
 import com.fillumina.utils.interpreter.GrammarElementType;
-import com.fillumina.utils.interpreter.grammar.AbstractOperator;
+import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperator;
 import java.util.List;
 
 /**

@@ -1,6 +1,6 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.grammar.WhiteSpace;
+import com.fillumina.utils.interpreter.grammar.pattern.WhiteSpace;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;

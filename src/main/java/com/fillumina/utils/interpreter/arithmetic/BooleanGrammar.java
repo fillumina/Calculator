@@ -1,12 +1,12 @@
 package com.fillumina.utils.interpreter.arithmetic;
 
-import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.CloseParenthesis;
 import com.fillumina.utils.interpreter.Grammar;
-import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
-import com.fillumina.utils.interpreter.grammar.AbstractOperator;
-import com.fillumina.utils.interpreter.grammar.ConstantElement;
-import com.fillumina.utils.interpreter.grammar.VariableContextManager;
-import com.fillumina.utils.interpreter.grammar.WhiteSpace;
+import com.fillumina.utils.interpreter.grammar.pattern.OpenParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperator;
+import com.fillumina.utils.interpreter.grammar.pattern.ConstantElement;
+import com.fillumina.utils.interpreter.grammar.pattern.VariableContextManager;
+import com.fillumina.utils.interpreter.grammar.pattern.WhiteSpace;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;

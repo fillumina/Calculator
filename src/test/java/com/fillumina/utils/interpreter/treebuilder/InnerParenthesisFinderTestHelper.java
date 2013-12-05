@@ -1,10 +1,10 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
-import com.fillumina.utils.interpreter.grammar.AbstractOperand;
+import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
 import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.Node;
-import com.fillumina.utils.interpreter.grammar.CloseParenthesis;
-import com.fillumina.utils.interpreter.grammar.OpenParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.CloseParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.OpenParenthesis;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
