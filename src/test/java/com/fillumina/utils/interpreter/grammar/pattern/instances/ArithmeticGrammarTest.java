@@ -1,4 +1,4 @@
-package com.fillumina.utils.interpreter.arithmetic;
+package com.fillumina.utils.interpreter.grammar.pattern.instances;
 
 import com.fillumina.utils.interpreter.treebuilder.ParenthesisMismatchedException;
 import java.util.Map;

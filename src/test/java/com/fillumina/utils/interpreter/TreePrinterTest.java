@@ -1,7 +1,7 @@
 package com.fillumina.utils.interpreter;
 
 import java.util.Collection;
-import com.fillumina.utils.interpreter.arithmetic.ArithmeticGrammar;
+import com.fillumina.utils.interpreter.grammar.pattern.instances.ArithmeticGrammar;
 import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;

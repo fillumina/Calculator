@@ -1,4 +1,4 @@
-package com.fillumina.utils.interpreter.arithmetic;
+package com.fillumina.utils.interpreter.grammar.pattern.instances;
 
 import com.fillumina.utils.interpreter.grammar.pattern.CloseParenthesis;
 import com.fillumina.utils.interpreter.Grammar;
