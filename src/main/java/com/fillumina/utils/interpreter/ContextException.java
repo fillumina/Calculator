@@ -1,8 +1,7 @@
-package com.fillumina.utils.interpreter.grammar.pattern;
-
-import com.fillumina.utils.interpreter.SyntaxErrorException;
+package com.fillumina.utils.interpreter;
 
 /**
+ * A variable is not defined in the context.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
@@ -29,5 +28,4 @@ public class ContextException extends SyntaxErrorException {
     private static String createMessage(final String offendingElement) {
         return "variable not in context: " + offendingElement;
     }
-
 }

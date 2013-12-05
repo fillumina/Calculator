@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public interface Solver<T, C> {
+public interface Solver {
 
-    List<T> solve(final List<Node<T,C>> nodeTree, final C context);
+    <T,C> List<T> solve(final List<Node<T,C>> nodeTree, final C context);
 }

@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Represents a node in a tree.
+ * Represents a node in the solution tree.
  *
  * @param T     the type of the expected result
  * @param C     the type of the context
@@ -19,19 +19,21 @@ public class Node<T,C> implements Serializable {
 
     public static final Node<?,?> NULL = new Node<>(null);
 
-    private final String value;
-    // TODO inherit a GrammarNode with grammarElement defined?
+    private final String expression;
+    private T value;
+    private boolean hasValue;
     private GrammarElement<T,C> grammarElement;
 
     @SuppressWarnings("unchecked")
     private List<Node<T,C>> children = Collections.EMPTY_LIST;
 
     public Node(final String value) {
-        this.value = value;
+        this.expression = value;
     }
 
-    public Node(final String value, final GrammarElement<T,C> grammarElement) {
-        this.value = value;
+    public Node(final String expression,
+            final GrammarElement<T,C> grammarElement) {
+        this.expression = expression;
         this.grammarElement = grammarElement;
     }
 
@@ -54,8 +56,23 @@ public class Node<T,C> implements Serializable {
         return children;
     }
 
-    public String getValue() {
+    public String getExpression() {
+        return expression;
+    }
+
+    public T getValue() {
         return value;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setValue(final T value) {
+        this.value = value;
+        this.hasValue = true;
+        children = Collections.EMPTY_LIST;
+    }
+
+    public boolean hasValue() {
+        return hasValue;
     }
 
     public GrammarElement<T,C> getGrammarElement() {
@@ -71,7 +88,7 @@ public class Node<T,C> implements Serializable {
     }
 
     public boolean hasNoChildren() {
-        return getChildren().isEmpty();
+        return children.isEmpty();
     }
 
     public boolean hasChildren() {
@@ -79,21 +96,20 @@ public class Node<T,C> implements Serializable {
     }
 
     public boolean hasOnlyOneChild() {
-        return getChildren().size() == 1;
+        return children.size() == 1;
     }
 
     public boolean isChildrenNumber(final int number) {
-        return getChildren().size() == number;
+        return children.size() == number;
     }
 
     public boolean isOfType(final GrammarElementType type) {
-        final GrammarElement<T, C> ge = getGrammarElement();
-        return ge == null ? false : ge.isType(type);
+        return grammarElement == null ? false : grammarElement.isType(type);
     }
 
     @Override
     public String toString() {
-        return "{" + value +
+        return "{" + expression +
             (children == Collections.EMPTY_LIST ?
                 "" : (" -> " + children)) + '}';
     }

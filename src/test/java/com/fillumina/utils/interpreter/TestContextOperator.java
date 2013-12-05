@@ -2,16 +2,18 @@ package com.fillumina.utils.interpreter;
 
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * It's an operator that doesn't evaluate. It is useful in tests.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class TestOperator extends AbstractOperator<String,Void> {
+public class TestContextOperator
+        extends AbstractOperator<String,Map<String,String>> {
     private static final long serialVersionUID = 1L;
 
-    public TestOperator(final String symbolRegexp,
+    public TestContextOperator(final String symbolRegexp,
             final int priority,
             final int requiredOperandsBefore,
             final int requiredOperandsAfter) {
@@ -21,12 +23,13 @@ public class TestOperator extends AbstractOperator<String,Void> {
 
     @Override
     public String evaluate(final String value,
-            final List<String> params, final Void context) {
-        return value;
+            final List<String> params, final Map<String,String> context) {
+        return '{' + value + params.toString() + '}';
     }
 
     @Override
     public boolean isType(final GrammarElementType type) {
         return GrammarElementType.OPERATOR.equals(type);
     }
+
 }

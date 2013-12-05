@@ -1,6 +1,5 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.util.ExtendedListIterator;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -42,7 +41,7 @@ public class Tokenizer<T,C> implements Serializable {
             final Node<T,C> node = iterator.next();
 
             if (node.isUnrecognized()) {
-                final GrammarElementMatcher matcher = ge.match(node.getValue());
+                final GrammarElementMatcher matcher = ge.match(node.getExpression());
                 if (matcher.found()) {
                     assertMatchANotEmptyRegion(matcher, ge);
                     final Node<T, C> matchedNode =
@@ -82,7 +81,7 @@ public class Tokenizer<T,C> implements Serializable {
 
             final int start = matcher.start();
             final int end = matcher.end();
-            final String value = node.getValue();
+            final String value = node.getExpression();
             final int valueLength = value.length();
 
             if (start == 0 && end == valueLength) {

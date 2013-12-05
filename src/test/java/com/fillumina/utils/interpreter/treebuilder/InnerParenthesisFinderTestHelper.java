@@ -70,7 +70,7 @@ public class InnerParenthesisFinderTestHelper {
             } else if (node.isOfType(GrammarElementType.CLOSED_PAR)) {
                 builder.append(')');
             } else {
-                builder.append(node.getValue());
+                builder.append(node.getExpression());
             }
         }
         return builder.toString();

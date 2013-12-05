@@ -11,17 +11,22 @@ import java.util.List;
  */
 public class Calculator<T,C> {
     private final Interpreter<T,C> interpreter;
-    private final Solver<T,C> solver;
+    private final Solver solver;
 
+    @SuppressWarnings("unchecked")
     public Calculator(final Iterable<GrammarElement<T,C>> grammar) {
         this.interpreter = new Interpreter<>(grammar);
-        this.solver = new DefaultSolver<>();
+        this.solver = DefaultSolver.INSTANCE;
     }
 
     public Calculator(final Iterable<GrammarElement<T,C>> grammar,
-            final Solver<T,C> solver) {
+            final Solver solver) {
         this.interpreter = new Interpreter<>(grammar);
         this.solver = solver;
+    }
+
+    public T solveSingleValue(final String expression, final C context) {
+        return solve(expression, context).get(0);
     }
 
     public List<T> solve(final String expression, final C context) {

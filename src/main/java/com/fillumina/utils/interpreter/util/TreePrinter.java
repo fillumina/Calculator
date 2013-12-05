@@ -1,5 +1,6 @@
-package com.fillumina.utils.interpreter;
+package com.fillumina.utils.interpreter.util;
 
+import com.fillumina.utils.interpreter.Node;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -37,7 +38,12 @@ public class TreePrinter<T,C> {
     private void addSubNodes(final StringBuilder builder,
             final int level,
             final Node<T,C> node) {
-        builder.append(spaces(level)).append(node.getValue()).append("\n");
+        builder.append(spaces(level))
+                .append(node.getExpression());
+        if (node.hasValue()) {
+            builder.append(" -> ").append(node.getValue());
+        }
+        builder.append("\n");
         for (Node<T,C> n: node.getChildren()) {
             addSubNodes(builder, level + 1, n);
         }

@@ -22,6 +22,4 @@ public class GrammarException extends SyntaxErrorException {
     public GrammarException(final Throwable cause) {
         super(cause);
     }
-
-
 }

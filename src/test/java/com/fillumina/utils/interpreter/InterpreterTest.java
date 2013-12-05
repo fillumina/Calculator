@@ -27,14 +27,15 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateASingleNodeAndMatchTheValue() {
-        final GrammarElement<String,Void> grammarElement = new TestOperand("\\d+", 0);
+        final GrammarElement<String,Void> grammarElement =
+                new TestOperand("\\d+", 0);
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar = new Grammar<>(grammarElement);
 
         final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("123");
 
-        assertEquals("123", solution.get(0).getValue());
+        assertEquals("123", solution.get(0).getExpression());
     }
 
     @Test

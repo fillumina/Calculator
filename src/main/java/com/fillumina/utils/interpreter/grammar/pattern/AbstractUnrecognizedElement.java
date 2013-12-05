@@ -27,5 +27,4 @@ public abstract class AbstractUnrecognizedElement<T,C>
     public boolean isType(final GrammarElementType type) {
         return GrammarElementType.UNRECOGNIZED.equals(type);
     }
-
 }

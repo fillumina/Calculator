@@ -1,32 +1,39 @@
 package com.fillumina.utils.interpreter.grammar.pattern.instances;
 
-import com.fillumina.utils.interpreter.treebuilder.ParenthesisMismatchedException;
-import java.util.Map;
 import com.fillumina.utils.interpreter.Calculator;
 import com.fillumina.utils.interpreter.EvaluationException;
+import com.fillumina.utils.interpreter.treebuilder.ParenthesisMismatchedException;
 import java.util.HashMap;
+import java.util.Map;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ArithmeticGrammarTest {
+public abstract class ArithmeticGrammarTestBase {
 
-    private Calculator<Double,Map<String, Double>> calculator;
-    private Map<String, Double> context;
+    protected Calculator<Double, Map<String, Double>> calculator;
+    protected Map<String, Double> context;
+
+    public abstract Calculator<Double, Map<String, Double>> getCalculator();
 
     @Before
     public void init() {
-        calculator = new Calculator<>(ArithmeticGrammar.INSTANCE);
+        calculator = getCalculator();
         context = new HashMap<>();
     }
 
-    private void assertEvaluateTo(final double expected, final String expression) {
-        final Double result = calculator.solve(expression, context).get(0);
+    protected void assertEvaluateTo(final double expected,
+            final String expression) {
+        final Double result = calculate(expression);
         assertEquals("\"" + expression + "\"", expected, result, 1E-7);
+    }
+
+    public Double calculate(final String expression) {
+        return calculator.solve(expression, context).get(0);
     }
 
     @Test
@@ -96,7 +103,7 @@ public class ArithmeticGrammarTest {
 
     @Test
     public void shouldSolveAConstantAndAnOperator() {
-        assertEvaluateTo(Math.PI/4, "pi/4");
+        assertEvaluateTo(Math.PI / 4, "pi/4");
     }
 
     @Test
@@ -199,24 +206,9 @@ public class ArithmeticGrammarTest {
         assertEvaluateTo(-13, "-3 * sin(pi/2) -(8 + 2)");
     }
 
-    @Test(expected=ParenthesisMismatchedException.class)
+    @Test(expected = ParenthesisMismatchedException.class)
     public void shouldDetectTheMissingClosingParenthesis() {
         assertEvaluateTo(-13, "-3 * sin(pi/2 -(8 + 2)");
-    }
-
-    @Test(expected=EvaluationException.class)
-    public void shouldDetectAnInexistentFunction() {
-        assertEvaluateTo(-13, "-3 * sinto(pi/2 -(8 + 2))");
-    }
-
-    @Test(expected=EvaluationException.class)
-    public void shouldDetectAnInexistentSymbol() {
-        assertEvaluateTo(-13, "-3 @ sin(pi/2 -(8 + 2))");
-    }
-
-    @Test(expected=EvaluationException.class)
-    public void shouldDetectAnEmptyExpression() {
-        assertEvaluateTo(-13, "");
     }
 
     @Test
@@ -276,7 +268,7 @@ public class ArithmeticGrammarTest {
 
     @Test
     public void shouldCalculateTheComplexExpression4() {
-        assertEvaluateTo(-5.0/4, "-(acos(0) + pi/4 - asin(   -1))/pi");
+        assertEvaluateTo(-5.0 / 4, "-(acos(0) + pi/4 - asin(   -1))/pi");
     }
 
     @Test
@@ -315,5 +307,20 @@ public class ArithmeticGrammarTest {
     @Test
     public void shoudReadOnlyTheArgumentsOnParenthesis() {
         assertEvaluateTo(2.5, "avg(2 3) 1");
+    }
+
+    @Test(expected=EvaluationException.class)
+    public void shouldDetectAnInexistentFunction() {
+        calculate("-3 * sinto(pi/2 -(8 + 2))");
+    }
+
+    @Test(expected=EvaluationException.class)
+    public void shouldDetectAnInexistentSymbol() {
+        calculate("-3 @ sin(pi/2 -(8 + 2))");
+    }
+
+    @Test(expected=EvaluationException.class)
+    public void shouldDetectAnEmptyExpression() {
+        calculate("");
     }
 }

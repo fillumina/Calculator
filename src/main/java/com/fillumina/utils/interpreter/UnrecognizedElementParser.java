@@ -48,7 +48,7 @@ public class UnrecognizedElementParser<T,C> implements Serializable {
     private void assertUnrecognizedElementIsPresent(final Node<T, C> node) {
         if (unrecognizedElement == null) {
             throw new SyntaxErrorException("Element '" +
-                    node.getValue() + "' not recognized");
+                    node.getExpression() + "' not recognized");
         }
     }
 }

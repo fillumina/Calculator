@@ -1,5 +1,7 @@
-package com.fillumina.utils.interpreter;
+package com.fillumina.utils.interpreter.util;
 
+import com.fillumina.utils.interpreter.Interpreter;
+import com.fillumina.utils.interpreter.Node;
 import java.util.Collection;
 import com.fillumina.utils.interpreter.grammar.pattern.instances.ArithmeticGrammar;
 import java.util.Map;
@@ -30,7 +32,7 @@ public class TreePrinterTest {
     }
 
     @Test
-    public void shouldATwoRootsTree() {
+    public void shouldPrintATwoRootsTree() {
         final Collection<Node<Double, Map<String,Double>>> collection =
                 interpreter.parse("sin(2 + 1/2) 1 - 8");
         final String prettyPrint = TreePrinter.prettyPrint(collection);

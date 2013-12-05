@@ -1,6 +1,7 @@
 package com.fillumina.utils.interpreter;
 
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
+import java.util.Map;
 
 /**
  * Used mainly in tests to return elements as they are without further
@@ -8,16 +9,17 @@ import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class TestOperand extends AbstractOperand<String, Void> {
+public class TestContextOperand
+        extends AbstractOperand<String, Map<String,String>> {
     private static final long serialVersionUID = 1L;
 
-    public TestOperand(final String symbolRegexp,
+    public TestContextOperand(final String symbolRegexp,
             final int priority) {
         super(symbolRegexp, priority);
     }
 
     @Override
-    public String evaluate(final String value, final Void context) {
+    public String evaluate(final String value, final Map<String,String> context) {
         return value;
     }
 }

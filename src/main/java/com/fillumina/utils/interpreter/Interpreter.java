@@ -31,7 +31,7 @@ public class Interpreter<T,C> implements Serializable {
         this.parenthesisCleaner = new ParenthesisCleaner<>();
     }
 
-    /** Parses the expression and return a (eventually multi-) node tree. */
+    /** Parses the expression and return a (eventually multi-headed) node tree. */
     public List<Node<T,C>> parse(final String expression) {
         final List<Node<T,C>> list = tokenizer.tokenize(expression);
         whiteSpaceCleaner.clean(list);
