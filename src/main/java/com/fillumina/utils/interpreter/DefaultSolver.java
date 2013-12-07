@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * Simple {@link Solver} that doesn't modify the solution tree.
+ *
  * @param T the type of the elements
  * @param C the type of the context
  *

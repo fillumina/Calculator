@@ -20,7 +20,7 @@ import java.util.List;
  * the first one will be considered.<p>
  *
  * <b>NOTE:</b> This class is just an helper and every method that works
- * on grammars simply accepts an {@link Iterable} over {@link GrammarElement}s.
+ * with grammars should accept an {@link Iterable} over {@link GrammarElement}s.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

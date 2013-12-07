@@ -6,12 +6,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * This {@link Solver} runs in the same way as {@link DefaultSolver} but
- * if it encounters an exception of type {@link ContextException} meaning that
- * a variable was not found in the context it simply stop executing that
- * branch and pass over. By this way the tree can be optimized before being
- * executed in a loop where some variables in the context changes (i.e.
- * producing a graph using 'x' and 'y' as variables).
+ * This {@link Solver} runs in the same way as the {@link DefaultSolver} but
+ * if it encounters an undefined variable it simply saves the calculation up to
+ * that, prunes the solution tree, stops executing that branch
+ * and passes over. This is useful to pre-optimize a solution tree before
+ * executing it in a loop (i.e. when graphing).
  * <p>
  * <b>NOTE:</b> this class modifies the solution tree.
  * <p>
@@ -29,7 +28,7 @@ public class PruningSolver implements Solver, Serializable {
     public static final PruningSolver INSTANCE = new PruningSolver();
 
     /**
-     * This solver try to solve the expression and at the same time
+     * This solver tries to solve the expression and at the same time
      * cuts the tree substituting the values that it founds into the nodes.
      * It's useful to pre-parse and optimize an expression that should be
      * executed several times.
@@ -40,10 +39,11 @@ public class PruningSolver implements Solver, Serializable {
      *          has been found.
      */
     @Override
-    public <T, C> List<T> solve(final List<Node<T,C>> nodeTree, final C context) {
+    public <T, C> List<T> solve(final List<Node<T,C>> nodeTree,
+            final C context) {
         final List<T> params = new ArrayList<>(nodeTree.size());
         boolean variableFound = false;
-        for (Node<T,C> node : nodeTree) {
+        for (final Node<T,C> node : nodeTree) {
             T evaluated = null;
             if (node.hasValue()) {
                 evaluated = node.getValue();
@@ -81,5 +81,4 @@ public class PruningSolver implements Solver, Serializable {
             throw new EvaluationException(node.getExpression(), ex);
         }
     }
-
 }

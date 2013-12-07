@@ -25,10 +25,12 @@ public class Calculator<T,C> {
         this.solver = solver;
     }
 
+    /** Assumes the result is a single rooted tree. */
     public T solveSingleValue(final String expression, final C context) {
         return solve(expression, context).get(0);
     }
 
+    /** Returns the entire (eventually multi-rooted) tree. */
     public List<T> solve(final String expression, final C context) {
         final List<Node<T,C>> solutionTree = interpreter.parse(expression);
         return solver.solve(solutionTree, context);

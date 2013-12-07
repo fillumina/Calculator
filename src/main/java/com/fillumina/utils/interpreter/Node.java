@@ -8,16 +8,16 @@ import java.util.List;
 
 /**
  * Represents a node in the solution tree.
+ * This class is <i>mutable</i> and not <i>thread safe</i> but it allows
+ * <i>deep cloning</i>.
  *
  * @param T     the type of the expected result
  * @param C     the type of the context
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class Node<T,C> implements Serializable {
+public class Node<T,C> implements Cloneable, Serializable {
     private static final long serialVersionUID = 1L;
-
-    public static final Node<?,?> NULL = new Node<>(null);
 
     private final String expression;
     private T value;
@@ -27,8 +27,8 @@ public class Node<T,C> implements Serializable {
     @SuppressWarnings("unchecked")
     private List<Node<T,C>> children = Collections.EMPTY_LIST;
 
-    public Node(final String value) {
-        this.expression = value;
+    public Node(final String expression) {
+        this.expression = expression;
     }
 
     public Node(final String expression,
@@ -37,8 +37,18 @@ public class Node<T,C> implements Serializable {
         this.grammarElement = grammarElement;
     }
 
+    /** Cloning constructor. */
+    public Node(final Node<T,C> other) {
+        this.expression = other.expression;
+        this.value = other.value;
+        this.hasValue = other.hasValue;
+        this.grammarElement = other.grammarElement;
+        this.children = new LinkedList<>(other.children);
+    }
+
     public Node<T,C> addChildren(final Node<T,C> node) {
         if (children == Collections.EMPTY_LIST) {
+            // LinkedList is much better suited for this algorithm
             children = new LinkedList<>();
         }
         children.add(node);
@@ -105,6 +115,11 @@ public class Node<T,C> implements Serializable {
 
     public boolean isOfType(final GrammarElementType type) {
         return grammarElement == null ? false : grammarElement.isType(type);
+    }
+
+    @Override
+    public Node<T,C> clone() {
+        return new Node<>(this);
     }
 
     @Override

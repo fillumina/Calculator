@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Uses the grammar to recognize the elements' hierarchy in a string expression.
+ * Uses the grammar to recognize the elements hierarchy in a string expression.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

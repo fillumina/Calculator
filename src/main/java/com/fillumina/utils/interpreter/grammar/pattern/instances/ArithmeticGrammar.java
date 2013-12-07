@@ -14,9 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Defines a simple arithmetic grammar useful to perform simple calculations
+ * Defines a simple arithmetic grammar useful to perform calculations
  * on double values. It supports variables that can be passed through a
- * context.
+ * context. It can even define its own variables directly in the
+ * expression using the equal symbol.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
