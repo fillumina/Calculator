@@ -27,7 +27,7 @@ public class TreePrinterTest {
     public void shouldPrintACorrectTree() {
         final Collection<Node<Double, Map<String,Double>>> collection =
                 interpreter.parse("sin(2 + 1/2)");
-        final String prettyPrint = TreePrinter.prettyPrint(collection);
+        final String prettyPrint = TreePrinter.prettyPrintFull(collection);
         assertEquals("sin OPERATOR\n" +
                         " + OPERATOR\n" +
                         "  2 OPERAND\n" +
@@ -41,7 +41,7 @@ public class TreePrinterTest {
     public void shouldPrintATwoRootsTree() {
         final Collection<Node<Double, Map<String,Double>>> collection =
                 interpreter.parse("sin(2 + 1/2) - 8");
-        final String prettyPrint = TreePrinter.prettyPrint(collection);
+        final String prettyPrint = TreePrinter.prettyPrintFull(collection);
         assertEquals("- OPERATOR\n" +
                         " sin OPERATOR\n" +
                         "  + OPERATOR\n" +

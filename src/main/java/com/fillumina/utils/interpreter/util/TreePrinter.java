@@ -9,22 +9,16 @@ import java.util.Arrays;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class TreePrinter<T,C> implements Serializable {
+public class TreePrinter implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private static class PrintTreeVisitor<T,C>
-            implements TreeVisitor<Node<T,C>> {
+    public static final NodePrinter FULL_NODE = new NodePrinter() {
         private static final long serialVersionUID = 1L;
 
-        final StringBuilder builder = new StringBuilder();
-
         @Override
-        public Iterable<Node<T,C>> getChildren(final Node<T,C> node) {
-            return node.getChildren();
-        }
-
-        @Override
-        public void onNode(final int level, final Node<T,C> node) {
+        public <T,C> void printNode(final StringBuilder builder,
+                final int level,
+                final Node<T,C> node) {
             builder.append(spaces(level))
                     .append(node.getExpression())
                     .append(" ")
@@ -34,11 +28,40 @@ public class TreePrinter<T,C> implements Serializable {
             }
             builder.append("\n");
         }
+    };
 
-        private String spaces(final int quantity) {
-            final char[] c = new char[quantity];
-            Arrays.fill(c, ' ');
-            return String.valueOf(c);
+    public static final NodePrinter SHORT_NODE = new NodePrinter() {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public <T,C> void printNode(final StringBuilder builder,
+                final int level,
+                final Node<T,C> node) {
+            builder.append(spaces(level))
+                    .append(node.getExpression())
+                    .append("\n");
+        }
+    };
+
+    private static class PrintTreeVisitor<T,C>
+            implements TreeVisitor<Node<T,C>> {
+        private static final long serialVersionUID = 1L;
+
+        final NodePrinter nodePrinter;
+        final StringBuilder builder = new StringBuilder();
+
+        public PrintTreeVisitor(final NodePrinter nodePrinter) {
+            this.nodePrinter = nodePrinter;
+        }
+
+        @Override
+        public Iterable<Node<T,C>> getChildren(final Node<T,C> node) {
+            return node.getChildren();
+        }
+
+        @Override
+        public void onNode(final int level, final Node<T,C> node) {
+            nodePrinter.printNode(builder, level, node);
         }
 
         @Override
@@ -47,21 +70,39 @@ public class TreePrinter<T,C> implements Serializable {
         }
     }
 
-    public static <T,C> String prettyPrint(
+    public static <T,C> String prettyPrintFull(
             final Iterable<Node<T,C>> solutionTree) {
+        return prettyPrintList(solutionTree, FULL_NODE);
+    }
+
+    public static <T,C> String prettyPrintShort(
+            final Iterable<Node<T,C>> solutionTree) {
+        return prettyPrintList(solutionTree, SHORT_NODE);
+    }
+
+    public static <T, C> String prettyPrintList(
+            final Iterable<Node<T, C>> solutionTree,
+            final NodePrinter nodePrinter) {
         final StringBuilder builder = new StringBuilder();
         for (Node<T,C> node : solutionTree) {
-            builder.append(prettyPrint(node));
+            builder.append(prettyPrint(node, nodePrinter));
         }
         return builder.toString();
     }
 
-    public static <T,C> String prettyPrint(final Node<T,C> tree) {
+    public static <T,C> String prettyPrint(final Node<T,C> tree,
+            final NodePrinter nodePrinter) {
         final PrintTreeVisitor<T, C> printTreeVisitor =
-                new PrintTreeVisitor<>();
+                new PrintTreeVisitor<>(nodePrinter);
         final TreeTraverser<Node<T,C>> treeTraverser =
                 new TreeTraverser<>(printTreeVisitor);
         treeTraverser.traverse(tree);
         return printTreeVisitor.toString();
+    }
+
+    public static String spaces(final int quantity) {
+        final char[] c = new char[quantity];
+        Arrays.fill(c, ' ');
+        return String.valueOf(c);
     }
 }

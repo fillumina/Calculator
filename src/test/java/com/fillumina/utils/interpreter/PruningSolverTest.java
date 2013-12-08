@@ -61,7 +61,7 @@ public class PruningSolverTest {
 
         final Map<String,String> context = new HashMap<>();
 
-        final String treePrint = TreePrinter.prettyPrint(solution);
+        final String treePrint = TreePrinter.prettyPrintFull(solution);
 //        System.out.println("treeprint\n" + treePrint);
         assertEquals("@ OPERATOR\n" +
                      " 1 OPERAND\n" +
@@ -76,7 +76,7 @@ public class PruningSolverTest {
 
         assertNull(result);
 
-        final String prunedTreePrint = TreePrinter.prettyPrint(solution);
+        final String prunedTreePrint = TreePrinter.prettyPrintFull(solution);
 
 //        System.out.println("result: " + result);
 //        System.out.println("pruned:\n" + prunedTreePrint);
