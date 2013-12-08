@@ -29,17 +29,8 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
 
     private ArithmeticGrammar() {
         super(
-        // DECIMAL in scientific notation
-        // the problem here is that the - and + symbols shouldn't be included
-        // in the number if there is a digit before (eventually separated by spaces)
-        // see http://www.regular-expressions.info/refadv.html
-        //
-        // (\\D\\ {100}) is wrong but works recognizing non digit chars
-        //
         new AbstractOperand<Double,Map<String, Double>>(
-                "((?<=(([\\*\\+\\-/^]\\ {0,100})|" +
-                "(\\D\\ {100})|(\\(\\ {0,100})))[\\+\\-])?" +
-                "\\d+(\\.\\d+)?([Ee][\\+\\-]?\\d+)?", 0) {
+                AbstractOperand.SCIENTIFIC_NOTATION_NUMBER_REGEXP, 0) {
             private static final long serialVersionUID = 1L;
 
             @Override

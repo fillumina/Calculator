@@ -11,12 +11,14 @@ import com.fillumina.utils.interpreter.GrammarElementType;
 public class WhiteSpace<T,C> extends UnevaluablePatternGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
+    public static final WhiteSpace<?,?> INSTANCE = new WhiteSpace<>("\\s+");
+
     public WhiteSpace(final String symbolRegexp) {
         super(symbolRegexp, 0);
     }
 
     @Override
-    public boolean isType(final GrammarElementType type) {
-        return GrammarElementType.WHITE_SPACE.equals(type);
+    public GrammarElementType getType() {
+        return GrammarElementType.WHITE_SPACE;
     }
 }

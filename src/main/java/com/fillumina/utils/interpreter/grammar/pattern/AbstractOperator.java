@@ -57,7 +57,7 @@ public abstract class AbstractOperator<T,C>
     }
 
     @Override
-    public boolean isType(final GrammarElementType type) {
-        return GrammarElementType.OPERATOR.equals(type);
+    public GrammarElementType getType() {
+        return GrammarElementType.OPERATOR;
     }
 }

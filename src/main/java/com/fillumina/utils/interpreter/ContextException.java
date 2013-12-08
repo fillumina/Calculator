@@ -26,6 +26,6 @@ public class ContextException extends SyntaxErrorException {
     }
 
     private static String createMessage(final String offendingElement) {
-        return "variable not in context: " + offendingElement;
+        return "variable not in context: '" + offendingElement + "'";
     }
 }

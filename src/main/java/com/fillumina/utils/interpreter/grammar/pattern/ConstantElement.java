@@ -25,8 +25,7 @@ public class ConstantElement<T,C>
     }
 
     @Override
-    public boolean isType(final GrammarElementType type) {
-        return GrammarElementType.OPERAND.equals(type);
+    public GrammarElementType getType() {
+        return GrammarElementType.OPERAND;
     }
-
 }

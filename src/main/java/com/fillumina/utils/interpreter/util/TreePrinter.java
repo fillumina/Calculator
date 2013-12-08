@@ -2,9 +2,9 @@ package com.fillumina.utils.interpreter.util;
 
 import com.fillumina.utils.interpreter.Node;
 import java.util.Arrays;
-import java.util.Collection;
 
 /**
+ * Helper to give a string representation of a solution tree.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
@@ -12,9 +12,9 @@ public class TreePrinter<T,C> {
     private final Node<T,C> tree;
 
     public static <T,C> String prettyPrint(
-            final Collection<Node<T,C>> collection) {
+            final Iterable<Node<T,C>> solutionTree) {
         final StringBuilder builder = new StringBuilder();
-        for (Node<T,C> node : collection) {
+        for (Node<T,C> node : solutionTree) {
             builder.append(prettyPrint(node));
         }
         return builder.toString();
@@ -39,7 +39,9 @@ public class TreePrinter<T,C> {
             final int level,
             final Node<T,C> node) {
         builder.append(spaces(level))
-                .append(node.getExpression());
+                .append(node.getExpression())
+                .append(" ")
+                .append(node.getGrammarElement().getType().toString());
         if (node.hasValue()) {
             builder.append(" -> ").append(node.getValue());
         }

@@ -32,6 +32,8 @@ public interface GrammarElement<T,C> extends Comparable<GrammarElement<T, C>> {
      */
     int getRequiredOperandsBefore();
 
+    GrammarElementType getType();
+
     /** Checks the type of the grammar. */
     boolean isType(GrammarElementType type);
 }

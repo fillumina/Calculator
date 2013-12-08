@@ -29,7 +29,7 @@ public class TokenizerTest {
         final GrammarElement<String, Void> sum = new TestOperator("\\+", 0, 1, 1);
         final GrammarElement<String, Void> number = new TestOperand("\\d+", 0);
         @SuppressWarnings("unchecked")
-        final Grammar<String, Void> grammar = new Grammar<>(number, sum);
+        final Grammar<String, Void> grammar = new Grammar<>(number, multiply, sum);
 
         final Tokenizer<String, Void> tokenizer = new Tokenizer<>(grammar);
         final List<Node<String,Void>> list = tokenizer.tokenize("12*7+9");

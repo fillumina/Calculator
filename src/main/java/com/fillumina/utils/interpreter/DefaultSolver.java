@@ -1,6 +1,7 @@
 package com.fillumina.utils.interpreter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,22 +12,27 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class DefaultSolver extends AbstractSolver
-        implements Serializable {
+public class DefaultSolver implements Solver, Serializable {
     private static final long serialVersionUID = 1L;
+    
+    public static final Solver INSTANCE =
+            new DefaultSolver(new DefaultEvaluator());
 
-    public static final DefaultSolver INSTANCE = new DefaultSolver();
+    private final Evaluator evaluator;
+
+    public DefaultSolver(final Evaluator evaluator) {
+        this.evaluator = evaluator;
+    }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public <T, C> T evaluate(final Node<T,C> node,
-            final List<T> params, final C context) {
-        final GrammarElement<T,C> grammarElement = node.getGrammarElement();
-
-        try {
-            return grammarElement.evaluate(node.getExpression(), params, context);
-        } catch (Exception e) {
-            throw new EvaluationException(node.getExpression(), e);
+    public <T, C> List<T> solve(final List<Node<T,C>> nodeTree,
+            final C context) {
+        final List<T> params = new ArrayList<>();
+        for (Node<T,C> node : nodeTree) {
+            final List<T> parameters = solve(node.getChildren(), context);
+            final T evaluated = evaluator.evaluate(node, parameters, context);
+            params.add(evaluated);
         }
+        return params;
     }
 }

@@ -1,7 +1,9 @@
 package com.fillumina.utils.interpreter.grammar.pattern.instances;
 
 import com.fillumina.utils.interpreter.Calculator;
+import com.fillumina.utils.interpreter.ContextException;
 import com.fillumina.utils.interpreter.EvaluationException;
+import com.fillumina.utils.interpreter.SyntaxErrorException;
 import com.fillumina.utils.interpreter.treebuilder.ParenthesisMismatchedException;
 import java.util.HashMap;
 import java.util.Map;
@@ -309,17 +311,17 @@ public abstract class ArithmeticGrammarTestBase {
         assertEvaluateTo(2.5, "avg(2 3) 1");
     }
 
-    @Test(expected=EvaluationException.class)
+    @Test(expected=ContextException.class)
     public void shouldDetectAnInexistentFunction() {
         calculate("-3 * sinto(pi/2 -(8 + 2))");
     }
 
-    @Test(expected=EvaluationException.class)
+    @Test(expected=ContextException.class)
     public void shouldDetectAnInexistentSymbol() {
         calculate("-3 @ sin(pi/2 -(8 + 2))");
     }
 
-    @Test(expected=EvaluationException.class)
+    @Test(expected=SyntaxErrorException.class)
     public void shouldDetectAnEmptyExpression() {
         calculate("");
     }

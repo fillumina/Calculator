@@ -41,7 +41,8 @@ public class Tokenizer<T,C> implements Serializable {
             final Node<T,C> node = iterator.next();
 
             if (node.isUnrecognized()) {
-                final GrammarElementMatcher matcher = ge.match(node.getExpression());
+                final GrammarElementMatcher matcher =
+                        ge.match(node.getExpression());
                 if (matcher.found()) {
                     assertMatchANotEmptyRegion(matcher, ge);
                     final Node<T, C> matchedNode =

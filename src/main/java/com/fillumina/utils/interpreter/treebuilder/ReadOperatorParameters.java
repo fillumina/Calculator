@@ -39,11 +39,19 @@ class ReadOperatorParameters {
                 break;
             }
             final Node<T,C> childNode = iterator.nextAndRemove();
-            if (childNode.isOfType(GrammarElementType.OPEN_PAR) && childNode.hasChildren()) {
+            if (childNode.isOfType(GrammarElementType.OPEN_PAR) &&
+                    childNode.hasChildren()) {
                 node.addAllChildren(childNode.getChildren());
-                break;
+                if (i==0) {
+                    // if a parenthesis follows an operator only the element
+                    // in the parenthesis will be added as parameters to the
+                    // operator (this will allow to use variable number
+                    // operators in an expression).
+                    break;
+                }
+            } else {
+                node.addChildren(childNode);
             }
-            node.addChildren(childNode);
         }
     }
 

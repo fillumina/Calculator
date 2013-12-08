@@ -25,7 +25,14 @@ import java.util.List;
 public class PruningSolver implements Solver, Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final PruningSolver INSTANCE = new PruningSolver();
+    public static final PruningSolver INSTANCE =
+            new PruningSolver(new DefaultEvaluator());
+
+    private final Evaluator evaluator;
+
+    public PruningSolver(final Evaluator evaluator) {
+        this.evaluator = evaluator;
+    }
 
     /**
      * This solver tries to solve the expression and at the same time
@@ -54,7 +61,7 @@ public class PruningSolver implements Solver, Serializable {
                         Collections.EMPTY_LIST;
                 if (solved != null) {
                     try {
-                        evaluated = evaluate(node, solved, context);
+                        evaluated = evaluator.evaluate(node, solved, context);
                         node.setValue(evaluated);
                     } catch (ContextException ex) {
                         // an undefined variable has been found
@@ -68,17 +75,5 @@ public class PruningSolver implements Solver, Serializable {
         }
         // returns null if a variable has been found
         return variableFound ? null : params;
-    }
-
-    private <T, C> T evaluate(final Node<T,C> node,
-            final List<T> params, final C context) {
-        final GrammarElement<T,C> grammarElement = node.getGrammarElement();
-        try {
-            return grammarElement.evaluate(node.getExpression(), params, context);
-        } catch (ContextException ex) {
-            throw ex;
-        } catch (Exception ex) {
-            throw new EvaluationException(node.getExpression(), ex);
-        }
     }
 }

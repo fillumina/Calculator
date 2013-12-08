@@ -24,7 +24,7 @@ public abstract class AbstractUnrecognizedElement<T,C>
     }
 
     @Override
-    public boolean isType(final GrammarElementType type) {
-        return GrammarElementType.UNRECOGNIZED.equals(type);
+    public GrammarElementType getType() {
+        return GrammarElementType.UNRECOGNIZED;
     }
 }

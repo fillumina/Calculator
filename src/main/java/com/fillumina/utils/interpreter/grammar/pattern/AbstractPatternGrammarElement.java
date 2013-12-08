@@ -2,6 +2,7 @@ package com.fillumina.utils.interpreter.grammar.pattern;
 
 import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
+import com.fillumina.utils.interpreter.GrammarElementType;
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
@@ -17,7 +18,6 @@ public abstract class AbstractPatternGrammarElement<T,C>
 
     private final String symbolRegexp;
     private final int priority;
-
     private final Pattern pattern;
 
     /**
@@ -74,5 +74,10 @@ public abstract class AbstractPatternGrammarElement<T,C>
     @Override
     public GrammarElementMatcher match(final String expression) {
         return new GrammarElementRegexpMatcher(pattern.matcher(expression));
+    }
+
+    @Override
+    public boolean isType(final GrammarElementType type) {
+        return getType().equals(type);
     }
 }

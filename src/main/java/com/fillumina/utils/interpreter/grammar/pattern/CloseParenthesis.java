@@ -11,13 +11,21 @@ import com.fillumina.utils.interpreter.GrammarElementType;
 public class CloseParenthesis<T,C> extends UnevaluablePatternGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
+    public static final CloseParenthesis<?,?> ROUND =
+            new CloseParenthesis<>("\\)");
+
+    public static final CloseParenthesis<?,?> ROUND_SQUARE =
+            new CloseParenthesis<>("\\)\\]");
+
+    public static final CloseParenthesis<?,?> ROUND_SQUARE_CURLY =
+            new CloseParenthesis<>("\\)\\]\\}");
+
     public CloseParenthesis(final String symbolRegexp) {
         super(symbolRegexp, 0);
     }
 
     @Override
-    public boolean isType(final GrammarElementType type) {
-        return GrammarElementType.CLOSED_PAR.equals(type);
+    public GrammarElementType getType() {
+        return GrammarElementType.CLOSED_PAR;
     }
-
 }

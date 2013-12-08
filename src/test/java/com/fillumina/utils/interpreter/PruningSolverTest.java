@@ -3,6 +3,7 @@ package com.fillumina.utils.interpreter;
 import com.fillumina.utils.interpreter.grammar.pattern.CloseParenthesis;
 import com.fillumina.utils.interpreter.grammar.pattern.OpenParenthesis;
 import com.fillumina.utils.interpreter.grammar.pattern.VariableContextManager;
+import com.fillumina.utils.interpreter.grammar.pattern.WhiteSpace;
 import com.fillumina.utils.interpreter.util.TreePrinter;
 import java.util.HashMap;
 import java.util.List;
@@ -23,23 +24,34 @@ public class PruningSolverTest {
     @Test
     public void shouldPruneTheTree() {
         final GrammarElement<String,Map<String,String>> operator =
-                new TestContextOperator("\\@\\ *", 0, 0, 100);
+                new TestContextOperator("\\@", 0, 0, 100);
 
         final GrammarElement<String,Map<String,String>> number =
-                new TestContextOperand("\\d+\\ *", 0);
+                new TestContextOperand("\\d+", 0);
 
+        @SuppressWarnings("unchecked")
         final GrammarElement<String,Map<String,String>> variable =
-                new VariableContextManager<>();
+                (GrammarElement<String,Map<String,String>>)
+                VariableContextManager.INSTANCE;
 
+        @SuppressWarnings("unchecked")
         final GrammarElement<String,Map<String,String>> openPar =
-                new OpenParenthesis<>("\\(");
+                (GrammarElement<String,Map<String,String>>)
+                OpenParenthesis.ROUND;
 
+        @SuppressWarnings("unchecked")
         final GrammarElement<String,Map<String,String>> closePar =
-                new CloseParenthesis<>("\\)");
+                (GrammarElement<String,Map<String,String>>)
+                CloseParenthesis.ROUND;
+
+        @SuppressWarnings("unchecked")
+        final WhiteSpace<String, Map<String, String>> whitespace =
+                (WhiteSpace<String,Map<String,String>>)WhiteSpace.INSTANCE;
 
         @SuppressWarnings("unchecked")
         final Grammar<String,Map<String,String>> grammar =
-                new Grammar<>(operator, number, variable, openPar, closePar);
+                new Grammar<>(operator, number, variable, openPar, closePar,
+                        whitespace);
 
         final Interpreter<String,Map<String,String>> interpreter =
                 new Interpreter<>(grammar);
@@ -50,15 +62,14 @@ public class PruningSolverTest {
         final Map<String,String> context = new HashMap<>();
 
         final String treePrint = TreePrinter.prettyPrint(solution);
-        assertEquals(treePrint, "@ \n" +
-                                " 1 \n" +
-                                " a \n" +
-                                " @ \n" +
-                                "  1 \n" +
-                                "  2\n" +
-                                " \n" +
-                                "3\n");
 //        System.out.println("treeprint\n" + treePrint);
+        assertEquals("@ OPERATOR\n" +
+                     " 1 OPERAND\n" +
+                     " a UNRECOGNIZED\n" +
+                     " @ OPERATOR\n" +
+                     "  1 OPERAND\n" +
+                     "  2 OPERAND\n" +
+                     " 3 OPERAND\n", treePrint);
 
         final List<String> result =
                 PruningSolver.INSTANCE.solve(solution, context);
@@ -70,13 +81,13 @@ public class PruningSolverTest {
 //        System.out.println("result: " + result);
 //        System.out.println("pruned:\n" + prunedTreePrint);
 
-        assertEquals(prunedTreePrint,
-                "@ \n" +
-                " 1  -> 1 \n" +
-                " a \n" +
-                " @  -> {@ [1 , 2]}\n" +
-                " \n" +
-                "3 -> 3\n"
+        assertEquals(
+                "@ OPERATOR\n" +
+                " 1 OPERAND -> 1\n" +
+                " a UNRECOGNIZED\n" +
+                " @ OPERATOR -> {@[1, 2]}\n" +
+                " 3 OPERAND -> 3\n",
+                prunedTreePrint
         );
     }
 }

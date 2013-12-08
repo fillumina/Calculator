@@ -113,6 +113,10 @@ public class Node<T,C> implements Cloneable, Serializable {
         return children.size() == number;
     }
 
+    public GrammarElementType getType() {
+        return grammarElement.getType();
+    }
+
     public boolean isOfType(final GrammarElementType type) {
         return grammarElement == null ? false : grammarElement.isType(type);
     }
@@ -125,6 +129,7 @@ public class Node<T,C> implements Cloneable, Serializable {
     @Override
     public String toString() {
         return "{" + expression +
+            //(grammarElement != null ? " " + grammarElement.getType() : "") +
             (children == Collections.EMPTY_LIST ?
                 "" : (" -> " + children)) + '}';
     }

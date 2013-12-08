@@ -28,15 +28,29 @@ public class TreePrinterTest {
         final Collection<Node<Double, Map<String,Double>>> collection =
                 interpreter.parse("sin(2 + 1/2)");
         final String prettyPrint = TreePrinter.prettyPrint(collection);
-        assertEquals("sin\n +\n  2\n  /\n   1\n   2\n", prettyPrint);
+        assertEquals("sin OPERATOR\n" +
+                        " + OPERATOR\n" +
+                        "  2 OPERAND\n" +
+                        "  / OPERATOR\n" +
+                        "   1 OPERAND\n" +
+                        "   2 OPERAND\n",
+                prettyPrint);
     }
 
     @Test
     public void shouldPrintATwoRootsTree() {
         final Collection<Node<Double, Map<String,Double>>> collection =
-                interpreter.parse("sin(2 + 1/2) 1 - 8");
+                interpreter.parse("sin(2 + 1/2) - 8");
         final String prettyPrint = TreePrinter.prettyPrint(collection);
-        assertEquals("sin\n +\n  2\n  /\n   1\n   2\n-\n 1\n 8\n", prettyPrint);
+        assertEquals("- OPERATOR\n" +
+                        " sin OPERATOR\n" +
+                        "  + OPERATOR\n" +
+                        "   2 OPERAND\n" +
+                        "   / OPERATOR\n" +
+                        "    1 OPERAND\n" +
+                        "    2 OPERAND\n" +
+                        " 8 OPERAND\n",
+                prettyPrint);
     }
 
 }
