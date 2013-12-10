@@ -1,12 +1,13 @@
 package com.fillumina.utils.interpreter;
 
 public interface GrammarElementMatcher {
-    /** The element has been found. */
-    boolean found();
 
-    /** The start index at which it's been found. */
-    int start();
+    /** The element has been isFound. */
+    boolean isFound();
 
-    /** The end index at which it's been found. */
-    int end();
+    /** The getStart index at which it's been isFound. */
+    int getStart();
+
+    /** The getEnd index at which it's been isFound. */
+    int getEnd();
 }

@@ -8,6 +8,7 @@ import com.fillumina.utils.interpreter.grammar.pattern.OpenParenthesis;
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperator;
 import com.fillumina.utils.interpreter.grammar.pattern.ConstantElement;
 import com.fillumina.utils.interpreter.grammar.pattern.VariableContextManager;
+import com.fillumina.utils.interpreter.grammar.pattern.VariableSetterOperator;
 import com.fillumina.utils.interpreter.grammar.pattern.WhiteSpace;
 import java.io.Serializable;
 import java.util.List;
@@ -232,22 +233,8 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperator<Double,Map<String, Double>>("[A-Za-z]+\\ *=", 0, 0, 1) {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                final String nodeValue = value;
-                final String varName = nodeValue.substring(0,
-                        nodeValue.length() - 1).trim();
-                final Double parameter = params.get(0);
-
-                context.put(varName, parameter);
-                return parameter;
-            }
-        },
-
+        new VariableSetterOperator<Double>(),
+        
         new ConstantElement<Double,Map<String, Double>>("e", E, 0),
         new ConstantElement<Double,Map<String, Double>>("pi", PI,  0),
 

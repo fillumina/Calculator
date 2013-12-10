@@ -8,7 +8,8 @@ import java.util.regex.Matcher;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class GrammarElementRegexpMatcher implements GrammarElementMatcher, Serializable {
+public class GrammarElementRegexpMatcher
+        implements GrammarElementMatcher, Serializable {
     private static final long serialVersionUID = 1L;
     final Matcher matcher;
 
@@ -17,17 +18,17 @@ public class GrammarElementRegexpMatcher implements GrammarElementMatcher, Seria
     }
 
     @Override
-    public boolean found() {
+    public boolean isFound() {
         return matcher.find();
     }
 
     @Override
-    public int start() {
+    public int getStart() {
         return matcher.start();
     }
 
     @Override
-    public int end() {
+    public int getEnd() {
         return matcher.end();
     }
 }

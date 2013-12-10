@@ -18,10 +18,13 @@ import java.util.List;
 public class DefaultSolver implements Solver, Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final Solver INSTANCE =
-            new DefaultSolver(new DefaultEvaluator());
+    public static final Solver INSTANCE = new DefaultSolver();
 
     private final Evaluator evaluator;
+
+    public DefaultSolver() {
+        this(new DefaultEvaluator());
+    }
 
     public DefaultSolver(final Evaluator evaluator) {
         this.evaluator = evaluator;

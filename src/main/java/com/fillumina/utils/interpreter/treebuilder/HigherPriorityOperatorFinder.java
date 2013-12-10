@@ -10,8 +10,10 @@ import java.util.ListIterator;
  */
 class HigherPriorityOperatorFinder {
 
-    public static final HigherPriorityOperatorFinder INSTANCE =
+    static final HigherPriorityOperatorFinder INSTANCE =
             new HigherPriorityOperatorFinder();
+
+    private HigherPriorityOperatorFinder() {}
 
     public <T,C> IndexedNode<T,C> find(final List<Node<T,C>> list) {
         @SuppressWarnings("unchecked")

@@ -1,8 +1,6 @@
 package com.fillumina.utils.interpreter.grammar.pattern.instances;
 
 import com.fillumina.utils.interpreter.Calculator;
-import com.fillumina.utils.interpreter.ContextException;
-import com.fillumina.utils.interpreter.EvaluationException;
 import com.fillumina.utils.interpreter.SyntaxErrorException;
 import com.fillumina.utils.interpreter.treebuilder.ParenthesisMismatchedException;
 import java.util.HashMap;
@@ -17,15 +15,14 @@ import org.junit.Test;
  */
 public abstract class ArithmeticGrammarTestBase {
 
-    protected Calculator<Double, Map<String, Double>> calculator;
-    protected Map<String, Double> context;
+    private final Map<String, Double> context = new HashMap<>();
+    private Calculator<Double, Map<String, Double>> calculator;
 
     public abstract Calculator<Double, Map<String, Double>> getCalculator();
 
     @Before
     public void init() {
         calculator = getCalculator();
-        context = new HashMap<>();
     }
 
     protected void assertEvaluateTo(final double expected,
@@ -314,5 +311,10 @@ public abstract class ArithmeticGrammarTestBase {
     @Test(expected=SyntaxErrorException.class)
     public void shouldDetectAnEmptyExpression() {
         calculate("");
+    }
+
+    @Test
+    public void shouldUseTheVariableJustSet() {
+        assertEvaluateTo(9.0, "(x = 4 / 2 + 1) * x");
     }
 }

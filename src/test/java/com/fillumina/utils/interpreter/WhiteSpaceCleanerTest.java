@@ -27,7 +27,7 @@ public class WhiteSpaceCleanerTest {
         final Tokenizer<String, Void> tokenizer = new Tokenizer<>(grammar);
         final List<Node<String, Void>> list = tokenizer.tokenize("12,3*  7 + 9.33");
 
-        whiteSpaceCleaner.clean(list);
+        whiteSpaceCleaner.executeOn(list);
 
         assertEquals(
                 "[{12}, {3}, {*}, {7}, {+}, {9}, {.}, {33}]",

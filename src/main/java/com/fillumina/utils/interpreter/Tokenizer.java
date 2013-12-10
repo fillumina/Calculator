@@ -43,7 +43,7 @@ public class Tokenizer<T,C> implements Serializable {
             if (node.isUnrecognized()) {
                 final GrammarElementMatcher matcher =
                         ge.match(node.getExpression());
-                if (matcher.found()) {
+                if (matcher.isFound()) {
                     assertMatchANotEmptyRegion(matcher, ge);
                     final Node<T, C> matchedNode =
                             iterator.splitNode(node, matcher);
@@ -56,7 +56,7 @@ public class Tokenizer<T,C> implements Serializable {
 
     private void assertMatchANotEmptyRegion(final GrammarElementMatcher matcher,
             final GrammarElement<T,C> ge) {
-        if (matcher.start() == matcher.end()) {
+        if (matcher.getStart() == matcher.getEnd()) {
             throw new GrammarException("* jollies not allowed in " + ge);
         }
     }
@@ -80,8 +80,8 @@ public class Tokenizer<T,C> implements Serializable {
                 final Node<T,C> node,
                 final GrammarElementMatcher matcher) {
 
-            final int start = matcher.start();
-            final int end = matcher.end();
+            final int start = matcher.getStart();
+            final int end = matcher.getEnd();
             final String value = node.getExpression();
             final int valueLength = value.length();
 

@@ -1,41 +1,39 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
 import com.fillumina.utils.interpreter.Node;
+import com.fillumina.utils.interpreter.SolutionTreeModifier;
 import java.io.Serializable;
 import java.util.List;
 
 /**
+ * Takes a flat list of parsed {@link GrammarElement}s and transforms it into a
+ * solution tree based on parentheses and operator priorities.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class TreeBuilder<T,C> implements Serializable {
+public class TreeBuilder implements SolutionTreeModifier, Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final InnerParenthesisFinder innerParenthesisFinder;
-    private final HigherPriorityOperatorFinder higherPriorityOperatorFinder;
-    private final ReadOperatorParameters loadOperatorParameters;
+    public static final TreeBuilder INSTANCE = new TreeBuilder();
 
-    public TreeBuilder() {
-        innerParenthesisFinder = InnerParenthesisFinder.INSTANCE;
-        higherPriorityOperatorFinder = HigherPriorityOperatorFinder.INSTANCE;
-        loadOperatorParameters = ReadOperatorParameters.INSTANCE;
-    }
+    private TreeBuilder() {}
 
-    public void createTree(final List<Node<T,C>> nodeList) {
+    @Override
+    public <T,C> void executeOn(final List<Node<T,C>> nodeList) {
         Node<T,C> innerParenthesis;
         while( notNull( innerParenthesis =
-                innerParenthesisFinder.find(nodeList))) {
+                InnerParenthesisFinder.INSTANCE.find(nodeList))) {
             readOperatorsByPriority(innerParenthesis.getChildren());
         }
 
         readOperatorsByPriority(nodeList);
     }
 
-    private void readOperatorsByPriority(final List<Node<T,C>> nodeList) {
+    private <T,C> void readOperatorsByPriority(final List<Node<T,C>> nodeList) {
         IndexedNode<T,C> higherPriorityOperator;
         while( exists( higherPriorityOperator =
-                higherPriorityOperatorFinder.find(nodeList))) {
-            loadOperatorParameters.read(nodeList, higherPriorityOperator);
+                HigherPriorityOperatorFinder.INSTANCE.find(nodeList))) {
+            ReadOperatorParameters.INSTANCE.read(nodeList, higherPriorityOperator);
         }
     }
 
@@ -43,7 +41,7 @@ public class TreeBuilder<T,C> implements Serializable {
         return obj != null;
     }
 
-    private boolean exists(final IndexedNode<T,C> node) {
+    private boolean exists(final Object node) {
         return node != IndexedNode.NULL;
     }
 }

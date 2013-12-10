@@ -12,5 +12,4 @@ public interface Evaluator extends Serializable {
 
     <T, C> T evaluate(final Node<T, C> node, final List<T> params,
             final C context);
-
 }

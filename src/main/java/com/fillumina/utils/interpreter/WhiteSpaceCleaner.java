@@ -1,5 +1,6 @@
 package com.fillumina.utils.interpreter;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -9,11 +10,15 @@ import java.util.ListIterator;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class WhiteSpaceCleaner {
+public class WhiteSpaceCleaner implements SolutionTreeModifier, Serializable {
+    private static final long serialVersionUID = 1L;
 
     public static final WhiteSpaceCleaner INSTANCE = new WhiteSpaceCleaner();
 
-    public <T,C> void clean(final List<Node<T,C>> list) {
+    private WhiteSpaceCleaner() {}
+
+    @Override
+    public <T,C> void executeOn(final List<Node<T,C>> list) {
         final ListIterator<Node<T,C>> iterator = list.listIterator();
         while(iterator.hasNext()) {
             final Node<T,C> node = iterator.next();
@@ -21,7 +26,7 @@ public class WhiteSpaceCleaner {
             if (isAWhiteSpace(node)) {
                 iterator.remove();
             } else {
-                clean(node.getChildren());
+                executeOn(node.getChildren());
             }
         }
     }
