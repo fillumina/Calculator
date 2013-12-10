@@ -3,6 +3,7 @@ package com.fillumina.utils.interpreter.util;
 import java.io.Serializable;
 
 /**
+ * Traverses a tree and calls a {@link TreeVisitor} at each node.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

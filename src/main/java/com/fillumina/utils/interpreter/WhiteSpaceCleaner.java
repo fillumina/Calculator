@@ -12,7 +12,7 @@ import java.util.ListIterator;
 public class WhiteSpaceCleaner {
 
     public static final WhiteSpaceCleaner INSTANCE = new WhiteSpaceCleaner();
-    
+
     public <T,C> void clean(final List<Node<T,C>> list) {
         final ListIterator<Node<T,C>> iterator = list.listIterator();
         while(iterator.hasNext()) {
@@ -28,6 +28,7 @@ public class WhiteSpaceCleaner {
 
     private <T,C> boolean isAWhiteSpace(final Node<T,C> node) {
         final GrammarElement<T, C> ge = node.getGrammarElement();
-        return ge == null ? false : ge.isType(GrammarElementType.WHITE_SPACE);
+        return ge == null ? false :
+                ge.getType() == GrammarElementType.WHITE_SPACE;
     }
 }

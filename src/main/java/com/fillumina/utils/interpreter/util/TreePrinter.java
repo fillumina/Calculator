@@ -43,6 +43,20 @@ public class TreePrinter implements Serializable {
         }
     };
 
+    public static final NodePrinter NODE_TOSTRING = new NodePrinter() {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public <T,C> void printNode(final StringBuilder builder,
+                final int level,
+                final Node<T,C> node) {
+            builder.append(node).append("\n");
+        }
+    };
+
+    // I cannot see a reason to extend this class
+    private TreePrinter() {}
+
     private static class PrintTreeVisitor<T,C>
             implements TreeVisitor<Node<T,C>> {
         private static final long serialVersionUID = 1L;

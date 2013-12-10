@@ -54,7 +54,8 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
     }
 
     public boolean isACloseParenthesis() {
-        return getNode().getGrammarElement().isType(GrammarElementType.CLOSED_PAR);
+        return getNode().getGrammarElement().getType() ==
+                GrammarElementType.CLOSED_PAR;
     }
 
     /**
@@ -64,7 +65,7 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
      */
     public boolean isAnEmptyOpenParenthesis() {
         final Node<T,C> n = getNode();
-        return n.getGrammarElement().isType(GrammarElementType.OPEN_PAR) &&
+        return n.getGrammarElement().getType() == GrammarElementType.OPEN_PAR &&
                 n.hasNoChildren();
     }
 
@@ -77,7 +78,8 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
     }
 
     public boolean isEmptyOperator() {
-        return getNode().getGrammarElement().isType(GrammarElementType.OPERATOR) &&
+        final GrammarElementType type = getNode().getGrammarElement().getType();
+        return type == GrammarElementType.OPERATOR &&
                 getNode().hasNoChildren();
     }
 

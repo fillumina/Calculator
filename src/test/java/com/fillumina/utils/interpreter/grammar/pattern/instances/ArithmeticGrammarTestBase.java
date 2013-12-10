@@ -311,16 +311,6 @@ public abstract class ArithmeticGrammarTestBase {
         assertEvaluateTo(2.5, "avg(2 3) 1");
     }
 
-    @Test(expected=ContextException.class)
-    public void shouldDetectAnInexistentFunction() {
-        calculate("-3 * sinto(pi/2 -(8 + 2))");
-    }
-
-    @Test(expected=ContextException.class)
-    public void shouldDetectAnInexistentSymbol() {
-        calculate("-3 @ sin(pi/2 -(8 + 2))");
-    }
-
     @Test(expected=SyntaxErrorException.class)
     public void shouldDetectAnEmptyExpression() {
         calculate("");

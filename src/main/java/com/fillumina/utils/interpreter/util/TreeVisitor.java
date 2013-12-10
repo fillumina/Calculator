@@ -1,6 +1,7 @@
 package com.fillumina.utils.interpreter.util;
 
 /**
+ * Tree's node visitor. It provides also a way to get the node's children.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

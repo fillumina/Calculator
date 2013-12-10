@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * Evaluates a node.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

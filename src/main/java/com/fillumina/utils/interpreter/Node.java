@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Represents a node in the solution tree.
  * This class is <i>mutable</i> and not <i>thread safe</i> but it allows
- * <i>deep cloning</i>.
+ * <i>deep cloning</i> so that a solution tree can be cloned.
  *
  * @param T     the type of the expected result
  * @param C     the type of the context
@@ -118,7 +118,7 @@ public class Node<T,C> implements Cloneable, Serializable {
     }
 
     public boolean isOfType(final GrammarElementType type) {
-        return grammarElement == null ? false : grammarElement.isType(type);
+        return grammarElement == null ? false : grammarElement.getType() == type;
     }
 
     @Override

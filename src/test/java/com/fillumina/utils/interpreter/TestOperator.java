@@ -24,9 +24,4 @@ public class TestOperator extends AbstractOperator<String,Void> {
             final List<String> params, final Void context) {
         return value;
     }
-
-    @Override
-    public boolean isType(final GrammarElementType type) {
-        return GrammarElementType.OPERATOR.equals(type);
-    }
 }

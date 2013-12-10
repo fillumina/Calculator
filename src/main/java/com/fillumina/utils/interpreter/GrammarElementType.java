@@ -1,8 +1,8 @@
 package com.fillumina.utils.interpreter;
 
 /**
- * Different types of {@link GrammarElement}.
- * 
+ * Different types of {@link GrammarElement}s.
+ *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public enum GrammarElementType {

@@ -26,10 +26,4 @@ public class TestContextOperator
             final List<String> params, final Map<String,String> context) {
         return '{' + value + params.toString() + '}';
     }
-
-    @Override
-    public boolean isType(final GrammarElementType type) {
-        return GrammarElementType.OPERATOR.equals(type);
-    }
-
 }

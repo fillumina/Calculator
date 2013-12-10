@@ -6,6 +6,9 @@ import java.util.List;
 
 /**
  * Simple {@link Solver} that doesn't modify the solution tree.
+ * This means that it doesn't optimize it in any way and every time it's
+ * called it executes every calculation in the solution tree again.
+ * If you need to perform optimizations use {@link PruningSolver}.
  *
  * @param T the type of the elements
  * @param C the type of the context
@@ -14,7 +17,7 @@ import java.util.List;
  */
 public class DefaultSolver implements Solver, Serializable {
     private static final long serialVersionUID = 1L;
-    
+
     public static final Solver INSTANCE =
             new DefaultSolver(new DefaultEvaluator());
 
@@ -27,9 +30,10 @@ public class DefaultSolver implements Solver, Serializable {
     @Override
     public <T, C> List<T> solve(final List<Node<T,C>> nodeTree,
             final C context) {
-        final List<T> params = new ArrayList<>();
+        final List<T> params = new ArrayList<>(nodeTree.size());
         for (Node<T,C> node : nodeTree) {
-            final List<T> parameters = solve(node.getChildren(), context);
+            final List<Node<T, C>> children = node.getChildren();
+            final List<T> parameters = solve(children, context);
             final T evaluated = evaluator.evaluate(node, parameters, context);
             params.add(evaluated);
         }
