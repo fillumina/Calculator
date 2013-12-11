@@ -23,28 +23,34 @@ public class Tokenizer<T,C> implements Serializable {
 
     public List<Node<T,C>> tokenize(final String expression) {
         // LinkedList is very efficient for this algorithm
+        // that needs to remove nodes a lot (which is inefficient in
+        // ArrayList).
         final LinkedList<Node<T,C>> list = new LinkedList<>();
         list.add(new Node<T,C>(expression));
 
-        for (GrammarElement<T,C> ge: grammar) {
-            recognizeGrammarElement(list, ge);
-        }
+        recognizeGrammarElementInOrderOfPriority(list);
 
         return list;
     }
 
-    private void recognizeGrammarElement(final List<Node<T,C>> list,
-            final GrammarElement<T,C> ge) {
+    private void recognizeGrammarElementInOrderOfPriority(
+            final LinkedList<Node<T, C>> list) {
+        for (GrammarElement<T,C> ge: grammar) {
+            recognizeGrammarElement(ge, list);
+        }
+    }
 
+    private void recognizeGrammarElement(final GrammarElement<T,C> ge,
+            final List<Node<T,C>> list) {
         final SplittingIterator<T,C> iterator = new SplittingIterator<>(list);
         while (iterator.hasNext()) {
             final Node<T,C> node = iterator.next();
 
-            if (node.isUnrecognized()) {
+            if (node.isUnassignedGrammarElement()) {
                 final GrammarElementMatcher matcher =
                         ge.match(node.getExpression());
                 if (matcher.isFound()) {
-                    assertMatchANotEmptyRegion(matcher, ge);
+                    assertMatchingANotEmptyRegion(matcher, ge);
                     final Node<T, C> matchedNode =
                             iterator.splitNode(node, matcher);
                     matchedNode.setGrammarElement(ge);
@@ -54,7 +60,8 @@ public class Tokenizer<T,C> implements Serializable {
         }
     }
 
-    private void assertMatchANotEmptyRegion(final GrammarElementMatcher matcher,
+    private void assertMatchingANotEmptyRegion(
+            final GrammarElementMatcher matcher,
             final GrammarElement<T,C> ge) {
         if (matcher.getStart() == matcher.getEnd()) {
             throw new GrammarException("* jollies not allowed in " + ge);
@@ -72,21 +79,26 @@ public class Tokenizer<T,C> implements Serializable {
             this.list = list;
         }
 
+        /** Reset the iterator to start. */
         public void reset() {
             delegate = list.listIterator();
         }
 
+        /**
+         * Splits the list to isolate the new node found by the matcher.
+         * @return the created node
+         */
         public Node<T,C> splitNode(
-                final Node<T,C> node,
+                final Node<T,C> originalNode,
                 final GrammarElementMatcher matcher) {
 
             final int start = matcher.getStart();
             final int end = matcher.getEnd();
-            final String value = node.getExpression();
+            final String value = originalNode.getExpression();
             final int valueLength = value.length();
 
             if (start == 0 && end == valueLength) {
-                return node;
+                return originalNode;
             } else {
                 remove();
 

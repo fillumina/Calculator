@@ -97,7 +97,7 @@ public class Node<T,C> implements Cloneable, Serializable {
         this.grammarElement = grammarElement;
     }
 
-    public boolean isUnrecognized() {
+    public boolean isUnassignedGrammarElement() {
         return grammarElement == null;
     }
 

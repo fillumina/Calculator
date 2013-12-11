@@ -35,13 +35,13 @@ public class DefaultSolver implements Solver, Serializable {
     @Override
     public <T, C> List<T> solve(final List<Node<T,C>> nodeTree,
             final C context) {
-        final List<T> params = new ArrayList<>(nodeTree.size());
-        for (Node<T,C> node : nodeTree) {
+        final List<T> results = new ArrayList<>(nodeTree.size());
+        for (final Node<T,C> node : nodeTree) {
             final List<Node<T, C>> children = node.getChildren();
             final List<T> parameters = solve(children, context);
             final T evaluated = evaluator.evaluate(node, parameters, context);
-            params.add(evaluated);
+            results.add(evaluated);
         }
-        return params;
+        return results;
     }
 }

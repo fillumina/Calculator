@@ -13,7 +13,6 @@ import java.util.Objects;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-//TODO couldn't just assign it as default at the first pass?
 public class UnrecognizedElementParser<T,C>
         implements SolutionTreeFilter, Serializable {
     private static final long serialVersionUID = 1L;
@@ -30,7 +29,7 @@ public class UnrecognizedElementParser<T,C>
     @SuppressWarnings("unchecked")
     public <T,C> void executeOn(final List<Node<T,C>> nodes) {
         for (Node<T,C> node: nodes) {
-            if (node.isUnrecognized()) {
+            if (node.isUnassignedGrammarElement()) {
                 assertUnrecognizedElementIsPresent(node);
                 node.setGrammarElement(
                         (GrammarElement<T, C>) unrecognizedElement);
@@ -38,6 +37,10 @@ public class UnrecognizedElementParser<T,C>
         }
     }
 
+    /**
+     * @return the <b>first</b> {@link GrammarElement} in the grammar of type
+     *          {@link GrammarElementType#UNRECOGNIZED}.
+     */
     public static <T,C> GrammarElement<T,C> getUnrecognizeElement(
             final Iterable<GrammarElement<T,C>> grammar) {
         if (grammar != null) {
@@ -50,7 +53,8 @@ public class UnrecognizedElementParser<T,C>
         return null;
     }
 
-    private <T,C> void assertUnrecognizedElementIsPresent(final Node<T, C> node) {
+    private <T,C> void assertUnrecognizedElementIsPresent(
+            final Node<T, C> node) {
         if (unrecognizedElement == null) {
             throw new SyntaxErrorException("Element '" +
                     node.getExpression() + "' not recognized");

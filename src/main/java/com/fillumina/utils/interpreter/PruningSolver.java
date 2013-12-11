@@ -48,7 +48,7 @@ public class PruningSolver implements Solver, Serializable {
     @Override
     public <T, C> List<T> solve(final List<Node<T,C>> nodeTree,
             final C context) {
-        final List<T> params = new ArrayList<>(nodeTree.size());
+        final List<T> results = new ArrayList<>(nodeTree.size());
         boolean variableFound = false;
         for (final Node<T,C> node : nodeTree) {
             T evaluated = null;
@@ -56,12 +56,12 @@ public class PruningSolver implements Solver, Serializable {
                 evaluated = node.getValue();
             } else {
                 @SuppressWarnings("unchecked")
-                final List<T> solved = node.hasChildren() ?
+                final List<T> params = node.hasChildren() ?
                         solve(node.getChildren(), context) :
                         Collections.EMPTY_LIST;
-                if (solved != null) {
+                if (params != null) {
                     try {
-                        evaluated = evaluator.evaluate(node, solved, context);
+                        evaluated = evaluator.evaluate(node, params, context);
                         node.setValueAndRemoveChildren(evaluated);
                     } catch (ContextException ex) {
                         variableFound = true;
@@ -70,9 +70,9 @@ public class PruningSolver implements Solver, Serializable {
                     variableFound = true;
                 }
             }
-            params.add( evaluated);
+            results.add( evaluated);
         }
         // returns null if a variable has been found
-        return variableFound ? null : params;
+        return variableFound ? null : results;
     }
 }

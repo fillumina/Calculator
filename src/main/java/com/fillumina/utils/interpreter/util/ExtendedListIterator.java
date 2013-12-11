@@ -49,6 +49,8 @@ public class ExtendedListIterator<T> implements ListIterator<T>, Serializable {
         return t;
     }
 
+    // delegator methods
+
     @Override
     public void set(final T e) {
         delegate.set(e);

@@ -23,7 +23,7 @@ public class VariableContextManager<T>
     public T evaluate(final String value, final List<T> params,
             final Map<String, T> context) {
         Objects.requireNonNull(context, "context must be not null");
-        if (value == null || value.trim().isEmpty()) {
+        if (value == null || value.isEmpty()) {
             throw new SyntaxErrorException("empty expression.");
         }
         final T variableValue = context.get(value);
