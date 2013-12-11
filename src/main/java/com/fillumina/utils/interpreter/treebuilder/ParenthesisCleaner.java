@@ -17,6 +17,8 @@ public class ParenthesisCleaner implements SolutionTreeFilter, Serializable {
     public static final ParenthesisCleaner INSTANCE =
             new ParenthesisCleaner();
 
+    private ParenthesisCleaner() {}
+
     @Override
     public <T,C> void executeOn(final List<Node<T,C>> nodes) {
         ListIterator<Node<T,C>> iterator = nodes.listIterator();

@@ -9,7 +9,7 @@ import java.util.Objects;
  * grammar element.
  * An {@link UnrecognizedElement} is something the {@link Tokenizer} could not
  * recognize as part of the grammar. It can be used to represent
- * variables.<br />
+ * variables.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

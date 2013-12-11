@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * A filter chain that executes the passed list of filter in the given order.
+ * A filter chain that executes the passed list of filters in the given order.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

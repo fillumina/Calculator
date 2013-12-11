@@ -2,7 +2,6 @@ package com.fillumina.utils.interpreter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -18,7 +17,7 @@ public class UndefinedVariablesFinder implements Serializable {
 
     private UndefinedVariablesFinder() {}
 
-    public <T,C> Collection<String> find(final List<Node<T,C>> solutionTree) {
+    public <T,C> List<String> find(final List<Node<T,C>> solutionTree) {
         final List<String> undefinedVariables = new ArrayList<>();
         find(solutionTree, undefinedVariables);
         return undefinedVariables;

@@ -3,6 +3,8 @@ package com.fillumina.utils.interpreter;
 import java.util.List;
 
 /**
+ * Evaluates an expression using its
+ * {@link GrammarElement#evaluate(String, java.util.List, Object) } method.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

@@ -5,7 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This object
+ * Encapsulate a solution tree and try to solve it by specifying
+ * the required constants in the context.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
@@ -51,7 +52,7 @@ public class SolutionOptimizer<T, C> implements Cloneable {
         return this.solution;
     }
 
-    public Collection<String> getUndefinedVariables() {
+    public List<String> getUndefinedVariables() {
         return UndefinedVariablesFinder.INSTANCE.find(solutionTree);
     }
 
