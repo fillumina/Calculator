@@ -43,7 +43,10 @@ public class Node<T,C> implements Cloneable, Serializable {
         this.value = other.value;
         this.hasValue = other.hasValue;
         this.grammarElement = other.grammarElement;
-        this.children = new LinkedList<>(other.children);
+        this.children = new LinkedList<>();
+        for (final Node<T,C> node: other.children) {
+            this.children.add(node.clone());
+        }
     }
 
     public Node<T,C> addChildren(final Node<T,C> node) {

@@ -1,6 +1,5 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.ParametrizedCalculator.OptimizedSolutionTree;
 import com.fillumina.utils.interpreter.grammar.pattern.instances.ArithmeticGrammar;
 import com.fillumina.utils.interpreter.util.Mapper;
 import java.util.Collections;
@@ -14,43 +13,45 @@ import static org.junit.Assert.*;
  */
 public class ParametrizedCalculatorTest {
 
+    @SuppressWarnings("unchecked")
+    private static final Map<String, Double> EMPTY_MAP =
+            (Map<String,Double>)Collections.EMPTY_MAP;
+
     private ParametrizedCalculator<Double, Map<String,Double>> calculator =
             new ParametrizedCalculator<>(ArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldHaveAStaticSolution() {
-        OptimizedSolutionTree<Double, Map<String,Double>> tree =
+        final OptimizedSolutionTree<Double, Map<String,Double>> solution =
                 calculator.createSolutionTree("(1 / 4)");
 
-        assertTrue(tree.hasStaticSolution());
-        assertEquals(0.25d, tree.getSingleValueSolution(), 0.01);
+        assertTrue(solution.hasStaticSolution());
+        assertEquals(0.25d, solution.getSingleValueSolution(), 0.01);
     }
 
     @Test
     public void shouldSolveAStaticSolutionAnyway() {
-        OptimizedSolutionTree<Double, Map<String,Double>> tree =
+        final OptimizedSolutionTree<Double, Map<String,Double>> solution =
                 calculator.createSolutionTree("(1 / 4)");
 
-        assertTrue(tree.hasStaticSolution());
-        assertEquals(0.25d,
-                tree.solveSingleValue((Map<String,Double>)Collections.EMPTY_MAP),
-                0.01);
+        assertTrue(solution.hasStaticSolution());
+        assertEquals(0.25d, solution.solve(EMPTY_MAP).get(0), 0.01);
     }
 
     @Test
     public void shouldNotHaveAStaticSolution() {
-        OptimizedSolutionTree<Double, Map<String,Double>> tree =
+        final OptimizedSolutionTree<Double, Map<String,Double>> solution =
                 calculator.createSolutionTree("sin(x + 1 / 4)");
 
-        assertFalse(tree.hasStaticSolution());
+        assertFalse(solution.hasStaticSolution());
     }
 
     @Test
     public void shouldCalculateTheSolutionOnceAVariableIsInserted() {
-        OptimizedSolutionTree<Double, Map<String,Double>> tree =
+        OptimizedSolutionTree<Double, Map<String,Double>> solution =
                 calculator.createSolutionTree("sin(x + 1 / 4)");
 
         final Map<String,Double> context = Mapper.create("x", 3.0/4.0);
-        assertEquals(0.8414709848078965, tree.solveSingleValue(context), 0.001);
+        assertEquals(0.8414709848078965, solution.solve(context).get(0), 0.001);
     }
 }

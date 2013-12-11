@@ -14,8 +14,9 @@ import java.util.List;
  * <p>
  * <b>NOTE:</b> this class modifies the solution tree.
  * <p>
- * <b>NOTE:</b> always use this class to get the solution (don't use
- * {@link DefaultSolver}).
+ * <b>NOTE:</b> if you start using this class you should keep using this class
+ * in your calculation because it makes use of some features of {@link Node}
+ * that other {@link Solver}s may not understand.
  *
  * @param T the type of the elements
  * @param C the type of the context
