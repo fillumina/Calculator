@@ -5,20 +5,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * This object
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class OptimizedSolutionTree<T, C> implements Cloneable {
+public class SolutionOptimizer<T, C> implements Cloneable {
     private final List<Node<T, C>> solutionTree;
     private List<T> solution;
 
-    public OptimizedSolutionTree(final List<Node<T, C>> solutionTree,
+    public SolutionOptimizer(final List<Node<T, C>> solutionTree,
             final List<T> solution) {
         this.solutionTree = solutionTree;
         this.solution = solution;
     }
 
-    public OptimizedSolutionTree(final OptimizedSolutionTree<T, C> original) {
+    public SolutionOptimizer(final SolutionOptimizer<T, C> original) {
         final List<Node<T, C>> originalSolutionTree = original.solutionTree;
         this.solutionTree = new LinkedList<>();
         for (final Node<T, C> node : originalSolutionTree) {
@@ -27,7 +28,7 @@ public class OptimizedSolutionTree<T, C> implements Cloneable {
         this.solution = original.solution; //doesn't make much sense but uh?
     }
 
-    public boolean hasStaticSolution() {
+    public boolean isSolved() {
         return solution != null;
     }
 
@@ -45,8 +46,9 @@ public class OptimizedSolutionTree<T, C> implements Cloneable {
      * @return the solution if found otherwise {@code null}.
      */
     public List<T> solve(final C context) {
-        return this.solution = PruningSolver.INSTANCE.solve(solutionTree,
+        this.solution = PruningSolver.INSTANCE.solve(solutionTree,
                 context);
+        return this.solution;
     }
 
     public Collection<String> getUndefinedVariables() {
@@ -54,7 +56,7 @@ public class OptimizedSolutionTree<T, C> implements Cloneable {
     }
 
     @Override
-    protected OptimizedSolutionTree<T, C> clone() {
-        return new OptimizedSolutionTree<>(this);
+    protected SolutionOptimizer<T, C> clone() {
+        return new SolutionOptimizer<>(this);
     }
 }
