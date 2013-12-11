@@ -2,7 +2,7 @@ package com.fillumina.utils.interpreter.treebuilder;
 
 import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.Node;
-import com.fillumina.utils.interpreter.SolutionTreeModifier;
+import com.fillumina.utils.interpreter.SolutionTreeFilter;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ListIterator;
@@ -11,7 +11,7 @@ import java.util.ListIterator;
  * Removes the parenthesis with only one children (parameter)
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ParenthesisCleaner implements SolutionTreeModifier, Serializable {
+public class ParenthesisCleaner implements SolutionTreeFilter, Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final ParenthesisCleaner INSTANCE =

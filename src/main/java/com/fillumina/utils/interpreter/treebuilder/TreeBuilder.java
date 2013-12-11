@@ -1,7 +1,7 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
 import com.fillumina.utils.interpreter.Node;
-import com.fillumina.utils.interpreter.SolutionTreeModifier;
+import com.fillumina.utils.interpreter.SolutionTreeFilter;
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class TreeBuilder implements SolutionTreeModifier, Serializable {
+public class TreeBuilder implements SolutionTreeFilter, Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final TreeBuilder INSTANCE = new TreeBuilder();

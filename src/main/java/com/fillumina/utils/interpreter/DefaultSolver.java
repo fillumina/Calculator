@@ -10,6 +10,8 @@ import java.util.List;
  * called it executes every calculation in the solution tree again.
  * If you need to perform optimizations use {@link PruningSolver}.
  *
+ * @see PruningSolver
+ *
  * @param T the type of the elements
  * @param C the type of the context
  *

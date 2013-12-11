@@ -42,7 +42,7 @@ public class PruningSolver implements Solver, Serializable {
      *
      * @param nodeTree  the solution tree
      * @param context   the context
-     * @return  the list of values or null if an undefined variable
+     * @return  the list of values or {@code null} if an undefined variable
      *          has been found.
      */
     @Override
@@ -62,9 +62,8 @@ public class PruningSolver implements Solver, Serializable {
                 if (solved != null) {
                     try {
                         evaluated = evaluator.evaluate(node, solved, context);
-                        node.setValue(evaluated);
+                        node.setValueAndRemoveChildren(evaluated);
                     } catch (ContextException ex) {
-                        // an undefined variable has been found
                         variableFound = true;
                     }
                 } else {

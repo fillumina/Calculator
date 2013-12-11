@@ -3,6 +3,7 @@ package com.fillumina.utils.interpreter;
 import java.util.List;
 
 /**
+ * Solves a solution tree.
  *
  * @param T     the type of the expected result
  * @param C     the type of the context

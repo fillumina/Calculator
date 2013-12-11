@@ -18,20 +18,29 @@ public class Interpreter<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final Tokenizer<T,C> tokenizer;
-    private final UnrecognizedElementParser<T,C> unrecognizedElementParser;
+    private final SolutionTreeFilter filters;
 
     public Interpreter(final Iterable<GrammarElement<T,C>> grammar) {
-        this.tokenizer = new Tokenizer<>(grammar);
-        this.unrecognizedElementParser = new UnrecognizedElementParser<>(grammar);
+        this(new Tokenizer<>(grammar),
+            new SolutionTreeFilterChain(
+                WhiteSpaceCleaner.INSTANCE,
+                new UnrecognizedElementParser<>(grammar),
+                TreeBuilder.INSTANCE,
+                ParenthesisCleaner.INSTANCE)
+        );
+    }
+
+    /** Defines your own tokenizer and filters. */
+    public Interpreter(final Tokenizer<T, C> tokenizer,
+            final SolutionTreeFilter filters) {
+        this.tokenizer = tokenizer;
+        this.filters = filters;
     }
 
     /** Parses the expression and return a (eventually multi-headed) node tree. */
     public List<Node<T,C>> parse(final String expression) {
         final List<Node<T,C>> list = tokenizer.tokenize(expression);
-        WhiteSpaceCleaner.INSTANCE.executeOn(list);
-        unrecognizedElementParser.executeOn(list);
-        TreeBuilder.INSTANCE.executeOn(list);
-        ParenthesisCleaner.INSTANCE.executeOn(list);
+        filters.executeOn(list);
         return list;
     }
 }

@@ -20,8 +20,8 @@ public class Node<T,C> implements Cloneable, Serializable {
     private static final long serialVersionUID = 1L;
 
     private final String expression;
-    private T value;
     private boolean hasValue;
+    private T value;
     private GrammarElement<T,C> grammarElement;
 
     @SuppressWarnings("unchecked")
@@ -74,8 +74,12 @@ public class Node<T,C> implements Cloneable, Serializable {
         return value;
     }
 
+    /**
+     * Sets the value in the node and removes all its children (they are not
+     * needed anymore as parameters to the calculation.
+     */
     @SuppressWarnings("unchecked")
-    public void setValue(final T value) {
+    public void setValueAndRemoveChildren(final T value) {
         this.value = value;
         this.hasValue = true;
         children = Collections.EMPTY_LIST;

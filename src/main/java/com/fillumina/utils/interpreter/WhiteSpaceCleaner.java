@@ -10,7 +10,7 @@ import java.util.ListIterator;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class WhiteSpaceCleaner implements SolutionTreeModifier, Serializable {
+public class WhiteSpaceCleaner implements SolutionTreeFilter, Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final WhiteSpaceCleaner INSTANCE = new WhiteSpaceCleaner();

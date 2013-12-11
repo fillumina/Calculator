@@ -1,5 +1,6 @@
 package com.fillumina.utils.interpreter;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,9 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class Calculator<T,C> {
+public class Calculator<T,C> implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private final Interpreter<T,C> interpreter;
     private final Solver solver;
 
@@ -31,12 +34,18 @@ public class Calculator<T,C> {
      */
     @SuppressWarnings("unchecked")
     public Calculator(final Iterable<GrammarElement<T,C>> grammar) {
-        this(grammar, DefaultSolver.INSTANCE);
+        this(new Interpreter<>(grammar), DefaultSolver.INSTANCE);
     }
 
     public Calculator(final Iterable<GrammarElement<T,C>> grammar,
             final Solver solver) {
-        this.interpreter = new Interpreter<>(grammar);
+        this(new Interpreter<>(grammar), solver);
+    }
+
+    /** Defines your own interpreter and solver. */
+    public Calculator(final Interpreter<T,C> interpreter,
+            final Solver solver) {
+        this.interpreter = interpreter;
         this.solver = solver;
     }
 

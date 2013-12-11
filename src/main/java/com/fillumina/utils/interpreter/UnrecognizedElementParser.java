@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 //TODO couldn't just assign it as default at the first pass?
 public class UnrecognizedElementParser<T,C>
-        implements SolutionTreeModifier, Serializable {
+        implements SolutionTreeFilter, Serializable {
     private static final long serialVersionUID = 1L;
 
     private final GrammarElement<T,C> unrecognizedElement;
