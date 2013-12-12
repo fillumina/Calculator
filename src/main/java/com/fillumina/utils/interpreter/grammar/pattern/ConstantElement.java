@@ -12,9 +12,10 @@ public class ConstantElement<T,C>
     private static final long serialVersionUID = 1L;
     private final T constant;
 
-    public ConstantElement(final String symbolRegexp, final T constant,
+    /** Insert the name of the constant NOT the regular expression. */
+    public ConstantElement(final String name, final T constant,
             final int priority) {
-        super(symbolRegexp, priority);
+        super("^(" + name + ")$", priority);
         this.constant = constant;
     }
 

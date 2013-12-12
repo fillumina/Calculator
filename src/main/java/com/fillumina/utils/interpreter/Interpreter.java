@@ -24,7 +24,7 @@ public class Interpreter<T,C> implements Serializable {
         this(new Tokenizer<>(grammar),
             new SolutionTreeFilterChain(
                 WhiteSpaceCleaner.INSTANCE,
-                new UnrecognizedElementParser<>(grammar),
+                new UndefinedElementParser<>(grammar),
                 TreeBuilder.INSTANCE,
                 ParenthesisCleaner.INSTANCE)
         );

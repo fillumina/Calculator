@@ -63,16 +63,16 @@ public class BooleanGrammar extends Grammar<Boolean, Map<String, Boolean>>
                 }
             },
 
+            new OpenParenthesis<Boolean,Map<String,Boolean>>("\\("),
+            new CloseParenthesis<Boolean,Map<String,Boolean>>("\\)"),
+            new WhiteSpace<Boolean,Map<String,Boolean>>("[\\ ,]+"),
+
             new ConstantElement<Boolean,Map<String,Boolean>>(
                     "true|TRUE|True", true, 0),
             new ConstantElement<Boolean,Map<String,Boolean>>(
                     "false|FALSE|False", false, 0),
 
-            new VariableContextManager<Boolean>(),
-
-            new OpenParenthesis<Boolean,Map<String,Boolean>>("\\("),
-            new CloseParenthesis<Boolean,Map<String,Boolean>>("\\)"),
-            new WhiteSpace<Boolean,Map<String,Boolean>>("[\\ ,]+")
+            new VariableContextManager<Boolean>()
         );
     }
 }

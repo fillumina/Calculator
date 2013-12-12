@@ -4,6 +4,8 @@ import com.fillumina.utils.interpreter.GrammarElementType;
 import java.util.List;
 
 /**
+ * Base class for operands. Remember that operands should have the
+ * higher priority in the grammar and so they should be defined first.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
@@ -28,6 +30,7 @@ public abstract class AbstractOperand<T,C>
         super(symbolRegexp, priority);
     }
 
+    /** And operand doesn't have parameters. */
     @Override
     public T evaluate(final String value,
             final List<T> params, final C context) {

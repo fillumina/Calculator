@@ -4,7 +4,8 @@ import com.fillumina.utils.interpreter.GrammarElementType;
 
 /**
  * Defines the symbols that close a parenthesis. Note that unbalanced different
- * kind of parenthesis will actually work. i.e.: <code>([2+1) *3]</code> is all right.
+ * kind of parenthesis will actually work. i.e.: <code>([2+1) *3]</code> is
+ * accepted.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

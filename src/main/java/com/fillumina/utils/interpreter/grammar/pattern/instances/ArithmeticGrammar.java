@@ -234,15 +234,15 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
         },
 
         new VariableSetterOperator<Double>(),
-        
-        new ConstantElement<Double,Map<String, Double>>("e", E, 0),
-        new ConstantElement<Double,Map<String, Double>>("pi", PI,  0),
-
-        new VariableContextManager<Double>(),
 
         new OpenParenthesis<Double,Map<String, Double>>("\\("),
         new CloseParenthesis<Double,Map<String, Double>>("\\)"),
-        new WhiteSpace<Double,Map<String, Double>>("[\\ ,]+")
+        new WhiteSpace<Double,Map<String, Double>>("[\\ ,]+"),
+
+        new ConstantElement<Double,Map<String, Double>>("e", E, 0),
+        new ConstantElement<Double,Map<String, Double>>("pi", PI,  0),
+
+        new VariableContextManager<Double>()
         );
     }
 }

@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * This parser assigns to unrecognized tokens the {@link UnrecognizedElement}
+ * Assigns to undefined tokens (those that don't have any
+ * {@link GrammarElement} set) the {@link UnrecognizedElement}
  * grammar element.
  * An {@link UnrecognizedElement} is something the {@link Tokenizer} could not
  * recognize as part of the grammar. It can be used to represent
@@ -13,13 +14,13 @@ import java.util.Objects;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class UnrecognizedElementParser<T,C>
+public class UndefinedElementParser<T,C>
         implements SolutionTreeFilter, Serializable {
     private static final long serialVersionUID = 1L;
 
     private final GrammarElement<T,C> unrecognizedElement;
 
-    public UnrecognizedElementParser(
+    public UndefinedElementParser(
             final Iterable<GrammarElement<T,C>> grammar) {
         Objects.requireNonNull(grammar, "grammar must not be null");
         unrecognizedElement = getUnrecognizeElement(grammar);

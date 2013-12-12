@@ -30,10 +30,10 @@ public class TreeBuilder implements SolutionTreeFilter, Serializable {
     }
 
     private <T,C> void readOperatorsByPriority(final List<Node<T,C>> nodeList) {
-        IndexedNode<T,C> higherPriorityOperator;
-        while( exists( higherPriorityOperator =
+        IndexedNode<T,C> higherPriorityOp;
+        while( exists( higherPriorityOp =
                 HigherPriorityOperatorFinder.INSTANCE.find(nodeList))) {
-            ReadOperatorParameters.INSTANCE.read(nodeList, higherPriorityOperator);
+            ReadOperatorParameters.INSTANCE.read(nodeList, higherPriorityOp);
         }
     }
 

@@ -17,10 +17,6 @@ import static org.junit.Assert.*;
  */
 public class PruningSolverTest {
 
-    public static void main(final String[] args) {
-        new PruningSolverTest().shouldPruneTheTree();
-    }
-
     @Test
     public void shouldPruneTheTree() {
         final GrammarElement<String,Map<String,String>> operator =

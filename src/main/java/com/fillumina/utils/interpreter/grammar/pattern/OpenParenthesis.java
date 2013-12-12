@@ -5,7 +5,7 @@ import com.fillumina.utils.interpreter.GrammarElementType;
 /**
  * Defines the symbols that open a parenthesis. Note that unbalanced different
  * kind of parenthesis will actually work. i.e.: <code>([2+1) *3]</code> is
- * all right.
+ * accepeted.
  * <br />
  * This class is also used internally as the parameters holder when a parenthesis
  * is discovered.

@@ -317,4 +317,13 @@ public abstract class ArithmeticGrammarTestBase {
     public void shouldUseTheVariableJustSet() {
         assertEvaluateTo(9.0, "(x = 4 / 2 + 1) * x");
     }
+
+    @Test
+    public void shouldDistinguishBetweenAEAndAVariableNameContainingE() {
+        context.put("ellelle", 1d);
+        context.put("elle", 2d);
+        context.put("el", 3d);
+        context.put("le", 4d);
+        assertEvaluateTo(49d, "ellelle+2*elle*el*le");
+    }
 }

@@ -1,5 +1,6 @@
 package com.fillumina.utils.interpreter.util;
 
+import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.Node;
 import java.io.Serializable;
 import java.util.Arrays;
@@ -21,8 +22,11 @@ public class TreePrinter implements Serializable {
                 final Node<T,C> node) {
             builder.append(spaces(level))
                     .append(node.getExpression())
-                    .append(" ")
-                    .append(node.getGrammarElement().getType().toString());
+                    .append(" ");
+            final GrammarElement<T, C> grammarElement = node.getGrammarElement();
+            if (grammarElement != null) {
+                builder.append(grammarElement.getType().toString());
+            }
             if (node.hasValue()) {
                 builder.append(" -> ").append(node.getValue());
             }
