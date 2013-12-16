@@ -1,16 +1,16 @@
-package com.fillumina.utils.interpreter.grammar.pattern.instances;
+package com.fillumina.utils.interpreter.grammar.fast.instances;
 
 import static java.lang.Math.*;
-import com.fillumina.utils.interpreter.grammar.pattern.CloseParentheses;
-import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
 import com.fillumina.utils.interpreter.Grammar;
 import com.fillumina.utils.interpreter.GrammarElement;
-import com.fillumina.utils.interpreter.grammar.pattern.OpenParentheses;
-import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperatorName;
-import com.fillumina.utils.interpreter.grammar.pattern.ConstantElement;
+import com.fillumina.utils.interpreter.grammar.fast.NumberOperandGrammarElement;
+import com.fillumina.utils.interpreter.grammar.fast.FastCloseParentheses;
+import com.fillumina.utils.interpreter.grammar.fast.FastOperatorGrammarElement;
+import com.fillumina.utils.interpreter.grammar.fast.FastConstantGrammarElement;
+import com.fillumina.utils.interpreter.grammar.fast.FastOpenParentheses;
+import com.fillumina.utils.interpreter.grammar.fast.FastWhiteSpace;
 import com.fillumina.utils.interpreter.grammar.pattern.VariableContextManager;
 import com.fillumina.utils.interpreter.grammar.pattern.VariableSetterOperator;
-import com.fillumina.utils.interpreter.grammar.pattern.WhiteSpace;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -20,30 +20,23 @@ import java.util.Map;
  * on double values. It supports variables that can be passed through a
  * context. It can even define its own variables directly in the
  * expression using the equal symbol.
+ * It uses the faster alternatives to most of its components.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
+public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
         implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final ArithmeticGrammar INSTANCE = new ArithmeticGrammar();
+    public static final FastArithmeticGrammar INSTANCE =
+            new FastArithmeticGrammar();
 
     @SuppressWarnings("unchecked")
-    private ArithmeticGrammar() {
+    private FastArithmeticGrammar() {
         super(
-        new AbstractOperand<Double,Map<String, Double>>(
-                AbstractOperand.SCIENTIFIC_NOTATION_NUMBER_REGEXP, 0) {
-            private static final long serialVersionUID = 1L;
+        new NumberOperandGrammarElement<Double,Map<String, Double>>(0, false),
 
-            @Override
-            public Double evaluate(final String value,
-                    final Map<String, Double> context) {
-                return Double.parseDouble(value);
-            }
-        },
-
-        new AbstractOperatorName<Double,Map<String, Double>>("!", 5, 1, 0) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("!", 5, 1, 0) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -59,7 +52,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("asin", 4, 0, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("asin", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -69,7 +62,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("acos", 4, 0, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("acos", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -80,7 +73,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
 
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("atan", 4, 0, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("atan", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -90,7 +83,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("sin", 4, 0, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("sin", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -100,7 +93,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("cos", 4, 0, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("cos", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -111,7 +104,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
 
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("tan", 4, 0, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("tan", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -121,7 +114,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("log", 4, 0, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("log", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -131,7 +124,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("ln", 4, 0, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("ln", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -141,7 +134,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("sqr", 4, 0, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("sqr", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -152,7 +145,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
         },
 
         // doesn't accept any parameter
-        new AbstractOperatorName<Double,Map<String, Double>>("rnd", 4, 0, 0) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("rnd", 4, 0, 0) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -163,7 +156,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
         },
 
         // accepts many parameters
-        new AbstractOperatorName<Double,Map<String, Double>>("avg", 4, 0,
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("avg", 4, 0,
                 Integer.MAX_VALUE) {
             private static final long serialVersionUID = 1L;
 
@@ -182,7 +175,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("^", 3, 1, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("^", 3, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -192,7 +185,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("*", 2, 1, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("*", 2, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -202,7 +195,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("/", 2, 1, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("/", 2, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -212,7 +205,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("+", 1, 1, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("+", 1, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -222,7 +215,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("-", 1, 1, 1) {
+        new FastOperatorGrammarElement<Double,Map<String, Double>>("-", 1, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -237,12 +230,13 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
 
         new VariableSetterOperator<Double>(),
 
-        (GrammarElement<Double,Map<String, Double>>)OpenParentheses.ROUND,
-        (GrammarElement<Double,Map<String, Double>>)CloseParentheses.ROUND,
-        new WhiteSpace<Double,Map<String, Double>>("[\\ ,]+"),
+        (GrammarElement<Double,Map<String, Double>>)FastOpenParentheses.ROUND,
+        (GrammarElement<Double,Map<String, Double>>)FastCloseParentheses.ROUND,
 
-        new ConstantElement<Double,Map<String, Double>>("e", E, 0),
-        new ConstantElement<Double,Map<String, Double>>("pi", PI,  0),
+        (GrammarElement<Double,Map<String, Double>>)FastWhiteSpace.INSTANCE,
+
+        new FastConstantGrammarElement<Double,Map<String, Double>>("e", E, 0),
+        new FastConstantGrammarElement<Double,Map<String, Double>>("pi", PI,  0),
 
         new VariableContextManager<Double>()
         );

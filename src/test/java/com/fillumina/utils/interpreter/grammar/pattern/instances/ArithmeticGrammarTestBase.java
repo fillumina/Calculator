@@ -71,6 +71,16 @@ public abstract class ArithmeticGrammarTestBase {
     }
 
     @Test
+    public void shouldRecognizeAdditionWithScientificNotation() {
+        assertEvaluateTo(0, "-123.45E+2+123.45E+2");
+    }
+
+    @Test
+    public void shouldRecognizeSubtractionWithScientificNotation() {
+        assertEvaluateTo(1, "-123E-2/-123E-2");
+    }
+
+    @Test
     public void shouldSolveAnAddition() {
         assertEvaluateTo(12, "10+2");
     }

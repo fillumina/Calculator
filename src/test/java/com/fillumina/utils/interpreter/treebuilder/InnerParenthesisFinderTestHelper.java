@@ -3,8 +3,8 @@ package com.fillumina.utils.interpreter.treebuilder;
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
 import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.Node;
-import com.fillumina.utils.interpreter.grammar.pattern.CloseParenthesis;
-import com.fillumina.utils.interpreter.grammar.pattern.OpenParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.CloseParentheses;
+import com.fillumina.utils.interpreter.grammar.pattern.OpenParentheses;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class InnerParenthesisFinderTestHelper {
         private static final long serialVersionUID = 1L;
 
         public OpenParNode() {
-            super("(", new OpenParenthesis<Long, Void>("\\("));
+            super("(", new OpenParentheses<Long, Void>("\\("));
         }
     }
 
@@ -45,7 +45,7 @@ public class InnerParenthesisFinderTestHelper {
         private static final long serialVersionUID = 1L;
 
         public CloseParNode() {
-            super(")", new CloseParenthesis<Long, Void>("\\)"));
+            super(")", new CloseParentheses<Long, Void>("\\)"));
         }
     }
 

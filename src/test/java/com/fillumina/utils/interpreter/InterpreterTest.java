@@ -1,8 +1,8 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.grammar.pattern.OpenParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.OpenParentheses;
 import com.fillumina.utils.interpreter.grammar.pattern.WhiteSpace;
-import com.fillumina.utils.interpreter.grammar.pattern.CloseParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.CloseParentheses;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -127,9 +127,9 @@ public class InterpreterTest {
         final GrammarElement<String,Void> number =
                 new TestOperand("\\d+", 0);
         final GrammarElement<String,Void> openPar =
-                new OpenParenthesis<>("\\(");
+                new OpenParentheses<>("\\(");
         final GrammarElement<String,Void> closePar =
-                new CloseParenthesis<>("\\)");
+                new CloseParentheses<>("\\)");
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar =
                 new Grammar<>(number, multiply, minus, openPar, closePar);
@@ -152,9 +152,9 @@ public class InterpreterTest {
         final GrammarElement<String,Void> number =
                 new TestOperand("\\d+", 0);
         final GrammarElement<String,Void> openPar =
-                new OpenParenthesis<>("\\(");
+                new OpenParentheses<>("\\(");
         final GrammarElement<String,Void> closePar =
-                new CloseParenthesis<>("\\)");
+                new CloseParentheses<>("\\)");
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar =
                 new Grammar<>(number, multiply, sin, minus, openPar, closePar);
@@ -173,8 +173,8 @@ public class InterpreterTest {
         final GrammarElement<String,Void> sum = new TestOperator("\\+", 1, 1, 1);
         final GrammarElement<String,Void> minus = new TestOperator("\\-", 1, 1, 1);
         final GrammarElement<String,Void> number = new TestOperand("\\d+", 0);
-        final GrammarElement<String,Void> openPar = new OpenParenthesis<>("\\(");
-        final GrammarElement<String,Void> closePar = new CloseParenthesis<>("\\)");
+        final GrammarElement<String,Void> openPar = new OpenParentheses<>("\\(");
+        final GrammarElement<String,Void> closePar = new CloseParentheses<>("\\)");
         final GrammarElement<String,Void> whiteSpace = new WhiteSpace<>("[\\ ]+");
 
         @SuppressWarnings("unchecked")

@@ -1,7 +1,7 @@
 package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.grammar.pattern.CloseParenthesis;
-import com.fillumina.utils.interpreter.grammar.pattern.OpenParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.CloseParentheses;
+import com.fillumina.utils.interpreter.grammar.pattern.OpenParentheses;
 import com.fillumina.utils.interpreter.grammar.pattern.VariableContextManager;
 import com.fillumina.utils.interpreter.grammar.pattern.WhiteSpace;
 import com.fillumina.utils.interpreter.util.TreePrinter;
@@ -33,12 +33,12 @@ public class PruningSolverTest {
         @SuppressWarnings("unchecked")
         final GrammarElement<String,Map<String,String>> openPar =
                 (GrammarElement<String,Map<String,String>>)
-                OpenParenthesis.ROUND;
+                OpenParentheses.ROUND;
 
         @SuppressWarnings("unchecked")
         final GrammarElement<String,Map<String,String>> closePar =
                 (GrammarElement<String,Map<String,String>>)
-                CloseParenthesis.ROUND;
+                CloseParentheses.ROUND;
 
         @SuppressWarnings("unchecked")
         final WhiteSpace<String, Map<String, String>> whitespace =

@@ -1,8 +1,6 @@
 package com.fillumina.utils.interpreter.grammar.pattern;
 
-import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
-import java.io.Serializable;
 import java.util.regex.Pattern;
 
 /**
@@ -16,14 +14,13 @@ import java.util.regex.Pattern;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractPatternGrammarElement<T,C>
-        implements GrammarElement<T,C>, Serializable {
+        extends AbstractComparableGrammarElement<T, C> {
     private static final long serialVersionUID = 1L;
 
     public static final String NOT_STARTING_WITH_ALPHA = "(?<![a-zA-Z])";
     public static final String NOT_ENDING_WITH_ALPHA = "(?![a-zA-Z])";
 
     private final String symbolRegexp;
-    private final int priority;
     private final Pattern pattern;
 
     /**
@@ -35,8 +32,8 @@ public abstract class AbstractPatternGrammarElement<T,C>
      */
     public AbstractPatternGrammarElement(final String symbolRegexp,
             final int priority) {
+        super(priority);
         this.symbolRegexp = symbolRegexp;
-        this.priority = priority;
         this.pattern = Pattern.compile(symbolRegexp);
     }
 
@@ -44,22 +41,8 @@ public abstract class AbstractPatternGrammarElement<T,C>
         return pattern;
     }
 
-    public int getPriority() {
-        return priority;
-    }
-
     public String getSymbolRegexp() {
         return symbolRegexp;
-    }
-
-    @Override
-    public int compareTo(final GrammarElement<T,C> grammarElement) {
-        if (!(grammarElement instanceof AbstractPatternGrammarElement)) {
-            return 0;
-        }
-        final AbstractPatternGrammarElement<T,C> ge =
-                (AbstractPatternGrammarElement<T,C>) grammarElement;
-        return Integer.compare(priority, ge.priority);
     }
 
     @Override

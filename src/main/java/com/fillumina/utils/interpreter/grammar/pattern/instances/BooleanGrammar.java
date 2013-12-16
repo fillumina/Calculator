@@ -1,8 +1,8 @@
 package com.fillumina.utils.interpreter.grammar.pattern.instances;
 
-import com.fillumina.utils.interpreter.grammar.pattern.CloseParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.CloseParentheses;
 import com.fillumina.utils.interpreter.Grammar;
-import com.fillumina.utils.interpreter.grammar.pattern.OpenParenthesis;
+import com.fillumina.utils.interpreter.grammar.pattern.OpenParentheses;
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperator;
 import com.fillumina.utils.interpreter.grammar.pattern.ConstantElement;
 import com.fillumina.utils.interpreter.grammar.pattern.VariableContextManager;
@@ -63,8 +63,8 @@ public class BooleanGrammar extends Grammar<Boolean, Map<String, Boolean>>
                 }
             },
 
-            new OpenParenthesis<Boolean,Map<String,Boolean>>("\\("),
-            new CloseParenthesis<Boolean,Map<String,Boolean>>("\\)"),
+            new OpenParentheses<Boolean,Map<String,Boolean>>("\\("),
+            new CloseParentheses<Boolean,Map<String,Boolean>>("\\)"),
             new WhiteSpace<Boolean,Map<String,Boolean>>("[\\ ,]+"),
 
             new ConstantElement<Boolean,Map<String,Boolean>>(
