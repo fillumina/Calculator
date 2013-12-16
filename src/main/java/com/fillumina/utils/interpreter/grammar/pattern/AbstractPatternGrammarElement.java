@@ -15,6 +15,9 @@ public abstract class AbstractPatternGrammarElement<T,C>
         implements GrammarElement<T,C>, Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static final String NOT_STARTING_WITH_ALPHA = "(?<![a-zA-Z])";
+    public static final String NOT_ENDING_WITH_ALPHA = "(?![a-zA-Z])";
+
     private final String symbolRegexp;
     private final int priority;
     private final Pattern pattern;
@@ -73,5 +76,24 @@ public abstract class AbstractPatternGrammarElement<T,C>
     @Override
     public GrammarElementMatcher match(final String expression) {
         return new GrammarElementRegexpMatcher(pattern.matcher(expression));
+    }
+
+    /**
+     * If a name is passed than it makes sure that the name is not preceded
+     * by other characters (like <code>sin</code> and <code>asin</code>).
+     * If a single symbol is passed than it is recognized
+     * in every context without restrictions.
+     * It's somewhat arbitrary but it seems to make sense with usual
+     * arithmetics at least.
+     */
+    public static String transform(final String name) {
+        if (name.length() == 1) {
+            if (" *.\\\"()[]?+-^$".indexOf(name.charAt(0)) != -1) {
+                return "\\" + name;
+            }
+            return name;
+        }
+        return NOT_STARTING_WITH_ALPHA +
+                Pattern.quote(name) + NOT_ENDING_WITH_ALPHA;
     }
 }

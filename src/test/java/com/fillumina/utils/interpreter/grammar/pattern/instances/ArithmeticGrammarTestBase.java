@@ -319,11 +319,24 @@ public abstract class ArithmeticGrammarTestBase {
     }
 
     @Test
+    public void shouldDistinguishBetweenAVariableContainingAnOperator() {
+        context.put("sina", 0.5d);
+        context.put("osin", Math.PI);
+        assertEvaluateTo(Math.sin(Math.PI/2d), "sin(sina*osin)");
+    }
+
+    @Test
     public void shouldDistinguishBetweenAEAndAVariableNameContainingE() {
         context.put("ellelle", 1d);
         context.put("elle", 2d);
         context.put("el", 3d);
         context.put("le", 4d);
-        assertEvaluateTo(49d, "ellelle+2*elle*el*le");
+        assertEvaluateTo(1d + Math.E * 48d, "ellelle+2*elle*el*le*e");
+    }
+
+    @Test
+    public void shouldDistinguishBetweenAVariableNameContainingAnOperator() {
+        context.put("asintoto", Math.PI);
+        assertEvaluateTo(0, "sin(asintoto)");
     }
 }
