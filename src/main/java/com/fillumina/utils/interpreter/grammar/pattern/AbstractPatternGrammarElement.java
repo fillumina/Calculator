@@ -9,6 +9,10 @@ import java.util.regex.Pattern;
  * It's the base class of a hierarchy based on the use of a regular expression
  * to recognize the element in a string.
  *
+ * @see <a href='http://www.regular-expressions.info/lookaround.html'>
+ *      http://www.regular-expressions.info/lookaround.html</a>
+ * @see <a href='http://ocpsoft.org/opensource/guide-to-regular-expressions-in-java-part-2/'>
+ *      http://ocpsoft.org/opensource/guide-to-regular-expressions-in-java-part-2/</a>
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractPatternGrammarElement<T,C>
