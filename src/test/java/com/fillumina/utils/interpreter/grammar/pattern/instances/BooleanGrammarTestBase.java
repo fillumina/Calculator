@@ -11,18 +11,21 @@ import static org.junit.Assert.*;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class BooleanGrammarTest {
+public abstract class BooleanGrammarTestBase {
 
     private Calculator<Boolean,Map<String,Boolean>> calculator;
     private Map<String,Boolean> context;
 
+    public abstract Calculator<Boolean,Map<String,Boolean>> getCalculator();
+
     @Before
     public void init() {
-        calculator = new Calculator<>(BooleanGrammar.INSTANCE);
+        calculator = getCalculator();
         context = new HashMap<>();
     }
 
-    private void assertEvaluateTo(final boolean expected, final String expression) {
+    private void assertEvaluateTo(final boolean expected,
+            final String expression) {
         assertEquals("\"" + expression + "\"",
                 expected, calculator.solve(expression, context).get(0));
     }
@@ -99,7 +102,7 @@ public class BooleanGrammarTest {
 
     @Test
     public void shouldRecognizeTheOperandsWithoutSpaces() {
-        assertEvaluateTo(false, "falseORfalse");
+        assertEvaluateTo(false, "false|false");
     }
 
     @Test

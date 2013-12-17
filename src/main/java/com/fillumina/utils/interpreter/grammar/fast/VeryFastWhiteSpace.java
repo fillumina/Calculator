@@ -34,8 +34,10 @@ public class VeryFastWhiteSpace<T,C>
                     start = i;
                 }
             } else {
-                end = i;
-                break;
+                if (start != -1) {
+                    end = i;
+                    break;
+                }
             }
         }
         if (start == -1) {
