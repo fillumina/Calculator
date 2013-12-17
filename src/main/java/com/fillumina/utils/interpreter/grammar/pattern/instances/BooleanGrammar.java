@@ -27,6 +27,7 @@ public class BooleanGrammar extends Grammar<Boolean, Map<String, Boolean>>
     @SuppressWarnings("unchecked")
     private BooleanGrammar() {
         super(
+                //TODO spaces around letters is required
             new AbstractOperator<Boolean,Map<String,Boolean>>(
                     "(and|AND|And|&&|&)", 1, 1, 1) {
                 private static final long serialVersionUID = 1L;

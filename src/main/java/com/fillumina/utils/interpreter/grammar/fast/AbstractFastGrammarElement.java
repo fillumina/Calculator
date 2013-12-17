@@ -1,8 +1,7 @@
 package com.fillumina.utils.interpreter.grammar.fast;
 
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
-import com.fillumina.utils.interpreter.grammar.pattern.AbstractComparableGrammarElement;
-import com.fillumina.utils.interpreter.grammar.pattern.FastGrammarElementMatcher;
+import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
 
 /**
  * Matches a name in the given expression using a fast string search

@@ -2,8 +2,7 @@ package com.fillumina.utils.interpreter.grammar.fast;
 
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.GrammarElementType;
-import com.fillumina.utils.interpreter.grammar.pattern.AbstractComparableGrammarElement;
-import com.fillumina.utils.interpreter.grammar.pattern.FastGrammarElementMatcher;
+import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
 import java.util.List;
 
 /**

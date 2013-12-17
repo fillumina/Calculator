@@ -235,7 +235,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new VariableSetterOperator<Double>(),
+        (GrammarElement<Double,Map<String, Double>>)VariableSetterOperator.INSTANCE,
 
         (GrammarElement<Double,Map<String, Double>>)OpenParentheses.ROUND,
         (GrammarElement<Double,Map<String, Double>>)CloseParentheses.ROUND,

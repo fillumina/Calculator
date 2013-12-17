@@ -1,4 +1,4 @@
-package com.fillumina.utils.interpreter.grammar.pattern;
+package com.fillumina.utils.interpreter.grammar.fast;
 
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import java.io.Serializable;

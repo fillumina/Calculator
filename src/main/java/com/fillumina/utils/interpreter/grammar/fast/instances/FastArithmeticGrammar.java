@@ -8,9 +8,9 @@ import com.fillumina.utils.interpreter.grammar.fast.FastCloseParentheses;
 import com.fillumina.utils.interpreter.grammar.fast.FastOperatorGrammarElement;
 import com.fillumina.utils.interpreter.grammar.fast.FastConstantGrammarElement;
 import com.fillumina.utils.interpreter.grammar.fast.FastOpenParentheses;
-import com.fillumina.utils.interpreter.grammar.fast.FastWhiteSpace;
+import com.fillumina.utils.interpreter.grammar.fast.FastVariableSetterOperator;
+import com.fillumina.utils.interpreter.grammar.fast.VeryFastWhiteSpace;
 import com.fillumina.utils.interpreter.grammar.pattern.VariableContextManager;
-import com.fillumina.utils.interpreter.grammar.pattern.VariableSetterOperator;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -228,12 +228,13 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new VariableSetterOperator<Double>(),
+        (GrammarElement<Double,Map<String, Double>>)
+                FastVariableSetterOperator.INSTANCE,
 
         (GrammarElement<Double,Map<String, Double>>)FastOpenParentheses.ROUND,
         (GrammarElement<Double,Map<String, Double>>)FastCloseParentheses.ROUND,
 
-        (GrammarElement<Double,Map<String, Double>>)FastWhiteSpace.INSTANCE,
+        (GrammarElement<Double,Map<String, Double>>)VeryFastWhiteSpace.INSTANCE,
 
         new FastConstantGrammarElement<Double,Map<String, Double>>("e", E, 0),
         new FastConstantGrammarElement<Double,Map<String, Double>>("pi", PI,  0),

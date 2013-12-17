@@ -1,5 +1,6 @@
 package com.fillumina.utils.interpreter.grammar.pattern;
 
+import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import java.util.regex.Pattern;
 

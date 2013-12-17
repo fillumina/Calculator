@@ -20,6 +20,9 @@ public class VariableSetterOperator<T>
         implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    public static final VariableSetterOperator<?> INSTANCE =
+            new VariableSetterOperator<>();
+
     public VariableSetterOperator() {
         super("[A-Za-z\\d]+\\ *=", 0, 0, 1);
     }

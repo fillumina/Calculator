@@ -3,7 +3,6 @@ package com.fillumina.utils.interpreter.grammar.fast;
 import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
 import com.fillumina.utils.interpreter.EvaluationException;
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
-import com.fillumina.utils.interpreter.grammar.pattern.*;
 import com.fillumina.utils.interpreter.GrammarElementType;
 import java.util.List;
 
@@ -13,42 +12,30 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastWhiteSpace<T,C> extends AbstractComparableGrammarElement<T,C> {
+public class VeryFastWhiteSpace<T,C>
+        extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public static final FastWhiteSpace<?,?> INSTANCE =
-            new FastWhiteSpace<>(" \t\n", 0);
+    public static final VeryFastWhiteSpace<?,?> INSTANCE =
+            new VeryFastWhiteSpace<>(0);
 
-    private final char[] whitespaces;
-
-    /**
-     * @see VeryFastWhiteSpace
-     *
-     * @param whitespaces insert a string with the whitespace characters to
-     *                    recognize. i.e.: " \t\n"
-     * @param priority    the priority
-     */
-    public FastWhiteSpace(final String whitespaces, final int priority) {
+    public VeryFastWhiteSpace(final int priority) {
         super(priority);
-        this.whitespaces = whitespaces.toCharArray();
     }
 
     @Override
     public GrammarElementMatcher match(final String expression) {
         final char[] carray = expression.toCharArray();
         int start = -1, end = carray.length;
-        FOR: for (int i=0; i<carray.length; i++) {
+        for (int i=0; i<carray.length; i++) {
             final char c = carray[i];
-            for (int j=0; j<whitespaces.length; j++) {
-                if (c == whitespaces[j]) {
-                    if (start == -1) {
-                        start = i;
-                    }
-                    break;
-                } else {
-                    end = i;
-                    break FOR;
+            if (c == ' ' || c == '\t' || c == '\n' || c == '\r') {
+                if (start == -1) {
+                    start = i;
                 }
+            } else {
+                end = i;
+                break;
             }
         }
         if (start == -1) {

@@ -1,9 +1,10 @@
-package com.fillumina.utils.interpreter.grammar.pattern;
+package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.GrammarElement;
 import java.io.Serializable;
 
 /**
+ * Priority is used when building the solution tree to put high priority
+ * elements first.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
@@ -13,6 +14,7 @@ public abstract class AbstractComparableGrammarElement<T, C>
 
     protected final int priority;
 
+    /** Higher number is higher priority. */
     public AbstractComparableGrammarElement(final int priority) {
         this.priority = priority;
     }
