@@ -22,6 +22,18 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
     private final int index;
     private final ListIterator<Node<T,C>> iterator;
 
+    /**
+     * It's just a way to get {@link #NULL} avoiding to write things such as:
+     * <pre>
+     * &#64;SuppressWarnings("unchecked")
+     * IndexedNode<T,C> higherPriorityNode = (IndexedNode<T,C>) IndexedNode.NULL;
+     * </pre>
+     */
+    @SuppressWarnings("unchecked")
+    public static <T,C> IndexedNode<T,C> getNull() {
+        return (IndexedNode<T, C>) NULL;
+    }
+
     public static <T,C> IndexedNode<T,C> getFrom(
             final ListIterator<Node<T,C>> iterator) {
         final int index = iterator.nextIndex();

@@ -16,13 +16,13 @@ class HigherPriorityOperatorFinder {
     private HigherPriorityOperatorFinder() {}
 
     public <T,C> IndexedNode<T,C> find(final List<Node<T,C>> list) {
-        @SuppressWarnings("unchecked")
-        IndexedNode<T,C> higherPriorityNode = (IndexedNode<T,C>) IndexedNode.NULL;
+        IndexedNode<T,C> higherPriorityNode = IndexedNode.getNull();
 
         if (list.size() > 1) {
             final ListIterator<Node<T,C>> iterator = list.listIterator();
             while (iterator.hasNext()) {
-                final IndexedNode<T,C> currentNode = IndexedNode.getFrom(iterator);
+                final IndexedNode<T,C> currentNode =
+                        IndexedNode.getFrom(iterator);
 
                 if (currentNode.isEmptyOperator() &&
                         (higherPriorityNode.isNull() ||
