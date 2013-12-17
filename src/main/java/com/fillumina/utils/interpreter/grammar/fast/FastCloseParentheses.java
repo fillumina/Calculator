@@ -15,6 +15,7 @@ public class FastCloseParentheses<T,C>
     public static final FastCloseParentheses<?,?> ROUND =
             new FastCloseParentheses<>(")");
 
+    /** Only one symbol can be specified. */
     public FastCloseParentheses(final String symbolRegexp) {
         super(symbolRegexp, 0);
     }

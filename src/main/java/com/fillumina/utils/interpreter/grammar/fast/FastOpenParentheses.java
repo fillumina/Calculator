@@ -15,6 +15,7 @@ public class FastOpenParentheses<T,C>
     public static final FastOpenParentheses<?,?> ROUND =
             new FastOpenParentheses<>("(");
 
+    /** Only one symbol can be specified. */
     public FastOpenParentheses(final String name) {
         super(name, 0);
     }

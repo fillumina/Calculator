@@ -2,11 +2,12 @@ package com.fillumina.utils.interpreter.grammar.fast;
 
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractComparableGrammarElement;
+import com.fillumina.utils.interpreter.grammar.pattern.FastGrammarElementMatcher;
 
 /**
- * Matches a name in the given expression using a faster string search
+ * Matches a name in the given expression using a fast string search
  * algorithm and then validates the found substring. It's about 20% faster
- * than the pattern search.
+ * than pattern search.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
@@ -38,7 +39,7 @@ public abstract class AbstractFastGrammarElement<T,C>
         while(true) {
             idx = expression.indexOf(name, idx + 1);
             if (idx == -1) {
-                return NOT_FOUND;
+                return FastGrammarElementMatcher.NOT_FOUND;
             }
             if (!(length == 1 && isOperator())) {
                 if (idx > 0 && isChar(expression.charAt(idx - 1))) {
@@ -49,7 +50,7 @@ public abstract class AbstractFastGrammarElement<T,C>
                     continue;
                 }
             }
-            return new InnerGrammarElementMatcher(idx, idx + length);
+            return new FastGrammarElementMatcher(idx, idx + length);
         }
     }
 

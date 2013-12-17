@@ -44,9 +44,9 @@ public class FastWhiteSpace<T,C> extends AbstractComparableGrammarElement<T,C> {
             }
         }
         if (start == -1) {
-            return NOT_FOUND;
+            return FastGrammarElementMatcher.NOT_FOUND;
         }
-        return new InnerGrammarElementMatcher(start, end);
+        return new FastGrammarElementMatcher(start, end);
     }
 
     @Override

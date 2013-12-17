@@ -3,6 +3,7 @@ package com.fillumina.utils.interpreter.grammar.fast;
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractComparableGrammarElement;
+import com.fillumina.utils.interpreter.grammar.pattern.FastGrammarElementMatcher;
 import java.util.List;
 
 /**
@@ -11,15 +12,13 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class NumberOperandGrammarElement<T,C>
+public class FastNumberGrammarElement<T,C>
         extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    private static final char[] DIGITS = "0123456789".toCharArray();
+    private final boolean integer;
 
-    private boolean integer;
-
-    public NumberOperandGrammarElement(final int priority,
+    public FastNumberGrammarElement(final int priority,
             final boolean integer) {
         super(priority);
         this.integer = integer;
@@ -30,7 +29,7 @@ public class NumberOperandGrammarElement<T,C>
         final char[] carray = expression.toCharArray();
         int start = findFirstDigitIndex(carray, 0);
         if (start == -1) {
-            return NOT_FOUND;
+            return FastGrammarElementMatcher.NOT_FOUND;
         }
         boolean point = false;
         boolean exp = false;
@@ -39,19 +38,19 @@ public class NumberOperandGrammarElement<T,C>
             char c = carray[i];
             if (!isDigit(c)) {
                 if (integer) {
-                    break FOR;
+                    break;
                 }
                 switch (c) {
                     case '.':
                         if (point) {
-                            return NOT_FOUND;
+                            return FastGrammarElementMatcher.NOT_FOUND;
                         }
                         break;
 
                     case 'E':
                     case 'e':
                         if (exp) {
-                            return NOT_FOUND;
+                            return FastGrammarElementMatcher.NOT_FOUND;
                         }
                         break;
 
@@ -71,10 +70,10 @@ public class NumberOperandGrammarElement<T,C>
             }
         }
         if (start > 0 &&
-                isPreceededByAnOperatorOrByAParentheses(carray, start)) {
-            start --;
+                isPreceededByASignumAndAnOperatorOrParentheses(carray, start)) {
+            start --; // includes the signum
         }
-        return new InnerGrammarElementMatcher(start, end);
+        return new FastGrammarElementMatcher(start, end);
     }
 
     /**
@@ -84,7 +83,7 @@ public class NumberOperandGrammarElement<T,C>
      * assume here that the grammar defined is somewhat 'close' to the
      * standard arithmetic.
      */
-    private boolean isPreceededByAnOperatorOrByAParentheses(
+    private boolean isPreceededByASignumAndAnOperatorOrParentheses(
             final char[] carray,
             final int start) {
         final char signum = carray[start - 1];
@@ -94,6 +93,8 @@ public class NumberOperandGrammarElement<T,C>
                 if (cj == '*' || cj == '/' || cj == '(' || cj == '+' ||
                         cj == '-' || cj == '^') {
                     return true;
+                } else if (cj != ' ' && cj != '\n' && cj != '\t') {
+                    return false;
                 }
             }
         }

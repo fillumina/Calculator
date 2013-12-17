@@ -1,6 +1,5 @@
 package com.fillumina.utils.interpreter.grammar.fast.instances;
 
-import com.fillumina.utils.interpreter.grammar.fast.instances.FastArithmeticGrammar;
 import java.util.Map;
 import com.fillumina.utils.interpreter.Calculator;
 import com.fillumina.utils.interpreter.ContextException;
