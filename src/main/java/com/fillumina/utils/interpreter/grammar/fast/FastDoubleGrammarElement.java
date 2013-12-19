@@ -11,46 +11,44 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastNumberGrammarElement<T,C>
+//TODO some Langs accept ',' instead of '.'... should I comply? definitely
+public class FastDoubleGrammarElement<T,C>
         extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    private final boolean integer;
-
-    public FastNumberGrammarElement(final int priority,
-            final boolean integer) {
+    public FastDoubleGrammarElement(final int priority) {
         super(priority);
-        this.integer = integer;
     }
 
     @Override
     public GrammarElementMatcher match(final String expression) {
         final char[] carray = expression.toCharArray();
-        int start = findFirstDigitIndex(carray, 0);
+        int start = findFirstDigitOrPointIndex(carray, 0);
         if (start == -1) {
             return FastGrammarElementMatcher.NOT_FOUND;
         }
-        boolean point = false;
+        boolean point = carray[start] == '.';
         boolean exp = false;
         int end = carray.length;
         FOR: for (int i=start + 1; i<carray.length; i++) {
             char c = carray[i];
             if (!isDigit(c)) {
-                if (integer) {
-                    break;
-                }
                 switch (c) {
                     case '.':
                         if (point) {
-                            return FastGrammarElementMatcher.NOT_FOUND;
+                            end = i;
+                            break FOR;
                         }
+                        point = true;
                         break;
 
                     case 'E':
                     case 'e':
                         if (exp) {
-                            return FastGrammarElementMatcher.NOT_FOUND;
+                            end = i;
+                            break FOR;
                         }
+                        exp = true;
                         break;
 
                     case '+':
@@ -66,6 +64,13 @@ public class FastNumberGrammarElement<T,C>
                         end = i;
                         break FOR;
                 }
+            }
+        }
+        final char last = carray[end - 1];
+        if (last == 'e' || last == 'E' || last == '.') {
+            end--;
+            if (start == end) {
+                return FastGrammarElementMatcher.NOT_FOUND;
             }
         }
         if (start > 0 &&
@@ -100,9 +105,10 @@ public class FastNumberGrammarElement<T,C>
         return false;
     }
 
-    private int findFirstDigitIndex(final char[] carray, final int start) {
+    private int findFirstDigitOrPointIndex(final char[] carray, final int start) {
         for (int i=start; i<carray.length; i++) {
-            if (isDigit(carray[i])) {
+            final char c = carray[i];
+            if (isDigit(c) || c == '.') {
                 return i;
             }
         }

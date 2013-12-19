@@ -1,7 +1,7 @@
 package com.fillumina.utils.interpreter.grammar.fast;
 
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
-import com.fillumina.performance.producer.TestsContainer;
+import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.template.ProgressionConfigurator;
 import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTemplate;
 import com.fillumina.utils.interpreter.Calculator;
@@ -27,7 +27,7 @@ public class PatternVsFastBooleanPerformanceTest
     }
 
     @Override
-    public void addTests(TestsContainer tests) {
+    public void addTests(TestContainer tests) {
         final String expression = "NOT (false OR(true AND true))";
         final boolean result = false;
 

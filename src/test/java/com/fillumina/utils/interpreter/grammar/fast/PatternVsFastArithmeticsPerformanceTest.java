@@ -2,7 +2,7 @@ package com.fillumina.utils.interpreter.grammar.fast;
 
 import com.fillumina.utils.interpreter.grammar.fast.instances.FastArithmeticGrammar;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
-import com.fillumina.performance.producer.TestsContainer;
+import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.template.ProgressionConfigurator;
 import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTemplate;
 import com.fillumina.utils.interpreter.Calculator;
@@ -27,7 +27,7 @@ public class PatternVsFastArithmeticsPerformanceTest
     }
 
     @Override
-    public void addTests(TestsContainer tests) {
+    public void addTests(TestContainer tests) {
         final String expression = "atan( (5*sin(pi/4)) / (cos(pi/4)*-5) ) * 4/pi";
         final double result = -1;
 

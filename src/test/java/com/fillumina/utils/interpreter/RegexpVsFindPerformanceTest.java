@@ -1,7 +1,7 @@
 package com.fillumina.utils.interpreter;
 
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
-import com.fillumina.performance.producer.TestsContainer;
+import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.template.ProgressionConfigurator;
 import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTemplate;
 import java.util.regex.Matcher;
@@ -24,7 +24,7 @@ public class RegexpVsFindPerformanceTest
     }
 
     @Override
-    public void addTests(TestsContainer tests) {
+    public void addTests(TestContainer tests) {
         final String str = "abcdefghijklmnopqrstuvwxyz";
         final String search = "uvw";
 
