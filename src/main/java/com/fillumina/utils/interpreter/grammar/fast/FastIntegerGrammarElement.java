@@ -3,6 +3,7 @@ package com.fillumina.utils.interpreter.grammar.fast;
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
+import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
 import java.util.List;
 
 /**
@@ -11,7 +12,6 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-//TODO some Langs accept ',' instead of '.'... should I comply? definitely
 public class FastIntegerGrammarElement<T,C>
         extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;

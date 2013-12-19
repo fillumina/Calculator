@@ -3,6 +3,7 @@ package com.fillumina.utils.interpreter.grammar.fast;
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
+import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
 import java.util.List;
 
 /**
@@ -11,13 +12,20 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-//TODO some Langs accept ',' instead of '.'... should I comply? definitely
 public class FastDoubleGrammarElement<T,C>
         extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
+    private final char decimalSeparator;
+
     public FastDoubleGrammarElement(final int priority) {
+        this(priority, '.');
+    }
+
+    public FastDoubleGrammarElement(final int priority,
+            final char decimalSeparator) {
         super(priority);
+        this.decimalSeparator = decimalSeparator;
     }
 
     @Override
@@ -33,41 +41,41 @@ public class FastDoubleGrammarElement<T,C>
         FOR: for (int i=start + 1; i<carray.length; i++) {
             char c = carray[i];
             if (!isDigit(c)) {
-                switch (c) {
-                    case '.':
-                        if (point) {
-                            end = i;
-                            break FOR;
-                        }
-                        point = true;
-                        break;
-
-                    case 'E':
-                    case 'e':
-                        if (exp) {
-                            end = i;
-                            break FOR;
-                        }
-                        exp = true;
-                        break;
-
-                    case '+':
-                    case '-':
-                        final char prevc = carray[i-1];
-                        if (!(prevc == 'e' || prevc == 'E')) {
-                            end = i;
-                            break FOR;
-                        }
-                        break;
-
-                    default:
+                if (c == decimalSeparator) {
+                    if (point) {
                         end = i;
-                        break FOR;
+                        break;
+                    }
+                    point = true;
+                } else {
+                    switch (c) {
+                        case 'E':
+                        case 'e':
+                            if (exp) {
+                                end = i;
+                                break FOR;
+                            }
+                            exp = true;
+                            break;
+
+                        case '+':
+                        case '-':
+                            final char prevc = carray[i-1];
+                            if (!(prevc == 'e' || prevc == 'E')) {
+                                end = i;
+                                break FOR;
+                            }
+                            break;
+
+                        default:
+                            end = i;
+                            break FOR;
+                    }
                 }
             }
         }
         final char last = carray[end - 1];
-        if (last == 'e' || last == 'E' || last == '.') {
+        if (last == 'e' || last == 'E' || last == decimalSeparator) {
             end--;
             if (start == end) {
                 return FastGrammarElementMatcher.NOT_FOUND;
@@ -105,10 +113,11 @@ public class FastDoubleGrammarElement<T,C>
         return false;
     }
 
-    private int findFirstDigitOrPointIndex(final char[] carray, final int start) {
+    private int findFirstDigitOrPointIndex(final char[] carray,
+            final int start) {
         for (int i=start; i<carray.length; i++) {
             final char c = carray[i];
-            if (isDigit(c) || c == '.') {
+            if (isDigit(c) || c == decimalSeparator) {
                 return i;
             }
         }
