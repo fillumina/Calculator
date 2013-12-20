@@ -16,6 +16,9 @@ public class FastDoubleGrammarElement<T,C>
         extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
+    public static final FastDoubleGrammarElement<?,?> INSTANCE =
+            new FastDoubleGrammarElement<>(0);
+
     private final char decimalSeparator;
 
     public FastDoubleGrammarElement(final int priority) {
@@ -128,6 +131,7 @@ public class FastDoubleGrammarElement<T,C>
         return c >= '0' && c <= '9';
     }
 
+    /** Override if you need something different from {@code double}. */
     @Override
     @SuppressWarnings("unchecked")
     public T evaluate(final String value, List<T> params, C context) {

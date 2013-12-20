@@ -34,7 +34,8 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
     @SuppressWarnings("unchecked")
     private FastArithmeticGrammar() {
         super(
-        new FastDoubleGrammarElement<Double,Map<String, Double>>(0),
+        (GrammarElement<Double,Map<String, Double>>)
+                FastDoubleGrammarElement.INSTANCE,
 
         new FastOperatorGrammarElement<Double,Map<String, Double>>("!", 5, 1, 0) {
             private static final long serialVersionUID = 1L;

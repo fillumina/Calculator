@@ -8,11 +8,11 @@ import org.junit.Test;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class FastIntegerGrammarElementTest
-        extends FastNumberGrammarElementTestBase {
+        extends NumberGrammarElementTestBase {
 
     @Override
-    protected GrammarElement<Double, Void> getFastNumberGrammarElement() {
-        return new FastIntegerGrammarElement<>(0);
+    protected GrammarElement<Double, Void> getNumberGrammarElement() {
+        return (GrammarElement<Double, Void>) FastIntegerGrammarElement.INSTANCE;
     }
 
     @Test

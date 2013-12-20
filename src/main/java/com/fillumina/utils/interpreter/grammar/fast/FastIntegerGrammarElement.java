@@ -16,6 +16,9 @@ public class FastIntegerGrammarElement<T,C>
         extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
+    public static final FastIntegerGrammarElement<?,?> INSTANCE =
+            new FastIntegerGrammarElement<>(0);
+
     public FastIntegerGrammarElement(final int priority) {
         super(priority);
     }

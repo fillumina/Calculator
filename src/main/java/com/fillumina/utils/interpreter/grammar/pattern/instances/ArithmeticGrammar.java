@@ -2,12 +2,12 @@ package com.fillumina.utils.interpreter.grammar.pattern.instances;
 
 import static java.lang.Math.*;
 import com.fillumina.utils.interpreter.grammar.pattern.CloseParentheses;
-import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
 import com.fillumina.utils.interpreter.Grammar;
 import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.grammar.pattern.OpenParentheses;
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperatorName;
 import com.fillumina.utils.interpreter.grammar.pattern.ConstantElement;
+import com.fillumina.utils.interpreter.grammar.pattern.DoublePatternGrammarElement;
 import com.fillumina.utils.interpreter.grammar.pattern.VariableContextManager;
 import com.fillumina.utils.interpreter.grammar.pattern.VariableSetterOperator;
 import com.fillumina.utils.interpreter.grammar.pattern.WhiteSpace;
@@ -32,16 +32,8 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
     @SuppressWarnings("unchecked")
     private ArithmeticGrammar() {
         super(
-        new AbstractOperand<Double,Map<String, Double>>(
-                AbstractOperand.SCIENTIFIC_NOTATION_NUMBER_REGEXP, 0) {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value,
-                    final Map<String, Double> context) {
-                return Double.parseDouble(value);
-            }
-        },
+        (GrammarElement<Double,Map<String, Double>>)
+                DoublePatternGrammarElement.INSTANCE,
 
         new AbstractOperatorName<Double,Map<String, Double>>("!", 5, 1, 0) {
             private static final long serialVersionUID = 1L;

@@ -191,6 +191,17 @@ public abstract class ArithmeticGrammarTestBase {
     }
 
     @Test
+    public void shouldManageAVariableWithANegativeValue() {
+        context.put("a", 1d);
+        assertEvaluateTo(0, "(a -1)");
+    }
+
+    @Test
+    public void shouldManageAMultiCharOperatorWithNegativeValue() {
+        assertEvaluateTo(-Math.PI/2.0, "asin(-1)");
+    }
+
+    @Test
     public void shouldManageOperatorsWithDifferentPriorities() {
         assertEvaluateTo(-8, "-8*sin(+2*pi/4)");
     }
