@@ -4,8 +4,8 @@ package com.fillumina.utils.interpreter.util;
  * An helper to make regular expressions easier to write and read (and possibly
  * debug). It's an almost complete implementation.
  * <p>
- * Just as a comparison, the following REGEXP is quite complex to follow:
- * <pre>
+ Just as a comgroupison, the following REGEXP is quite complex to follow:
+ <pre>
     private static final String SCIENTIFIC_NOTATION_NUMBER_REGEXP =
             "((?<=(([\\*\\+\\-/\\^][\\t\\n\\ ]{0,100})|" +
                 "(\\D\\ {100})|(\\(\\ {0,100})))[\\+\\-])?" +
@@ -14,13 +14,13 @@ package com.fillumina.utils.interpreter.util;
  * It's much easier to read like this:
  * <pre>
     public static String getDoublePattern() {
-        return p().par(
+        return p().group(
                 p().positiveLookBehind(
                     p_or(
-                        p_par().opt('*', '+', '-', '/', '^')
+                        p_group().opt('*', '+', '-', '/', '^')
                             .opt('\t', '\n', ' ').repeate(0, 100),
-                        p_par().notDigit().c(' ').repeateExactly(100),
-                        p_par().c('(').c(' ').repeate(0, 100)
+                        p_group().notDigit().c(' ').repeateExactly(100),
+                        p_group().c('(').c(' ').repeate(0, 100)
                     )
                 ).opt('+', '-')
             ).eventually()
@@ -28,13 +28,13 @@ package com.fillumina.utils.interpreter.util;
             .digit().many()
             .c('.').eventually().digit().atLeastOnce()
 
-            .par(
+            .group(
                     p().opt('E', 'e').opt('+', '-').eventually()
                         .digit().atLeastOnce()
             ).eventually()
             .toString();
     }
- * </pre>
+ </pre>
  * And you can even comment the code with standard java comments!
  * (It took me no time to find a bug in this, I was getting crazy with the
  * REGEXP notation!)
@@ -57,7 +57,7 @@ public class PatternBuilder {
         return new PatternBuilder().c(character);
     }
 
-    public static PatternBuilder p_par() {
+    public static PatternBuilder p_group() {
         return new PatternBuilder(true);
     }
 
@@ -69,7 +69,7 @@ public class PatternBuilder {
         this(false);
     }
 
-    /** Start a new {@link PatternBuilder} enclosed by parentheses. */
+    /** *  Start a new {@link PatternBuilder} enclosed by groupentheses. */
     public PatternBuilder(boolean parentheses) {
         this.parentheses = parentheses;
         if (parentheses) {
@@ -106,14 +106,17 @@ public class PatternBuilder {
 
     /**
      * NOTE: the sequence is not surrounded by parentheses,
-     * the eventual quantifier applies to the last element.
+     * the eventual quantifier that may follow applies only to the last element.
      */
     public PatternBuilder seq(final char... options) {
         addOptions(options);
         return this;
     }
 
-    /** It's used heavily and deserves a short name. */
+    /**
+     * Defines
+     * It's used heavily and so it deserves a short name.
+     */
     public PatternBuilder opt(final char... options) {
         builder.append('[');
         addOptions(options);
@@ -121,7 +124,7 @@ public class PatternBuilder {
         return this;
     }
 
-    /** It's used heavily and deserves a short name. */
+    /** Defines a group of optional characters It's used heavily and deserves a short name. */
     public PatternBuilder nopt(final char... options) {
         builder.append("[^");
         addOptions(options);
@@ -185,19 +188,73 @@ public class PatternBuilder {
         return put("\\" + n);
     }
 
-    public PatternBuilder par(final PatternBuilder p) {
+    /** Put the content between parentheses. */
+    public PatternBuilder group(final PatternBuilder p) {
         builder.append('(').append(p).append(')');
         return this;
     }
 
+    /**
+     * Makes the passed group optional. Greedy, so the optional item is
+     * included in the match if possible.<p>
+     * abc? matches abc or ab
+     */
+    public PatternBuilder eventually(final PatternBuilder p) {
+        builder.append('(').append(p).append(")?");
+        return this;
+    }
+
+    /**
+     * Repeats passed group zero or more times. Greedy, so as many
+     * items as possible will be matched before trying permutations with
+     * less matches of the preceding item, up to the point where the preceding
+     * item is not matched at all.<p>
+     * ".*" matches "def" "ghi" in abc "def" "ghi" jkl
+     */
+    public PatternBuilder many(final PatternBuilder p) {
+        builder.append('(').append(p).append(")*");
+        return this;
+    }
+
+    /**
+     * Repeats passed group once or more. Greedy, so as many items as
+     * possible will be matched before trying permutations with less matches
+     * of the preceding item, up to the point where the preceding item is
+     * matched only once.<p>
+     * ".+" matches "def" "ghi" in abc "def" "ghi" jkl
+     */
+    public PatternBuilder atLeastOnce(final PatternBuilder p) {
+        builder.append('(').append(p).append(")+");
+        return this;
+    }
+
+    /**
+     * Repeats the previous item zero or more times. Greedy, so as many
+     * items as possible will be matched before trying permutations with
+     * less matches of the preceding item, up to the point where the preceding
+     * item is not matched at all.<p>
+     * ".*" matches "def" "ghi" in abc "def" "ghi" jkl
+     */
     public PatternBuilder many() {
         return put("*");
     }
 
+    /**
+     * Repeats the previous item once or more. Greedy, so as many items as
+     * possible will be matched before trying permutations with less matches
+     * of the preceding item, up to the point where the preceding item is
+     * matched only once.<p>
+     * ".+" matches "def" "ghi" in abc "def" "ghi" jkl
+     */
     public PatternBuilder atLeastOnce() {
         return put("+");
     }
 
+    /**
+     * Makes the preceding item optional. Greedy, so the optional item is
+     * included in the match if possible.<p>
+     * abc? matches abc or ab
+     */
     public PatternBuilder eventually() {
         return put("?");
     }
@@ -283,7 +340,7 @@ public class PatternBuilder {
      * t(?=s) matches the second t in streets.
      */
     public PatternBuilder positiveLookAhead(final PatternBuilder p) {
-        return par(p().put("?=").put(p.toString()));
+        return group(p().put("?=").put(p.toString()));
     }
 
     /**
@@ -293,7 +350,7 @@ public class PatternBuilder {
      * t(?!s) matches the first t in streets.
      */
     public PatternBuilder negativeLookAhead(final PatternBuilder p) {
-        return par(p().put("?!").put(p.toString()));
+        return group(p().put("?!").put(p.toString()));
     }
 
     /**
@@ -303,7 +360,7 @@ public class PatternBuilder {
      * (?<=s)t matches the first t in streets.
      */
     public PatternBuilder positiveLookBehind(final PatternBuilder p) {
-        return par(p().put("?<=").put(p.toString()));
+        return group(p().put("?<=").put(p.toString()));
     }
 
     /**
@@ -313,10 +370,14 @@ public class PatternBuilder {
      * (?<!s)t matches the second t in streets.
      */
     public PatternBuilder negativeLookBehind(final PatternBuilder p) {
-        return par(p().put("?<!").put(p.toString()));
+        return group(p().put("?<!").put(p.toString()));
     }
 
-    private PatternBuilder put(final String s) {
+    /**
+     * Allows to enter some regexp directly. Don't abuse it or you will
+     * void the usefulness of this builder.
+     */
+    public PatternBuilder put(final String s) {
         builder.append(s);
         return this;
     }

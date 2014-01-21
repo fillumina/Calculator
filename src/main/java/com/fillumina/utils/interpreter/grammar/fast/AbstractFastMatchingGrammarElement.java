@@ -35,7 +35,7 @@ public abstract class AbstractFastMatchingGrammarElement<T, C>
                 return FastGrammarElementMatcher.NOT_FOUND;
             }
             if (!(length == 1 && isOperator())) {
-                // single char operators are allowed not to be sorrounded
+                // single char operators are allowed not to be surrounded
                 // by spaces
                 if (idx > 0 && isChar(expression.charAt(idx - 1))) {
                     continue;

@@ -2,7 +2,7 @@ package com.fillumina.utils.interpreter.grammar.pattern;
 
 import static com.fillumina.utils.interpreter.util.PatternBuilder.p;
 import static com.fillumina.utils.interpreter.util.PatternBuilder.p_or;
-import static com.fillumina.utils.interpreter.util.PatternBuilder.p_par;
+import static com.fillumina.utils.interpreter.util.PatternBuilder.p_group;
 
 /**
  *
@@ -30,17 +30,17 @@ public class DoublePatternGrammarElement<T,C> extends AbstractOperand<T,C> {
     public static String getDoublePattern() {
         return p()
             // the signum
-            .par(
+            .eventually(
                 p().positiveLookBehind(
                     p_or(
-                        // 4 + 3
-                        p_par().opt('*', '+', '-', '/', '^')
+                        // 4 + -3
+                        p_group().opt('*', '+', '-', '/', '^')
                             .whitespace().repeate(0, 100),
                         // (-2
-                        p_par().c('(').whitespace().repeate(0, 100)
+                        p_group().c('(').whitespace().repeate(0, 100)
                     )
                 ).opt('+', '-')
-            ).eventually()
+            )
 
             // the decimal number
             .digit().many()
@@ -48,12 +48,12 @@ public class DoublePatternGrammarElement<T,C> extends AbstractOperand<T,C> {
             .digit().atLeastOnce()
 
             // the exponent
-            .par(
+            .eventually(
                     p()
                         .opt('E', 'e')
                         .opt('+', '-').eventually()
                         .digit().atLeastOnce()
-            ).eventually()
+            )
             .toString();
     }
 

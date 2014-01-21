@@ -49,7 +49,7 @@ public class PatternBuilderTest {
     @Test
     public void shouldCreateAComplexPattern() {
         assertPattern("([\\*\\+\\-/\\^][\\t\\n\\ ]{0,100})",
-                p().par(
+                p().group(
                         p().opt('*', '+', '-', '/', '^')
                             .opt('\t', '\n', ' ').repeate(0, 100)
                 )
@@ -67,7 +67,7 @@ public class PatternBuilderTest {
     @Test
     public void shouldGetOP_WS() {
         assertPattern(OP_WS,
-                p_par().opt('*', '+', '-', '/', '^')
+                p_group().opt('*', '+', '-', '/', '^')
                     .opt('\t', '\n', ' ').repeate(0, 100)
             );
     }
@@ -76,7 +76,7 @@ public class PatternBuilderTest {
     @Test
     public void shouldGetNO_DIGIT() {
         assertPattern(NO_DIGIT,
-                p_par().notDigit().c(' ').repeateExactly(100)
+                p_group().notDigit().c(' ').repeateExactly(100)
             );
     }
 
@@ -84,7 +84,7 @@ public class PatternBuilderTest {
     @Test
     public void shouldGetSPACES() {
         assertPattern(SPACES,
-                p_par().c('(').c(' ').repeate(0, 100)
+                p_group().c('(').c(' ').repeate(0, 100)
             );
     }
 
@@ -94,10 +94,10 @@ public class PatternBuilderTest {
     public void shouldGetINNER_POS_LOOK_BEHIND() {
         assertPattern(INNER_POS_LOOK_BEHIND,
                 p_or(
-                    p_par().opt('*', '+', '-', '/', '^')
+                    p_group().opt('*', '+', '-', '/', '^')
                         .opt('\t', '\n', ' ').repeate(0, 100),
-                    p_par().notDigit().c(' ').repeateExactly(100),
-                    p_par().c('(').c(' ').repeate(0, 100)
+                    p_group().notDigit().c(' ').repeateExactly(100),
+                    p_group().c('(').c(' ').repeate(0, 100)
                 )
             );
     }
@@ -108,10 +108,10 @@ public class PatternBuilderTest {
         assertPattern(LOOK_BEHIND,
                 p().positiveLookBehind(
                     p_or(
-                        p_par().opt('*', '+', '-', '/', '^')
+                        p_group().opt('*', '+', '-', '/', '^')
                             .opt('\t', '\n', ' ').repeate(0, 100),
-                        p_par().notDigit().c(' ').repeateExactly(100),
-                        p_par().c('(').c(' ').repeate(0, 100)
+                        p_group().notDigit().c(' ').repeateExactly(100),
+                        p_group().c('(').c(' ').repeate(0, 100)
                     )
                 )
             );
@@ -121,13 +121,13 @@ public class PatternBuilderTest {
     @Test
     public void shouldGetLEAVE_THE_SIGN() {
         assertPattern(LEAVE_THE_SIGN,
-                p().par(
+                p().group(
                     p().positiveLookBehind(
                         p_or(
-                            p_par().opt('*', '+', '-', '/', '^')
+                            p_group().opt('*', '+', '-', '/', '^')
                                 .opt('\t', '\n', ' ').repeate(0, 100),
-                            p_par().notDigit().c(' ').repeateExactly(100),
-                            p_par().c('(').c(' ').repeate(0, 100)
+                            p_group().notDigit().c(' ').repeateExactly(100),
+                            p_group().c('(').c(' ').repeate(0, 100)
                         )
                     ).opt('+', '-')
                 ).eventually()
@@ -138,7 +138,7 @@ public class PatternBuilderTest {
     @Test
     public void shouldGetDECIMAL_NUMBER() {
         assertPattern(DECIMAL_NUMBER,
-                p().digit().atLeastOnce().par(
+                p().digit().atLeastOnce().group(
                         p('.').digit().atLeastOnce()
                 ).eventually()
         );
@@ -148,7 +148,7 @@ public class PatternBuilderTest {
     @Test
     public void shouldGetEXPONENT() {
         assertPattern(EXPONENT,
-                p().par(
+                p().group(
                         p().opt('E', 'e').opt('+', '-').eventually()
                             .digit().atLeastOnce()
                 ).eventually()
@@ -160,22 +160,22 @@ public class PatternBuilderTest {
     @Test
     public void shouldGetSCIENTIFIC() {
         assertPattern(SCIENTIFIC,
-                p().par(
+                p().group(
                     p().positiveLookBehind(
                         p_or(
-                            p_par().opt('*', '+', '-', '/', '^')
+                            p_group().opt('*', '+', '-', '/', '^')
                                 .opt('\t', '\n', ' ').repeate(0, 100),
-                            p_par().notDigit().c(' ').repeateExactly(100),
-                            p_par().c('(').c(' ').repeate(0, 100)
+                            p_group().notDigit().c(' ').repeateExactly(100),
+                            p_group().c('(').c(' ').repeate(0, 100)
                         )
                     ).opt('+', '-')
                 ).eventually()
 
-                .digit().atLeastOnce().par(
+                .digit().atLeastOnce().group(
                         p('.').digit().atLeastOnce()
                 ).eventually()
 
-                .par(
+                .group(
                         p().opt('E', 'e').opt('+', '-').eventually()
                             .digit().atLeastOnce()
                 ).eventually()

@@ -30,8 +30,9 @@ public class FastIntegerGrammarElement<T,C>
         if (start == -1) {
             return FastGrammarElementMatcher.NOT_FOUND;
         }
-        int end = carray.length;
-        FOR: for (int i=start + 1; i<carray.length; i++) {
+        final int length = carray.length;
+        int end = length;
+        FOR: for (int i=start + 1; i<length; i++) {
             char c = carray[i];
             if (!isDigit(c)) {
                 end = i;
