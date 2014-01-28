@@ -46,6 +46,11 @@ public abstract class ArithmeticGrammarTestBase {
     }
 
     @Test
+    public void shouldRecognizeANegativeNumber() {
+        assertEvaluateTo(-73, "-73");
+    }
+
+    @Test
     public void shouldRecognizeARealNumber() {
         assertEvaluateTo(123.45, "123.45");
     }
