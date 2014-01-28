@@ -30,18 +30,18 @@ public abstract class AbstractOperator<T,C>
      * <br />
      * defines a sine usable like that: <code>sin(x + 2)</code>.
      *
-     * @param name              expression that recognizes the operator
+     * @param symbol              expression that recognizes the operator
      * @param priority                  priority in respect to other operators
      * @param requiredOperandsBefore    how many operands expected before the
      *                                  operator
      * @param requiredOperandsAfter     how many operands expected after the
      *                                  operator
      */
-    public AbstractOperator(final String name,
+    public AbstractOperator(final String symbol,
             final int priority,
             final int requiredOperandsBefore,
             final int requiredOperandsAfter) {
-        super(name, priority);
+        super(symbol, priority);
         this.requiredOperandsBefore = requiredOperandsBefore;
         this.requiredOperandsAfter = requiredOperandsAfter;
     }

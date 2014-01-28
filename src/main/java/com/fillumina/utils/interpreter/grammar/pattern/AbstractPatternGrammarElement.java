@@ -67,7 +67,7 @@ public abstract class AbstractPatternGrammarElement<T,C>
     }
 
     /**
-     * If a name is passed than it makes sure that the name is not preceded
+     * If a symbol is passed than it makes sure that the name is not preceded
      * by other characters (like <code>sin</code> and <code>asin</code>).
      * If a single symbol is passed than it is recognized
      * in every context without restrictions.

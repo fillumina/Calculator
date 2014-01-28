@@ -8,13 +8,13 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastConstantGrammarElement<T,C>
+public class FastConstantElement<T,C>
         extends AbstractFastGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
     private final T constant;
 
     /** Insert the symbol of the constant NOT the regular expression. */
-    public FastConstantGrammarElement(final String symbol, final T constant,
+    public FastConstantElement(final String symbol, final T constant,
             final int priority) {
         super(symbol, priority, 0, 0);
         this.constant = constant;

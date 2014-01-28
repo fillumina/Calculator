@@ -7,11 +7,11 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class UnevaluableFastGrammarElement<T, C>
+public abstract class UnevaluableFastElement<T, C>
         extends AbstractFastGrammarElement<T, C> {
     private static final long serialVersionUID = 1L;
 
-    public UnevaluableFastGrammarElement(final String symbol,
+    public UnevaluableFastElement(final String symbol,
             final int priority) {
         super(symbol, priority, 0, 0);
     }

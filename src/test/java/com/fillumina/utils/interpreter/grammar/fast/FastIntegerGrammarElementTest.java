@@ -12,7 +12,7 @@ public class FastIntegerGrammarElementTest
 
     @Override
     protected GrammarElement<Double, Void> getNumberGrammarElement() {
-        return (GrammarElement<Double, Void>) FastIntegerGrammarElement.INSTANCE;
+        return (GrammarElement<Double, Void>) FastIntegerElement.INSTANCE;
     }
 
     @Test

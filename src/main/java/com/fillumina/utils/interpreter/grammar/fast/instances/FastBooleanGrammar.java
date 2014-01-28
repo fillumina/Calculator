@@ -4,7 +4,7 @@ import com.fillumina.utils.interpreter.Grammar;
 import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.grammar.fast.FastCloseParentheses;
 import com.fillumina.utils.interpreter.grammar.fast.FastMultiConstant;
-import com.fillumina.utils.interpreter.grammar.fast.FastMultiOperator;
+import com.fillumina.utils.interpreter.grammar.fast.AbstractFastMultiOperator;
 import com.fillumina.utils.interpreter.grammar.fast.FastOpenParentheses;
 import com.fillumina.utils.interpreter.grammar.fast.FastVariableSetterOperator;
 import com.fillumina.utils.interpreter.grammar.fast.VeryFastWhiteSpace;
@@ -29,7 +29,7 @@ public class FastBooleanGrammar extends Grammar<Boolean, Map<String, Boolean>>
     @SuppressWarnings("unchecked")
     private FastBooleanGrammar() {
         super(
-            new FastMultiOperator<Boolean,Map<String,Boolean>>(
+            new AbstractFastMultiOperator<Boolean,Map<String,Boolean>>(
                     1, 1, 1, "and", "AND", "And", "&&", "&") {
                 private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class FastBooleanGrammar extends Grammar<Boolean, Map<String, Boolean>>
                 }
             },
 
-            new FastMultiOperator<Boolean,Map<String,Boolean>>(
+            new AbstractFastMultiOperator<Boolean,Map<String,Boolean>>(
                     1, 1, 1, "or", "OR", "Or", "||", "|") {
                 private static final long serialVersionUID = 1L;
 
@@ -53,7 +53,7 @@ public class FastBooleanGrammar extends Grammar<Boolean, Map<String, Boolean>>
                 }
             },
 
-            new FastMultiOperator<Boolean,Map<String,Boolean>>(
+            new AbstractFastMultiOperator<Boolean,Map<String,Boolean>>(
                     1, 0, 1, "not", "NOT", "Not", "~", "!") {
                 private static final long serialVersionUID = 1L;
 

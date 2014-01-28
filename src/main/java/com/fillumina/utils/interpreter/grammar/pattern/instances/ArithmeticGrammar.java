@@ -5,7 +5,7 @@ import com.fillumina.utils.interpreter.grammar.pattern.CloseParentheses;
 import com.fillumina.utils.interpreter.Grammar;
 import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.grammar.pattern.OpenParentheses;
-import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperatorName;
+import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperatorSymbol;
 import com.fillumina.utils.interpreter.grammar.pattern.ConstantElement;
 import com.fillumina.utils.interpreter.grammar.pattern.DoublePatternGrammarElement;
 import com.fillumina.utils.interpreter.grammar.pattern.VariableContextManager;
@@ -35,7 +35,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
         (GrammarElement<Double,Map<String, Double>>)
                 DoublePatternGrammarElement.INSTANCE,
 
-        new AbstractOperatorName<Double,Map<String, Double>>("!", 5, 1, 0) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("!", 5, 1, 0) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -51,7 +51,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("asin", 4, 0, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("asin", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -61,7 +61,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("acos", 4, 0, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("acos", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -72,7 +72,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
 
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("atan", 4, 0, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("atan", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -82,7 +82,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("sin", 4, 0, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("sin", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -92,7 +92,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("cos", 4, 0, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("cos", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -103,7 +103,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
 
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("tan", 4, 0, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("tan", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -113,7 +113,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("log", 4, 0, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("log", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -123,7 +123,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("ln", 4, 0, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("ln", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -133,7 +133,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("sqr", 4, 0, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("sqr", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -144,7 +144,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
         },
 
         // doesn't accept any parameter
-        new AbstractOperatorName<Double,Map<String, Double>>("rnd", 4, 0, 0) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("rnd", 4, 0, 0) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -155,7 +155,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
         },
 
         // accepts many parameters
-        new AbstractOperatorName<Double,Map<String, Double>>("avg", 4, 0,
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("avg", 4, 0,
                 Integer.MAX_VALUE) {
             private static final long serialVersionUID = 1L;
 
@@ -174,7 +174,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("^", 3, 1, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("^", 3, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -184,7 +184,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("*", 2, 1, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("*", 2, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -194,7 +194,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("/", 2, 1, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("/", 2, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -204,7 +204,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("+", 1, 1, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("+", 1, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -214,7 +214,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractOperatorName<Double,Map<String, Double>>("-", 1, 1, 1) {
+        new AbstractOperatorSymbol<Double,Map<String, Double>>("-", 1, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override

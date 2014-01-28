@@ -7,11 +7,11 @@ import com.fillumina.utils.interpreter.GrammarElementType;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class FastOperatorGrammarElement<T,C>
+public abstract class AbstractFastOperator<T,C>
         extends AbstractFastGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public FastOperatorGrammarElement(final String symbol,
+    public AbstractFastOperator(final String symbol,
             final int priority,
             final int operandsBefore,
             final int operandsAfter) {

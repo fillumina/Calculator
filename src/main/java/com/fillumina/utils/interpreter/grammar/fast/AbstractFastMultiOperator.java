@@ -6,11 +6,11 @@ import com.fillumina.utils.interpreter.GrammarElementType;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class FastMultiOperator<T,C>
+public abstract class AbstractFastMultiOperator<T,C>
         extends AbstractFastMultiGrammarElement<T, C> {
     private static final long serialVersionUID = 1L;
 
-    public FastMultiOperator(final int priority,
+    public AbstractFastMultiOperator(final int priority,
             final int operandsBefore,
             final int operandsAfter,
             final String... symbols) {

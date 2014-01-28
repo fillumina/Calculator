@@ -9,7 +9,7 @@ import com.fillumina.utils.interpreter.GrammarElementType;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class FastCloseParentheses<T,C>
-        extends UnevaluableFastGrammarElement<T,C> {
+        extends UnevaluableFastElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     public static final FastCloseParentheses<?,?> ROUND =

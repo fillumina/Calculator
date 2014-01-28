@@ -4,7 +4,7 @@ import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import java.util.Arrays;
 
 /**
- * Matches a name in the given expression using a fast string search
+ * Matches a symbol in the given expression using a fast string search
  * algorithm and then validates the found substring. It's about 20% faster
  * than pattern search.
  *

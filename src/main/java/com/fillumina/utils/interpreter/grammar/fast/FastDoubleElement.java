@@ -12,31 +12,76 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastIntegerGrammarElement<T,C>
+public class FastDoubleElement<T,C>
         extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public static final FastIntegerGrammarElement<?,?> INSTANCE =
-            new FastIntegerGrammarElement<>(0);
+    public static final FastDoubleElement<?,?> INSTANCE =
+            new FastDoubleElement<>(0);
 
-    public FastIntegerGrammarElement(final int priority) {
+    private final char decimalSeparator;
+
+    public FastDoubleElement(final int priority) {
+        this(priority, '.');
+    }
+
+    public FastDoubleElement(final int priority,
+            final char decimalSeparator) {
         super(priority);
+        this.decimalSeparator = decimalSeparator;
     }
 
     @Override
     public GrammarElementMatcher match(final String expression) {
         final char[] carray = expression.toCharArray();
-        int start = findFirstDigitIndex(carray, 0);
+        int start = findFirstDigitOrPointIndex(carray, 0);
         if (start == -1) {
             return FastGrammarElementMatcher.NOT_FOUND;
         }
-        final int length = carray.length;
-        int end = length;
-        FOR: for (int i=start + 1; i<length; i++) {
+        boolean point = carray[start] == '.';
+        boolean exp = false;
+        int end = carray.length;
+        FOR: for (int i=start + 1; i<carray.length; i++) {
             char c = carray[i];
             if (!isDigit(c)) {
-                end = i;
-                break FOR;
+                if (c == decimalSeparator) {
+                    if (point) {
+                        end = i;
+                        break;
+                    }
+                    point = true;
+                } else {
+                    switch (c) {
+                        case 'E':
+                        case 'e':
+                            if (exp) {
+                                end = i;
+                                break FOR;
+                            }
+                            exp = true;
+                            break;
+
+                        case '+':
+                        case '-':
+                            final char prevc = carray[i-1];
+                            if (!(prevc == 'e' || prevc == 'E')) {
+                                end = i;
+                                break FOR;
+                            }
+                            break;
+
+                        default:
+                            end = i;
+                            break FOR;
+                    }
+                }
+            }
+        }
+        final char last = carray[end - 1];
+        if (last == 'e' || last == 'E' || last == decimalSeparator) {
+            end--;
+            if (start == end) {
+                return FastGrammarElementMatcher.NOT_FOUND;
             }
         }
         if (start > 0 &&
@@ -67,14 +112,15 @@ public class FastIntegerGrammarElement<T,C>
                     return false;
                 }
             }
-            return true;
         }
         return false;
     }
 
-    private int findFirstDigitIndex(final char[] carray, final int start) {
+    private int findFirstDigitOrPointIndex(final char[] carray,
+            final int start) {
         for (int i=start; i<carray.length; i++) {
-            if (isDigit(carray[i])) {
+            final char c = carray[i];
+            if (isDigit(c) || c == decimalSeparator) {
                 return i;
             }
         }
@@ -85,6 +131,7 @@ public class FastIntegerGrammarElement<T,C>
         return c >= '0' && c <= '9';
     }
 
+    /** Override if you need something different from {@code double}. */
     @Override
     @SuppressWarnings("unchecked")
     public T evaluate(final String value, List<T> params, C context) {
