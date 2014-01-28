@@ -16,8 +16,8 @@ public class FastCloseParentheses<T,C>
             new FastCloseParentheses<>(")");
 
     /** Only one symbol can be specified. */
-    public FastCloseParentheses(final String symbolRegexp) {
-        super(symbolRegexp, 0);
+    public FastCloseParentheses(final String symbol) {
+        super(symbol, 0);
     }
 
     @Override

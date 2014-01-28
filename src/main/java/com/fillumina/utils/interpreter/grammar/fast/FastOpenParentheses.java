@@ -16,8 +16,8 @@ public class FastOpenParentheses<T,C>
             new FastOpenParentheses<>("(");
 
     /** Only one symbol can be specified. */
-    public FastOpenParentheses(final String name) {
-        super(name, 0);
+    public FastOpenParentheses(final String symbol) {
+        super(symbol, 0);
     }
 
     @Override

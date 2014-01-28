@@ -14,20 +14,20 @@ public abstract class AbstractFastMultiGrammarElement<T,C>
         extends AbstractFastMatchingGrammarElement<T, C> {
     private static final long serialVersionUID = 1L;
 
-    private final String[] names;
+    private final String[] symbols;
 
     public AbstractFastMultiGrammarElement(final int priority,
             final int operandsBefore,
             final int operandsAfter,
-            final String... names) {
+            final String... symbols) {
         super(priority, operandsBefore, operandsAfter);
-        this.names = names;
+        this.symbols = symbols;
     }
 
     @Override
     public GrammarElementMatcher match(final String expression) {
-        for (String name: names) {
-            final GrammarElementMatcher matcher = matchName(expression, name);
+        for (String symbol: symbols) {
+            final GrammarElementMatcher matcher = matchSymbol(expression, symbol);
             if (matcher.isFound()) {
                 return matcher;
             }
@@ -37,6 +37,6 @@ public abstract class AbstractFastMultiGrammarElement<T,C>
 
     @Override
     public String toString() {
-        return Arrays.toString(names);
+        return Arrays.toString(symbols);
     }
 }

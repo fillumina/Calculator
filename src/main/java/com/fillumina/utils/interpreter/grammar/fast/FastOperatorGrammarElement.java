@@ -11,11 +11,11 @@ public abstract class FastOperatorGrammarElement<T,C>
         extends AbstractFastGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public FastOperatorGrammarElement(final String name,
+    public FastOperatorGrammarElement(final String symbol,
             final int priority,
             final int operandsBefore,
             final int operandsAfter) {
-        super(name, priority, operandsBefore, operandsAfter);
+        super(symbol, priority, operandsBefore, operandsAfter);
     }
 
     @Override

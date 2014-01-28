@@ -11,9 +11,9 @@ public abstract class UnevaluableFastGrammarElement<T, C>
         extends AbstractFastGrammarElement<T, C> {
     private static final long serialVersionUID = 1L;
 
-    public UnevaluableFastGrammarElement(final String name,
+    public UnevaluableFastGrammarElement(final String symbol,
             final int priority) {
-        super(name, priority, 0, 0);
+        super(symbol, priority, 0, 0);
     }
 
     @Override

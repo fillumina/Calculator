@@ -25,12 +25,12 @@ public abstract class AbstractFastMatchingGrammarElement<T, C>
 
     protected abstract boolean isOperator();
 
-    protected GrammarElementMatcher matchName(final String expression,
-            final String name) {
-        final int length = name.length();
+    protected GrammarElementMatcher matchSymbol(final String expression,
+            final String symbol) {
+        final int length = symbol.length();
         int idx = -1;
         while (true) {
-            idx = expression.indexOf(name, idx + 1);
+            idx = expression.indexOf(symbol, idx + 1);
             if (idx == -1) {
                 return FastGrammarElementMatcher.NOT_FOUND;
             }

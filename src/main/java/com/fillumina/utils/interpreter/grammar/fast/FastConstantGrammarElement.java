@@ -13,10 +13,10 @@ public class FastConstantGrammarElement<T,C>
     private static final long serialVersionUID = 1L;
     private final T constant;
 
-    /** Insert the name of the constant NOT the regular expression. */
-    public FastConstantGrammarElement(final String name, final T constant,
+    /** Insert the symbol of the constant NOT the regular expression. */
+    public FastConstantGrammarElement(final String symbol, final T constant,
             final int priority) {
-        super(name, priority, 0, 0);
+        super(symbol, priority, 0, 0);
         this.constant = constant;
     }
 

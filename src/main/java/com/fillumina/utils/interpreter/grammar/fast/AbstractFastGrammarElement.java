@@ -13,23 +13,23 @@ public abstract class AbstractFastGrammarElement<T,C>
         extends AbstractFastMatchingGrammarElement<T, C> {
     private static final long serialVersionUID = 1L;
 
-    private final String name;
+    private final String symbol;
 
-    public AbstractFastGrammarElement(final String name,
+    public AbstractFastGrammarElement(final String symbol,
             final int priority,
             final int operandsBefore,
             final int operandsAfter) {
         super(priority, operandsBefore, operandsAfter);
-        this.name = name;
+        this.symbol = symbol;
     }
 
     @Override
     public GrammarElementMatcher match(final String expression) {
-        return matchName(expression, name);
+        return matchSymbol(expression, symbol);
     }
 
     @Override
     public String toString() {
-        return name;
+        return symbol;
     }
 }

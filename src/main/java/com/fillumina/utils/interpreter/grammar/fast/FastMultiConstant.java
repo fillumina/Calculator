@@ -15,8 +15,8 @@ public class FastMultiConstant<T,C>
 
     public FastMultiConstant(final T value,
             final int priority,
-            final String... names) {
-        super(priority, 0, 0, names);
+            final String... symbols) {
+        super(priority, 0, 0, symbols);
         this.value = value;
     }
 

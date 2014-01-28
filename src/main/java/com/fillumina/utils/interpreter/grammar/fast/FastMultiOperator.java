@@ -13,8 +13,8 @@ public abstract class FastMultiOperator<T,C>
     public FastMultiOperator(final int priority,
             final int operandsBefore,
             final int operandsAfter,
-            final String... names) {
-        super(priority, operandsBefore, operandsAfter, names);
+            final String... symbols) {
+        super(priority, operandsBefore, operandsAfter, symbols);
     }
 
     @Override
