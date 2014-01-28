@@ -98,7 +98,7 @@ public class FastDoubleElement<T,C>
      * assume here that the grammar defined is somewhat 'close' to the
      * standard arithmetic.
      */
-    private boolean isPreceededByASignumAndAnOperatorOrParentheses(
+    protected boolean isPreceededByASignumAndAnOperatorOrParentheses(
             final char[] carray,
             final int start) {
         final char signum = carray[start - 1];
