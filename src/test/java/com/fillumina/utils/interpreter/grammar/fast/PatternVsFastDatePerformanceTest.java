@@ -7,10 +7,6 @@ import com.fillumina.performance.template.ProgressionConfigurator;
 import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTemplate;
 import com.fillumina.utils.interpreter.grammar.DateFastElement;
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,7 +19,7 @@ public class PatternVsFastDatePerformanceTest
     private static class PatternDate extends AbstractOperand<Void,Void> {
         private static final long serialVersionUID = 1L;
         public static final String DATE_TIME_PATTERN =
-            "\\d{1,2}/\\d{1,2}/\\(d{1,4}(\\ +\\d{1,2}:\\d{1,2}(:\\d{1,2})?)?";
+            "\\d{1,2}/\\d{1,2}/\\d{1,4}(\\ +\\d{1,2}:\\d{1,2}:\\d{1,2})?";
 
         public PatternDate() {
             super(DATE_TIME_PATTERN, 0);
@@ -32,10 +28,6 @@ public class PatternVsFastDatePerformanceTest
         @Override
         public Void evaluate(final String val, final Void query) {
             return null;
-        }
-
-        private boolean isSecondsOmitted(final String value) {
-            return value.replaceAll("[^:]", "").length() == 1;
         }
     }
 
