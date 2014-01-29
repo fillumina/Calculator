@@ -24,26 +24,26 @@ public class AbstractStringFastElementTest extends GrammarElementTestBase {
 
     @Test
     public void shouldFindTheSingleQuotedString() {
-        recognize("abc def", "lkdjlk 'abc def' lklkew3 _");
+        recognize("'abc def'", "lkdjlk 'abc def' lklkew3 _");
     }
 
     @Test
     public void shouldRecognizeTheEmptyString() {
-        recognize("", "ljldkjsp''lfkd");
+        recognize("''", "ljldkjsp''lfkd");
     }
 
     @Test
     public void shouldRecognizeTheDoubleQuotedString() {
-        recognize("1234", "a;la assl \"1234\"");
+        recognize("\"1234\"", "a;la assl \"1234\"");
     }
 
     @Test
     public void shouldRecognizeTheStringWithoutSpacesAround() {
-        recognize("1234", "\"1234\"");
+        recognize("\"1234\"", "\"1234\"");
     }
 
     @Test
     public void shouldRecognizeAnEscapedQuote() {
-        recognize("123\\'4", "  '123\\'4' ");
+        recognize("'123\\'4'", "  '123\\'4' ");
     }
 }

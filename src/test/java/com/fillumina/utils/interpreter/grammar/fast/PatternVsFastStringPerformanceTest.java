@@ -102,8 +102,9 @@ public class PatternVsFastStringPerformanceTest
             @Override
             public Object sink() {
                 GrammarElementMatcher matcher = fastString.match(string);
-                assertEquals(12, matcher.getStart());
-                assertEquals(23, matcher.getEnd());
+                // this matcher returns the quotes too (which are needed!)
+                assertEquals(11, matcher.getStart());
+                assertEquals(24, matcher.getEnd());
                 return matcher;
             }
         });

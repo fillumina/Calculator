@@ -32,10 +32,10 @@ public abstract class AbstractStringFastElement<T,C>
                 escape = true;
             } else if (c == '\'' || c == '\"') {
                 if (quote == 0) {
-                    start = i + 1;
+                    start = i;
                     quote = c;
                 } else if (c == quote) {
-                    return new FastElementMatcher(start, i);
+                    return new FastElementMatcher(start, i + 1);
                 }
             }
         }
