@@ -41,9 +41,9 @@ public class VeryFastWhiteSpace<T,C>
             }
         }
         if (start == -1) {
-            return FastGrammarElementMatcher.NOT_FOUND;
+            return FastElementMatcher.NOT_FOUND;
         }
-        return new FastGrammarElementMatcher(start, end);
+        return new FastElementMatcher(start, end);
     }
 
     @Override

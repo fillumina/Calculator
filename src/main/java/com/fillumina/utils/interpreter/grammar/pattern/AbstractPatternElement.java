@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  *      http://ocpsoft.org/opensource/guide-to-regular-expressions-in-java-part-2/</a>
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class AbstractPatternGrammarElement<T,C>
+public abstract class AbstractPatternElement<T,C>
         extends AbstractComparableGrammarElement<T, C> {
     private static final long serialVersionUID = 1L;
 
@@ -31,7 +31,7 @@ public abstract class AbstractPatternGrammarElement<T,C>
      * @param priority      the highest the number, the more priority has
      *                      the element.
      */
-    public AbstractPatternGrammarElement(final String symbolRegexp,
+    public AbstractPatternElement(final String symbolRegexp,
             final int priority) {
         super(priority);
         this.symbolRegexp = symbolRegexp;
@@ -63,7 +63,7 @@ public abstract class AbstractPatternGrammarElement<T,C>
 
     @Override
     public GrammarElementMatcher match(final String expression) {
-        return new GrammarElementRegexpMatcher(pattern.matcher(expression));
+        return new ElementRegexpMatcher(pattern.matcher(expression));
     }
 
     /**

@@ -8,7 +8,7 @@ import java.util.List;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class FastMultiConstant<T,C>
-        extends AbstractFastMultiGrammarElement<T, C> {
+        extends AbstractMultiFastElement<T, C> {
     private static final long serialVersionUID = 1L;
 
     private final T value;

@@ -8,12 +8,12 @@ import java.util.regex.Matcher;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class GrammarElementRegexpMatcher
+public class ElementRegexpMatcher
         implements GrammarElementMatcher, Serializable {
     private static final long serialVersionUID = 1L;
     final Matcher matcher;
 
-    public GrammarElementRegexpMatcher(final Matcher matcher) {
+    public ElementRegexpMatcher(final Matcher matcher) {
         this.matcher = matcher;
     }
 

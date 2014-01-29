@@ -8,7 +8,7 @@ import com.fillumina.utils.interpreter.GrammarElementType;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class WhiteSpace<T,C> extends UnevaluablePatternGrammarElement<T,C> {
+public class WhiteSpace<T,C> extends UnevaluablePatternElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     public static final WhiteSpace<?,?> INSTANCE = new WhiteSpace<>("\\s+");

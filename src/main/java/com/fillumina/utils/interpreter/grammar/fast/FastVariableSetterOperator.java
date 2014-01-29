@@ -46,7 +46,7 @@ public class FastVariableSetterOperator<T>
     public GrammarElementMatcher match(final String expression) {
         final int idx = expression.indexOf('=');
         if (idx == -1 || idx == 0) {
-            return FastGrammarElementMatcher.NOT_FOUND;
+            return FastElementMatcher.NOT_FOUND;
         }
         //if (true) throw new RuntimeException("GOTCHA");
         final char[] carray = expression.toCharArray();
@@ -58,20 +58,20 @@ public class FastVariableSetterOperator<T>
                 variable = true;
             } else if (c == ' ' || c == '\t' || c == '\n' || c == '\r') {
                 if (variable) {
-                    return new FastGrammarElementMatcher(i + 1, idx + 1);
+                    return new FastElementMatcher(i + 1, idx + 1);
                 }
             } else {
                 if (variable) {
-                    return new FastGrammarElementMatcher(i + 1, idx + 1);
+                    return new FastElementMatcher(i + 1, idx + 1);
                 } else {
-                    return FastGrammarElementMatcher.NOT_FOUND;
+                    return FastElementMatcher.NOT_FOUND;
                 }
             }
         }
         if (variable) {
-            return new FastGrammarElementMatcher(0, idx + 1);
+            return new FastElementMatcher(0, idx + 1);
         }
-        return FastGrammarElementMatcher.NOT_FOUND;
+        return FastElementMatcher.NOT_FOUND;
     }
 
     @Override

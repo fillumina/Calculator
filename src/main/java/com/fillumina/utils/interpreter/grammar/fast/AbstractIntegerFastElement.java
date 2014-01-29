@@ -4,7 +4,6 @@ import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
-import java.util.List;
 
 /**
  * This way of managing numbers is at least 2 times faster than
@@ -12,14 +11,11 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastIntegerElement<T,C>
+public abstract class AbstractIntegerFastElement<T,C>
         extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public static final FastIntegerElement<?,?> INSTANCE =
-            new FastIntegerElement<>(0);
-
-    public FastIntegerElement(final int priority) {
+    public AbstractIntegerFastElement(final int priority) {
         super(priority);
     }
 
@@ -28,7 +24,7 @@ public class FastIntegerElement<T,C>
         final char[] carray = expression.toCharArray();
         int start = findFirstDigitIndex(carray, 0);
         if (start == -1) {
-            return FastGrammarElementMatcher.NOT_FOUND;
+            return FastElementMatcher.NOT_FOUND;
         }
         final int length = carray.length;
         int end = length;
@@ -43,7 +39,7 @@ public class FastIntegerElement<T,C>
                 isPreceededByASignumAndAnOperatorOrParentheses(carray, start)) {
             start --; // includes the signum
         }
-        return new FastGrammarElementMatcher(start, end);
+        return new FastElementMatcher(start, end);
     }
 
     /**
@@ -83,12 +79,6 @@ public class FastIntegerElement<T,C>
 
     private boolean isDigit(final char c) {
         return c >= '0' && c <= '9';
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public T evaluate(final String value, List<T> params, C context) {
-        return (T) Integer.valueOf(value);
     }
 
     @Override

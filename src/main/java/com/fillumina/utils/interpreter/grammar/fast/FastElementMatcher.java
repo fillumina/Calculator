@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastGrammarElementMatcher
+public class FastElementMatcher
         implements GrammarElementMatcher, Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class FastGrammarElementMatcher
     private final int start;
     private final int end;
 
-    public FastGrammarElementMatcher(final int start, final int end) {
+    public FastElementMatcher(final int start, final int end) {
         this.start = start;
         this.end = end;
     }

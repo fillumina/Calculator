@@ -14,7 +14,7 @@ import com.fillumina.utils.interpreter.GrammarElementType;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractOperator<T,C>
-        extends AbstractPatternGrammarElement<T,C> {
+        extends AbstractPatternElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     private final int requiredOperandsBefore;

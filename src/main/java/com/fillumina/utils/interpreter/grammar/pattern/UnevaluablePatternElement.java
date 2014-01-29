@@ -7,11 +7,11 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class UnevaluablePatternGrammarElement<T,C>
-        extends AbstractPatternGrammarElement<T,C> {
+public abstract class UnevaluablePatternElement<T,C>
+        extends AbstractPatternElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public UnevaluablePatternGrammarElement(final String symbolRegexp,
+    public UnevaluablePatternElement(final String symbolRegexp,
             final int priority) {
         super(symbolRegexp, priority);
     }

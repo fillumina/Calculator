@@ -8,7 +8,7 @@ import java.util.List;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class UnevaluableFastElement<T, C>
-        extends AbstractFastGrammarElement<T, C> {
+        extends AbstractFastElement<T, C> {
     private static final long serialVersionUID = 1L;
 
     public UnevaluableFastElement(final String symbol,

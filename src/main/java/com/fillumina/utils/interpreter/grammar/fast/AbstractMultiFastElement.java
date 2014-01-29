@@ -10,13 +10,13 @@ import java.util.Arrays;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class AbstractFastMultiGrammarElement<T,C>
-        extends AbstractFastMatchingGrammarElement<T, C> {
+public abstract class AbstractMultiFastElement<T,C>
+        extends AbstractMatchingFastElement<T, C> {
     private static final long serialVersionUID = 1L;
 
     private final String[] symbols;
 
-    public AbstractFastMultiGrammarElement(final int priority,
+    public AbstractMultiFastElement(final int priority,
             final int operandsBefore,
             final int operandsAfter,
             final String... symbols) {
@@ -32,7 +32,7 @@ public abstract class AbstractFastMultiGrammarElement<T,C>
                 return matcher;
             }
         }
-        return FastGrammarElementMatcher.NOT_FOUND;
+        return FastElementMatcher.NOT_FOUND;
     }
 
     @Override

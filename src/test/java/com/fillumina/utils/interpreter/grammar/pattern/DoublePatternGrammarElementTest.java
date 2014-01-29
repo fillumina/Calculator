@@ -1,18 +1,19 @@
 package com.fillumina.utils.interpreter.grammar.pattern;
 
 import com.fillumina.utils.interpreter.GrammarElement;
-import com.fillumina.utils.interpreter.grammar.fast.FastDoubleGrammarElementTest;
+import com.fillumina.utils.interpreter.grammar.DoublePatternElement;
+import com.fillumina.utils.interpreter.grammar.fast.DoubleFastElementTest;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class DoublePatternGrammarElementTest
-        extends FastDoubleGrammarElementTest {
+        extends DoubleFastElementTest {
 
     @Override
     protected GrammarElement<Double, Void> getNumberGrammarElement() {
         return (GrammarElement<Double, Void>)
-                DoublePatternGrammarElement.INSTANCE;
+                DoublePatternElement.INSTANCE;
     }
 }

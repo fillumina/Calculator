@@ -12,20 +12,17 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastDoubleElement<T,C>
+public abstract class AbstractDoubleFastElement<T,C>
         extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public static final FastDoubleElement<?,?> INSTANCE =
-            new FastDoubleElement<>(0);
-
     private final char decimalSeparator;
 
-    public FastDoubleElement(final int priority) {
+    public AbstractDoubleFastElement(final int priority) {
         this(priority, '.');
     }
 
-    public FastDoubleElement(final int priority,
+    public AbstractDoubleFastElement(final int priority,
             final char decimalSeparator) {
         super(priority);
         this.decimalSeparator = decimalSeparator;
@@ -36,7 +33,7 @@ public class FastDoubleElement<T,C>
         final char[] carray = expression.toCharArray();
         int start = findFirstDigitOrPointIndex(carray, 0);
         if (start == -1) {
-            return FastGrammarElementMatcher.NOT_FOUND;
+            return FastElementMatcher.NOT_FOUND;
         }
         boolean point = carray[start] == '.';
         boolean exp = false;
@@ -81,14 +78,14 @@ public class FastDoubleElement<T,C>
         if (last == 'e' || last == 'E' || last == decimalSeparator) {
             end--;
             if (start == end) {
-                return FastGrammarElementMatcher.NOT_FOUND;
+                return FastElementMatcher.NOT_FOUND;
             }
         }
         if (start > 0 &&
                 isPreceededByASignumAndAnOperatorOrParentheses(carray, start)) {
             start --; // includes the signum
         }
-        return new FastGrammarElementMatcher(start, end);
+        return new FastElementMatcher(start, end);
     }
 
     /**
@@ -101,8 +98,8 @@ public class FastDoubleElement<T,C>
     protected boolean isPreceededByASignumAndAnOperatorOrParentheses(
             final char[] carray,
             final int start) {
-        final char signum = carray[start - 1];
-        if (signum == '+' || signum == '-') {
+        final char sign = carray[start - 1];
+        if (sign == '+' || sign == '-') {
             for (int j = start - 2; j >= 0; j--) {
                 final char cj = carray[j];
                 if (cj == '*' || cj == '/' || cj == '(' || cj == '+' ||
@@ -129,13 +126,6 @@ public class FastDoubleElement<T,C>
 
     private boolean isDigit(final char c) {
         return c >= '0' && c <= '9';
-    }
-
-    /** Override if you need something different from {@code double}. */
-    @Override
-    @SuppressWarnings("unchecked")
-    public T evaluate(final String value, List<T> params, C context) {
-        return (T) Double.valueOf(value);
     }
 
     @Override

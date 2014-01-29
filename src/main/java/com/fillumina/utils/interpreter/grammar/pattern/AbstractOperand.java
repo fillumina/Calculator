@@ -10,7 +10,7 @@ import java.util.List;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractOperand<T,C>
-        extends AbstractPatternGrammarElement<T,C> {
+        extends AbstractPatternElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     public AbstractOperand(final String symbolRegexp, final int priority) {

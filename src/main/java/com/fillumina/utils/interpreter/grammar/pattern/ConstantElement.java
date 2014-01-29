@@ -8,7 +8,7 @@ import java.util.List;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class ConstantElement<T,C>
-        extends AbstractPatternGrammarElement<T,C> {
+        extends AbstractPatternElement<T,C> {
     private static final long serialVersionUID = 1L;
     private final T constant;
 

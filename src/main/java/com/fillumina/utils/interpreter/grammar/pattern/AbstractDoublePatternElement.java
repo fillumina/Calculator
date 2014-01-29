@@ -8,8 +8,13 @@ import static com.fillumina.utils.interpreter.util.PatternBuilder.p_group;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class DoublePatternGrammarElement<T,C> extends AbstractOperand<T,C> {
+public abstract class AbstractDoublePatternElement<T,C>
+        extends AbstractOperand<T,C> {
     private static final long serialVersionUID = 1L;
+
+    public AbstractDoublePatternElement(final int priority) {
+        super(getDoublePattern(), priority);
+    }
 
     /*
      * DECIMAL in scientific notation regular expression.
@@ -19,14 +24,6 @@ public class DoublePatternGrammarElement<T,C> extends AbstractOperand<T,C> {
      *
      * (\\D\\ {100}) is wrong but works recognizing non digit chars
      */
-
-    public static final DoublePatternGrammarElement<?,?> INSTANCE =
-            new DoublePatternGrammarElement<>(0);
-
-    public DoublePatternGrammarElement(final int priority) {
-        super(getDoublePattern(), priority);
-    }
-
     public static String getDoublePattern() {
         return p()
             // the signum
@@ -55,12 +52,5 @@ public class DoublePatternGrammarElement<T,C> extends AbstractOperand<T,C> {
                         .digit().atLeastOnce()
             )
             .toString();
-    }
-
-    /** Override if you need something different from {@code double}. */
-    @Override
-    @SuppressWarnings("unchecked")
-    public T evaluate(final String value, final C context) {
-        return (T) Double.valueOf(value);
     }
 }

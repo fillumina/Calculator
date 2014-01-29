@@ -1,18 +1,19 @@
 package com.fillumina.utils.interpreter.grammar.fast;
 
 import com.fillumina.utils.interpreter.GrammarElement;
+import com.fillumina.utils.interpreter.grammar.FastDoubleElement;
 import org.junit.Test;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastIntegerGrammarElementTest
+public class DoubleFastElementTest
         extends NumberGrammarElementTestBase {
 
     @Override
     protected GrammarElement<Double, Void> getNumberGrammarElement() {
-        return (GrammarElement<Double, Void>) FastIntegerElement.INSTANCE;
+        return (GrammarElement<Double, Void>) FastDoubleElement.INSTANCE;
     }
 
     @Test
@@ -26,8 +27,8 @@ public class FastIntegerGrammarElementTest
     }
 
     @Test
-    public void shouldNotRecognizeThePoint() {
-        recognize("1", "1.0");
+    public void shouldRecognizeThePoint() {
+        recognize("1.0", "1.0");
     }
 
     @Test
@@ -37,7 +38,12 @@ public class FastIntegerGrammarElementTest
 
     @Test
     public void shouldRecognizeANumberStartingWithAPoint() {
-        recognize("1", ".1");
+        recognize(".1", ".1");
+    }
+
+    @Test
+    public void shouldRecognizeANumberStartingWithAPointAndSpace() {
+        recognize(".1", " .1");
     }
 
     @Test
@@ -47,17 +53,17 @@ public class FastIntegerGrammarElementTest
 
     @Test
     public void shouldNotRecognizeTwoPoints() {
-        recognize("12", "12.10.12");
+        recognize("12.10", "12.10.12");
     }
 
     @Test
     public void shouldNotRecognizeTwoPointsWhenOneIsThefirstCharacter() {
-        recognize("10", ".10.12");
+        recognize(".10", ".10.12");
     }
 
     @Test
     public void shouldRecognizeABigNumberWithSpacesAround() {
-        recognize("0100", "  0100.12345 ");
+        recognize("0100.12345", "  0100.12345 ");
     }
 
     @Test
@@ -71,52 +77,52 @@ public class FastIntegerGrammarElementTest
     }
 
     @Test
-    public void shouldRecognizeASignedDigitInAlphaString() {
-        recognize("-1", " -1_ string");
+    public void shouldNotRecognizeASignedDigitInAlphaStringWithoutParOrOperator() {
+        recognize("1", " -1_ string");
     }
 
     @Test
     public void shouldRecognizeABigNumberWithSpacesAndCharactersAround() {
-        recognize("0100", " a l pha 0100.12345beta ");
+        recognize("0100.12345", " a l pha 0100.12345beta ");
     }
 
     @Test
     public void shouldRecognizeABigNumberWithSpacesAndCharactersAround2() {
-        recognize("0100", " a l pha0100.12345 b e ta ");
+        recognize("0100.12345", " a l pha0100.12345 b e ta ");
     }
 
     @Test
     public void shouldRecognizeANumberWithAnotherNumberAfter() {
-        recognize("0100", " 0100.12345 123 ");
+        recognize("0100.12345", " 0100.12345 123 ");
     }
 
     @Test
     public void shoudRecognizeTheScientificNotation() {
-        recognize("12", " 12.34E567 E e");
+        recognize("12.34E567", " 12.34E567 E e");
     }
 
     @Test
     public void shoudRecognizeTheScientificNotationEndingWithAnA() {
-        recognize("12", " 12.34E567A a");
+        recognize("12.34E567", " 12.34E567A a");
     }
 
     @Test
     public void shoudRecognizeTheScientificNotationEndingWithAnE() {
-        recognize("12", " 12.34E567E e");
+        recognize("12.34E567", " 12.34E567E e");
     }
 
     @Test
     public void shoudRecognizeTheScientificNotationWithSignumInExp() {
-        recognize("12", " 12.34E+567 ");
+        recognize("12.34E+567", " 12.34E+567 ");
     }
 
     @Test
     public void shoudRecognizeTheScientificNotationWithSignumMinusInExp() {
-        recognize("12", " 12.34E-567 ");
+        recognize("12.34E-567", " 12.34E-567 ");
     }
 
     @Test
-    public void shoudRecognizeTheSignedScientificNotationWithSignumInExp() {
-        recognize("-12", " -12.34E-567 ");
+    public void shoudNotRecognizeTheSignedScientificNotationWithSignumInExp() {
+        recognize("12.34E-567", " -12.34E-567 ");
     }
 }

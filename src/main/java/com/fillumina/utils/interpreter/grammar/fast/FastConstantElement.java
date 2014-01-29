@@ -9,7 +9,7 @@ import java.util.List;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class FastConstantElement<T,C>
-        extends AbstractFastGrammarElement<T,C> {
+        extends AbstractFastElement<T,C> {
     private static final long serialVersionUID = 1L;
     private final T constant;
 

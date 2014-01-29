@@ -3,7 +3,7 @@ package com.fillumina.utils.interpreter.grammar.fast.instances;
 import static java.lang.Math.*;
 import com.fillumina.utils.interpreter.Grammar;
 import com.fillumina.utils.interpreter.GrammarElement;
-import com.fillumina.utils.interpreter.grammar.fast.FastDoubleElement;
+import com.fillumina.utils.interpreter.grammar.fast.AbstractDoubleFastElement;
 import com.fillumina.utils.interpreter.grammar.fast.FastCloseParentheses;
 import com.fillumina.utils.interpreter.grammar.fast.AbstractFastOperator;
 import com.fillumina.utils.interpreter.grammar.fast.FastConstantElement;
@@ -34,8 +34,15 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
     @SuppressWarnings("unchecked")
     private FastArithmeticGrammar() {
         super(
-        (GrammarElement<Double,Map<String, Double>>)
-                FastDoubleElement.INSTANCE,
+        new AbstractDoubleFastElement<Double,Map<String, Double>>(0) {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public Double evaluate(final String value, final List<Double> params,
+                    final Map<String, Double> context) {
+                return Double.valueOf(value);
+            }
+        },
 
         new AbstractFastOperator<Double,Map<String, Double>>("!", 5, 1, 0) {
             private static final long serialVersionUID = 1L;

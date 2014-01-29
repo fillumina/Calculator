@@ -9,13 +9,13 @@ import com.fillumina.utils.interpreter.GrammarElementMatcher;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class AbstractFastGrammarElement<T,C>
-        extends AbstractFastMatchingGrammarElement<T, C> {
+public abstract class AbstractFastElement<T,C>
+        extends AbstractMatchingFastElement<T, C> {
     private static final long serialVersionUID = 1L;
 
     private final String symbol;
 
-    public AbstractFastGrammarElement(final String symbol,
+    public AbstractFastElement(final String symbol,
             final int priority,
             final int operandsBefore,
             final int operandsAfter) {

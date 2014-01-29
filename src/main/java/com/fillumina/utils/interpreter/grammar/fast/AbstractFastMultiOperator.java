@@ -7,7 +7,7 @@ import com.fillumina.utils.interpreter.GrammarElementType;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractFastMultiOperator<T,C>
-        extends AbstractFastMultiGrammarElement<T, C> {
+        extends AbstractMultiFastElement<T, C> {
     private static final long serialVersionUID = 1L;
 
     public AbstractFastMultiOperator(final int priority,

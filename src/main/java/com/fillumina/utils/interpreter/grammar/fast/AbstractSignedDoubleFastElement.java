@@ -3,21 +3,21 @@ package com.fillumina.utils.interpreter.grammar.fast;
 import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
 
 /**
- * Eats the signum whatever the conditions.
- * 
+ * Eats the sign eagerly whatever the conditions. To be used in mixed
+ * string - number grammars so that the sign could not be confounded
+ * with the operation.
+ *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastSignedDoubleElement<T,C> extends FastDoubleElement<T,C> {
+public abstract class AbstractSignedDoubleFastElement<T,C>
+        extends AbstractDoubleFastElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public static final AbstractComparableGrammarElement<?,?> INSTANCE =
-            new FastSignedDoubleElement<>(0);
-
-    public FastSignedDoubleElement(final int priority) {
+    public AbstractSignedDoubleFastElement(final int priority) {
         super(priority);
     }
 
-    public FastSignedDoubleElement(final int priority,
+    public AbstractSignedDoubleFastElement(final int priority,
             final char decimalSeparator) {
         super(priority, decimalSeparator);
     }
@@ -25,7 +25,7 @@ public class FastSignedDoubleElement<T,C> extends FastDoubleElement<T,C> {
     @Override
     protected boolean isPreceededByASignumAndAnOperatorOrParentheses(
             char[] carray, int start) {
-        final char signum = carray[start - 1];
-        return (signum == '+' || signum == '-');
+        final char sign = carray[start - 1];
+        return (sign == '+' || sign == '-');
     }
 }
