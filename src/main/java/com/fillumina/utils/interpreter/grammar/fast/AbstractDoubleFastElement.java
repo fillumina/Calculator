@@ -4,6 +4,7 @@ import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
+import java.util.List;
 
 /**
  * This way of managing numbers is at least 2 times faster than
@@ -30,7 +31,7 @@ public abstract class AbstractDoubleFastElement<T,C>
     @Override
     public GrammarElementMatcher match(final String expression) {
         final char[] carray = expression.toCharArray();
-        int start = findStartOfNumber(carray, 0);
+        int start = findFirstDigitOrPointIndex(carray, 0);
         if (start == -1) {
             return FastElementMatcher.NOT_FOUND;
         }
@@ -80,10 +81,10 @@ public abstract class AbstractDoubleFastElement<T,C>
                 return FastElementMatcher.NOT_FOUND;
             }
         }
-//        if (start > 0 &&
-//                isPreceededByASignumAndAnOperatorOrParentheses(carray, start)) {
-//            start --; // includes the signum
-//        }
+        if (start > 0 &&
+                isPreceededByASignumAndAnOperatorOrParentheses(carray, start)) {
+            start --; // includes the signum
+        }
         return new FastElementMatcher(start, end);
     }
 
@@ -112,23 +113,13 @@ public abstract class AbstractDoubleFastElement<T,C>
         return false;
     }
 
-    protected int findStartOfNumber(final char[] carray,
+    private int findFirstDigitOrPointIndex(final char[] carray,
             final int start) {
-        boolean acceptableSign=false;
         for (int i=start; i<carray.length; i++) {
             final char c = carray[i];
-            if (acceptableSign &&
-                    (c == '+' || c == '-') &&
-                    i < (carray.length - 1) &&
-                    isDigit(carray[i+1]) ) {
-                return i;
-            }
             if (isDigit(c) || c == decimalSeparator) {
                 return i;
             }
-            acceptableSign = (c == '*' || c == '/' || c == '(' || c == '+' ||
-                c == '-' || c == '^') ||
-                    (acceptableSign && (c == ' ' || c == '\n' || c == '\t'));
         }
         return -1;
     }
