@@ -1,7 +1,5 @@
 package com.fillumina.utils.interpreter.grammar.fast;
 
-import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
-
 /**
  * Eats the sign eagerly whatever the conditions. To be used in mixed
  * string - number grammars so that the sign could not be confounded

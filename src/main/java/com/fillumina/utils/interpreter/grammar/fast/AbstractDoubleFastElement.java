@@ -4,7 +4,6 @@ import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
 import com.fillumina.utils.interpreter.grammar.pattern.AbstractOperand;
-import java.util.List;
 
 /**
  * This way of managing numbers is at least 2 times faster than
