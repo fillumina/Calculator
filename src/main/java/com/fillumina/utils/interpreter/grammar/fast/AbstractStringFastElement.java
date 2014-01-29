@@ -30,10 +30,14 @@ public abstract class AbstractStringFastElement<T,C>
                 escape = false;
             } else if (c == '\\') {
                 escape = true;
-            } else if (start == -1 && !isWhitespace(c) /*c == '\'' || c == '\"'*/) {
+            } else if (start == -1 && !isWhitespace(c)) {
                 start = i;
-            } else if (start != -1 && isWhitespace(c)) {
-                return new FastElementMatcher(start, i);
+            } else if (start != -1) {
+                if (isWhitespace(c)) {
+                    return new FastElementMatcher(start, i);
+                } else if (i == length -1) {
+                    return new FastElementMatcher(start, i + 1);
+                }
             }
         }
         return FastElementMatcher.NOT_FOUND;

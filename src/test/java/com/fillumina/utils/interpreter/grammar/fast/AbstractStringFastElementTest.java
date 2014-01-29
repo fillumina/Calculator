@@ -28,6 +28,11 @@ public class AbstractStringFastElementTest extends GrammarElementTestBase {
     }
 
     @Test
+    public void shouldRecognizeAString() {
+        recognize("abc", "abc");
+    }
+
+    @Test
     public void shouldNotRecognizeTheEmptyString() {
         notRecognize("");
     }
