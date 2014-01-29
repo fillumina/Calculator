@@ -9,10 +9,10 @@ import org.junit.Test;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class DoubleFastElementTest
-        extends NumberGrammarElementTestBase {
+        extends GrammarElementTestBase {
 
     @Override
-    protected GrammarElement<Double, Void> getNumberGrammarElement() {
+    protected GrammarElement<Double, Void> getGrammarElement() {
         return (GrammarElement<Double, Void>) FastDoubleElement.INSTANCE;
     }
 

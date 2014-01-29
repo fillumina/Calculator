@@ -77,10 +77,6 @@ public abstract class AbstractIntegerFastElement<T,C>
         return -1;
     }
 
-    private boolean isDigit(final char c) {
-        return c >= '0' && c <= '9';
-    }
-
     @Override
     public int getRequiredOperandsAfter() {
         return 0;

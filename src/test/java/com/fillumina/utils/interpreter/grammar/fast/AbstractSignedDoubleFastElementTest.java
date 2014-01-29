@@ -9,7 +9,7 @@ import org.junit.Test;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class AbstractSignedDoubleFastElementTest
-        extends NumberGrammarElementTestBase {
+        extends GrammarElementTestBase {
 
     @Test
     public void shouldCaptureTheSign() {
@@ -32,7 +32,7 @@ public class AbstractSignedDoubleFastElementTest
     }
 
     @Override
-    protected GrammarElement<Double, Void> getNumberGrammarElement() {
+    protected GrammarElement<Double, Void> getGrammarElement() {
         return new AbstractSignedDoubleFastElement<Double, Void>(0) {
             private static final long serialVersionUID = 1L;
 

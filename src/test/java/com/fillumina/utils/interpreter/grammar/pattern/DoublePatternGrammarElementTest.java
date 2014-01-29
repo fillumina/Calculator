@@ -12,7 +12,7 @@ public class DoublePatternGrammarElementTest
         extends DoubleFastElementTest {
 
     @Override
-    protected GrammarElement<Double, Void> getNumberGrammarElement() {
+    protected GrammarElement<Double, Void> getGrammarElement() {
         return (GrammarElement<Double, Void>)
                 DoublePatternElement.INSTANCE;
     }

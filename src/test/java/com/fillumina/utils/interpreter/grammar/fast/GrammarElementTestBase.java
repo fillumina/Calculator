@@ -8,12 +8,12 @@ import static org.junit.Assert.*;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class NumberGrammarElementTestBase {
+public abstract class GrammarElementTestBase {
 
-    protected abstract GrammarElement<Double, Void> getNumberGrammarElement();
+    protected abstract GrammarElement<Double, Void> getGrammarElement();
 
     protected void recognize(final String expected, final String expression) {
-        final GrammarElementMatcher matcher = getNumberGrammarElement().
+        final GrammarElementMatcher matcher = getGrammarElement().
                 match(expression);
         if (!matcher.isFound()) {
             throw new AssertionError(expression + " not matches");
@@ -24,7 +24,7 @@ public abstract class NumberGrammarElementTestBase {
     }
 
     protected void notRecognize(final String expression) {
-        final GrammarElementMatcher matcher = getNumberGrammarElement().
+        final GrammarElementMatcher matcher = getGrammarElement().
                 match(expression);
         if (matcher.isFound()) {
             throw new AssertionError("found: '" +
