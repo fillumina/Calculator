@@ -2,8 +2,8 @@ package com.fillumina.utils.interpreter.grammar.fast;
 
 import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.grammar.StringFastElement;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -23,27 +23,17 @@ public class AbstractStringFastElementTest extends GrammarElementTestBase {
     }
 
     @Test
-    public void shouldFindTheSingleQuotedString() {
-        recognize("'abc def'", "lkdjlk 'abc def' lklkew3 _");
+    public void shouldFindTheString() {
+        recognize("abc", "  abc  ");
     }
 
     @Test
-    public void shouldRecognizeTheEmptyString() {
-        recognize("''", "ljldkjsp''lfkd");
-    }
-
-    @Test
-    public void shouldRecognizeTheDoubleQuotedString() {
-        recognize("\"1234\"", "a;la assl \"1234\"");
-    }
-
-    @Test
-    public void shouldRecognizeTheStringWithoutSpacesAround() {
-        recognize("\"1234\"", "\"1234\"");
+    public void shouldNotRecognizeTheEmptyString() {
+        notRecognize("");
     }
 
     @Test
     public void shouldRecognizeAnEscapedQuote() {
-        recognize("'123\\'4'", "  '123\\'4' ");
+        recognize("123\\'4", "  123\\'4 ");
     }
 }

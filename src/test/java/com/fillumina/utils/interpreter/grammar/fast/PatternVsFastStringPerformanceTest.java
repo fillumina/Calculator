@@ -8,7 +8,7 @@ import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTempl
 import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.GrammarElementType;
-import com.fillumina.utils.interpreter.grammar.StringFastElement;
+import com.fillumina.utils.interpreter.grammar.QuotedStringFastElement;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -81,8 +81,8 @@ public class PatternVsFastStringPerformanceTest
         final AbstractComparableGrammarElement<Void,Void> patternString =
                 new PatternStringElement();
 
-        final StringFastElement fastString =
-                StringFastElement.INSTANCE;
+        final QuotedStringFastElement fastString =
+                QuotedStringFastElement.INSTANCE;
 
         final String string = "allkjldskjf'hello kitti'akl";
 

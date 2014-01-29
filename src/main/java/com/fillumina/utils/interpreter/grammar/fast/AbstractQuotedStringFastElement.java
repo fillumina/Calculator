@@ -3,18 +3,17 @@ package com.fillumina.utils.interpreter.grammar.fast;
 import com.fillumina.utils.interpreter.AbstractComparableGrammarElement;
 import com.fillumina.utils.interpreter.GrammarElementMatcher;
 import com.fillumina.utils.interpreter.GrammarElementType;
-import static java.lang.Character.isWhitespace;
 
 /**
  * Extracts strings surrounded by single or double quotes.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class AbstractStringFastElement<T,C>
+public abstract class AbstractQuotedStringFastElement<T,C>
         extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public AbstractStringFastElement(int priority) {
+    public AbstractQuotedStringFastElement(int priority) {
         super(priority);
     }
 
@@ -22,6 +21,7 @@ public abstract class AbstractStringFastElement<T,C>
     public GrammarElementMatcher match(final String expression) {
         final char[] carray = expression.toCharArray();
         int start = -1;
+        char quote = 0;
         boolean escape = false;
         final int length = carray.length;
         for (int i=0; i<length; i++) {
@@ -30,10 +30,13 @@ public abstract class AbstractStringFastElement<T,C>
                 escape = false;
             } else if (c == '\\') {
                 escape = true;
-            } else if (start == -1 && !isWhitespace(c) /*c == '\'' || c == '\"'*/) {
-                start = i;
-            } else if (start != -1 && isWhitespace(c)) {
-                return new FastElementMatcher(start, i);
+            } else if (c == '\'' || c == '\"') {
+                if (quote == 0) {
+                    start = i;
+                    quote = c;
+                } else if (c == quote) {
+                    return new FastElementMatcher(start, i + 1);
+                }
             }
         }
         return FastElementMatcher.NOT_FOUND;
