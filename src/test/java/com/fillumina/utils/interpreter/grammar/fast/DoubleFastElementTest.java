@@ -1,7 +1,7 @@
 package com.fillumina.utils.interpreter.grammar.fast;
 
 import com.fillumina.utils.interpreter.GrammarElement;
-import com.fillumina.utils.interpreter.grammar.FastDoubleElement;
+import com.fillumina.utils.interpreter.grammar.DoubleFastElement;
 import org.junit.Test;
 
 /**
@@ -13,7 +13,7 @@ public class DoubleFastElementTest
 
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return (GrammarElement<Double, Void>) FastDoubleElement.INSTANCE;
+        return (GrammarElement<Double, Void>) DoubleFastElement.INSTANCE;
     }
 
     @Test

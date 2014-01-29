@@ -36,14 +36,20 @@ public abstract class AbstractDateFastElement<T,C>
 
     @Override
     public GrammarElementMatcher match(final String expression) {
+        final int startPos = getStartingPos(expression);
+        if (startPos == -1) {
+            // fast fail
+            return FastElementMatcher.NOT_FOUND;
+        }
         final char[] cpattern = this.cpattern; // cache locally
         final char[] carray = expression.toCharArray();
-        final int startPos = getStartingPos(expression);
         int patternIndex = 0;
         int start = -1;
-        for (int i=startPos; i<carray.length; i++) {
+        final int plength = cpattern.length;
+        final int clength = carray.length;
+        for (int i=startPos; i<clength; i++) {
             final char c = carray[i];
-            if (patternIndex == cpattern.length) {
+            if (patternIndex == plength) {
                 return new FastElementMatcher(start, i);
             } else if (isDigit(c)) {
                 if (!isNotAlpha(cpattern[patternIndex])) {
@@ -99,9 +105,12 @@ public abstract class AbstractDateFastElement<T,C>
 
     private int getStartingPos(final String expression) {
         if (firstNonDigitPosition == -1) {
-            return 0;
+            return 0; // the pattern have only digits
         }
         final int pos = expression.indexOf(firstNonDigitChar);
+        if (pos == -1) {
+            return -1; // the expression doesn't contain a valid date
+        }
         final int startingPos = pos - firstNonDigitPosition;
         return startingPos > 0 ? startingPos : 0;
     }

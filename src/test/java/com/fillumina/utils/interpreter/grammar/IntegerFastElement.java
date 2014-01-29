@@ -7,14 +7,14 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastIntegerElement
+public class IntegerFastElement
         extends AbstractIntegerFastElement<Double,Void> {
     private static final long serialVersionUID = 1L;
 
-    public static final FastIntegerElement INSTANCE =
-            new FastIntegerElement();
+    public static final IntegerFastElement INSTANCE =
+            new IntegerFastElement();
 
-    public FastIntegerElement() {
+    public IntegerFastElement() {
         super(0);
     }
 

@@ -7,13 +7,13 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastDoubleElement extends AbstractDoubleFastElement<Double,Void> {
+public class DoubleFastElement extends AbstractDoubleFastElement<Double,Void> {
     private static final long serialVersionUID = 1L;
 
-    public static final FastDoubleElement INSTANCE =
-            new FastDoubleElement();
+    public static final DoubleFastElement INSTANCE =
+            new DoubleFastElement();
 
-    public FastDoubleElement() {
+    public DoubleFastElement() {
         super(0);
     }
 
