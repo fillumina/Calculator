@@ -1,5 +1,6 @@
 package com.fillumina.utils.interpreter;
 
+import com.fillumina.utils.interpreter.util.ImmutableIterator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,9 +41,10 @@ public class Grammar<T,C>
         elements = Collections.unmodifiableList(new ArrayList<>(collection));
     }
 
+    /** Always returns an immutable {@link Iterator}. */
     @Override
     public Iterator<GrammarElement<T, C>> iterator() {
-        return elements.iterator();
+        return new ImmutableIterator<>(elements.iterator());
     }
 
     /**

@@ -25,6 +25,7 @@ public abstract class AbstractDateFastElement<T,C>
      * @param priority  the priority at which this operand is evaluated
      *                  (usually 0)
      * @param pattern   Something of type "dd/MM/yy HH:mm:ss" or "dd/MM/yy"
+     *                  see {@link DateFormat}.
      */
     public AbstractDateFastElement(final int priority, final String pattern) {
         super(priority);
