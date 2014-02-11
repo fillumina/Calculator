@@ -11,10 +11,10 @@ public abstract class AbstractFastOperator<T,C>
         extends AbstractFastElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public AbstractFastOperator(final String symbol,
-            final int priority,
+    public AbstractFastOperator(final int priority,
             final int operandsBefore,
-            final int operandsAfter) {
+            final int operandsAfter,
+            final String symbol) {
         super(symbol, priority, operandsBefore, operandsAfter);
     }
 

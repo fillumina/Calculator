@@ -44,7 +44,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("!", 5, 1, 0) {
+        new AbstractFastOperator<Double,Map<String, Double>>(5, 1, 0, "!") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -60,7 +60,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("asin", 4, 0, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(4, 0, 1, "asin") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -70,7 +70,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("acos", 4, 0, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(4, 0, 1, "acos") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -81,7 +81,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
 
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("atan", 4, 0, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(4, 0, 1, "atan") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -91,7 +91,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("sin", 4, 0, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(4, 0, 1, "sin") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -101,7 +101,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("cos", 4, 0, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(4, 0, 1, "cos") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -112,7 +112,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
 
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("tan", 4, 0, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(4, 0, 1, "tan") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -122,7 +122,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("log", 4, 0, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(4, 0, 1, "log") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -132,7 +132,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("ln", 4, 0, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(4, 0, 1, "ln") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -142,7 +142,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("sqr", 4, 0, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(4, 0, 1, "sqr") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -152,8 +152,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        // doesn't accept any parameter
-        new AbstractFastOperator<Double,Map<String, Double>>("rnd", 4, 0, 0) {
+                new AbstractFastOperator<Double,Map<String, Double>>(4, 0, 0, "rnd") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -163,9 +162,8 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        // accepts many parameters
-        new AbstractFastOperator<Double,Map<String, Double>>("avg", 4, 0,
-                Integer.MAX_VALUE) {
+                new AbstractFastOperator<Double,Map<String, Double>>(4, 0,
+                Integer.MAX_VALUE, "avg") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -183,7 +181,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("^", 3, 1, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(3, 1, 1, "^") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -193,7 +191,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("*", 2, 1, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(2, 1, 1, "*") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -203,7 +201,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("/", 2, 1, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(2, 1, 1, "/") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -213,7 +211,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("+", 1, 1, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(1, 1, 1, "+") {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -223,7 +221,7 @@ public class FastArithmeticGrammar extends Grammar<Double, Map<String, Double>>
             }
         },
 
-        new AbstractFastOperator<Double,Map<String, Double>>("-", 1, 1, 1) {
+        new AbstractFastOperator<Double,Map<String, Double>>(1, 1, 1, "-") {
             private static final long serialVersionUID = 1L;
 
             @Override
