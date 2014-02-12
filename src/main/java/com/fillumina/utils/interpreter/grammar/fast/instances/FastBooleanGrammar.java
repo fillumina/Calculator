@@ -3,7 +3,7 @@ package com.fillumina.utils.interpreter.grammar.fast.instances;
 import com.fillumina.utils.interpreter.Grammar;
 import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.grammar.fast.FastCloseParentheses;
-import com.fillumina.utils.interpreter.grammar.fast.FastMultiConstant;
+import com.fillumina.utils.interpreter.grammar.fast.ValueFastMultiConstant;
 import com.fillumina.utils.interpreter.grammar.fast.AbstractFastMultiOperator;
 import com.fillumina.utils.interpreter.grammar.fast.FastOpenParentheses;
 import com.fillumina.utils.interpreter.grammar.fast.FastVariableSetterOperator;
@@ -77,9 +77,9 @@ public class FastBooleanGrammar extends Grammar<Boolean, Map<String, Boolean>>
             (GrammarElement<Boolean,Map<String, Boolean>>)
                     VeryFastWhiteSpace.INSTANCE,
 
-            new FastMultiConstant<Boolean,Map<String,Boolean>>(
+            new ValueFastMultiConstant<Boolean,Map<String,Boolean>>(
                     true, 0, "true", "TRUE", "True"),
-            new FastMultiConstant<Boolean,Map<String,Boolean>>(
+            new ValueFastMultiConstant<Boolean,Map<String,Boolean>>(
                     false, 0, "false", "FALSE", "False"),
 
             new VariableContextManager<Boolean>()
