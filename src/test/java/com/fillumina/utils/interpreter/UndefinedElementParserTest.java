@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class UndefinedElementParserTest {
 
     private final Tokenizer<Double, Map<String, Double>> tokenizer =
-            new GrammarBasedTokenizer<>(ArithmeticGrammar.INSTANCE);
+            new Tokenizer<>(ArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldRecognizeTheUndefinedVariable() {

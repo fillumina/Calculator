@@ -34,12 +34,12 @@ public class Calculator<T,C> implements Serializable {
      */
     @SuppressWarnings("unchecked")
     public Calculator(final Iterable<GrammarElement<T,C>> grammar) {
-        this(new GrammarBasedInterpreter<>(grammar), DefaultSolver.INSTANCE);
+        this(new Interpreter<>(grammar), DefaultSolver.INSTANCE);
     }
 
     public Calculator(final Iterable<GrammarElement<T,C>> grammar,
             final Solver solver) {
-        this(new GrammarBasedInterpreter<>(grammar), solver);
+        this(new Interpreter<>(grammar), solver);
     }
 
     /** Defines your own interpreter and solver. */

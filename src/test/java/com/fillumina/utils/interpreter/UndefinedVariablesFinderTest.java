@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class UndefinedVariablesFinderTest {
 
     private final Interpreter<Double, Map<String,Double>> interpreter =
-            new GrammarBasedInterpreter<>(ArithmeticGrammar.INSTANCE);
+            new Interpreter<>(ArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldRecognizeTheUndefinedVariables() {

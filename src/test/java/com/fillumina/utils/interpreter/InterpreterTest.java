@@ -19,7 +19,7 @@ public class InterpreterTest {
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar = new Grammar<>(grammarElement);
 
-        final Interpreter<String,Void> interpreter = new GrammarBasedInterpreter<>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("123");
 
         assertEquals(grammarElement, solution.get(0).getGrammarElement());
@@ -32,7 +32,7 @@ public class InterpreterTest {
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar = new Grammar<>(grammarElement);
 
-        final Interpreter<String,Void> interpreter = new GrammarBasedInterpreter<>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("123");
 
         assertEquals("123", solution.get(0).getExpression());
@@ -45,7 +45,7 @@ public class InterpreterTest {
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar = new Grammar<>(operator, number);
 
-        final Interpreter<String,Void> interpreter = new GrammarBasedInterpreter<>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("$123");
 
         assertEquals(operator, solution.get(0).getGrammarElement());
@@ -61,7 +61,7 @@ public class InterpreterTest {
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar = new Grammar<>(operator, number);
 
-        final Interpreter<String,Void> interpreter = new GrammarBasedInterpreter<>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("5*2");
 
         assertEquals("[{* -> [{5}, {2}]}]", solution.toString());
@@ -79,7 +79,7 @@ public class InterpreterTest {
         final Grammar<String,Void> grammar =
                 new Grammar<>(number, multiply, minus);
 
-        final Interpreter<String,Void> interpreter = new GrammarBasedInterpreter<>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("5*-2");
 
         assertEquals("[{* -> [{5}, {- -> [{2}]}]}]", solution.toString());
@@ -94,7 +94,7 @@ public class InterpreterTest {
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar = new Grammar<>(string, upper);
 
-        final Interpreter<String,Void> interpreter = new GrammarBasedInterpreter<>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("upper'hello world'");
 
         assertEquals("[{upper -> [{'hello world'}]}]", solution.toString());
@@ -112,7 +112,7 @@ public class InterpreterTest {
         final Grammar<String,Void> grammar =
                 new Grammar<>(number, multiply, minus);
 
-        final Interpreter<String,Void> interpreter = new GrammarBasedInterpreter<>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("2*5-8");
 
         assertEquals("[{- -> [{* -> [{2}, {5}]}, {8}]}]", solution.toString());
@@ -134,7 +134,7 @@ public class InterpreterTest {
         final Grammar<String,Void> grammar =
                 new Grammar<>(number, multiply, minus, openPar, closePar);
 
-        final Interpreter<String,Void> interpreter = new GrammarBasedInterpreter<>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("2*(5-8)");
 
         assertEquals("[{* -> [{2}, {- -> [{5}, {8}]}]}]",
@@ -159,7 +159,7 @@ public class InterpreterTest {
         final Grammar<String,Void> grammar =
                 new Grammar<>(number, multiply, sin, minus, openPar, closePar);
 
-        final Interpreter<String,Void> interpreter = new GrammarBasedInterpreter<>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("2*sin(5-8)");
 
         assertEquals("[{* -> [{2}, {sin -> [{- -> [{5}, {8}]}]}]}]",
@@ -181,7 +181,7 @@ public class InterpreterTest {
         final Grammar<String,Void> grammar = new Grammar<>(number,
                 multiply, sin, minus, sum, openPar, closePar, whiteSpace);
 
-        final Interpreter<String,Void> interpreter = new GrammarBasedInterpreter<>(grammar);
+        final Interpreter<String,Void> interpreter = new Interpreter<>(grammar);
         final List<Node<String,Void>> solution = interpreter.parse("3 * sin( 3 + 5-8)-6");
 
         assertEquals("[{- -> [{* -> [{3}, {sin -> [{- -> [{+ -> [{3}, {5}]}, {8}]}]}]}, {6}]}]",

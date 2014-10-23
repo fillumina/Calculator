@@ -50,7 +50,7 @@ public class PruningSolverTest {
                         whitespace);
 
         final Interpreter<String,Map<String,String>> interpreter =
-                new GrammarBasedInterpreter<>(grammar);
+                new Interpreter<>(grammar);
 
         final List<Node<String,Map<String,String>>> solution =
                 interpreter.parse("@ 1 a (@ 1 2) 3");

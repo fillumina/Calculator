@@ -17,7 +17,7 @@ public class TokenizerTest {
         @SuppressWarnings("unchecked")
         final Grammar<String, Void> grammar = new Grammar<>(number, operator);
 
-        final Tokenizer<String, Void> tokenizer = new GrammarBasedTokenizer<>(grammar);
+        final Tokenizer<String, Void> tokenizer = new Tokenizer<>(grammar);
         final List<Node<String,Void>> list = tokenizer.tokenize("12*3*2");
 
         assertEquals("[{12}, {*}, {3}, {*}, {2}]", list.toString());
@@ -31,7 +31,7 @@ public class TokenizerTest {
         @SuppressWarnings("unchecked")
         final Grammar<String, Void> grammar = new Grammar<>(number, multiply, sum);
 
-        final Tokenizer<String, Void> tokenizer = new GrammarBasedTokenizer<>(grammar);
+        final Tokenizer<String, Void> tokenizer = new Tokenizer<>(grammar);
         final List<Node<String,Void>> list = tokenizer.tokenize("12*7+9");
 
         assertEquals("[{12}, {*}, {7}, {+}, {9}]", list.toString());
@@ -46,7 +46,7 @@ public class TokenizerTest {
         final Grammar<String, Void> grammar =
                 new Grammar<>(number, multiply, sum);
 
-        final Tokenizer<String, Void> tokenizer = new GrammarBasedTokenizer<>(grammar);
+        final Tokenizer<String, Void> tokenizer = new Tokenizer<>(grammar);
         final List<Node<String,Void>> list = tokenizer.tokenize("12,3*  7 + 9.33");
 
         assertEquals(

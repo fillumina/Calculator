@@ -18,7 +18,7 @@ public class OptimizerCalculator<T,C> implements Serializable {
     private final Interpreter<T,C> interpreter;
 
     public OptimizerCalculator(final Iterable<GrammarElement<T,C>> grammar) {
-        this.interpreter = new GrammarBasedInterpreter<>(grammar);
+        this.interpreter = new Interpreter<>(grammar);
     }
 
     @SuppressWarnings("unchecked")
