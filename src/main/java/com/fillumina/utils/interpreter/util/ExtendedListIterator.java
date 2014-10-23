@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
+ * Adds some methods to the {@link ListIterator}.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

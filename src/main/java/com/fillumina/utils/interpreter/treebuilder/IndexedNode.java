@@ -1,6 +1,5 @@
 package com.fillumina.utils.interpreter.treebuilder;
 
-import com.fillumina.utils.interpreter.GrammarElement;
 import com.fillumina.utils.interpreter.GrammarElementType;
 import com.fillumina.utils.interpreter.Node;
 import java.io.Serializable;
@@ -12,7 +11,7 @@ import java.util.ListIterator;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
+class IndexedNode<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final IndexedNode<?,?> NULL =
@@ -34,7 +33,7 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
         return (IndexedNode<T, C>) NULL;
     }
 
-    public static <T,C> IndexedNode<T,C> getFrom(
+    public static <T,C> IndexedNode<T,C> createFromNextItemIn(
             final ListIterator<Node<T,C>> iterator) {
         final int index = iterator.nextIndex();
         final Node<T,C> node = iterator.next();
@@ -79,26 +78,6 @@ class IndexedNode<T,C> implements Comparable<Node<T,C>>, Serializable {
         final Node<T,C> n = getNode();
         return n.getGrammarElement().getType() == GrammarElementType.OPEN_PAR &&
                 n.hasNoChildren();
-    }
-
-    public boolean lessThan(final IndexedNode<T,C> o) {
-        return compareTo(o.getNode()) < 0;
-    }
-
-    public boolean isNull() {
-        return NULL == this;
-    }
-
-    public boolean isEmptyOperator() {
-        final GrammarElementType type = getNode().getGrammarElement().getType();
-        return type == GrammarElementType.OPERATOR &&
-                getNode().hasNoChildren();
-    }
-
-    @Override
-    public int compareTo(final Node<T,C> o) {
-        final GrammarElement<T,C> ge = o.getGrammarElement();
-        return this.node.getGrammarElement().compareTo(ge);
     }
 
     @Override

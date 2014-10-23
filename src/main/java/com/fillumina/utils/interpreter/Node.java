@@ -52,6 +52,7 @@ public class Node<T,C> implements Cloneable, Serializable {
     public Node<T,C> addChildren(final Node<T,C> node) {
         if (children == Collections.EMPTY_LIST) {
             // LinkedList is much better suited for this algorithm
+            //TODO arraylist??
             children = new LinkedList<>();
         }
         children.add(node);

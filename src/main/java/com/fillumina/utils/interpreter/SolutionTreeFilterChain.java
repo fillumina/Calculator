@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * A filter chain that executes the passed list of filters in the given order.
+ * It implements the <i>chain of responsibility</i> pattern.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

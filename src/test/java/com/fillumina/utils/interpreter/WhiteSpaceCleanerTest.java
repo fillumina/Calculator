@@ -24,7 +24,7 @@ public class WhiteSpaceCleanerTest {
         final Grammar<String, Void> grammar =
                 new Grammar<>(number, multiply, sum, whiteSpace);
 
-        final Tokenizer<String, Void> tokenizer = new Tokenizer<>(grammar);
+        final Tokenizer<String, Void> tokenizer = new GrammarBasedTokenizer<>(grammar);
         final List<Node<String, Void>> list = tokenizer.tokenize("12,3*  7 + 9.33");
 
         assertEquals(

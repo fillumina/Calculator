@@ -28,6 +28,11 @@ public abstract class AbstractMatchingFastElement<T, C>
     protected GrammarElementMatcher matchSymbol(final String expression,
             final String symbol) {
         final int length = symbol.length();
+        final int expressionLength = expression.length();
+        final int difference = expressionLength - length;
+        if (difference < 0) {
+            return FastElementMatcher.NOT_FOUND;
+        }
         int idx = -1;
         while (true) {
             idx = expression.indexOf(symbol, idx + 1);
@@ -37,20 +42,17 @@ public abstract class AbstractMatchingFastElement<T, C>
             if (!(length == 1 && isOperator())) {
                 // single char operators are allowed not to be surrounded
                 // by spaces
-                if (idx > 0 && isChar(expression.charAt(idx - 1))) {
+                if (idx > 0 &&
+                        Character.isAlphabetic(expression.charAt(idx - 1))) {
                     continue;
                 }
-                if (idx + length < expression.length() &&
-                        isChar(expression.charAt(idx + length))) {
+                if (idx < difference &&
+                        Character.isAlphabetic(expression.charAt(idx + length))) {
                     continue;
                 }
             }
             return new FastElementMatcher(idx, idx + length);
         }
-    }
-
-    protected boolean isChar(final char c) {
-        return Character.isAlphabetic(c);
     }
 
     @Override

@@ -1,8 +1,6 @@
-package com.fillumina.utils.interpreter.treebuilder;
+package com.fillumina.utils.interpreter;
 
-import com.fillumina.utils.interpreter.GrammarElementType;
-import com.fillumina.utils.interpreter.Node;
-import com.fillumina.utils.interpreter.SolutionTreeFilter;
+import com.fillumina.utils.interpreter.treebuilder.ParenthesisMismatchedException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ListIterator;

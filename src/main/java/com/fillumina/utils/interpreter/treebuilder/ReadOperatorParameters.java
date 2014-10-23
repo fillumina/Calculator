@@ -16,16 +16,15 @@ class ReadOperatorParameters {
 
     public <T,C> void read(final List<Node<T,C>> list,
             final IndexedNode<T,C> higherPriority) {
-        final int index = higherPriority.getIndex();
-        final Node<T,C> node = list.get(index);
+        final Node<T,C> node = higherPriority.getNode();
 
-        final OperatorParameters<T,C> operator =
-                new OperatorParameters<>(higherPriority);
+        final OperatorParametersIndexes<T,C> operands =
+                new OperatorParametersIndexes<>(higherPriority);
 
         final ExtendedListIterator<Node<T,C>> iterator =
-                new ExtendedListIterator<>(list, operator.startOperandsIndex);
+                new ExtendedListIterator<>(list, operands.startIndex);
 
-        for (int i=0; i<operator.operandsBefore; i++) {
+        for (int i=0; i<operands.before; i++) {
             if (!iterator.hasNext()) {
                 break;
             }
@@ -34,7 +33,7 @@ class ReadOperatorParameters {
 
         iterator.next(); // jump over the node
 
-        for (int i=0; i<operator.operandsAfter; i++) {
+        for (int i=0; i<operands.after; i++) {
             if (!iterator.hasNext()) {
                 break;
             }
@@ -55,25 +54,25 @@ class ReadOperatorParameters {
         }
     }
 
-    private static class OperatorParameters<T,C> {
-        private final int startOperandsIndex;
-        private final int operandsBefore;
-        private final int operandsAfter;
+    private static class OperatorParametersIndexes<T,C> {
+        private final int startIndex;
+        private final int before;
+        private final int after;
 
-        public OperatorParameters(final IndexedNode<T,C> indexedNode) {
+        public OperatorParametersIndexes(final IndexedNode<T,C> indexedNode) {
             final GrammarElement<T,C> grammarElement =
                     indexedNode.getNode().getGrammarElement();
-            operandsAfter = grammarElement.getRequiredOperandsAfter();
+            after = grammarElement.getRequiredOperandsAfter();
 
             final int leftOperands = grammarElement.getRequiredOperandsBefore();
-            final int startIndex = indexedNode.getIndex() - leftOperands;
+            final int firstIndex = indexedNode.getIndex() - leftOperands;
 
-            if (startIndex < 0 ) {
-                startOperandsIndex = 0;
-                operandsBefore = indexedNode.getIndex() - 1;
+            if (firstIndex < 0 ) {
+                startIndex = 0;
+                before = indexedNode.getIndex() - 1;
             } else {
-                startOperandsIndex = startIndex;
-                operandsBefore = leftOperands;
+                startIndex = firstIndex;
+                before = leftOperands;
             }
         }
 

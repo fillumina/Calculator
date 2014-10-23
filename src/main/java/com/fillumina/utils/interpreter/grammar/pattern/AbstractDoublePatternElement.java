@@ -18,11 +18,7 @@ public abstract class AbstractDoublePatternElement<T,C>
 
     /*
      * DECIMAL in scientific notation regular expression.
-     * The problem here is that the - and + symbols shouldn't be included
-     * in the number if there is a digit before (eventually separated by spaces)
      * see http://www.regular-expressions.info/refadv.html
-     *
-     * (\\D\\ {100}) is wrong but works recognizing non digit chars
      */
     public static String getDoublePattern() {
         return p()

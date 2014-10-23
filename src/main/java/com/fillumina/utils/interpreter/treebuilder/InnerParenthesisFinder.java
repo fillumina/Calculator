@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
+ * Extracts the content of a couple of opened and closed parentheses
+ * putting the contained nodes as the children
+ * of the opened parentheses and removing the closed parentheses node.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
@@ -13,15 +16,20 @@ class InnerParenthesisFinder {
     static final InnerParenthesisFinder INSTANCE = new InnerParenthesisFinder();
 
     /**
-     * Extracts a sublist of the inner parenthesis content and put it
-     * in the children of the open parenthesis while the closed one is removed.
+     * Extracts a sublist with the nodes contained between an opened and a
+     * closed parentheses and put them as the children of the open parenthesis
+     * while the node containing the closed one is removed.
+     *
+     * @return the {@link Node} containing the opened parentheses or
+     *         {@code null} if no opened parentheses are found.
      */
     public <T,C> Node<T,C> find(final List<Node<T,C>> nodeList) {
         IndexedNode<T,C> openPar = null;
 
         final ListIterator<Node<T,C>> iterator = nodeList.listIterator();
         while (iterator.hasNext()) {
-            final IndexedNode<T,C> node = IndexedNode.getFrom(iterator);
+            final IndexedNode<T,C> node =
+                    IndexedNode.createFromNextItemIn(iterator);
 
             if (node.isAnEmptyOpenParenthesis()) {
                 openPar = node;
@@ -29,11 +37,11 @@ class InnerParenthesisFinder {
             } else if (node.isACloseParenthesis()) {
                 assertThereWasAnOpenParenthesisBefore(openPar);
                 node.remove();
-                if (openPar.isPreviousThan(node)) {
+                if (isEmptyParentheses(openPar, node)) {
                     openPar.remove();
                     openPar = null;
                 } else {
-                    getList(nodeList).from(openPar).to(node)
+                    extractFromList(nodeList).start(openPar).end(node)
                             .moveInnerNodesAsChildrenOf(openPar);
 
                     return openPar.getNode();
@@ -42,6 +50,13 @@ class InnerParenthesisFinder {
         }
         assertAllOpenParenthesisAreClosed(openPar);
         return null;
+    }
+
+    /** There is no content between the open and the closed parentheses. */
+    private static <T,C> boolean isEmptyParentheses(
+            final IndexedNode<T, C> openPar,
+            final IndexedNode<T, C> node) {
+        return openPar.isPreviousThan(node);
     }
 
     private <T,C> void assertAllOpenParenthesisAreClosed(
@@ -66,12 +81,12 @@ class InnerParenthesisFinder {
             this.nodeList = nodeList;
         }
 
-        private Extractor<T,C> from(final IndexedNode<T,C> start) {
+        private Extractor<T,C> start(final IndexedNode<T,C> start) {
             this.start = start;
             return this;
         }
 
-        private Extractor<T,C> to(final IndexedNode<T,C> end) {
+        private Extractor<T,C> end(final IndexedNode<T,C> end) {
             this.end = end;
             return this;
         }
@@ -92,7 +107,7 @@ class InnerParenthesisFinder {
         }
     }
 
-    private <T,C> Extractor<T,C> getList(final List<Node<T,C>> nodeList) {
+    private <T,C> Extractor<T,C> extractFromList(final List<Node<T,C>> nodeList) {
         return new Extractor<>(nodeList);
     }
 }

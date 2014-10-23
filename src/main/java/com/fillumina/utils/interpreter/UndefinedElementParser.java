@@ -23,7 +23,7 @@ public class UndefinedElementParser<T,C>
     public UndefinedElementParser(
             final Iterable<GrammarElement<T,C>> grammar) {
         Objects.requireNonNull(grammar, "grammar must not be null");
-        unrecognizedElement = getUnrecognizeElement(grammar);
+        unrecognizedElement = getUnrecognizedElement(grammar);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class UndefinedElementParser<T,C>
      * @return the <b>first</b> {@link GrammarElement} in the grammar of type
      *          {@link GrammarElementType#UNRECOGNIZED}.
      */
-    public static <T,C> GrammarElement<T,C> getUnrecognizeElement(
+    private static <T,C> GrammarElement<T,C> getUnrecognizedElement(
             final Iterable<GrammarElement<T,C>> grammar) {
         if (grammar != null) {
             for (GrammarElement<T,C> ge: grammar) {

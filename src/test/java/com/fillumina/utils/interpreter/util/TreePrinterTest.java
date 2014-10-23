@@ -1,5 +1,6 @@
 package com.fillumina.utils.interpreter.util;
 
+import com.fillumina.utils.interpreter.GrammarBasedInterpreter;
 import com.fillumina.utils.interpreter.Interpreter;
 import com.fillumina.utils.interpreter.Node;
 import java.util.Collection;
@@ -20,7 +21,7 @@ public class TreePrinterTest {
     @Before
     public void init() {
         final ArithmeticGrammar grammar = ArithmeticGrammar.INSTANCE;
-        interpreter = new Interpreter<>(grammar);
+        interpreter = new GrammarBasedInterpreter<>(grammar);
     }
 
     @Test
