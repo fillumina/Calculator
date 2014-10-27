@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Evaluates a node.
+ * Evaluates a node (it is part of the {@link Solver}).
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

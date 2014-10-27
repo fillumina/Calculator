@@ -10,13 +10,13 @@ import java.util.List;
  * if it encounters an undefined variable it simply saves the calculation up to
  * that, prunes the solution tree, stops executing that branch
  * and passes over. This is useful to pre-optimize a solution tree before
- * executing it in a loop (i.e. when graphing).
+ * executing it in a loop (i.e. when plotting).
  * <p>
  * <b>NOTE:</b> this class modifies the solution tree.
  * <p>
  * <b>NOTE:</b> if you start using this class you should keep using this class
  * in your calculation because it makes use of some features of {@link Node}
- * that other {@link Solver}s may not understand.
+ * that other {@link Solver}s might not understand.
  *
  * @param T the type of the elements
  * @param C the type of the context

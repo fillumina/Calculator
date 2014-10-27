@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-// NOTE: cannot make an interface out of this because Node is linked to Grammar
+// NOTE: cannot make an interface out of this because Node uses GrammarELement
 public class Interpreter<T,C> implements Serializable {
     private static final long serialVersionUID = 1L;
 

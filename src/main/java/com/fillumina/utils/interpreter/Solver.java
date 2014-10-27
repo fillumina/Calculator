@@ -3,7 +3,8 @@ package com.fillumina.utils.interpreter;
 import java.util.List;
 
 /**
- * Solves a solution tree into a list of solutions.
+ * Solves a solution tree into a list of solutions. The context is passed
+ * around to store variables and informations about the calculation.
  *
  * @param T     the type of the expected result
  * @param C     the type of the context

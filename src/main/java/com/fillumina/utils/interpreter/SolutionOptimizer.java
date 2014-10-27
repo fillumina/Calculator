@@ -41,16 +41,19 @@ public class SolutionOptimizer<T, C> implements Cloneable {
     }
 
     /**
+     * Try to solve the given solution tree. If the solution cannot be found
+     * (there could be less variable defined than required) {@code null} is
+     * returned.
      *
-     * @param context the context
+     * @param context the context (define the missing variables here)
      * @return the solution if found otherwise {@code null}.
      */
     public List<T> solve(final C context) {
-        this.solution = PruningSolver.INSTANCE.solve(solutionTree,
-                context);
+        this.solution = PruningSolver.INSTANCE.solve(solutionTree, context);
         return this.solution;
     }
 
+    /** @return a list of the undefined variables found in the solution tree. */
     public List<String> getUndefinedVariables() {
         return UndefinedVariablesFinder.INSTANCE.find(solutionTree);
     }

@@ -4,7 +4,7 @@ package com.fillumina.utils.interpreter.util;
  * An helper to make regular expressions easier to write and read (and possibly
  * debug). It's an almost complete implementation.
  * <p>
- Just as a comgroupison, the following REGEXP is quite complex to follow:
+ The following REGEXP is quite complex to follow:
  <pre>
     private static final String SCIENTIFIC_NOTATION_NUMBER_REGEXP =
             "((?<=(([\\*\\+\\-/\\^][\\t\\n\\ ]{0,100})|" +
@@ -36,8 +36,6 @@ package com.fillumina.utils.interpreter.util;
     }
  </pre>
  * And you can even comment the code with standard java comments!
- * (It took me no time to find a bug in this, I was getting crazy with the
- * REGEXP notation!)
  *
  * @see <a href='http://www.regular-expressions.info/reference.html'>
  *      http://www.regular-expressions.info/reference.html</a>

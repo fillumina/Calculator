@@ -50,7 +50,7 @@ public class ExtendedListIterator<T> implements ListIterator<T>, Serializable {
         return t;
     }
 
-    // delegator methods
+    // delegated methods
 
     @Override
     public void set(final T e) {

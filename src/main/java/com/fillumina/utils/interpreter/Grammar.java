@@ -11,13 +11,13 @@ import java.util.List;
 /**
  * Collection of {@link GrammarElement}s defining a grammar.
  *
- * {@link GrammarElement}s should be added in order of parsing priority,
+ * {@link GrammarElement}s should be added in order of parsing priority, with
  * higher priority first. This means that if you have a function which
  * name is {@code cons} and a variable which name is {@code constant}
  * the variable element should come first in the list.<p>
  *
  * <b>IMPORTANT:</b> There should be at most <b>one</b>
- * <code>UnrecognizedElement</code> defined in a grammar. At any rate only
+ * <code>UnrecognizedElement</code> defined in a grammar. Only
  * the first one will be considered.<p>
  *
  * <b>NOTE:</b> This class is just an helper and every method that works
@@ -67,7 +67,7 @@ public class Grammar<T,C>
 
     /**
      * Creates a <b>new</b> {@link Grammar} with the new elements added, in the
-     * given order, having the present elements first.
+     * given order, <i>after</i> the elements already present in the grammar.
      */
     public Grammar<T,C> join(final Grammar<? extends T,? extends C>... grammars) {
         final List<GrammarElement<? extends T,? extends C>> list =

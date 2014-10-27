@@ -1,6 +1,7 @@
 package com.fillumina.utils.interpreter;
 
 /**
+ * The given expression is not syntactically correct.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

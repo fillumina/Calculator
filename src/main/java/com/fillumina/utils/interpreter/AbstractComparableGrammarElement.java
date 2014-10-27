@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Priority is used when building the solution tree to put high priority
- * elements first.
+ * elements first. This abstract class provides a simple priority mechanism.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

@@ -1,6 +1,7 @@
 package com.fillumina.utils.interpreter;
 
 /**
+ * Syntax error in the expression.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

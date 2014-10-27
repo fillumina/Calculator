@@ -33,7 +33,7 @@ public class DefaultSolver implements Solver, Serializable {
     }
 
     @Override
-    public <T, C> List<T> solve(final List<Node<T,C>> nodeTree,
+    public <T,C> List<T> solve(final List<Node<T,C>> nodeTree,
             final C context) {
         final List<T> results = new ArrayList<>(nodeTree.size());
         for (final Node<T,C> node : nodeTree) {

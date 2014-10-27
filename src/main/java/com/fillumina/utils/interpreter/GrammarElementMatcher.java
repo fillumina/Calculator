@@ -1,5 +1,10 @@
 package com.fillumina.utils.interpreter;
 
+/**
+ * Returns an eventual match of an element in the string expression.
+ *
+ * @author Francesco Illuminati <fillumina@gmail.com>
+ */
 public interface GrammarElementMatcher {
 
     /**

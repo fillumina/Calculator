@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * Removes the parenthesis with only one children (parameter)
+ * Removes the parenthesis with only one children (parameter).
+ *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class ParenthesisCleaner implements SolutionTreeFilter, Serializable {

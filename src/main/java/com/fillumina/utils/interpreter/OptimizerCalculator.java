@@ -5,10 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * This calculator solve an expression and returns a solution tree
+ * This calculator solves an expression and returns a solution tree
  * encapsulated into a {@link SolutionOptimizer}
  * that can be used to find the solution by specifying the needed
- * variables.
+ * variables. It is better than simply using a {@link Calculator} because
+ * the initial solution tree has been already simplified so eventually
+ * less calculations are going to be performed.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

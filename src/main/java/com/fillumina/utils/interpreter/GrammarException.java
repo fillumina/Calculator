@@ -1,6 +1,7 @@
 package com.fillumina.utils.interpreter;
 
 /**
+ * Misconfigured grammar elements.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
