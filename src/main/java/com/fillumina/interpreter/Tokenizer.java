@@ -1,0 +1,14 @@
+package com.fillumina.interpreter;
+
+import java.util.List;
+
+/**
+ * Reads the grammar elements in the given expression and returns a list
+ * of them.
+ *
+ * @author Francesco Illuminati <fillumina@gmail.com>
+ */
+public interface Tokenizer<T, C> {
+
+    List<Node<T, C>> tokenize(final String expression);
+}
