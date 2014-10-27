@@ -51,10 +51,25 @@ public class Calculator<T,C> implements Serializable {
         return new SolutionTree<>(solver, solutionTree);
     }
 
+    /** Returns the first result or {@code null} if no solution can be found. */
+    public T solveSingleValue(final String expression) {
+        return solve(expression, null).get(0);
+    }
 
     /** Returns the first result or {@code null} if no solution can be found. */
     public T solveSingleValue(final String expression, final C context) {
         return solve(expression, context).get(0);
+    }
+
+    /**
+     * Returns the entire (eventually multi-rooted or partially solved)
+     * solved tree. For most uses it is preferable to use
+     * {@link #createSolutionTree(java.lang.String, java.lang.Object) }.
+     */
+    public List<T> solve(final String expression) {
+        final List<Node<T,C>> solutionTree =
+                interpreter.buildSolutionTree(expression);
+        return solver.solve(solutionTree, null);
     }
 
     /**

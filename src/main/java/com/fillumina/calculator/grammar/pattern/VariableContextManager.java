@@ -22,9 +22,11 @@ public class VariableContextManager<T>
     @Override
     public T evaluate(final String value, final List<T> params,
             final Map<String, T> context) {
-        Objects.requireNonNull(context, "context must be not null");
         if (value == null || value.isEmpty()) {
             throw new SyntaxErrorException("empty expression.");
+        }
+        if (context == null) {
+            throw new ContextException(value);
         }
         final T variableValue = context.get(value);
         if (variableValue == null) {

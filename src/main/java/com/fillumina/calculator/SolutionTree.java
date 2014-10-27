@@ -36,7 +36,7 @@ public class SolutionTree<T, C> implements Cloneable {
         return solution != null;
     }
 
-    public T getSingleValueSolution() {
+    public T getSingleSolution() {
         if (isSolved()) {
             return getSolution().get(0);
         }

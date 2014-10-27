@@ -29,7 +29,7 @@ public class PruningCalculatorTest {
                 calculator.createSolutionTree("(1 / 4)");
         solution.solve();
         assertTrue(solution.isSolved());
-        assertEquals(0.25d, solution.getSingleValueSolution(), 0.01);
+        assertEquals(0.25d, solution.getSingleSolution(), 0.01);
     }
 
     @Test

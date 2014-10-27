@@ -31,6 +31,11 @@ public class AbstractSignedDoubleFastElementTest
         recognize("1", "- 1");
     }
 
+    @Test
+    public void shouldCaptureTheExponent() {
+        recognize("1E-4", "1E-4");
+    }
+
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
         return new AbstractSignedDoubleFastElement<Double, Void>(0) {
