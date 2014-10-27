@@ -31,7 +31,8 @@ import java.util.Map;
  * Defines a simple arithmetic grammar useful to perform calculations
  * on double values. It supports variables that can be passed through a
  * context. It can even define its own variables directly in the
- * expression using the equal symbol.
+ * expression using the equal symbol. It uses a grammar based on patterns
+ * which is easy to create but somewhat slow.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
@@ -46,7 +47,7 @@ public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
         super(
         new AbstractDoublePatternElement<Double,Map<String, Double>>(0) {
             private static final long serialVersionUID = 1L;
-            
+
             @Override
             public Double evaluate(final String value,
                     final Map<String, Double> context) {

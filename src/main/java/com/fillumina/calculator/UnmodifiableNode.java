@@ -48,13 +48,13 @@ public class UnmodifiableNode<T,C> extends Node<T,C>
     /** Does nothing at all. */
     @Override
     public UnmodifiableNode<T,C> addChildren(Node<T,C> node) {
-        return this;
+        throw new IllegalStateException("this is an unmodifiable Node");
     }
 
     /** Does nothing at all. */
     @Override
     public UnmodifiableNode<T,C> addAllChildren(Collection<Node<T,C>> nodes) {
-        return this;
+        throw new IllegalStateException("this is an unmodifiable Node");
     }
 
     /**
