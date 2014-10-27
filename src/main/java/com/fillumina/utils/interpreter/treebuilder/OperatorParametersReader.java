@@ -10,9 +10,9 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-class ReadOperatorParameters {
+class OperatorParametersReader {
 
-    static final ReadOperatorParameters INSTANCE = new ReadOperatorParameters();
+    static final OperatorParametersReader INSTANCE = new OperatorParametersReader();
 
     public <T,C> void read(final List<Node<T,C>> list,
             final IndexedNode<T,C> higherPriority) {

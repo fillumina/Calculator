@@ -8,14 +8,15 @@ package com.fillumina.utils.interpreter;
 public interface GrammarElementMatcher {
 
     /**
-     * The element has been found.
      * Always call this before getting start or end (needed for pattern matcher).
+     * 
+     * @return {@code true} if the element has been found.
      */
     boolean isFound();
 
-    /** The getStart index at which it's been isFound. */
+    /** The start index at which a match has been found. */
     int getStart();
 
-    /** The getEnd index at which it's been isFound. */
+    /** The end index at which a match has been found. */
     int getEnd();
 }

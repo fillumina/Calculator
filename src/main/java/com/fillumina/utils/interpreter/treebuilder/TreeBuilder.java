@@ -33,7 +33,7 @@ public class TreeBuilder implements SolutionTreeFilter, Serializable {
         IndexedNode<T,C> higherPriorityOp;
         while( exists( higherPriorityOp =
                 HigherPriorityOperatorFinder.INSTANCE.find(nodeList))) {
-            ReadOperatorParameters.INSTANCE.read(nodeList, higherPriorityOp);
+            OperatorParametersReader.INSTANCE.read(nodeList, higherPriorityOp);
         }
     }
 
