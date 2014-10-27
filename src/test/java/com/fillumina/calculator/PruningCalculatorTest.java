@@ -1,20 +1,20 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.SolutionTree;
-import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.grammar.pattern.instances.ArithmeticGrammar;
 import com.fillumina.calculator.util.Mapper;
 import java.util.Collections;
 import java.util.Map;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class OptimizerCalculatorTest {
+public class PruningCalculatorTest {
 
     @SuppressWarnings("unchecked")
     private static final Map<String, Double> EMPTY_MAP =

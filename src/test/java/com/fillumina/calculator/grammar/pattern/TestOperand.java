@@ -1,7 +1,5 @@
 package com.fillumina.calculator.grammar.pattern;
 
-import com.fillumina.calculator.grammar.pattern.AbstractOperand;
-
 /**
  * Used mainly in tests to return elements as they are without further
  * processing.

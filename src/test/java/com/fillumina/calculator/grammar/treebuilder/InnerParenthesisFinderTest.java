@@ -1,12 +1,10 @@
 package com.fillumina.calculator.grammar.treebuilder;
 
-import com.fillumina.calculator.grammar.treebuilder.InnerParenthesisFinder;
-import com.fillumina.calculator.grammar.treebuilder.ParenthesisMismatchedException;
-import org.junit.Before;
 import com.fillumina.calculator.Node;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
+import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

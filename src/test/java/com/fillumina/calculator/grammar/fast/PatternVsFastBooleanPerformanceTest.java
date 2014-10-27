@@ -1,15 +1,15 @@
 package com.fillumina.calculator.grammar.fast;
 
-import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
-import com.fillumina.performance.producer.TestContainer;
-import com.fillumina.performance.template.ProgressionConfigurator;
-import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTemplate;
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.FastSolver;
 import com.fillumina.calculator.grammar.fast.instances.FastBooleanGrammar;
 import com.fillumina.calculator.grammar.pattern.instances.BooleanGrammar;
+import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
+import com.fillumina.performance.producer.TestContainer;
+import com.fillumina.performance.template.ProgressionConfigurator;
+import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTemplate;
 import java.util.Map;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  *

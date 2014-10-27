@@ -1,10 +1,13 @@
 package com.fillumina.calculator.grammar.pattern;
 
+import static com.fillumina.calculator.grammar.pattern.AbstractPatternElement.NOT_ENDING_WITH_ALPHA;
+import static com.fillumina.calculator.grammar.pattern.AbstractPatternElement.NOT_STARTING_WITH_ALPHA;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static com.fillumina.calculator.grammar.pattern.AbstractPatternElement.*;
 
 /**
  *

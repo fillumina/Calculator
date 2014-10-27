@@ -1,17 +1,29 @@
 package com.fillumina.calculator.grammar.fast.instances;
 
-import static java.lang.Math.*;
-import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.GrammarElement;
+import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.grammar.fast.AbstractDoubleFastElement;
-import com.fillumina.calculator.grammar.fast.FastCloseParentheses;
 import com.fillumina.calculator.grammar.fast.AbstractFastOperator;
+import com.fillumina.calculator.grammar.fast.FastCloseParentheses;
 import com.fillumina.calculator.grammar.fast.FastConstantElement;
 import com.fillumina.calculator.grammar.fast.FastOpenParentheses;
 import com.fillumina.calculator.grammar.fast.FastVariableSetterOperator;
 import com.fillumina.calculator.grammar.fast.VeryFastWhiteSpace;
 import com.fillumina.calculator.grammar.pattern.VariableContextManager;
 import java.io.Serializable;
+import static java.lang.Math.E;
+import static java.lang.Math.PI;
+import static java.lang.Math.acos;
+import static java.lang.Math.asin;
+import static java.lang.Math.atan;
+import static java.lang.Math.cos;
+import static java.lang.Math.log;
+import static java.lang.Math.log10;
+import static java.lang.Math.pow;
+import static java.lang.Math.round;
+import static java.lang.Math.sin;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.tan;
 import java.util.List;
 import java.util.Map;
 

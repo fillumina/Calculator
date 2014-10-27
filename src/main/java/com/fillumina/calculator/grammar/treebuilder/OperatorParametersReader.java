@@ -1,9 +1,9 @@
 package com.fillumina.calculator.grammar.treebuilder;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.util.ExtendedListIterator;
-import com.fillumina.calculator.grammar.GrammarElementType;
 import com.fillumina.calculator.Node;
+import com.fillumina.calculator.grammar.GrammarElementType;
+import com.fillumina.calculator.util.ExtendedListIterator;
 import java.util.List;
 
 /**

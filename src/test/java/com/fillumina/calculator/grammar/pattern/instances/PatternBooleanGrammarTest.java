@@ -1,6 +1,5 @@
 package com.fillumina.calculator.grammar.pattern.instances;
 
-import com.fillumina.calculator.grammar.pattern.instances.BooleanGrammar;
 import com.fillumina.calculator.Calculator;
 import java.util.Map;
 

@@ -1,7 +1,7 @@
 package com.fillumina.calculator.grammar.fast;
 
-import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
+import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import com.fillumina.calculator.grammar.GrammarElementType;
 import java.io.Serializable;
 import java.util.List;

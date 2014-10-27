@@ -3,9 +3,9 @@ package com.fillumina.calculator.grammar.pattern.instances;
 import com.fillumina.calculator.Calculator;
 import java.util.HashMap;
 import java.util.Map;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

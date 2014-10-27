@@ -1,20 +1,15 @@
 package com.fillumina.calculator.grammar;
 
 import com.fillumina.calculator.DefaultTokenizer;
-import com.fillumina.calculator.DefaultTokenizer;
-import com.fillumina.calculator.Node;
 import com.fillumina.calculator.Node;
 import com.fillumina.calculator.Tokenizer;
-import com.fillumina.calculator.Tokenizer;
-import com.fillumina.calculator.grammar.GrammarElementType;
-import com.fillumina.calculator.grammar.WhiteSpaceCleaner;
-import com.fillumina.calculator.grammar.UndefinedElementParser;
 import com.fillumina.calculator.grammar.pattern.instances.ArithmeticGrammar;
 import com.fillumina.calculator.util.TreePrinter;
 import java.util.List;
 import java.util.Map;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

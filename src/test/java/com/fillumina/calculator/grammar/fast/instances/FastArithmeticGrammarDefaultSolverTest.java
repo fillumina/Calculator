@@ -1,11 +1,10 @@
 package com.fillumina.calculator.grammar.fast.instances;
 
-import com.fillumina.calculator.grammar.fast.instances.FastArithmeticGrammar;
-import java.util.Map;
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.ContextException;
 import com.fillumina.calculator.FastSolver;
 import com.fillumina.calculator.grammar.pattern.instances.ArithmeticGrammarTestBase;
+import java.util.Map;
 import org.junit.Test;
 
 /**

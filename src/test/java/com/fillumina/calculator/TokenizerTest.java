@@ -1,15 +1,11 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.GrammarElement;
+import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.grammar.pattern.TestOperand;
 import com.fillumina.calculator.grammar.pattern.TestOperator;
-import com.fillumina.calculator.DefaultTokenizer;
-import com.fillumina.calculator.Node;
-import com.fillumina.calculator.Tokenizer;
-import com.fillumina.calculator.grammar.Grammar;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

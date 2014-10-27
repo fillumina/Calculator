@@ -1,8 +1,8 @@
 package com.fillumina.calculator.grammar.pattern;
 
 import static com.fillumina.calculator.util.PatternBuilder.p;
-import static com.fillumina.calculator.util.PatternBuilder.p_or;
 import static com.fillumina.calculator.util.PatternBuilder.p_group;
+import static com.fillumina.calculator.util.PatternBuilder.p_or;
 
 /**
  *

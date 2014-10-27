@@ -1,17 +1,29 @@
 package com.fillumina.calculator.grammar.pattern.instances;
 
-import static java.lang.Math.*;
-import com.fillumina.calculator.grammar.pattern.CloseParentheses;
-import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.pattern.OpenParentheses;
-import com.fillumina.calculator.grammar.pattern.AbstractOperatorSymbol;
-import com.fillumina.calculator.grammar.pattern.ConstantElement;
+import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.grammar.pattern.AbstractDoublePatternElement;
+import com.fillumina.calculator.grammar.pattern.AbstractOperatorSymbol;
+import com.fillumina.calculator.grammar.pattern.CloseParentheses;
+import com.fillumina.calculator.grammar.pattern.ConstantElement;
+import com.fillumina.calculator.grammar.pattern.OpenParentheses;
 import com.fillumina.calculator.grammar.pattern.VariableContextManager;
 import com.fillumina.calculator.grammar.pattern.VariableSetterOperator;
 import com.fillumina.calculator.grammar.pattern.WhiteSpace;
 import java.io.Serializable;
+import static java.lang.Math.E;
+import static java.lang.Math.PI;
+import static java.lang.Math.acos;
+import static java.lang.Math.asin;
+import static java.lang.Math.atan;
+import static java.lang.Math.cos;
+import static java.lang.Math.log;
+import static java.lang.Math.log10;
+import static java.lang.Math.pow;
+import static java.lang.Math.round;
+import static java.lang.Math.sin;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.tan;
 import java.util.List;
 import java.util.Map;
 

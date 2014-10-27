@@ -1,9 +1,10 @@
 package com.fillumina.calculator.util;
 
-import com.fillumina.calculator.util.PatternBuilder;
+import static com.fillumina.calculator.util.PatternBuilder.p;
+import static com.fillumina.calculator.util.PatternBuilder.p_group;
+import static com.fillumina.calculator.util.PatternBuilder.p_or;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static com.fillumina.calculator.util.PatternBuilder.*;
 
 /**
  *

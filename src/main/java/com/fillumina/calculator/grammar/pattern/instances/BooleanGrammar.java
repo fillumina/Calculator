@@ -1,10 +1,10 @@
 package com.fillumina.calculator.grammar.pattern.instances;
 
-import com.fillumina.calculator.grammar.pattern.CloseParentheses;
 import com.fillumina.calculator.grammar.Grammar;
-import com.fillumina.calculator.grammar.pattern.OpenParentheses;
 import com.fillumina.calculator.grammar.pattern.AbstractOperator;
+import com.fillumina.calculator.grammar.pattern.CloseParentheses;
 import com.fillumina.calculator.grammar.pattern.ConstantElement;
+import com.fillumina.calculator.grammar.pattern.OpenParentheses;
 import com.fillumina.calculator.grammar.pattern.VariableContextManager;
 import com.fillumina.calculator.grammar.pattern.WhiteSpace;
 import java.io.Serializable;

@@ -2,8 +2,8 @@ package com.fillumina.calculator.grammar.fast;
 
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.grammar.StringFastElement;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

@@ -2,7 +2,7 @@ package com.fillumina.calculator.grammar.fast;
 
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  *

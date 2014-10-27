@@ -1,9 +1,8 @@
 package com.fillumina.calculator.grammar.pattern.instances;
 
-import com.fillumina.calculator.grammar.pattern.instances.ArithmeticGrammar;
-import java.util.Map;
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.PruningSolver;
+import java.util.Map;
 import org.junit.Test;
 
 /**

@@ -1,7 +1,7 @@
 package com.fillumina.calculator.grammar.pattern;
 
-import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
+import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import java.util.regex.Pattern;
 
 /**

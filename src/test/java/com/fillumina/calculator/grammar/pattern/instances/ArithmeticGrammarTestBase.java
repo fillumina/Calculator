@@ -5,7 +5,8 @@ import com.fillumina.calculator.SyntaxErrorException;
 import com.fillumina.calculator.grammar.treebuilder.ParenthesisMismatchedException;
 import java.util.HashMap;
 import java.util.Map;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 

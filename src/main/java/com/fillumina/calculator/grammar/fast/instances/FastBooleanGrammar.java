@@ -1,12 +1,12 @@
 package com.fillumina.calculator.grammar.fast.instances;
 
-import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.fast.FastCloseParentheses;
-import com.fillumina.calculator.grammar.fast.ValueFastMultiConstant;
+import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.grammar.fast.AbstractFastMultiOperator;
+import com.fillumina.calculator.grammar.fast.FastCloseParentheses;
 import com.fillumina.calculator.grammar.fast.FastOpenParentheses;
 import com.fillumina.calculator.grammar.fast.FastVariableSetterOperator;
+import com.fillumina.calculator.grammar.fast.ValueFastMultiConstant;
 import com.fillumina.calculator.grammar.fast.VeryFastWhiteSpace;
 import com.fillumina.calculator.grammar.pattern.VariableContextManager;
 import java.io.Serializable;

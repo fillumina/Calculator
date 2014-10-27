@@ -1,6 +1,5 @@
 package com.fillumina.calculator.grammar.pattern;
 
-import com.fillumina.calculator.grammar.pattern.AbstractOperator;
 import java.util.List;
 
 /**

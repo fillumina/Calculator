@@ -1,6 +1,5 @@
 package com.fillumina.calculator.grammar.fast;
 
-import com.fillumina.calculator.grammar.fast.AbstractSignedDoubleFastElement;
 import com.fillumina.calculator.GrammarElement;
 import java.util.List;
 import org.junit.Test;

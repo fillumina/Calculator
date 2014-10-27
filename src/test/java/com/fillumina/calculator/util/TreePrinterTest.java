@@ -3,12 +3,12 @@ package com.fillumina.calculator.util;
 import com.fillumina.calculator.DefaultInterpreter;
 import com.fillumina.calculator.Interpreter;
 import com.fillumina.calculator.Node;
-import java.util.Collection;
 import com.fillumina.calculator.grammar.pattern.instances.ArithmeticGrammar;
+import java.util.Collection;
 import java.util.Map;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

@@ -1,18 +1,14 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.Interpreter;
-import com.fillumina.calculator.GrammarElement;
+import com.fillumina.calculator.grammar.Grammar;
+import com.fillumina.calculator.grammar.pattern.CloseParentheses;
+import com.fillumina.calculator.grammar.pattern.OpenParentheses;
 import com.fillumina.calculator.grammar.pattern.TestOperand;
 import com.fillumina.calculator.grammar.pattern.TestOperator;
-import com.fillumina.calculator.Node;
-import com.fillumina.calculator.DefaultInterpreter;
-import com.fillumina.calculator.grammar.Grammar;
-import com.fillumina.calculator.grammar.pattern.OpenParentheses;
 import com.fillumina.calculator.grammar.pattern.WhiteSpace;
-import com.fillumina.calculator.grammar.pattern.CloseParentheses;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

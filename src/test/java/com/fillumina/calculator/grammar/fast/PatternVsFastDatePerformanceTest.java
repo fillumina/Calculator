@@ -1,12 +1,12 @@
 package com.fillumina.calculator.grammar.fast;
 
+import com.fillumina.calculator.grammar.DateFastElement;
+import com.fillumina.calculator.grammar.pattern.AbstractOperand;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.producer.timer.RunnableSink;
 import com.fillumina.performance.template.ProgressionConfigurator;
 import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTemplate;
-import com.fillumina.calculator.grammar.DateFastElement;
-import com.fillumina.calculator.grammar.pattern.AbstractOperand;
 import java.util.concurrent.TimeUnit;
 
 /**

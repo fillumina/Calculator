@@ -1,20 +1,19 @@
 package com.fillumina.calculator.grammar.fast;
 
-import com.fillumina.calculator.grammar.fast.FastElementMatcher;
+import com.fillumina.calculator.GrammarElementMatcher;
+import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
+import com.fillumina.calculator.grammar.GrammarElementType;
+import com.fillumina.calculator.grammar.QuotedStringFastElement;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.producer.timer.RunnableSink;
 import com.fillumina.performance.template.ProgressionConfigurator;
 import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTemplate;
-import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
-import com.fillumina.calculator.GrammarElementMatcher;
-import com.fillumina.calculator.grammar.GrammarElementType;
-import com.fillumina.calculator.grammar.QuotedStringFastElement;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  *

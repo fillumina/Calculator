@@ -1,14 +1,14 @@
 package com.fillumina.calculator.grammar.treebuilder;
 
-import com.fillumina.calculator.grammar.pattern.AbstractOperand;
-import com.fillumina.calculator.grammar.GrammarElementType;
 import com.fillumina.calculator.Node;
+import com.fillumina.calculator.grammar.GrammarElementType;
+import com.fillumina.calculator.grammar.pattern.AbstractOperand;
 import com.fillumina.calculator.grammar.pattern.CloseParentheses;
 import com.fillumina.calculator.grammar.pattern.OpenParentheses;
 import java.util.ArrayList;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
