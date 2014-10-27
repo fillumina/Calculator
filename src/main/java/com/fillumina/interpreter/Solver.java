@@ -13,5 +13,5 @@ import java.util.List;
  */
 public interface Solver {
 
-    <T,C> List<T> solve(final List<Node<T,C>> nodeTree, final C context);
+    <T,C> List<T> solve(final List<Node<T,C>> solutionTree, final C context);
 }

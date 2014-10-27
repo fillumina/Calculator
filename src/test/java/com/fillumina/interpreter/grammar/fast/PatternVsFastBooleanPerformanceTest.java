@@ -4,8 +4,8 @@ import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.template.ProgressionConfigurator;
 import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTemplate;
-import com.fillumina.interpreter.DefaultCalculator;
-import com.fillumina.interpreter.DefaultSolver;
+import com.fillumina.interpreter.Calculator;
+import com.fillumina.interpreter.FastSolver;
 import com.fillumina.interpreter.grammar.fast.instances.FastBooleanGrammar;
 import com.fillumina.interpreter.grammar.pattern.instances.BooleanGrammar;
 import java.util.Map;
@@ -32,9 +32,9 @@ public class PatternVsFastBooleanPerformanceTest
         final boolean result = false;
 
         tests.addTest("pattern", new Runnable() {
-            final DefaultCalculator<Boolean, Map<String,Boolean>> c =
-                    new DefaultCalculator<>(BooleanGrammar.INSTANCE,
-                            DefaultSolver.INSTANCE);
+            final Calculator<Boolean, Map<String,Boolean>> c =
+                    new Calculator<>(BooleanGrammar.INSTANCE,
+                            FastSolver.INSTANCE);
 
             @Override
             public void run() {
@@ -43,9 +43,9 @@ public class PatternVsFastBooleanPerformanceTest
         });
 
         tests.addTest("fast", new Runnable() {
-            final DefaultCalculator<Boolean, Map<String,Boolean>> c =
-                    new DefaultCalculator<>(FastBooleanGrammar.INSTANCE,
-                            DefaultSolver.INSTANCE);
+            final Calculator<Boolean, Map<String,Boolean>> c =
+                    new Calculator<>(FastBooleanGrammar.INSTANCE,
+                            FastSolver.INSTANCE);
 
             @Override
             public void run() {

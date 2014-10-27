@@ -1,5 +1,7 @@
 package com.fillumina.interpreter;
 
+import com.fillumina.interpreter.grammar.pattern.TestContextOperand;
+import com.fillumina.interpreter.grammar.pattern.TestContextOperator;
 import com.fillumina.interpreter.PruningSolver;
 import com.fillumina.interpreter.Node;
 import com.fillumina.interpreter.DefaultInterpreter;

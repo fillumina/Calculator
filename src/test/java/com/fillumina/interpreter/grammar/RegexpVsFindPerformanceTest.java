@@ -1,4 +1,4 @@
-package com.fillumina.interpreter;
+package com.fillumina.interpreter.grammar;
 
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;

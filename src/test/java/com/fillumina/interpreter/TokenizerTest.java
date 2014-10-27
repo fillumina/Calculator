@@ -1,5 +1,7 @@
 package com.fillumina.interpreter;
 
+import com.fillumina.interpreter.grammar.pattern.TestOperand;
+import com.fillumina.interpreter.grammar.pattern.TestOperator;
 import com.fillumina.interpreter.DefaultTokenizer;
 import com.fillumina.interpreter.Node;
 import com.fillumina.interpreter.Tokenizer;

@@ -1,4 +1,4 @@
-package com.fillumina.interpreter;
+package com.fillumina.interpreter.grammar.pattern;
 
 import com.fillumina.interpreter.grammar.pattern.AbstractOperand;
 

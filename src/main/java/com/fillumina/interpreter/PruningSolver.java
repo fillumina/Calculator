@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * This {@link Solver} runs in the same way as the {@link DefaultSolver} but
+ * This {@link Solver} runs in the same way as the {@link FastSolver} but
  * if it encounters an undefined variable it simply saves the calculation up to
  * that, prunes the solution tree, stops executing that branch
  * and passes over. This is useful to pre-optimize a solution tree before

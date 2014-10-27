@@ -1,6 +1,6 @@
 package com.fillumina.interpreter.grammar.pattern.instances;
 
-import com.fillumina.interpreter.DefaultCalculator;
+import com.fillumina.interpreter.Calculator;
 import com.fillumina.interpreter.SyntaxErrorException;
 import com.fillumina.interpreter.grammar.treebuilder.ParenthesisMismatchedException;
 import java.util.HashMap;
@@ -16,9 +16,9 @@ import org.junit.Test;
 public abstract class ArithmeticGrammarTestBase {
 
     private final Map<String, Double> context = new HashMap<>();
-    private DefaultCalculator<Double, Map<String, Double>> calculator;
+    private Calculator<Double, Map<String, Double>> calculator;
 
-    public abstract DefaultCalculator<Double, Map<String, Double>> getCalculator();
+    public abstract Calculator<Double, Map<String, Double>> getCalculator();
 
     @Before
     public void init() {

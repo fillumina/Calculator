@@ -1,6 +1,6 @@
 package com.fillumina.interpreter.grammar.pattern.instances;
 
-import com.fillumina.interpreter.DefaultCalculator;
+import com.fillumina.interpreter.Calculator;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.Before;
@@ -13,10 +13,10 @@ import static org.junit.Assert.*;
  */
 public abstract class BooleanGrammarTestBase {
 
-    private DefaultCalculator<Boolean,Map<String,Boolean>> calculator;
+    private Calculator<Boolean,Map<String,Boolean>> calculator;
     private Map<String,Boolean> context;
 
-    public abstract DefaultCalculator<Boolean,Map<String,Boolean>> getCalculator();
+    public abstract Calculator<Boolean,Map<String,Boolean>> getCalculator();
 
     @Before
     public void init() {

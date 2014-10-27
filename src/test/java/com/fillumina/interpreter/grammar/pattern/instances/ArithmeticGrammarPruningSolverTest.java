@@ -2,7 +2,7 @@ package com.fillumina.interpreter.grammar.pattern.instances;
 
 import com.fillumina.interpreter.grammar.pattern.instances.ArithmeticGrammar;
 import java.util.Map;
-import com.fillumina.interpreter.DefaultCalculator;
+import com.fillumina.interpreter.Calculator;
 import com.fillumina.interpreter.PruningSolver;
 import org.junit.Test;
 
@@ -16,8 +16,8 @@ public class ArithmeticGrammarPruningSolverTest
 
     @Override
     @SuppressWarnings("unchecked")
-    public DefaultCalculator<Double, Map<String, Double>> getCalculator() {
-        return new DefaultCalculator<>(
+    public Calculator<Double, Map<String, Double>> getCalculator() {
+        return new Calculator<>(
                 ArithmeticGrammar.INSTANCE, PruningSolver.INSTANCE);
     }
 

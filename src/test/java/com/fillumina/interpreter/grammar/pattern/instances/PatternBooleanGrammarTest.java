@@ -1,7 +1,6 @@
 package com.fillumina.interpreter.grammar.pattern.instances;
 
-import com.fillumina.interpreter.grammar.pattern.instances.BooleanGrammar;
-import com.fillumina.interpreter.DefaultCalculator;
+import com.fillumina.interpreter.Calculator;
 import java.util.Map;
 
 /**
@@ -11,7 +10,7 @@ import java.util.Map;
 public class PatternBooleanGrammarTest extends BooleanGrammarTestBase {
 
     @Override
-    public DefaultCalculator<Boolean,Map<String,Boolean>> getCalculator() {
-        return new DefaultCalculator<>(BooleanGrammar.INSTANCE);
+    public Calculator<Boolean,Map<String,Boolean>> getCalculator() {
+        return Calculator.createFast(BooleanGrammar.INSTANCE);
     }
 }

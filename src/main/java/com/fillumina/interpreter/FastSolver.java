@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Simple {@link Solver} that doesn't modify the solution tree.
- * This means that it doesn't optimize it in any way and every time it's
+ * Simple {@link Solver} that doesn't modify the solution tree. It's
+ * slightly faster than {@link PruningSolver} by an almost negligible amount but
+ * it doesn't optimize it in any way and every time it's
  * called it executes every calculation in the solution tree again.
- * If you need to perform optimizations use {@link PruningSolver}.
+ * If you need to perform optimizations use {@link PruningSolver}. On the other
+ * hand this solver is <i>thread safe</i>.
  *
  * @see PruningSolver
  *
@@ -17,26 +19,26 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class DefaultSolver implements Solver, Serializable {
+public class FastSolver implements Solver, Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final Solver INSTANCE = new DefaultSolver();
+    public static final Solver INSTANCE = new FastSolver();
 
     private final Evaluator evaluator;
 
-    public DefaultSolver() {
+    public FastSolver() {
         this(new DefaultEvaluator());
     }
 
-    public DefaultSolver(final Evaluator evaluator) {
+    public FastSolver(final Evaluator evaluator) {
         this.evaluator = evaluator;
     }
 
     @Override
-    public <T,C> List<T> solve(final List<Node<T,C>> nodeTree,
+    public <T,C> List<T> solve(final List<Node<T,C>> solutionTree,
             final C context) {
-        final List<T> results = new ArrayList<>(nodeTree.size());
-        for (final Node<T,C> node : nodeTree) {
+        final List<T> results = new ArrayList<>(solutionTree.size());
+        for (final Node<T,C> node : solutionTree) {
             final List<Node<T, C>> children = node.getChildren();
             final List<T> parameters = solve(children, context);
             final T evaluated = evaluator.evaluate(node, parameters, context);

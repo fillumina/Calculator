@@ -18,30 +18,30 @@ public class OptimizerCalculatorTest {
     private static final Map<String, Double> EMPTY_MAP =
             (Map<String,Double>)Collections.EMPTY_MAP;
 
-    private OptimizingCalculator<Double, Map<String,Double>> calculator =
-            new OptimizingCalculator<>(ArithmeticGrammar.INSTANCE);
+    private Calculator<Double, Map<String,Double>> calculator =
+            Calculator.createPruning(ArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldHaveAStaticSolution() {
-        final SolutionOptimizer<Double, Map<String,Double>> solution =
+        final SolutionTree<Double, Map<String,Double>> solution =
                 calculator.createSolutionTree("(1 / 4)");
-
+        solution.solve();
         assertTrue(solution.isSolved());
         assertEquals(0.25d, solution.getSingleValueSolution(), 0.01);
     }
 
     @Test
     public void shouldSolveAStaticSolutionAnyway() {
-        final SolutionOptimizer<Double, Map<String,Double>> solution =
+        final SolutionTree<Double, Map<String,Double>> solution =
                 calculator.createSolutionTree("(1 / 4)");
-
+        solution.solve();
         assertTrue(solution.isSolved());
         assertEquals(0.25d, solution.solve(EMPTY_MAP).get(0), 0.01);
     }
 
     @Test
     public void shouldNotHaveAStaticSolution() {
-        final SolutionOptimizer<Double, Map<String,Double>> solution =
+        final SolutionTree<Double, Map<String,Double>> solution =
                 calculator.createSolutionTree("sin(x + 1 / 4)");
 
         assertFalse(solution.isSolved());
@@ -49,7 +49,7 @@ public class OptimizerCalculatorTest {
 
     @Test
     public void shouldCalculateTheSolutionOnceAVariableIsInserted() {
-        final SolutionOptimizer<Double, Map<String,Double>> solution =
+        final SolutionTree<Double, Map<String,Double>> solution =
                 calculator.createSolutionTree("sin(x + 1 / 4)");
 
         final Map<String,Double> context = Mapper.create("x", 3.0/4.0);
@@ -58,7 +58,7 @@ public class OptimizerCalculatorTest {
 
     @Test
     public void shouldCalculateTheSolutionOnceASecondVariableIsInserted() {
-        final SolutionOptimizer<Double, Map<String,Double>> solution =
+        final SolutionTree<Double, Map<String,Double>> solution =
                 calculator.createSolutionTree("sin(x + 1 / 4) + y");
 
         final Map<String,Double> context1 = Mapper.create("x", 3.0/4.0);

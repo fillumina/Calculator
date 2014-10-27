@@ -5,8 +5,8 @@ import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.template.ProgressionConfigurator;
 import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTemplate;
-import com.fillumina.interpreter.DefaultCalculator;
-import com.fillumina.interpreter.DefaultSolver;
+import com.fillumina.interpreter.Calculator;
+import com.fillumina.interpreter.FastSolver;
 import com.fillumina.interpreter.grammar.pattern.instances.ArithmeticGrammar;
 import java.util.Map;
 import static org.junit.Assert.*;
@@ -32,9 +32,9 @@ public class PatternVsFastArithmeticsPerformanceTest
         final double result = -1;
 
         tests.addTest("pattern", new Runnable() {
-            final DefaultCalculator<Double, Map<String,Double>> c =
-                    new DefaultCalculator<>(ArithmeticGrammar.INSTANCE,
-                            DefaultSolver.INSTANCE);
+            final Calculator<Double, Map<String,Double>> c =
+                    new Calculator<>(ArithmeticGrammar.INSTANCE,
+                            FastSolver.INSTANCE);
 
             @Override
             public void run() {
@@ -43,9 +43,9 @@ public class PatternVsFastArithmeticsPerformanceTest
         });
 
         tests.addTest("fast", new Runnable() {
-            final DefaultCalculator<Double, Map<String,Double>> c =
-                    new DefaultCalculator<>(FastArithmeticGrammar.INSTANCE,
-                            DefaultSolver.INSTANCE);
+            final Calculator<Double, Map<String,Double>> c =
+                    new Calculator<>(FastArithmeticGrammar.INSTANCE,
+                            FastSolver.INSTANCE);
 
             @Override
             public void run() {

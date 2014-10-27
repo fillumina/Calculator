@@ -1,10 +1,10 @@
-package com.fillumina.interpreter;
+package com.fillumina.interpreter.grammar;
 
-import com.fillumina.interpreter.OptimizingCalculator;
-import com.fillumina.interpreter.Node;
-import com.fillumina.interpreter.SolutionOptimizer;
+import com.fillumina.interpreter.Calculator;
 import com.fillumina.interpreter.DefaultInterpreter;
-import com.fillumina.interpreter.grammar.UndefinedVariablesFinder;
+import com.fillumina.interpreter.Interpreter;
+import com.fillumina.interpreter.Node;
+import com.fillumina.interpreter.SolutionTree;
 import com.fillumina.interpreter.grammar.pattern.instances.ArithmeticGrammar;
 import com.fillumina.interpreter.util.Mapper;
 import java.util.List;
@@ -44,12 +44,14 @@ public class UndefinedVariablesFinderTest {
 
     @Test
     public void shouldRecognizeOnlyTheUndefinedVariable() {
-        final OptimizingCalculator<Double, Map<String,Double>> calculator =
-            new OptimizingCalculator<>(ArithmeticGrammar.INSTANCE);
+        final Calculator<Double, Map<String,Double>> calculator =
+            Calculator.createPruning(ArithmeticGrammar.INSTANCE);
+
+        final SolutionTree<Double,Map<String,Double>> solution =
+                calculator.createSolutionTree("x + 2 * y + sin(2 * pi)");
 
         final Map<String,Double> context = Mapper.create("x", 1.2d);
-        final SolutionOptimizer<Double,Map<String,Double>> solution =
-                calculator.createSolutionTree("x + 2 * y + sin(2 * pi)", context);
+        solution.solve(context);
 
         final List<String> undefinedVars = solution.getUndefinedVariables();
         assertEquals(1, undefinedVars.size());

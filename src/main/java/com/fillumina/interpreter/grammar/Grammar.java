@@ -78,4 +78,13 @@ public class Grammar<T,C>
         }
         return new Grammar<>(list);
     }
+
+    public static <T,C> List<GrammarElement<T,C>> join(
+            final List<GrammarElement<T,C>>... lists) {
+        final List<GrammarElement<T,C>> list =new ArrayList<>();
+        for (final List<GrammarElement<T,C>> l: lists) {
+            list.addAll(l);
+        }
+        return list;
+    }
 }

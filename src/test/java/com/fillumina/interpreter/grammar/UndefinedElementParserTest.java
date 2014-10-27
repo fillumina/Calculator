@@ -1,7 +1,10 @@
-package com.fillumina.interpreter;
+package com.fillumina.interpreter.grammar;
 
 import com.fillumina.interpreter.DefaultTokenizer;
+import com.fillumina.interpreter.DefaultTokenizer;
 import com.fillumina.interpreter.Node;
+import com.fillumina.interpreter.Node;
+import com.fillumina.interpreter.Tokenizer;
 import com.fillumina.interpreter.Tokenizer;
 import com.fillumina.interpreter.grammar.GrammarElementType;
 import com.fillumina.interpreter.grammar.WhiteSpaceCleaner;

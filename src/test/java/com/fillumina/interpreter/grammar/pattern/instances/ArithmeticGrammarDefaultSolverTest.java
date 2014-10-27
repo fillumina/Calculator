@@ -2,9 +2,9 @@ package com.fillumina.interpreter.grammar.pattern.instances;
 
 import com.fillumina.interpreter.grammar.pattern.instances.ArithmeticGrammar;
 import java.util.Map;
-import com.fillumina.interpreter.DefaultCalculator;
+import com.fillumina.interpreter.Calculator;
 import com.fillumina.interpreter.ContextException;
-import com.fillumina.interpreter.DefaultSolver;
+import com.fillumina.interpreter.FastSolver;
 import org.junit.Test;
 
 /**
@@ -16,9 +16,9 @@ public class ArithmeticGrammarDefaultSolverTest
 
     @Override
     @SuppressWarnings("unchecked")
-    public DefaultCalculator<Double, Map<String, Double>> getCalculator() {
-        return new DefaultCalculator<>(
-                ArithmeticGrammar.INSTANCE, DefaultSolver.INSTANCE);
+    public Calculator<Double, Map<String, Double>> getCalculator() {
+        return new Calculator<>(
+                ArithmeticGrammar.INSTANCE, FastSolver.INSTANCE);
     }
 
     @Test(expected=ContextException.class)

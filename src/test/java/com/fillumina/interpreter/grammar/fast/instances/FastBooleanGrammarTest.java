@@ -1,6 +1,6 @@
 package com.fillumina.interpreter.grammar.fast.instances;
 
-import com.fillumina.interpreter.DefaultCalculator;
+import com.fillumina.interpreter.Calculator;
 import com.fillumina.interpreter.grammar.pattern.instances.BooleanGrammarTestBase;
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import java.util.Map;
 public class FastBooleanGrammarTest extends BooleanGrammarTestBase {
 
     @Override
-    public DefaultCalculator<Boolean,Map<String,Boolean>> getCalculator() {
-        return new DefaultCalculator<>(FastBooleanGrammar.INSTANCE);
+    public Calculator<Boolean,Map<String,Boolean>> getCalculator() {
+        return Calculator.createFast(FastBooleanGrammar.INSTANCE);
     }
 }
