@@ -1,6 +1,5 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.grammar.UndefinedVariablesFinder;
 import java.util.LinkedList;
 import java.util.List;
 

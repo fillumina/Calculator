@@ -1,5 +1,6 @@
-package com.fillumina.calculator.grammar.pattern;
+package com.fillumina.calculator.grammar.element;
 
+import com.fillumina.calculator.grammar.pattern.*;
 import com.fillumina.calculator.ContextException;
 import com.fillumina.calculator.SyntaxErrorException;
 import java.util.List;

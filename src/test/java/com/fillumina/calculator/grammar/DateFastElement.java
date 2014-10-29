@@ -1,13 +1,13 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.grammar.fast.AbstractDateFastElement;
+import com.fillumina.calculator.grammar.element.AbstractFastDateOperand;
 import java.util.List;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class DateFastElement extends AbstractDateFastElement<Double,Void> {
+public class DateFastElement extends AbstractFastDateOperand<Double,Void> {
     private static final long serialVersionUID = 1L;
 
     public static final DateFastElement DATE =

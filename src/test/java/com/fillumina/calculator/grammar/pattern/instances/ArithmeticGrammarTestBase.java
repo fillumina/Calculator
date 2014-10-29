@@ -33,7 +33,7 @@ public abstract class ArithmeticGrammarTestBase {
     }
 
     public Double calculate(final String expression) {
-        return calculator.solve(expression, context).get(0);
+        return calculator.solve(context, expression).get(0);
     }
 
     @Test
@@ -147,7 +147,7 @@ public abstract class ArithmeticGrammarTestBase {
 
     @Test
     public void shouldSolveANoParameterOperator() {
-        final Double result = calculator.solve("rnd()", context).get(0);
+        final Double result = calculator.solve(context, "rnd()").get(0);
         assertTrue(result > 0 && result < 1);
     }
 

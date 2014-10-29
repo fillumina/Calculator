@@ -1,8 +1,5 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.grammar.ParenthesisCleaner;
-import com.fillumina.calculator.grammar.UndefinedElementParser;
-import com.fillumina.calculator.grammar.WhiteSpaceCleaner;
 import com.fillumina.calculator.grammar.treebuilder.TreeBuilder;
 import java.io.Serializable;
 import java.util.List;

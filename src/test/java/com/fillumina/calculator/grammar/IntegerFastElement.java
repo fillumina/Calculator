@@ -1,6 +1,6 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.grammar.fast.AbstractIntegerFastElement;
+import com.fillumina.calculator.grammar.element.AbstractFastIntegerOperand;
 import java.util.List;
 
 /**
@@ -8,7 +8,7 @@ import java.util.List;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class IntegerFastElement
-        extends AbstractIntegerFastElement<Double,Void> {
+        extends AbstractFastIntegerOperand<Double,Void> {
     private static final long serialVersionUID = 1L;
 
     public static final IntegerFastElement INSTANCE =

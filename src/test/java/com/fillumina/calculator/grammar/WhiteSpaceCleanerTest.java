@@ -1,5 +1,6 @@
 package com.fillumina.calculator.grammar;
 
+import com.fillumina.calculator.WhiteSpaceCleaner;
 import com.fillumina.calculator.DefaultTokenizer;
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.Node;

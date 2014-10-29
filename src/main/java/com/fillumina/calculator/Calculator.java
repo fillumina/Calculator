@@ -31,6 +31,14 @@ public class Calculator<T,C> implements Serializable {
                 PruningSolver.INSTANCE);
     }
 
+    /**
+     * Using by default the pruning grammar which is more flexible thought
+     * slightly slower.
+     */
+    public Calculator(final Iterable<GrammarElement<T,C>> grammar) {
+        this(new DefaultInterpreter<>(grammar), PruningSolver.INSTANCE);
+    }
+
     public Calculator(final Iterable<GrammarElement<T,C>> grammar,
             final Solver solver) {
         this(new DefaultInterpreter<>(grammar), solver);
@@ -53,12 +61,12 @@ public class Calculator<T,C> implements Serializable {
 
     /** Returns the first result or {@code null} if no solution can be found. */
     public T solveSingleValue(final String expression) {
-        return solve(expression, null).get(0);
+        return solve(null, expression).get(0);
     }
 
     /** Returns the first result or {@code null} if no solution can be found. */
-    public T solveSingleValue(final String expression, final C context) {
-        return solve(expression, context).get(0);
+    public T solveSingleValue(final C context, final String expression) {
+        return solve(context, expression).get(0);
     }
 
     /**
@@ -77,7 +85,7 @@ public class Calculator<T,C> implements Serializable {
      * solved tree. For most uses it is preferable to use
      * {@link #createSolutionTree(java.lang.String, java.lang.Object) }.
      */
-    public List<T> solve(final String expression, final C context) {
+    public List<T> solve(final C context, final String expression) {
         final List<Node<T,C>> solutionTree =
                 interpreter.buildSolutionTree(expression);
         return solver.solve(solutionTree, context);

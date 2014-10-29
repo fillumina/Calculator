@@ -2,7 +2,7 @@ package com.fillumina.calculator.grammar.pattern;
 
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.grammar.DoublePatternElement;
-import com.fillumina.calculator.grammar.fast.DoubleFastElementTest;
+import com.fillumina.calculator.grammar.element.DoubleFastElementTest;
 
 /**
  *

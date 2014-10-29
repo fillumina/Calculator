@@ -1,13 +1,13 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.grammar.fast.AbstractDoubleFastElement;
+import com.fillumina.calculator.grammar.element.AbstractFastDoubleOperand;
 import java.util.List;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class DoubleFastElement extends AbstractDoubleFastElement<Double,Void> {
+public class DoubleFastElement extends AbstractFastDoubleOperand<Double,Void> {
     private static final long serialVersionUID = 1L;
 
     public static final DoubleFastElement INSTANCE =

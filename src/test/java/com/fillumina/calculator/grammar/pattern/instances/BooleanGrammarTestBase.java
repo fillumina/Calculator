@@ -27,7 +27,7 @@ public abstract class BooleanGrammarTestBase {
     private void assertEvaluateTo(final boolean expected,
             final String expression) {
         assertEquals("\"" + expression + "\"",
-                expected, calculator.solve(expression, context).get(0));
+                expected, calculator.solve(context, expression).get(0));
     }
 
     @Test
