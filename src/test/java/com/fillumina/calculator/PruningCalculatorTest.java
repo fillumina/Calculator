@@ -1,6 +1,6 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.grammar.pattern.instances.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.pattern.instances.ArithmeticPatternGrammar;
 import com.fillumina.calculator.util.Mapper;
 import java.util.Collections;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class PruningCalculatorTest {
             (Map<String,Double>)Collections.EMPTY_MAP;
 
     private Calculator<Double, Map<String,Double>> calculator =
-            Calculator.createPruning(ArithmeticGrammar.INSTANCE);
+            Calculator.createPruning(ArithmeticPatternGrammar.INSTANCE);
 
     @Test
     public void shouldHaveAStaticSolution() {

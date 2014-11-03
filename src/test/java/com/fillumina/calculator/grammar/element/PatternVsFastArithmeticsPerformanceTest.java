@@ -2,13 +2,14 @@ package com.fillumina.calculator.grammar.element;
 
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.FastSolver;
-import com.fillumina.calculator.grammar.instances.FastArithmeticGrammar;
-import com.fillumina.calculator.grammar.pattern.instances.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.pattern.instances.ArithmeticPatternGrammar;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.template.ProgressionConfigurator;
 import com.fillumina.performance.util.junit.JUnitAutoProgressionPerformanceTemplate;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -24,6 +25,8 @@ public class PatternVsFastArithmeticsPerformanceTest
 
     @Override
     public void init(ProgressionConfigurator config) {
+        config.setMaxStandardDeviation(6)
+                .setTimeout(30, TimeUnit.SECONDS);
     }
 
     @Override
@@ -33,7 +36,7 @@ public class PatternVsFastArithmeticsPerformanceTest
 
         tests.addTest("pattern", new Runnable() {
             final Calculator<Double, Map<String,Double>> c =
-                    new Calculator<>(ArithmeticGrammar.INSTANCE,
+                    new Calculator<>(ArithmeticPatternGrammar.INSTANCE,
                             FastSolver.INSTANCE);
 
             @Override
@@ -44,7 +47,7 @@ public class PatternVsFastArithmeticsPerformanceTest
 
         tests.addTest("fast", new Runnable() {
             final Calculator<Double, Map<String,Double>> c =
-                    new Calculator<>(FastArithmeticGrammar.INSTANCE,
+                    new Calculator<>(ArithmeticGrammar.INSTANCE,
                             FastSolver.INSTANCE);
 
             @Override

@@ -12,53 +12,43 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastWhiteSpace<T,C> extends AbstractComparableGrammarElement<T,C> {
+public class FastWhiteSpace<T,C>
+        extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     private static final FastWhiteSpace<?,?> INSTANCE =
-            new FastWhiteSpace<>(0, " \t\n");
-
-    private final char[] whitespaces;
+            new FastWhiteSpace<>(0);
 
     @SuppressWarnings("unchecked")
     public static <T,C> FastWhiteSpace<T,C> instance() {
         return (FastWhiteSpace<T, C>) INSTANCE;
     }
 
-    /**
-     * @see VeryFastWhiteSpace
-     *
-     * @param whitespaces insert a string with the whitespace characters to
-     *                    recognize. i.e.: " \t\n"
-     * @param priority    the priority
-     */
-    public FastWhiteSpace(final int priority, final String whitespaces) {
+    public FastWhiteSpace(final int priority) {
         super(priority);
-        this.whitespaces = whitespaces.toCharArray();
     }
 
     @Override
     public GrammarElementMatcher match(final String expression) {
         final char[] carray = expression.toCharArray();
         int start = -1, end = carray.length;
-        FOR: for (int i=0; i<carray.length; i++) {
+        for (int i=0; i<carray.length; i++) {
             final char c = carray[i];
-            for (int j=0; j<whitespaces.length; j++) {
-                if (c == whitespaces[j]) {
-                    if (start == -1) {
-                        start = i;
-                    }
-                    break;
-                } else {
+            if (c == ' ' || c == '\t' || c == '\n' || c == '\r') {
+                if (start == -1) {
+                    start = i;
+                }
+            } else {
+                if (start != -1) {
                     end = i;
-                    break FOR;
+                    break;
                 }
             }
         }
         if (start == -1) {
-            return FastElementMatcher.NOT_FOUND;
+            return ElementMatcher.NOT_FOUND;
         }
-        return new FastElementMatcher(start, end);
+        return new ElementMatcher(start, end);
     }
 
     @Override

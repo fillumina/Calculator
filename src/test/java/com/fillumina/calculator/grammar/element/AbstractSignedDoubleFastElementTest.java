@@ -1,6 +1,6 @@
 package com.fillumina.calculator.grammar.element;
 
-import com.fillumina.calculator.grammar.element.AbstractSignedDoubleFastElement;
+import com.fillumina.calculator.grammar.element.AbstractSignedDoubleOperand;
 import com.fillumina.calculator.GrammarElement;
 import java.util.List;
 import org.junit.Test;
@@ -39,7 +39,7 @@ public class AbstractSignedDoubleFastElementTest
 
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return new AbstractSignedDoubleFastElement<Double, Void>(0) {
+        return new AbstractSignedDoubleOperand<Double, Void>(0) {
             private static final long serialVersionUID = 1L;
 
             @Override

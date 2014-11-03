@@ -1,6 +1,6 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.grammar.element.AbstractFastQuotedStringOperand;
+import com.fillumina.calculator.grammar.element.AbstractQuotedStringOperand;
 import java.util.List;
 
 /**
@@ -8,7 +8,7 @@ import java.util.List;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class QuotedStringFastElement
-        extends AbstractFastQuotedStringOperand<Double,Void> {
+        extends AbstractQuotedStringOperand<Double,Void> {
     private static final long serialVersionUID = 1L;
 
     public static final QuotedStringFastElement INSTANCE =

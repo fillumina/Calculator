@@ -2,8 +2,8 @@ package com.fillumina.calculator.grammar.element;
 
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.FastSolver;
-import com.fillumina.calculator.grammar.instances.FastBooleanGrammar;
-import com.fillumina.calculator.grammar.pattern.instances.BooleanGrammar;
+import com.fillumina.calculator.grammar.instance.BooleanGrammar;
+import com.fillumina.calculator.grammar.pattern.instances.BooleanPatternGrammar;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.template.ProgressionConfigurator;
@@ -33,7 +33,7 @@ public class PatternVsFastBooleanPerformanceTest
 
         tests.addTest("pattern", new Runnable() {
             final Calculator<Boolean, Map<String,Boolean>> c =
-                    new Calculator<>(BooleanGrammar.INSTANCE,
+                    new Calculator<>(BooleanPatternGrammar.INSTANCE,
                             FastSolver.INSTANCE);
 
             @Override
@@ -44,7 +44,7 @@ public class PatternVsFastBooleanPerformanceTest
 
         tests.addTest("fast", new Runnable() {
             final Calculator<Boolean, Map<String,Boolean>> c =
-                    new Calculator<>(FastBooleanGrammar.INSTANCE,
+                    new Calculator<>(BooleanGrammar.INSTANCE,
                             FastSolver.INSTANCE);
 
             @Override

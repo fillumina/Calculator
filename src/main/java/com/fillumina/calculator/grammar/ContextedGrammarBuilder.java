@@ -1,8 +1,7 @@
 package com.fillumina.calculator.grammar;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.Grammar;
-import com.fillumina.calculator.grammar.pattern.VariableContextManager;
+import com.fillumina.calculator.grammar.element.VariableContextManager;
 import java.util.Map;
 
 
@@ -23,7 +22,7 @@ public class ContextedGrammarBuilder<T> extends GrammarBuilder<T,Map<String,T>> 
             Iterable<GrammarElement<T, Map<String, T>>> grammar) {
         super(grammar);
     }
-    
+
     @Override
     @SuppressWarnings("unchecked")
     public Iterable<GrammarElement<T, Map<String, T>>> buildGrammar() {

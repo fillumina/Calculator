@@ -1,8 +1,8 @@
 package com.fillumina.calculator;
 
 import com.fillumina.calculator.grammar.Grammar;
-import com.fillumina.calculator.grammar.pattern.TestOperand;
-import com.fillumina.calculator.grammar.pattern.TestOperator;
+import com.fillumina.calculator.grammar.pattern.test.TestOperand;
+import com.fillumina.calculator.grammar.pattern.test.TestOperator;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;

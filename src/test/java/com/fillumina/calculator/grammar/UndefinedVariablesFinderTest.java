@@ -6,7 +6,7 @@ import com.fillumina.calculator.DefaultInterpreter;
 import com.fillumina.calculator.Interpreter;
 import com.fillumina.calculator.Node;
 import com.fillumina.calculator.SolutionTree;
-import com.fillumina.calculator.grammar.pattern.instances.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.pattern.instances.ArithmeticPatternGrammar;
 import com.fillumina.calculator.util.Mapper;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +22,7 @@ import org.junit.Test;
 public class UndefinedVariablesFinderTest {
 
     private final Interpreter<Double, Map<String,Double>> interpreter =
-            new DefaultInterpreter<>(ArithmeticGrammar.INSTANCE);
+            new DefaultInterpreter<>(ArithmeticPatternGrammar.INSTANCE);
 
     @Test
     public void shouldRecognizeTheUndefinedVariables() {
@@ -48,7 +48,7 @@ public class UndefinedVariablesFinderTest {
     @Test
     public void shouldRecognizeOnlyTheUndefinedVariable() {
         final Calculator<Double, Map<String,Double>> calculator =
-            Calculator.createPruning(ArithmeticGrammar.INSTANCE);
+            Calculator.createPruning(ArithmeticPatternGrammar.INSTANCE);
 
         final SolutionTree<Double,Map<String,Double>> solution =
                 calculator.createSolutionTree("x + 2 * y + sin(2 * pi)");

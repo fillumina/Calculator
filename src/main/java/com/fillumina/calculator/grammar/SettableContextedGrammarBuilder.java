@@ -2,7 +2,7 @@ package com.fillumina.calculator.grammar;
 
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.grammar.Grammar;
-import com.fillumina.calculator.grammar.element.FastVariableSetterOperator;
+import com.fillumina.calculator.grammar.element.VariableSetterOperator;
 import java.util.Map;
 
 /**
@@ -28,7 +28,7 @@ public class SettableContextedGrammarBuilder<T>
     @Override
     @SuppressWarnings("unchecked")
     public Iterable<GrammarElement<T, Map<String, T>>> buildGrammar() {
-        add(FastVariableSetterOperator.<T>instance());
+        add(VariableSetterOperator.<T>instance());
         return super.buildGrammar();
     }
 }

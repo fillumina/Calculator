@@ -1,6 +1,5 @@
 package com.fillumina.calculator.grammar.element;
 
-import com.fillumina.calculator.grammar.element.FastElementMatcher;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import com.fillumina.calculator.grammar.GrammarElementType;
@@ -42,9 +41,9 @@ public class PatternVsFastStringPerformanceTest
             Matcher matcher = PATTERN.matcher(expression);
             matcher.find();
             if (matcher.groupCount() == 2) {
-                return new FastElementMatcher(matcher.start(2), matcher.end(2));
+                return new ElementMatcher(matcher.start(2), matcher.end(2));
             }
-            return FastElementMatcher.NOT_FOUND;
+            return ElementMatcher.NOT_FOUND;
         }
 
         @Override

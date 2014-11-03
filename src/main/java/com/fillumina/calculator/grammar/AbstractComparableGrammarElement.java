@@ -24,10 +24,6 @@ public abstract class AbstractComparableGrammarElement<T, C>
         return priority;
     }
 
-    public static boolean isDigit(final char c) {
-        return c >= '0' && c <= '9';
-    }
-
     @Override
     public int compareTo(final GrammarElement<T, C> grammarElement) {
         if (!(grammarElement instanceof AbstractComparableGrammarElement)) {

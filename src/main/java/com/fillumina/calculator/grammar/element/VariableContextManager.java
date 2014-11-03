@@ -1,8 +1,10 @@
 package com.fillumina.calculator.grammar.element;
 
-import com.fillumina.calculator.grammar.pattern.*;
 import com.fillumina.calculator.ContextException;
+import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.SyntaxErrorException;
+import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
+import com.fillumina.calculator.grammar.GrammarElementType;
 import java.util.List;
 import java.util.Map;
 
@@ -13,11 +15,15 @@ import java.util.Map;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class VariableContextManager<T>
-        extends AbstractUnrecognizedElement<T, Map<String, T>> {
+        extends AbstractComparableGrammarElement<T, Map<String, T>> {
     private static final long serialVersionUID = 1L;
 
     public static final VariableContextManager<?> INSTANCE =
             new VariableContextManager<>();
+
+    public VariableContextManager() {
+        super(0);
+    }
 
     @Override
     public T evaluate(final String value, final List<T> params,
@@ -33,5 +39,25 @@ public class VariableContextManager<T>
             throw new ContextException(value);
         }
         return variableValue;
+    }
+
+    @Override
+    public GrammarElementType getType() {
+        return GrammarElementType.UNRECOGNIZED;
+    }
+
+    @Override
+    public GrammarElementMatcher match(String expression) {
+        return ElementMatcher.NOT_FOUND;
+    }
+
+    @Override
+    public int getRequiredOperandsAfter() {
+        return 0;
+    }
+
+    @Override
+    public int getRequiredOperandsBefore() {
+        return 0;
     }
 }

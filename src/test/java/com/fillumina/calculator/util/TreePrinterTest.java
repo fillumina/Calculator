@@ -3,7 +3,7 @@ package com.fillumina.calculator.util;
 import com.fillumina.calculator.DefaultInterpreter;
 import com.fillumina.calculator.Interpreter;
 import com.fillumina.calculator.Node;
-import com.fillumina.calculator.grammar.pattern.instances.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.pattern.instances.ArithmeticPatternGrammar;
 import java.util.Collection;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
@@ -20,7 +20,7 @@ public class TreePrinterTest {
 
     @Before
     public void init() {
-        final ArithmeticGrammar grammar = ArithmeticGrammar.INSTANCE;
+        final ArithmeticPatternGrammar grammar = ArithmeticPatternGrammar.INSTANCE;
         interpreter = new DefaultInterpreter<>(grammar);
     }
 

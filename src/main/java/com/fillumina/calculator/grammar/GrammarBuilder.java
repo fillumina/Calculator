@@ -1,16 +1,16 @@
 package com.fillumina.calculator.grammar;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.element.AbstractFastDateOperand;
-import com.fillumina.calculator.grammar.element.AbstractFastDoubleOperand;
-import com.fillumina.calculator.grammar.element.AbstractFastIntegerOperand;
-import com.fillumina.calculator.grammar.element.AbstractFastMultiOperator;
-import com.fillumina.calculator.grammar.element.AbstractFastStringOperand;
-import com.fillumina.calculator.grammar.element.FastCloseParentheses;
-import com.fillumina.calculator.grammar.element.FastConstantOperand;
-import com.fillumina.calculator.grammar.element.FastOpenParentheses;
-import com.fillumina.calculator.grammar.element.ValueFastMultiConstant;
-import com.fillumina.calculator.grammar.element.VeryFastWhiteSpace;
+import com.fillumina.calculator.grammar.element.AbstractDateOperand;
+import com.fillumina.calculator.grammar.element.AbstractDoubleOperand;
+import com.fillumina.calculator.grammar.element.AbstractIntegerOperand;
+import com.fillumina.calculator.grammar.element.AbstractMultiOperator;
+import com.fillumina.calculator.grammar.element.AbstractStringOperand;
+import com.fillumina.calculator.grammar.element.CloseParentheses;
+import com.fillumina.calculator.grammar.element.ConstantOperand;
+import com.fillumina.calculator.grammar.element.OpenParentheses;
+import com.fillumina.calculator.grammar.element.ValuedMultiConstant;
+import com.fillumina.calculator.grammar.element.FastWhiteSpace;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,7 +49,7 @@ public class GrammarBuilder<T,C> {
             throw new IllegalStateException(
                     "Define the integer operator before the double");
         }
-        elements.add(new AbstractFastIntegerOperand<T,C>(0) {
+        elements.add(new AbstractIntegerOperand<T,C>(0) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -62,7 +62,7 @@ public class GrammarBuilder<T,C> {
 
     public GrammarBuilder<T,C> addFloatOperand(
             final StringEvaluator<T,C> evaluator) {
-        elements.add(new AbstractFastDoubleOperand<T,C>(0) {
+        elements.add(new AbstractDoubleOperand<T,C>(0) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -76,7 +76,7 @@ public class GrammarBuilder<T,C> {
 
     public GrammarBuilder<T,C> addDateOperand(final String pattern,
             final StringEvaluator<T,C> evaluator) {
-        elements.add(new AbstractFastDateOperand<T,C>(0, pattern) {
+        elements.add(new AbstractDateOperand<T,C>(0, pattern) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -99,9 +99,9 @@ public class GrammarBuilder<T,C> {
      */
     public GrammarBuilder<T,C> addBooleanOperand(final T trueValue,
             final T falseValue) {
-        elements.add(new ValueFastMultiConstant<T,C>(
+        elements.add(new ValuedMultiConstant<T,C>(
                     trueValue, 0, "true", "TRUE", "True"));
-        elements.add(new ValueFastMultiConstant<T,C>(
+        elements.add(new ValuedMultiConstant<T,C>(
                     falseValue, 0, "false", "FALSE", "False"));
         return this;
     }
@@ -109,7 +109,7 @@ public class GrammarBuilder<T,C> {
     /** Adds unquoted, single-quoted and double-quoted strings. */
     public GrammarBuilder<T,C> addStringOperand(
             final StringEvaluator<T,C> evaluator) {
-        elements.add(new AbstractFastStringOperand<T,C>(0) {
+        elements.add(new AbstractStringOperand<T,C>(0) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -121,7 +121,7 @@ public class GrammarBuilder<T,C> {
     }
 
     public GrammarBuilder<T,C> addConstant(final String symbol, final T constant) {
-        elements.add(new FastConstantOperand<T,C>(symbol, constant, 0));
+        elements.add(new ConstantOperand<T,C>(symbol, constant, 0));
         return this;
     }
 
@@ -162,7 +162,7 @@ public class GrammarBuilder<T,C> {
         }
 
         public GrammarBuilder<T,C> buildOperator() {
-            elements.add(new AbstractFastMultiOperator<T, C>(priority,
+            elements.add(new AbstractMultiOperator<T, C>(priority,
                     operandsBefore, operandsAfter, symbols) {
                         private static final long serialVersionUID = 1L;
 
@@ -183,9 +183,9 @@ public class GrammarBuilder<T,C> {
     /** Intermediate results are independent between each other. */
     @SuppressWarnings("unchecked")
     public Iterable<GrammarElement<T,C>> buildGrammar() {
-        add(FastOpenParentheses.<T,C>round());
-        add(FastCloseParentheses.<T,C>round());
-        add(VeryFastWhiteSpace.<T,C>instance());
+        add(OpenParentheses.<T,C>round());
+        add(CloseParentheses.<T,C>round());
+        add(FastWhiteSpace.<T,C>instance());
 
         return Collections.unmodifiableList(new ArrayList<>(elements));
     }
