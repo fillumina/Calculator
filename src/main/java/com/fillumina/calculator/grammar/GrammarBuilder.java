@@ -150,6 +150,16 @@ public class GrammarBuilder<T,C> {
             return this;
         }
 
+        public OperatorBuilder allAvailableOperandsBefore() {
+            this.operandsBefore = Integer.MAX_VALUE;
+            return this;
+        }
+
+        public OperatorBuilder allAvailableOperandsAfter() {
+            this.operandsAfter = Integer.MAX_VALUE;
+            return this;
+        }
+
         public OperatorBuilder evaluator(final StringParametricEvaluator<T,C> value) {
             this.evaluator = value;
             return this;

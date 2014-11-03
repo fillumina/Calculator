@@ -1,10 +1,11 @@
 package com.fillumina.calculator;
 
 import com.fillumina.calculator.grammar.GrammarException;
-import com.fillumina.calculator.util.ExtendedListIterator;
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Objects;
 
 /**
@@ -70,15 +71,15 @@ public class DefaultTokenizer<T,C> implements Serializable, Tokenizer<T, C> {
         }
     }
 
-    private static class SplittingIterator<T,C>
-            extends ExtendedListIterator<Node<T,C>> {
+    private static class SplittingIterator<T,C> implements Iterator<Node<T,C>> {
         private static final long serialVersionUID = 1L;
 
         private final List<Node<T,C>> list;
+        private ListIterator<Node<T,C>> delegate;
 
         public SplittingIterator(final List<Node<T, C>> list) {
-            super(list);
             this.list = list;
+            this.delegate = list.listIterator();
         }
 
         /** Reset the iterator to start. */
@@ -102,22 +103,37 @@ public class DefaultTokenizer<T,C> implements Serializable, Tokenizer<T, C> {
             if (start == 0 && end == valueLength) {
                 return originalNode;
             } else {
-                remove();
+                delegate.remove();
 
                 if (start != 0) {
-                    add(new Node<T,C>(value.substring(0, start)));
+                    delegate.add(new Node<T,C>(value.substring(0, start)));
                 }
 
                 final Node<T, C> createdNode =
                         new Node<>(value.substring(start, end));
-                add(createdNode);
+                delegate.add(createdNode);
 
                 if (end != valueLength) {
-                    add(new Node<T,C>(value.substring(end, valueLength)));
+                    delegate.add(new Node<T,C>(value.substring(end, valueLength)));
                 }
 
                 return createdNode;
             }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return delegate.hasNext();
+        }
+
+        @Override
+        public Node<T, C> next() {
+            return delegate.next();
+        }
+
+        @Override
+        public void remove() {
+            delegate.remove();
         }
     }
 }

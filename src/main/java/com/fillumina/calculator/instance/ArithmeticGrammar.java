@@ -1,5 +1,6 @@
 package com.fillumina.calculator.instance;
 
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.element.AbstractDoubleOperand;
 import com.fillumina.calculator.element.AbstractOperator;
 import com.fillumina.calculator.element.CloseParentheses;
@@ -9,6 +10,9 @@ import com.fillumina.calculator.element.OpenParentheses;
 import com.fillumina.calculator.element.VariableContextManager;
 import com.fillumina.calculator.element.VariableSetterOperator;
 import com.fillumina.calculator.grammar.Grammar;
+import com.fillumina.calculator.grammar.SettableContextedGrammarBuilder;
+import com.fillumina.calculator.grammar.StringEvaluator;
+import com.fillumina.calculator.grammar.StringParametricEvaluator;
 import java.io.Serializable;
 import static java.lang.Math.E;
 import static java.lang.Math.PI;
@@ -35,226 +39,275 @@ import java.util.Map;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ArithmeticGrammar extends Grammar<Double, Map<String, Double>>
-        implements Serializable {
+public class ArithmeticGrammar {
     private static final long serialVersionUID = 1L;
 
-    public static final ArithmeticGrammar INSTANCE =
-            new ArithmeticGrammar();
+    public static final Iterable<GrammarElement<Double,Map<String,Double>>> INSTANCE =
+        new SettableContextedGrammarBuilder<Double>()
+                .addFloatOperand(new StringEvaluator<Double, Map<String, Double>>() {
+                    @Override
+                    public Double evaluate(String value, Map<String, Double> context) {
+                        return Double.valueOf(value);
+                    }
+                })
 
-    @SuppressWarnings("unchecked")
-    private ArithmeticGrammar() {
-        super(new AbstractDoubleOperand<Double,Map<String, Double>>(0) {
-            private static final long serialVersionUID = 1L;
+                .addOperator()
+                    .priority(5)
+                    .symbols("!")
+                    .operandsBefore(1)
+                    .operandsAfter(0)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            final Double number = params.get(0);
+                            final long ivalue = round(number);
+                            long result = 1;
+                            for (long l=1; l<=ivalue; l++) {
+                                result *= l;
+                            }
+                            return Double.valueOf(String.valueOf(result));
+                        }
+                    })
+                    .buildOperator()
 
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return Double.valueOf(value);
-            }
-        },
+                .addOperator()
+                    .priority(4)
+                    .symbols("asin")
+                    .operandsBefore(0)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return asin(params.get(0));
+                        }
+                    })
+                    .buildOperator()
 
-        new AbstractOperator<Double,Map<String, Double>>(5, 1, 0, "!") {
-            private static final long serialVersionUID = 1L;
+                .addOperator()
+                    .priority(4)
+                    .symbols("acos")
+                    .operandsBefore(0)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return acos(params.get(0));
+                        }
+                    })
+                    .buildOperator()
 
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                final Double number = params.get(0);
-                final long ivalue = round(number);
-                long result = 1;
-                for (long l=1; l<=ivalue; l++) {
-                    result *= l;
-                }
-                return Double.valueOf(String.valueOf(result));
-            }
-        },
+                .addOperator()
+                    .priority(4)
+                    .symbols("atan")
+                    .operandsBefore(0)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return atan(params.get(0));
+                        }
+                    })
+                    .buildOperator()
 
-        new AbstractOperator<Double,Map<String, Double>>(4, 0, 1, "asin") {
-            private static final long serialVersionUID = 1L;
+                .addOperator()
+                    .priority(4)
+                    .symbols("sin")
+                    .operandsBefore(0)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return sin(params.get(0));
+                        }
+                    })
+                    .buildOperator()
 
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return asin(params.get(0));
-            }
-        },
+                .addOperator()
+                    .priority(4)
+                    .symbols("cos")
+                    .operandsBefore(0)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return cos(params.get(0));
+                        }
+                    })
+                    .buildOperator()
 
-        new AbstractOperator<Double,Map<String, Double>>(4, 0, 1, "acos") {
-            private static final long serialVersionUID = 1L;
+                .addOperator()
+                    .priority(4)
+                    .symbols("tan")
+                    .operandsBefore(0)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return tan(params.get(0));
+                        }
+                    })
+                    .buildOperator()
 
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return acos(params.get(0));
-            }
+                .addOperator()
+                    .priority(4)
+                    .symbols("log")
+                    .operandsBefore(0)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return log10(params.get(0));
+                        }
+                    })
+                    .buildOperator()
 
-        },
+                .addOperator()
+                    .priority(4)
+                    .symbols("ln")
+                    .operandsBefore(0)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return log(params.get(0));
+                        }
+                    })
+                    .buildOperator()
 
-        new AbstractOperator<Double,Map<String, Double>>(4, 0, 1, "atan") {
-            private static final long serialVersionUID = 1L;
+                .addOperator()
+                    .priority(4)
+                    .symbols("sqrt", "sqr")
+                    .operandsBefore(0)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return sqrt(params.get(0));
+                        }
+                    })
+                    .buildOperator()
 
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return atan(params.get(0));
-            }
-        },
+                .addOperator()
+                    .priority(4)
+                    .symbols("rnd")
+                    .operandsBefore(0)
+                    .operandsAfter(0)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return Math.random();
+                        }
+                    })
+                    .buildOperator()
 
-        new AbstractOperator<Double,Map<String, Double>>(4, 0, 1, "sin") {
-            private static final long serialVersionUID = 1L;
+                .addOperator()
+                    .priority(4)
+                    .symbols("avg")
+                    .operandsBefore(0)
+                    .allAvailableOperandsAfter()
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            final int size = params.size();
+                            if (size == 0) {
+                                return 0.0;
+                            }
+                            double total = 0;
+                            for (Double d: params) {
+                                total += d;
+                            }
+                            return total / size;
+                        }
+                    })
+                    .buildOperator()
 
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return sin(params.get(0));
-            }
-        },
+                .addOperator()
+                    .priority(3)
+                    .symbols("^")
+                    .operandsBefore(1)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return pow(params.get(0), params.get(1));
+                        }
+                    })
+                    .buildOperator()
 
-        new AbstractOperator<Double,Map<String, Double>>(4, 0, 1, "cos") {
-            private static final long serialVersionUID = 1L;
+                .addOperator()
+                    .priority(2)
+                    .symbols("*")
+                    .operandsBefore(1)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return params.get(0) * params.get(1);
+                        }
+                    })
+                    .buildOperator()
 
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return cos(params.get(0));
-            }
+                .addOperator()
+                    .priority(2)
+                    .symbols("/")
+                    .operandsBefore(1)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return params.get(0) / params.get(1);
+                        }
+                    })
+                    .buildOperator()
 
-        },
+                .addOperator()
+                    .priority(1)
+                    .symbols("+")
+                    .operandsBefore(1)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            return params.get(0) + params.get(1);
+                        }
+                    })
+                    .buildOperator()
 
-        new AbstractOperator<Double,Map<String, Double>>(4, 0, 1, "tan") {
-            private static final long serialVersionUID = 1L;
+                .addOperator()
+                    .priority(1)
+                    .symbols("-")
+                    .operandsBefore(1)
+                    .operandsAfter(1)
+                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                        @Override
+                        public Double evaluate(String value, List<Double> params,
+                                Map<String, Double> context) {
+                            if (params.size() == 1) {
+                                return - params.get(0);
+                            }
+                            return params.get(0) - params.get(1);
+                        }
+                    })
+                    .buildOperator()
 
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return tan(params.get(0));
-            }
-        },
+                .addConstant("e", E)
+                .addConstant("pi", PI)
+        .buildGrammar();
 
-        new AbstractOperator<Double,Map<String, Double>>(4, 0, 1, "log") {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return log10(params.get(0));
-            }
-        },
-
-        new AbstractOperator<Double,Map<String, Double>>(4, 0, 1, "ln") {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return log(params.get(0));
-            }
-        },
-
-        new AbstractOperator<Double,Map<String, Double>>(4, 0, 1, "sqr") {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return sqrt(params.get(0));
-            }
-        },
-
-        new AbstractOperator<Double,Map<String, Double>>(4, 0, 0, "rnd") {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return Math.random();
-            }
-        },
-
-        new AbstractOperator<Double,Map<String, Double>>(4, 0,
-                Integer.MAX_VALUE, "avg") {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                final int size = params.size();
-                if (size == 0) {
-                    return 0.0;
-                }
-                double total = 0;
-                for (Double d: params) {
-                    total += d;
-                }
-                return total / size;
-            }
-        },
-
-        new AbstractOperator<Double,Map<String, Double>>(3, 1, 1, "^") {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return pow(params.get(0), params.get(1));
-            }
-        },
-
-        new AbstractOperator<Double,Map<String, Double>>(2, 1, 1, "*") {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return params.get(0) * params.get(1);
-            }
-        },
-
-        new AbstractOperator<Double,Map<String, Double>>(2, 1, 1, "/") {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return params.get(0) / params.get(1);
-            }
-        },
-
-        new AbstractOperator<Double,Map<String, Double>>(1, 1, 1, "+") {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                return params.get(0) + params.get(1);
-            }
-        },
-
-        new AbstractOperator<Double,Map<String, Double>>(1, 1, 1, "-") {
-            private static final long serialVersionUID = 1L;
-
-            @Override
-            public Double evaluate(final String value, final List<Double> params,
-                    final Map<String, Double> context) {
-                if (params.size() == 1) {
-                    return - params.get(0);
-                }
-                return params.get(0) - params.get(1);
-            }
-        },
-
-        VariableSetterOperator.<Double>instance(),
-
-        OpenParentheses.<Double,Map<String, Double>>round(),
-        CloseParentheses.<Double,Map<String, Double>>round(),
-
-        FastWhiteSpace.<Double,Map<String, Double>>instance(),
-
-        new ConstantOperand<Double,Map<String, Double>>("e", E, 0),
-        new ConstantOperand<Double,Map<String, Double>>("pi", PI,  0),
-
-        new VariableContextManager<Double>()
-        );
-    }
 }

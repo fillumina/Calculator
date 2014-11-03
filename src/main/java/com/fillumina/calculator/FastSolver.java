@@ -10,7 +10,7 @@ import java.util.List;
  * it doesn't optimize it in any way and every time it's
  * called it executes every calculation in the solution tree again.
  * If you need to perform optimizations use {@link PruningSolver}. On the other
- * hand this solver is <i>thread safe</i>.
+ * hand this solver is <i>thread safe</i> and doesn't modify the solution tree.
  *
  * @see PruningSolver
  *

@@ -1,10 +1,10 @@
-package com.fillumina.calculator.util;
+package com.fillumina.calculator.element;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class CharacterUtil {
+class CharacterUtil {
     private static final FastCharacterChecker CHARACTERS =
             new FastCharacterChecker(new FastCharacterChecker.Evaluator() {
         @Override

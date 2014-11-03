@@ -4,7 +4,6 @@ import com.fillumina.calculator.GrammarElement;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -37,8 +36,13 @@ public class Grammar<T,C>
                 Arrays.asList(elementsArray.clone()));
     }
 
-    public Grammar(final Collection<GrammarElement<? extends T,? extends C>> collection) {
-        elements = Collections.unmodifiableList(new ArrayList<>(collection));
+    public Grammar(final Iterable<GrammarElement<? extends T,? extends C>> iterable) {
+        final List<GrammarElement<? extends T,? extends C>> list =
+                new ArrayList<>();
+        for (GrammarElement<? extends T,? extends C> element : iterable) {
+            list.add(element);
+        }
+        elements = Collections.unmodifiableList(list);
     }
 
     /** Always returns an immutable {@link Iterator}. */
@@ -80,10 +84,24 @@ public class Grammar<T,C>
     }
 
     public static <T,C> List<GrammarElement<T,C>> join(
-            final List<GrammarElement<T,C>>... lists) {
+            final Iterable<GrammarElement<T,C>>... iterables) {
         final List<GrammarElement<T,C>> list =new ArrayList<>();
-        for (final List<GrammarElement<T,C>> l: lists) {
-            list.addAll(l);
+        for (final Iterable<GrammarElement<T,C>> iterable: iterables) {
+            GrammarElement<T,C> ge = null;
+            for (Iterator<GrammarElement<T,C>> i = iterable.iterator();
+                    i.hasNext();
+                    ge = i.next()) {
+                list.add(ge);
+            }
+        }
+        return list;
+    }
+
+    public static <T,C> List<GrammarElement<T,C>> join(
+            final GrammarElement<T,C>... elements) {
+        final List<GrammarElement<T,C>> list =new ArrayList<>();
+        for (final GrammarElement<T,C> l: elements) {
+            list.add(l);
         }
         return list;
     }

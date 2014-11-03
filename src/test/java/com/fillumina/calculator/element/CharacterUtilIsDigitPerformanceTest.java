@@ -1,5 +1,6 @@
-package com.fillumina.calculator.util;
+package com.fillumina.calculator.element;
 
+import com.fillumina.calculator.element.CharacterUtil;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.producer.timer.RunnableSink;
@@ -11,16 +12,16 @@ import java.util.Random;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class CharacterUtilIsAlphabeticPerformanceTest
+public class CharacterUtilIsDigitPerformanceTest
         extends JUnitAutoProgressionPerformanceTemplate {
 
     public static void main(String[] args) {
-        new CharacterUtilIsAlphabeticPerformanceTest().executeWithIntermediateOutput();
+        new CharacterUtilIsDigitPerformanceTest().executeWithIntermediateOutput();
     }
 
     @Override
     public void init(ProgressionConfigurator config) {
-        config.setMaxStandardDeviation(3);
+        config.setMaxStandardDeviation(4);
     }
 
     @Override
@@ -31,7 +32,7 @@ public class CharacterUtilIsAlphabeticPerformanceTest
 
             @Override
             public Object sink() {
-                return Character.isAlphabetic(
+                return Character.isDigit(
                         (char)rnd.nextInt(Character.MAX_VALUE));
             }
         });
@@ -40,7 +41,7 @@ public class CharacterUtilIsAlphabeticPerformanceTest
 
             @Override
             public Object sink() {
-                return CharacterUtil.isAlphabetic(
+                return CharacterUtil.isDigit(
                         (char)rnd.nextInt(Character.MAX_VALUE));
             }
         });

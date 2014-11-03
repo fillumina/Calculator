@@ -19,6 +19,7 @@ import java.util.Map;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
+// TODO use the builders
 public class BooleanGrammar extends Grammar<Boolean, Map<String, Boolean>>
         implements Serializable {
     private static final long serialVersionUID = 1L;
