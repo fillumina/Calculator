@@ -13,9 +13,9 @@ public class CharacterUtil {
         }
     });
 
-    public static boolean isNotAlpha(final char c) {
-        return !CHARACTERS.contains(c);
-        //return c < 'A' || (c > 'Z' && c < 'a') || c > 'z';
+    public static boolean isAlphabetic(final char c) {
+        return CHARACTERS.contains(c);
+        //return (c >= 'A' && c <= 'Z') || (&& c >= 'a' && c <= 'z');
     }
 
     public static boolean isDigit(final char c) {

@@ -1,8 +1,5 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.GrammarElement;
-import java.io.Serializable;
-
 /**
  * Priority is used when building the solution tree to put high priority
  * elements first. This abstract class provides a simple priority mechanism.

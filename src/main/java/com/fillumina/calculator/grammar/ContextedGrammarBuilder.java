@@ -1,7 +1,7 @@
 package com.fillumina.calculator.grammar;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.element.VariableContextManager;
+import com.fillumina.calculator.element.VariableContextManager;
 import java.util.Map;
 
 

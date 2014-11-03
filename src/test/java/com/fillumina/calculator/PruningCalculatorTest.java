@@ -1,6 +1,6 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.grammar.pattern.instances.ArithmeticPatternGrammar;
+import com.fillumina.calculator.pattern.instances.ArithmeticPatternGrammar;
 import com.fillumina.calculator.util.Mapper;
 import java.util.Collections;
 import java.util.Map;

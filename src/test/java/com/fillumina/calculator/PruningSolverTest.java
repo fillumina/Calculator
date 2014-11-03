@@ -1,12 +1,13 @@
 package com.fillumina.calculator;
 
 import com.fillumina.calculator.grammar.Grammar;
-import com.fillumina.calculator.grammar.pattern.CloseParentheses;
-import com.fillumina.calculator.grammar.pattern.OpenParentheses;
-import com.fillumina.calculator.grammar.pattern.VariableContextManager;
-import com.fillumina.calculator.grammar.pattern.WhiteSpace;
-import com.fillumina.calculator.grammar.pattern.test.TestContextOperand;
-import com.fillumina.calculator.grammar.pattern.test.TestContextOperator;
+import com.fillumina.calculator.interpreter.DefaultInterpreter;
+import com.fillumina.calculator.pattern.CloseParentheses;
+import com.fillumina.calculator.pattern.OpenParentheses;
+import com.fillumina.calculator.pattern.VariableContextManager;
+import com.fillumina.calculator.pattern.WhiteSpace;
+import com.fillumina.calculator.pattern.test.TestContextOperand;
+import com.fillumina.calculator.pattern.test.TestContextOperator;
 import com.fillumina.calculator.util.TreePrinter;
 import java.util.HashMap;
 import java.util.List;

@@ -1,23 +1,23 @@
 package com.fillumina.calculator.grammar;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.element.AbstractDateOperand;
-import com.fillumina.calculator.grammar.element.AbstractDoubleOperand;
-import com.fillumina.calculator.grammar.element.AbstractIntegerOperand;
-import com.fillumina.calculator.grammar.element.AbstractMultiOperator;
-import com.fillumina.calculator.grammar.element.AbstractStringOperand;
-import com.fillumina.calculator.grammar.element.CloseParentheses;
-import com.fillumina.calculator.grammar.element.ConstantOperand;
-import com.fillumina.calculator.grammar.element.FastWhiteSpace;
-import com.fillumina.calculator.grammar.element.OpenParentheses;
-import com.fillumina.calculator.grammar.element.ValuedMultiConstant;
+import com.fillumina.calculator.element.AbstractDateOperand;
+import com.fillumina.calculator.element.AbstractDoubleOperand;
+import com.fillumina.calculator.element.AbstractIntegerOperand;
+import com.fillumina.calculator.element.AbstractMultiOperator;
+import com.fillumina.calculator.element.AbstractStringOperand;
+import com.fillumina.calculator.element.CloseParentheses;
+import com.fillumina.calculator.element.ConstantOperand;
+import com.fillumina.calculator.element.FastWhiteSpace;
+import com.fillumina.calculator.element.OpenParentheses;
+import com.fillumina.calculator.element.ValuedMultiConstant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 
 /**
- * Helps building {@link Grammar}s with predefined components like round
+ * Helps building {@link Grammar}s with predefined components: round
  * parentheses and white spaces.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>

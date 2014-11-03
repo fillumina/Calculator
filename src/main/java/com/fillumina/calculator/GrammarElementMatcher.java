@@ -9,7 +9,7 @@ public interface GrammarElementMatcher {
 
     /**
      * Always call this before getting start or end (needed for pattern matcher).
-     * 
+     *
      * @return {@code true} if the element has been found.
      */
     boolean isFound();
@@ -19,4 +19,22 @@ public interface GrammarElementMatcher {
 
     /** The end index at which a match has been found. */
     int getEnd();
+
+    GrammarElementMatcher NOT_FOUND = new GrammarElementMatcher() {
+
+        @Override
+        public boolean isFound() {
+            return false;
+        }
+
+        @Override
+        public int getStart() {
+            throw new UnsupportedOperationException("Not found!");
+        }
+
+        @Override
+        public int getEnd() {
+            throw new UnsupportedOperationException("Not found!");
+        }
+    };
 }

@@ -1,6 +1,6 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.grammar.element.AbstractDoubleOperand;
+import com.fillumina.calculator.element.AbstractDoubleOperand;
 import java.util.List;
 
 /**

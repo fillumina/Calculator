@@ -1,6 +1,6 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.grammar.element.AbstractQuotedStringOperand;
+import com.fillumina.calculator.element.AbstractQuotedStringOperand;
 import java.util.List;
 
 /**

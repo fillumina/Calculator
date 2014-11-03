@@ -40,7 +40,7 @@ public class CharacterUtilIsAlphabeticPerformanceTest
 
             @Override
             public Object sink() {
-                return CharacterUtil.isNotAlpha(
+                return CharacterUtil.isAlphabetic(
                         (char)rnd.nextInt(Character.MAX_VALUE));
             }
         });

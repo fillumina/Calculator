@@ -1,6 +1,6 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.grammar.pattern.AbstractDoublePatternElement;
+import com.fillumina.calculator.pattern.AbstractDoublePatternElement;
 
 /**
  *
