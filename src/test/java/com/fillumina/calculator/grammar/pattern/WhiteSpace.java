@@ -1,6 +1,6 @@
 package com.fillumina.calculator.grammar.pattern;
 
-import com.fillumina.calculator.grammar.GrammarElementType;
+import com.fillumina.calculator.GrammarElementType;
 
 /**
  * Defines characters that will be ignored during parsing (usually spaces,

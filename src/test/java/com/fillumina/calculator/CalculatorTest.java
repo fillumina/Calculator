@@ -1,9 +1,9 @@
 package com.fillumina.calculator;
 
 import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
-import com.fillumina.calculator.grammar.StringEvaluator;
 import com.fillumina.calculator.grammar.GrammarBuilder;
 import com.fillumina.calculator.grammar.SettableContextedGrammarBuilder;
+import com.fillumina.calculator.grammar.StringEvaluator;
 import com.fillumina.calculator.grammar.StringParametricEvaluator;
 import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
 import com.fillumina.calculator.util.Mapper;

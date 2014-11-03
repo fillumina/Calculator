@@ -1,6 +1,6 @@
 package com.fillumina.calculator.grammar.element;
 
-import com.fillumina.calculator.grammar.GrammarElementType;
+import com.fillumina.calculator.GrammarElementType;
 import java.util.List;
 
 /**

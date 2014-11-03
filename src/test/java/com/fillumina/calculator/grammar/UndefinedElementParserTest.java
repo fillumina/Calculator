@@ -1,10 +1,11 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.WhiteSpaceCleaner;
-import com.fillumina.calculator.UndefinedElementParser;
 import com.fillumina.calculator.DefaultTokenizer;
+import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.Node;
 import com.fillumina.calculator.Tokenizer;
+import com.fillumina.calculator.UndefinedElementParser;
+import com.fillumina.calculator.WhiteSpaceCleaner;
 import com.fillumina.calculator.grammar.pattern.instances.ArithmeticPatternGrammar;
 import com.fillumina.calculator.util.TreePrinter;
 import java.util.List;

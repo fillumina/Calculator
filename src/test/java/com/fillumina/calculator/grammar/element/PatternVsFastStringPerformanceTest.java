@@ -1,8 +1,8 @@
 package com.fillumina.calculator.grammar.element;
 
 import com.fillumina.calculator.GrammarElementMatcher;
+import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
-import com.fillumina.calculator.grammar.GrammarElementType;
 import com.fillumina.calculator.grammar.QuotedStringFastElement;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;

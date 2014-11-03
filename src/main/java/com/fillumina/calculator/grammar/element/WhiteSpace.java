@@ -2,8 +2,8 @@ package com.fillumina.calculator.grammar.element;
 
 import com.fillumina.calculator.EvaluationException;
 import com.fillumina.calculator.GrammarElementMatcher;
-import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
-import com.fillumina.calculator.grammar.GrammarElementType;
+import com.fillumina.calculator.GrammarElementType;
+import com.fillumina.calculator.grammar.AbstractComparableGrammarOperand;
 import java.util.List;
 
 /**
@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class WhiteSpace<T,C> extends AbstractComparableGrammarElement<T,C> {
+public class WhiteSpace<T,C> extends AbstractComparableGrammarOperand<T,C> {
     private static final long serialVersionUID = 1L;
 
     private static final WhiteSpace<?,?> INSTANCE =
@@ -71,15 +71,5 @@ public class WhiteSpace<T,C> extends AbstractComparableGrammarElement<T,C> {
             final C context) {
         throw new EvaluationException("Element not evaluable: " + value +
                 ", parameters: " + params);
-    }
-
-    @Override
-    public int getRequiredOperandsAfter() {
-        return 0;
-    }
-
-    @Override
-    public int getRequiredOperandsBefore() {
-        return 0;
     }
 }

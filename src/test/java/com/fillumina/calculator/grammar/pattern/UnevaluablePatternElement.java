@@ -1,8 +1,7 @@
 package com.fillumina.calculator.grammar.pattern;
 
-import com.fillumina.calculator.grammar.element.AbstractPatternElement;
 import com.fillumina.calculator.EvaluationException;
-import com.fillumina.calculator.grammar.GrammarElementType;
+import com.fillumina.calculator.grammar.element.AbstractPatternElement;
 import java.util.List;
 
 /**

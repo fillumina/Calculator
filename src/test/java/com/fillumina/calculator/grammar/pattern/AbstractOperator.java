@@ -1,7 +1,7 @@
 package com.fillumina.calculator.grammar.pattern;
 
+import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.grammar.element.AbstractPatternElement;
-import com.fillumina.calculator.grammar.GrammarElementType;
 
 /**
  * An operator is an evaluable element that might expects some arguments.

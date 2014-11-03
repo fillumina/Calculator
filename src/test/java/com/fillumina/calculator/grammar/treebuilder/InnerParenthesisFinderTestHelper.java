@@ -1,7 +1,7 @@
 package com.fillumina.calculator.grammar.treebuilder;
 
+import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.Node;
-import com.fillumina.calculator.grammar.GrammarElementType;
 import com.fillumina.calculator.grammar.pattern.AbstractOperand;
 import com.fillumina.calculator.grammar.pattern.CloseParentheses;
 import com.fillumina.calculator.grammar.pattern.OpenParentheses;

@@ -1,4 +1,4 @@
-package com.fillumina.calculator.grammar;
+package com.fillumina.calculator;
 
 /**
  * Different types of {@link GrammarElement}s.

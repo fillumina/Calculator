@@ -1,14 +1,14 @@
 package com.fillumina.calculator.grammar.element;
 
-import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
-import com.fillumina.calculator.grammar.GrammarElementType;
+import com.fillumina.calculator.GrammarElementType;
+import com.fillumina.calculator.grammar.AbstractComparableGrammarOperand;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractOperand<T,C>
-        extends AbstractComparableGrammarElement<T,C> {
+        extends AbstractComparableGrammarOperand<T,C> {
     private static final long serialVersionUID = 1L;
 
     public AbstractOperand() {
@@ -21,16 +21,6 @@ public abstract class AbstractOperand<T,C>
      */
     public AbstractOperand(int priority) {
         super(priority);
-    }
-
-    @Override
-    public int getRequiredOperandsAfter() {
-        return 0;
-    }
-
-    @Override
-    public int getRequiredOperandsBefore() {
-        return 0;
     }
 
     @Override

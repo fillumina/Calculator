@@ -1,9 +1,6 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.Node;
-import com.fillumina.calculator.SolutionTreeFilter;
-import com.fillumina.calculator.grammar.GrammarElementType;
+import com.fillumina.calculator.grammar.element.WhiteSpace;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ListIterator;

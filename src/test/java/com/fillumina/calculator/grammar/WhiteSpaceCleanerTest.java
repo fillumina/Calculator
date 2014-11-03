@@ -1,13 +1,13 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.WhiteSpaceCleaner;
 import com.fillumina.calculator.DefaultTokenizer;
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.Node;
 import com.fillumina.calculator.Tokenizer;
+import com.fillumina.calculator.WhiteSpaceCleaner;
+import com.fillumina.calculator.grammar.pattern.WhiteSpace;
 import com.fillumina.calculator.grammar.pattern.test.TestOperand;
 import com.fillumina.calculator.grammar.pattern.test.TestOperator;
-import com.fillumina.calculator.grammar.pattern.WhiteSpace;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;

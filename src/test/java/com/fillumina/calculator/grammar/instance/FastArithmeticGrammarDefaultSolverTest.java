@@ -1,6 +1,5 @@
 package com.fillumina.calculator.grammar.instance;
 
-import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.ContextException;
 import com.fillumina.calculator.FastSolver;

@@ -1,6 +1,6 @@
 package com.fillumina.calculator.grammar.element;
 
-import com.fillumina.calculator.grammar.GrammarElementType;
+import com.fillumina.calculator.GrammarElementType;
 
 /**
  * Defines the symbol that open a parenthesis. It's about 20% faster than

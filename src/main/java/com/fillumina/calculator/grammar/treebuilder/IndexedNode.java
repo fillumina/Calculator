@@ -1,7 +1,7 @@
 package com.fillumina.calculator.grammar.treebuilder;
 
+import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.Node;
-import com.fillumina.calculator.grammar.GrammarElementType;
 import java.io.Serializable;
 import java.util.ListIterator;
 

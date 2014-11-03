@@ -2,9 +2,9 @@ package com.fillumina.calculator.grammar.element;
 
 import com.fillumina.calculator.ContextException;
 import com.fillumina.calculator.GrammarElementMatcher;
+import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.SyntaxErrorException;
-import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
-import com.fillumina.calculator.grammar.GrammarElementType;
+import com.fillumina.calculator.grammar.AbstractComparableGrammarOperand;
 import java.util.List;
 import java.util.Map;
 
@@ -15,11 +15,16 @@ import java.util.Map;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class VariableContextManager<T>
-        extends AbstractComparableGrammarElement<T, Map<String, T>> {
+        extends AbstractComparableGrammarOperand<T, Map<String, T>> {
     private static final long serialVersionUID = 1L;
 
-    public static final VariableContextManager<?> INSTANCE =
+    private static final VariableContextManager<?> INSTANCE =
             new VariableContextManager<>();
+
+    @SuppressWarnings("unchecked")
+    public static final <T> VariableContextManager<T> instance() {
+        return (VariableContextManager<T>) INSTANCE;
+    }
 
     public VariableContextManager() {
         super(0);
@@ -49,15 +54,5 @@ public class VariableContextManager<T>
     @Override
     public GrammarElementMatcher match(String expression) {
         return ElementMatcher.NOT_FOUND;
-    }
-
-    @Override
-    public int getRequiredOperandsAfter() {
-        return 0;
-    }
-
-    @Override
-    public int getRequiredOperandsBefore() {
-        return 0;
     }
 }

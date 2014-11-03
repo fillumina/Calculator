@@ -24,9 +24,8 @@ public class ContextedGrammarBuilder<T> extends GrammarBuilder<T,Map<String,T>> 
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public Iterable<GrammarElement<T, Map<String, T>>> buildGrammar() {
-        add((GrammarElement<T,Map<String,T>>)VariableContextManager.INSTANCE);
+        add(VariableContextManager.<T>instance());
         return super.buildGrammar();
     }
 }

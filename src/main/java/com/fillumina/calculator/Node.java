@@ -1,6 +1,5 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.grammar.GrammarElementType;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;

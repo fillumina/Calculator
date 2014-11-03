@@ -1,10 +1,9 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.grammar.GrammarElementType;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 /**
  *
