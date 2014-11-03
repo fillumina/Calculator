@@ -24,6 +24,7 @@ public class PatternVsFastBooleanPerformanceTest
 
     @Override
     public void init(ProgressionConfigurator config) {
+        config.setMaxStandardDeviation(6);
     }
 
     @Override

@@ -7,8 +7,7 @@ import com.fillumina.calculator.grammar.GrammarElementType;
 import java.util.List;
 
 /**
- * Defines characters that will be ignored during parsing (usually spaces,
- * commas, tabs, linefeeds and the like).
+ * Ignores common white space characters (CR,LF,TAB,SPACE).
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

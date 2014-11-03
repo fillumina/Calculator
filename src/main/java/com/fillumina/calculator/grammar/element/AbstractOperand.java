@@ -37,8 +37,4 @@ public abstract class AbstractOperand<T,C>
     public GrammarElementType getType() {
         return GrammarElementType.OPERAND;
     }
-
-    protected static boolean isDigit(final char c) {
-        return c <= '9' && c >= '0';
-    }
 }

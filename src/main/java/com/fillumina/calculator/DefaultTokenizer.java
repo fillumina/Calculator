@@ -66,7 +66,7 @@ public class DefaultTokenizer<T,C> implements Serializable, Tokenizer<T, C> {
             final GrammarElementMatcher matcher,
             final GrammarElement<T,C> ge) {
         if (matcher.getStart() == matcher.getEnd()) {
-            throw new GrammarException("* jollies not allowed in " + ge);
+            throw new GrammarException("Cannot match an empty string: " + ge);
         }
     }
 

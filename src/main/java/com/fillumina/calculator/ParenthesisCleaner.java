@@ -1,7 +1,5 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.Node;
-import com.fillumina.calculator.SolutionTreeFilter;
 import com.fillumina.calculator.grammar.GrammarElementType;
 import com.fillumina.calculator.grammar.treebuilder.ParenthesisMismatchedException;
 import java.io.Serializable;

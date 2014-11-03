@@ -25,28 +25,8 @@ class FastCharacterChecker implements Serializable {
         }
     };
 
-    public static final class Appendable extends FastCharacterChecker {
-        private static final long serialVersionUID = 1L;
-
-        public Appendable() {
-        }
-
-        public Appendable(char[] array) {
-            super(array);
-        }
-
-        public Appendable(String string) {
-            super(string);
-        }
-
-        public void addCharacter(final char c) {
-            super.addCharacter(c);
-        }
-
-        public void addCharacters(final char... array) {
-            super.addCharacters(array);
-        }
-
+    public static interface Evaluator {
+        boolean evaluate(char c);
     }
 
     private final long[] positions = new long[1024]; // 65536 / 64 = 1024
@@ -60,6 +40,14 @@ class FastCharacterChecker implements Serializable {
 
     public FastCharacterChecker(final char... array) {
         addCharacters(array);
+    }
+
+    public FastCharacterChecker(final Evaluator evaluator) {
+        for (char c=Character.MIN_VALUE; c < Character.MAX_VALUE; c++) {
+            if (evaluator.evaluate(c)) {
+                addCharacter(c);
+            }
+        }
     }
 
     private void addCharacters(final char... array) {

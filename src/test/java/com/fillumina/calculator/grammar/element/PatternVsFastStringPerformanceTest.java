@@ -73,7 +73,8 @@ public class PatternVsFastStringPerformanceTest
 
     @Override
     public void init(ProgressionConfigurator config) {
-        config.setTimeout(1, TimeUnit.MINUTES);
+        config.setTimeout(1, TimeUnit.MINUTES)
+                .setMaxStandardDeviation(6);
     }
 
     @Override

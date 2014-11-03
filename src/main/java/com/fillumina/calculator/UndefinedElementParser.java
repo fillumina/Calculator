@@ -1,9 +1,5 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.Node;
-import com.fillumina.calculator.SolutionTreeFilter;
-import com.fillumina.calculator.SyntaxErrorException;
 import com.fillumina.calculator.grammar.GrammarElementType;
 import java.io.Serializable;
 import java.util.List;

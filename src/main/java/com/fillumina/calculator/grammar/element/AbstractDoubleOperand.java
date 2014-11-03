@@ -1,6 +1,7 @@
 package com.fillumina.calculator.grammar.element;
 
 import com.fillumina.calculator.GrammarElementMatcher;
+import static com.fillumina.calculator.util.CharacterUtil.isDigit;
 import java.text.DecimalFormatSymbols;
 
 /**

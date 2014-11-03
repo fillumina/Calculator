@@ -12,7 +12,6 @@ import com.fillumina.calculator.grammar.element.OpenParentheses;
 import com.fillumina.calculator.grammar.element.ValuedMultiConstant;
 import com.fillumina.calculator.grammar.element.FastWhiteSpace;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

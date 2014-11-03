@@ -25,7 +25,7 @@ public class PatternVsFastArithmeticsPerformanceTest
 
     @Override
     public void init(ProgressionConfigurator config) {
-        config.setMaxStandardDeviation(6)
+        config.setMaxStandardDeviation(4)
                 .setTimeout(30, TimeUnit.SECONDS);
     }
 
