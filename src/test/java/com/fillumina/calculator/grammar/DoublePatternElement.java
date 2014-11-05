@@ -1,13 +1,14 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.pattern.AbstractDoublePatternElement;
+import com.fillumina.calculator.element.AbstractDoubleOperand;
+import java.util.List;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class DoublePatternElement
-        extends AbstractDoublePatternElement<Double, Void> {
+        extends AbstractDoubleOperand<Double, Void> {
     private static final long serialVersionUID = 1L;
 
     public static final DoublePatternElement INSTANCE =
@@ -18,7 +19,7 @@ public class DoublePatternElement
     }
 
     @Override
-    public Double evaluate(final String value, Void context) {
+    public Double evaluate(String value, List<Double> params, Void context) {
         return Double.valueOf(value);
     }
 }

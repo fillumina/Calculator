@@ -1,7 +1,7 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.DateFastElement;
+import com.fillumina.calculator.grammar.DateFastOperand;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.junit.Test;
@@ -10,11 +10,11 @@ import org.junit.Test;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class AbstractDateFastElementTest extends GrammarElementTestBase {
+public class AbstractDateOperandTest extends GrammarElementTestBase {
 
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return DateFastElement.DATE;
+        return DateFastOperand.DATE;
     }
 
     @Test
@@ -50,6 +50,11 @@ public class AbstractDateFastElementTest extends GrammarElementTestBase {
     @Test
     public void shouldNotGetA3DigitMonth() {
         notRecognize("1/123/14");
+    }
+
+    @Test
+    public void shouldNotRecognizeGibberish() {
+        notRecognize("alfabeta");
     }
 
     @Test

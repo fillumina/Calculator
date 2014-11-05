@@ -28,22 +28,39 @@ public abstract class AbstractDoubleOperand<T,C> extends AbstractOperand<T,C> {
     @Override
     public GrammarElementMatcher match(final String expression) {
         final char[] carray = expression.toCharArray();
-        int start = findFirstDigitOrPointIndex(carray, 0);
-        if (start == -1) {
+
+        int start = 0;
+        boolean separator = false;
+        boolean atLeastOneDigit = false;
+        char c;
+        FIND_FIRST_DIGIT: while (true) {
+            for (int i=0; i<carray.length; i++) {
+                c = carray[i];
+                if (isDigit(c)) {
+                    start = i;
+                    atLeastOneDigit = true;
+                    break FIND_FIRST_DIGIT;
+                }
+                if (c == decimalSeparator) {
+                    start = i;
+                    separator = true;
+                    break FIND_FIRST_DIGIT;
+                }
+            }
             return ElementMatcher.NOT_FOUND;
         }
-        boolean point = carray[start] == '.';
+
         boolean exp = false;
         int end = carray.length;
-        FOR: for (int i=start + 1; i<carray.length; i++) {
-            char c = carray[i];
+        FOR: for (int i=start + 1; i<end; i++) {
+            c = carray[i];
             if (!isDigit(c)) {
                 if (c == decimalSeparator) {
-                    if (point) {
+                    if (separator) {
                         end = i;
                         break;
                     }
-                    point = true;
+                    separator = true;
                 } else {
                     switch (c) {
                         case 'E':
@@ -58,17 +75,21 @@ public abstract class AbstractDoubleOperand<T,C> extends AbstractOperand<T,C> {
                         case '+':
                         case '-':
                             final char prevc = carray[i-1];
-                            if (!(prevc == 'e' || prevc == 'E')) {
-                                end = i;
-                                break FOR;
+                            if (prevc == 'e' || prevc == 'E') {
+                                break;
                             }
-                            break;
 
                         default:
-                            end = i;
-                            break FOR;
+                            if (atLeastOneDigit) {
+                                end = i;
+                                break FOR;
+                            } else {
+                                start = i;
+                            }
                     }
                 }
+            } else {
+                atLeastOneDigit = true;
             }
         }
         final char last = carray[end - 1];

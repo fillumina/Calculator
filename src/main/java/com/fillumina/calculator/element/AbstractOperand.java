@@ -11,10 +11,6 @@ public abstract class AbstractOperand<T,C>
         extends AbstractComparableGrammarOperand<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public AbstractOperand() {
-        this(0);
-    }
-
     /**
      * @param priority  the priority at which this operand is evaluated
      *                  (usually 0)

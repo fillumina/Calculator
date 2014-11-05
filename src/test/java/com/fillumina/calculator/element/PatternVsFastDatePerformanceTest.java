@@ -1,6 +1,6 @@
 package com.fillumina.calculator.element;
 
-import com.fillumina.calculator.grammar.DateFastElement;
+import com.fillumina.calculator.grammar.DateFastOperand;
 import com.fillumina.calculator.pattern.AbstractOperand;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
@@ -44,7 +44,7 @@ public class PatternVsFastDatePerformanceTest
     @Override
     public void addTests(TestContainer tests) {
         final PatternDate patternDate = new PatternDate();
-        final DateFastElement fastDate = DateFastElement.DATE_TIME;
+        final DateFastOperand fastDate = DateFastOperand.DATE_TIME;
         final String strDate = "12/11/2014 10:22:55";
 
         tests.addTest("pattern", new RunnableSink() {

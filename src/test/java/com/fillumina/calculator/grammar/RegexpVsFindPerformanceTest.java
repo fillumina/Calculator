@@ -50,5 +50,6 @@ public class RegexpVsFindPerformanceTest
 
     @Override
     public void addAssertions(PerformanceAssertion assertion) {
+        assertion.assertTest("regexp").slowerThan("find");
     }
 }

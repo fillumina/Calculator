@@ -1,19 +1,18 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.DoubleFastElement;
+import com.fillumina.calculator.grammar.DoubleOperand;
 import org.junit.Test;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class DoubleFastElementTest
-        extends GrammarElementTestBase {
+public class DoubleOperandTest extends GrammarElementTestBase {
 
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return (GrammarElement<Double, Void>) DoubleFastElement.INSTANCE;
+        return (GrammarElement<Double, Void>) DoubleOperand.INSTANCE;
     }
 
     @Test
@@ -97,6 +96,11 @@ public class DoubleFastElementTest
     }
 
     @Test
+    public void shouldRecognizeANumberWithMultiplePoints() {
+        recognize("0100.12345", " 0100.12345.123 ");
+    }
+
+    @Test
     public void shoudRecognizeTheScientificNotation() {
         recognize("12.34E567", " 12.34E567 E e");
     }
@@ -124,5 +128,20 @@ public class DoubleFastElementTest
     @Test
     public void shoudNotRecognizeTheSignedScientificNotationWithSignumInExp() {
         recognize("12.34E-567", " -12.34E-567 ");
+    }
+
+    @Test
+    public void shoudRecognizeTheSignedScientificNotationWithSmallCaseE() {
+        recognize("12.34e-567", "12.34e-567");
+    }
+
+    @Test
+    public void shouldNotRecognizeADoubleStartingWithE() {
+        recognize("2", "E-2");
+    }
+
+    @Test
+    public void shouldNotRecognizeADoubleStartingWithADot() {
+        recognize("-2", ".-2");
     }
 }
