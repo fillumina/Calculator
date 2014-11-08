@@ -1,6 +1,6 @@
 package com.fillumina.calculator.pattern.test;
 
-import com.fillumina.calculator.pattern.AbstractOperand;
+import com.fillumina.calculator.pattern.AbstractPatternOperand;
 
 /**
  * Used mainly in tests to return elements as they are without further
@@ -8,7 +8,7 @@ import com.fillumina.calculator.pattern.AbstractOperand;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class TestOperand extends AbstractOperand<String, Void> {
+public class TestOperand extends AbstractPatternOperand<String, Void> {
     private static final long serialVersionUID = 1L;
 
     public TestOperand(final String symbolRegexp,

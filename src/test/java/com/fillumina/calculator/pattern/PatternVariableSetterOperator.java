@@ -15,15 +15,15 @@ import java.util.Map;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class VariableSetterOperator<T>
-        extends AbstractOperator<T,Map<String, T>>
+public class PatternVariableSetterOperator<T>
+        extends AbstractPatternOperator<T,Map<String, T>>
         implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final VariableSetterOperator<?> INSTANCE =
-            new VariableSetterOperator<>();
+    public static final PatternVariableSetterOperator<?> INSTANCE =
+            new PatternVariableSetterOperator<>();
 
-    public VariableSetterOperator() {
+    public PatternVariableSetterOperator() {
         super("[A-Za-z\\d]+\\ *=", 0, 0, 1);
     }
 

@@ -10,11 +10,11 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class AbstractOperand<T,C>
+public abstract class AbstractPatternOperand<T,C>
         extends AbstractPatternElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public AbstractOperand(final String symbolRegexp, final int priority) {
+    public AbstractPatternOperand(final String symbolRegexp, final int priority) {
         super(priority, symbolRegexp);
     }
 

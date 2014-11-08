@@ -1,19 +1,9 @@
 package com.fillumina.calculator.instance;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.element.AbstractDoubleOperand;
-import com.fillumina.calculator.element.AbstractOperator;
-import com.fillumina.calculator.element.CloseParentheses;
-import com.fillumina.calculator.element.ConstantOperand;
-import com.fillumina.calculator.element.FastWhiteSpace;
-import com.fillumina.calculator.element.OpenParentheses;
-import com.fillumina.calculator.element.VariableContextManager;
-import com.fillumina.calculator.element.VariableSetterOperator;
-import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.grammar.SettableContextedGrammarBuilder;
 import com.fillumina.calculator.grammar.StringEvaluator;
 import com.fillumina.calculator.grammar.StringParametricEvaluator;
-import java.io.Serializable;
 import static java.lang.Math.E;
 import static java.lang.Math.PI;
 import static java.lang.Math.acos;

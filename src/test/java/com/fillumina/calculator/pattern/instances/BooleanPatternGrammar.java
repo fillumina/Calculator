@@ -1,12 +1,12 @@
 package com.fillumina.calculator.pattern.instances;
 
+import com.fillumina.calculator.element.VariableContextManager;
 import com.fillumina.calculator.grammar.Grammar;
-import com.fillumina.calculator.pattern.AbstractOperator;
-import com.fillumina.calculator.pattern.CloseParentheses;
-import com.fillumina.calculator.pattern.ConstantElement;
-import com.fillumina.calculator.pattern.OpenParentheses;
-import com.fillumina.calculator.pattern.VariableContextManager;
-import com.fillumina.calculator.pattern.WhiteSpace;
+import com.fillumina.calculator.pattern.AbstractPatternOperator;
+import com.fillumina.calculator.pattern.PatternCloseParentheses;
+import com.fillumina.calculator.pattern.PatternConstantElement;
+import com.fillumina.calculator.pattern.PatternOpenParentheses;
+import com.fillumina.calculator.pattern.PatternWhiteSpace;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +26,8 @@ public class BooleanPatternGrammar extends Grammar<Boolean, Map<String, Boolean>
 
     @SuppressWarnings("unchecked")
     private BooleanPatternGrammar() {
-        super(
-            //TODO spaces around letters is required
-            new AbstractOperator<Boolean,Map<String,Boolean>>(
+        super(//TODO spaces around letters is required
+            new AbstractPatternOperator<Boolean,Map<String,Boolean>>(
                     "(and|AND|And|&&|&)", 1, 1, 1) {
                 private static final long serialVersionUID = 1L;
 
@@ -40,7 +39,7 @@ public class BooleanPatternGrammar extends Grammar<Boolean, Map<String, Boolean>
                 }
             },
 
-            new AbstractOperator<Boolean,Map<String,Boolean>>(
+            new AbstractPatternOperator<Boolean,Map<String,Boolean>>(
                     "(or|OR|Or|\\|\\||\\|)", 1, 1, 1) {
                 private static final long serialVersionUID = 1L;
 
@@ -52,7 +51,7 @@ public class BooleanPatternGrammar extends Grammar<Boolean, Map<String, Boolean>
                 }
             },
 
-            new AbstractOperator<Boolean,Map<String,Boolean>>(
+            new AbstractPatternOperator<Boolean,Map<String,Boolean>>(
                     "(not|NOT|Not|~|!)", 1, 0, 1) {
                 private static final long serialVersionUID = 1L;
 
@@ -64,13 +63,13 @@ public class BooleanPatternGrammar extends Grammar<Boolean, Map<String, Boolean>
                 }
             },
 
-            new OpenParentheses<Boolean,Map<String,Boolean>>("\\("),
-            new CloseParentheses<Boolean,Map<String,Boolean>>("\\)"),
-            new WhiteSpace<Boolean,Map<String,Boolean>>("[\\ ,]+"),
+            new PatternOpenParentheses<Boolean,Map<String,Boolean>>("\\("),
+            new PatternCloseParentheses<Boolean,Map<String,Boolean>>("\\)"),
+            new PatternWhiteSpace<Boolean,Map<String,Boolean>>("[\\ ,]+"),
 
-            new ConstantElement<Boolean,Map<String,Boolean>>(
+            new PatternConstantElement<Boolean,Map<String,Boolean>>(
                     "true|TRUE|True", true, 0),
-            new ConstantElement<Boolean,Map<String,Boolean>>(
+            new PatternConstantElement<Boolean,Map<String,Boolean>>(
                     "false|FALSE|False", false, 0),
 
             new VariableContextManager<Boolean>()

@@ -9,7 +9,7 @@ import static com.fillumina.calculator.util.PatternBuilder.p_or;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractDoublePatternElement<T,C>
-        extends AbstractOperand<T,C> {
+        extends AbstractPatternOperand<T,C> {
     private static final long serialVersionUID = 1L;
 
     public AbstractDoublePatternElement(final int priority) {

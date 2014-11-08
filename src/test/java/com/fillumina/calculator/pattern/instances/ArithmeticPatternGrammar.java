@@ -1,15 +1,15 @@
 package com.fillumina.calculator.pattern.instances;
 
 import com.fillumina.calculator.GrammarElement;
+import com.fillumina.calculator.element.VariableContextManager;
 import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.pattern.AbstractDoublePatternElement;
-import com.fillumina.calculator.pattern.AbstractOperatorSymbol;
-import com.fillumina.calculator.pattern.CloseParentheses;
-import com.fillumina.calculator.pattern.ConstantElement;
-import com.fillumina.calculator.pattern.OpenParentheses;
-import com.fillumina.calculator.pattern.VariableContextManager;
-import com.fillumina.calculator.pattern.VariableSetterOperator;
-import com.fillumina.calculator.pattern.WhiteSpace;
+import com.fillumina.calculator.pattern.AbstractPatternOperatorSymbol;
+import com.fillumina.calculator.pattern.PatternCloseParentheses;
+import com.fillumina.calculator.pattern.PatternConstantElement;
+import com.fillumina.calculator.pattern.PatternOpenParentheses;
+import com.fillumina.calculator.pattern.PatternVariableSetterOperator;
+import com.fillumina.calculator.pattern.PatternWhiteSpace;
 import java.io.Serializable;
 import static java.lang.Math.E;
 import static java.lang.Math.PI;
@@ -44,8 +44,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
 
     @SuppressWarnings("unchecked")
     private ArithmeticPatternGrammar() {
-        super(
-        new AbstractDoublePatternElement<Double,Map<String, Double>>(0) {
+        super(new AbstractDoublePatternElement<Double,Map<String, Double>>(0) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -55,7 +54,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("!", 5, 1, 0) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("!", 5, 1, 0) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -71,7 +70,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("asin", 4, 0, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("asin", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -81,7 +80,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("acos", 4, 0, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("acos", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -92,7 +91,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
 
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("atan", 4, 0, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("atan", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -102,7 +101,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("sin", 4, 0, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("sin", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -112,7 +111,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("cos", 4, 0, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("cos", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -123,7 +122,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
 
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("tan", 4, 0, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("tan", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -133,7 +132,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("log", 4, 0, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("log", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -143,7 +142,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("ln", 4, 0, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("ln", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -153,7 +152,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("sqr", 4, 0, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("sqr", 4, 0, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -164,7 +163,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
         },
 
         // doesn't accept any parameter
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("rnd", 4, 0, 0) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("rnd", 4, 0, 0) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -174,8 +173,8 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        // accepts many parameters
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("avg", 4, 0,
+        // accepts an undefined number of parameters
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("avg", 4, 0,
                 Integer.MAX_VALUE) {
             private static final long serialVersionUID = 1L;
 
@@ -194,7 +193,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("^", 3, 1, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("^", 3, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -204,7 +203,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("*", 2, 1, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("*", 2, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -214,7 +213,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("/", 2, 1, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("/", 2, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -224,7 +223,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("+", 1, 1, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("+", 1, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -234,7 +233,7 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        new AbstractOperatorSymbol<Double,Map<String, Double>>("-", 1, 1, 1) {
+        new AbstractPatternOperatorSymbol<Double,Map<String, Double>>("-", 1, 1, 1) {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -247,14 +246,14 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
             }
         },
 
-        (GrammarElement<Double,Map<String, Double>>)VariableSetterOperator.INSTANCE,
+        (GrammarElement<Double,Map<String, Double>>)PatternVariableSetterOperator.INSTANCE,
 
-        (GrammarElement<Double,Map<String, Double>>)OpenParentheses.ROUND,
-        (GrammarElement<Double,Map<String, Double>>)CloseParentheses.ROUND,
-        new WhiteSpace<Double,Map<String, Double>>("[\\ ,]+"),
+        (GrammarElement<Double,Map<String, Double>>)PatternOpenParentheses.ROUND,
+        (GrammarElement<Double,Map<String, Double>>)PatternCloseParentheses.ROUND,
+        new PatternWhiteSpace<Double,Map<String, Double>>("[\\ ,]+"),
 
-        new ConstantElement<Double,Map<String, Double>>("e", E, 0),
-        new ConstantElement<Double,Map<String, Double>>("pi", PI,  0),
+        new PatternConstantElement<Double,Map<String, Double>>("e", E, 0),
+        new PatternConstantElement<Double,Map<String, Double>>("pi", PI,  0),
 
         new VariableContextManager<Double>()
         );

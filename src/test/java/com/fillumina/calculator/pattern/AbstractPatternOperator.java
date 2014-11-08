@@ -14,7 +14,7 @@ import com.fillumina.calculator.element.AbstractPatternElement;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class AbstractOperator<T,C>
+public abstract class AbstractPatternOperator<T,C>
         extends AbstractPatternElement<T,C> {
     private static final long serialVersionUID = 1L;
 
@@ -38,7 +38,7 @@ public abstract class AbstractOperator<T,C>
      * @param requiredOperandsAfter     how many operands expected after the
      *                                  operator
      */
-    public AbstractOperator(final String symbol,
+    public AbstractPatternOperator(final String symbol,
             final int priority,
             final int requiredOperandsBefore,
             final int requiredOperandsAfter) {

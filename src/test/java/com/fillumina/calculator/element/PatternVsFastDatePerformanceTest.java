@@ -1,7 +1,7 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.grammar.DateFastOperand;
-import com.fillumina.calculator.pattern.AbstractOperand;
+import com.fillumina.calculator.pattern.AbstractPatternOperand;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.producer.timer.RunnableSink;
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class PatternVsFastDatePerformanceTest
         extends JUnitAutoProgressionPerformanceTemplate {
 
-    private static class PatternDate extends AbstractOperand<Void,Void> {
+    private static class PatternDate extends AbstractPatternOperand<Void,Void> {
         private static final long serialVersionUID = 1L;
         public static final String DATE_TIME_PATTERN =
             "\\d{1,2}/\\d{1,2}/\\d{1,4}(\\ +\\d{1,2}:\\d{1,2}:\\d{1,2})?";

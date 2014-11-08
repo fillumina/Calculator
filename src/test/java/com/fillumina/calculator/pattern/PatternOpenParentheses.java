@@ -12,20 +12,20 @@ import com.fillumina.calculator.GrammarElementType;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class OpenParentheses<T,C>
+public class PatternOpenParentheses<T,C>
         extends UnevaluablePatternElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public static final OpenParentheses<?,?> ROUND =
-            new OpenParentheses<>("\\(");
+    public static final PatternOpenParentheses<?,?> ROUND =
+            new PatternOpenParentheses<>("\\(");
 
-    public static final OpenParentheses<?,?> ROUND_SQUARE =
-            new OpenParentheses<>("\\(\\[");
+    public static final PatternOpenParentheses<?,?> ROUND_SQUARE =
+            new PatternOpenParentheses<>("\\(\\[");
 
-    public static final OpenParentheses<?,?> ROUND_SQUARE_CURLY =
-            new OpenParentheses<>("\\(\\[\\{");
+    public static final PatternOpenParentheses<?,?> ROUND_SQUARE_CURLY =
+            new PatternOpenParentheses<>("\\(\\[\\{");
 
-    public OpenParentheses(final String symbolRegexp) {
+    public PatternOpenParentheses(final String symbolRegexp) {
         super(symbolRegexp, 0);
     }
 

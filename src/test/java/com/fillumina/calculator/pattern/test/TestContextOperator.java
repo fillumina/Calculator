@@ -1,6 +1,6 @@
 package com.fillumina.calculator.pattern.test;
 
-import com.fillumina.calculator.pattern.AbstractOperator;
+import com.fillumina.calculator.pattern.AbstractPatternOperator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class TestContextOperator
-        extends AbstractOperator<String,Map<String,String>> {
+        extends AbstractPatternOperator<String,Map<String,String>> {
     private static final long serialVersionUID = 1L;
 
     public TestContextOperator(final String symbolRegexp,

@@ -1,6 +1,6 @@
 package com.fillumina.calculator.pattern.test;
 
-import com.fillumina.calculator.pattern.AbstractOperator;
+import com.fillumina.calculator.pattern.AbstractPatternOperator;
 import java.util.List;
 
 /**
@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class TestOperator extends AbstractOperator<String,Void> {
+public class TestOperator extends AbstractPatternOperator<String,Void> {
     private static final long serialVersionUID = 1L;
 
     public TestOperator(final String symbolRegexp,

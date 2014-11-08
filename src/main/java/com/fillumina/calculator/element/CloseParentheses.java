@@ -8,6 +8,7 @@ import com.fillumina.calculator.GrammarElementType;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
+//TODO use equals() to match symbol so to allow for different symbols
 public class CloseParentheses<T,C>
         extends UnevaluableElement<T,C> {
     private static final long serialVersionUID = 1L;

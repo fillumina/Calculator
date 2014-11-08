@@ -20,6 +20,7 @@ import java.util.List;
 public class UnmodifiableNode<T,C> extends Node<T,C>
         implements Cloneable, Serializable {
     private static final long serialVersionUID = 1L;
+    private static final String ERROR_MESSAGE = "this is an unmodifiable Node";
 
     /** Takes a solution and returns a unmodifiable version of it. */
     public static <T,C> List<Node<T,C>> unmodifiable(
@@ -48,13 +49,13 @@ public class UnmodifiableNode<T,C> extends Node<T,C>
     /** Does nothing at all. */
     @Override
     public UnmodifiableNode<T,C> addChildren(Node<T,C> node) {
-        throw new IllegalStateException("this is an unmodifiable Node");
+        throw new IllegalStateException(ERROR_MESSAGE);
     }
 
     /** Does nothing at all. */
     @Override
     public UnmodifiableNode<T,C> addAllChildren(Collection<Node<T,C>> nodes) {
-        throw new IllegalStateException("this is an unmodifiable Node");
+        throw new IllegalStateException(ERROR_MESSAGE);
     }
 
     /**
@@ -64,12 +65,12 @@ public class UnmodifiableNode<T,C> extends Node<T,C>
     @SuppressWarnings("unchecked")
     @Override
     public void setValueAndRemoveChildren(T value) {
-        throw new IllegalStateException("this is an unmodifiable Node");
+        throw new IllegalStateException(ERROR_MESSAGE);
     }
 
     @Override
     public void setGrammarElement(GrammarElement<T,C> grammarElement) {
-        throw new IllegalStateException("this is an unmodifiable Node");
+        throw new IllegalStateException(ERROR_MESSAGE);
     }
 
     @Override

@@ -2,9 +2,9 @@ package com.fillumina.calculator;
 
 import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.interpreter.DefaultInterpreter;
-import com.fillumina.calculator.pattern.CloseParentheses;
-import com.fillumina.calculator.pattern.OpenParentheses;
-import com.fillumina.calculator.pattern.WhiteSpace;
+import com.fillumina.calculator.pattern.PatternCloseParentheses;
+import com.fillumina.calculator.pattern.PatternOpenParentheses;
+import com.fillumina.calculator.pattern.PatternWhiteSpace;
 import com.fillumina.calculator.pattern.test.TestOperand;
 import com.fillumina.calculator.pattern.test.TestOperator;
 import java.util.List;
@@ -131,9 +131,9 @@ public class InterpreterTest {
         final GrammarElement<String,Void> number =
                 new TestOperand("\\d+", 0);
         final GrammarElement<String,Void> openPar =
-                new OpenParentheses<>("\\(");
+                new PatternOpenParentheses<>("\\(");
         final GrammarElement<String,Void> closePar =
-                new CloseParentheses<>("\\)");
+                new PatternCloseParentheses<>("\\)");
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar =
                 new Grammar<>(number, multiply, minus, openPar, closePar);
@@ -156,9 +156,9 @@ public class InterpreterTest {
         final GrammarElement<String,Void> number =
                 new TestOperand("\\d+", 0);
         final GrammarElement<String,Void> openPar =
-                new OpenParentheses<>("\\(");
+                new PatternOpenParentheses<>("\\(");
         final GrammarElement<String,Void> closePar =
-                new CloseParentheses<>("\\)");
+                new PatternCloseParentheses<>("\\)");
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar =
                 new Grammar<>(number, multiply, sin, minus, openPar, closePar);
@@ -177,9 +177,9 @@ public class InterpreterTest {
         final GrammarElement<String,Void> sum = new TestOperator("\\+", 1, 1, 1);
         final GrammarElement<String,Void> minus = new TestOperator("\\-", 1, 1, 1);
         final GrammarElement<String,Void> number = new TestOperand("\\d+", 0);
-        final GrammarElement<String,Void> openPar = new OpenParentheses<>("\\(");
-        final GrammarElement<String,Void> closePar = new CloseParentheses<>("\\)");
-        final GrammarElement<String,Void> whiteSpace = new WhiteSpace<>("[\\ ]+");
+        final GrammarElement<String,Void> openPar = new PatternOpenParentheses<>("\\(");
+        final GrammarElement<String,Void> closePar = new PatternCloseParentheses<>("\\)");
+        final GrammarElement<String,Void> whiteSpace = new PatternWhiteSpace<>("[\\ ]+");
 
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar = new Grammar<>(number,

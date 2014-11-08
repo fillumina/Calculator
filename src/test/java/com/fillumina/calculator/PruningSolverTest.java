@@ -1,11 +1,11 @@
 package com.fillumina.calculator;
 
+import com.fillumina.calculator.element.VariableContextManager;
 import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.interpreter.DefaultInterpreter;
-import com.fillumina.calculator.pattern.CloseParentheses;
-import com.fillumina.calculator.pattern.OpenParentheses;
-import com.fillumina.calculator.pattern.VariableContextManager;
-import com.fillumina.calculator.pattern.WhiteSpace;
+import com.fillumina.calculator.pattern.PatternCloseParentheses;
+import com.fillumina.calculator.pattern.PatternOpenParentheses;
+import com.fillumina.calculator.pattern.PatternWhiteSpace;
 import com.fillumina.calculator.pattern.test.TestContextOperand;
 import com.fillumina.calculator.pattern.test.TestContextOperator;
 import com.fillumina.calculator.util.TreePrinter;
@@ -32,22 +32,22 @@ public class PruningSolverTest {
 
         @SuppressWarnings("unchecked")
         final GrammarElement<String,Map<String,String>> variable =
-                (GrammarElement<String,Map<String,String>>)
-                VariableContextManager.INSTANCE;
+                VariableContextManager.instance();
 
         @SuppressWarnings("unchecked")
         final GrammarElement<String,Map<String,String>> openPar =
                 (GrammarElement<String,Map<String,String>>)
-                OpenParentheses.ROUND;
+                PatternOpenParentheses.ROUND;
 
         @SuppressWarnings("unchecked")
         final GrammarElement<String,Map<String,String>> closePar =
                 (GrammarElement<String,Map<String,String>>)
-                CloseParentheses.ROUND;
+                PatternCloseParentheses.ROUND;
 
         @SuppressWarnings("unchecked")
-        final WhiteSpace<String, Map<String, String>> whitespace =
-                (WhiteSpace<String,Map<String,String>>)WhiteSpace.INSTANCE;
+        final PatternWhiteSpace<String, Map<String, String>> whitespace =
+                (PatternWhiteSpace<String,Map<String,String>>)
+                PatternWhiteSpace.INSTANCE;
 
         @SuppressWarnings("unchecked")
         final Grammar<String,Map<String,String>> grammar =

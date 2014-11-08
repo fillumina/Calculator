@@ -2,9 +2,9 @@ package com.fillumina.calculator.treebuilder;
 
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.Node;
-import com.fillumina.calculator.pattern.AbstractOperand;
-import com.fillumina.calculator.pattern.CloseParentheses;
-import com.fillumina.calculator.pattern.OpenParentheses;
+import com.fillumina.calculator.pattern.AbstractPatternOperand;
+import com.fillumina.calculator.pattern.PatternCloseParentheses;
+import com.fillumina.calculator.pattern.PatternOpenParentheses;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -20,7 +20,7 @@ public class InnerParenthesisFinderTestHelper {
         private static final long serialVersionUID = 1L;
 
         public EvaluableNode(final String value) {
-            super(value, new AbstractOperand<Long, Void>("\\" +value, 1) {
+            super(value, new AbstractPatternOperand<Long, Void>("\\" +value, 1) {
 
                 private static final long serialVersionUID = 1L;
 
@@ -37,7 +37,7 @@ public class InnerParenthesisFinderTestHelper {
         private static final long serialVersionUID = 1L;
 
         public OpenParNode() {
-            super("(", new OpenParentheses<Long, Void>("\\("));
+            super("(", new PatternOpenParentheses<Long, Void>("\\("));
         }
     }
 
@@ -45,7 +45,7 @@ public class InnerParenthesisFinderTestHelper {
         private static final long serialVersionUID = 1L;
 
         public CloseParNode() {
-            super(")", new CloseParentheses<Long, Void>("\\)"));
+            super(")", new PatternCloseParentheses<Long, Void>("\\)"));
         }
     }
 

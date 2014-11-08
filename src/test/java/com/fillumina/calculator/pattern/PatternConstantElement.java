@@ -8,13 +8,13 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ConstantElement<T,C>
+public class PatternConstantElement<T,C>
         extends AbstractPatternElement<T,C> {
     private static final long serialVersionUID = 1L;
     private final T constant;
 
     /** Insert the name of the constant NOT the regular expression. */
-    public ConstantElement(final String name, final T constant,
+    public PatternConstantElement(final String name, final T constant,
             final int priority) {
         super(priority, "^(" + name + ")$");
         this.constant = constant;

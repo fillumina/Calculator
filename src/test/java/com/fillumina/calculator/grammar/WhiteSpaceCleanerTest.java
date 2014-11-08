@@ -5,7 +5,7 @@ import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.Node;
 import com.fillumina.calculator.Tokenizer;
 import com.fillumina.calculator.interpreter.WhiteSpaceCleaner;
-import com.fillumina.calculator.pattern.WhiteSpace;
+import com.fillumina.calculator.pattern.PatternWhiteSpace;
 import com.fillumina.calculator.pattern.test.TestOperand;
 import com.fillumina.calculator.pattern.test.TestOperator;
 import java.util.List;
@@ -26,7 +26,7 @@ public class WhiteSpaceCleanerTest {
         final GrammarElement<String, Void> multiply = new TestOperator("\\*", 0, 1, 1);
         final GrammarElement<String, Void> sum = new TestOperator("\\+", 0, 1, 1);
         final GrammarElement<String, Void> number = new TestOperand("\\d+", 0);
-        final GrammarElement<String, Void> whiteSpace = new WhiteSpace<>("[\\ ,]+");
+        final GrammarElement<String, Void> whiteSpace = new PatternWhiteSpace<>("[\\ ,]+");
         @SuppressWarnings("unchecked")
         final Grammar<String, Void> grammar =
                 new Grammar<>(number, multiply, sum, whiteSpace);

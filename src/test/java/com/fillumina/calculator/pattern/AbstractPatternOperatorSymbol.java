@@ -8,14 +8,15 @@ package com.fillumina.calculator.pattern;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class AbstractOperatorSymbol<T,C> extends AbstractOperator<T,C> {
+public abstract class AbstractPatternOperatorSymbol<T,C>
+        extends AbstractPatternOperator<T,C> {
     private static final long serialVersionUID = 1L;
 
     /**
      * Insert the symbol of the operator, NOT the regular expression.
      * i.e. "*", not "\\*"
      */
-    public AbstractOperatorSymbol(final String symbol,
+    public AbstractPatternOperatorSymbol(final String symbol,
             final int priority,
             final int requiredOperandsBefore,
             final int requiredOperandsAfter) {

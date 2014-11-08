@@ -14,11 +14,11 @@ import com.fillumina.calculator.element.AbstractPatternElement;
  * @see VariableContextManager
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public abstract class AbstractUnrecognizedElement<T,C>
+public abstract class AbstractUnrecognizedPatternElement<T,C>
         extends AbstractPatternElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public AbstractUnrecognizedElement() {
+    public AbstractUnrecognizedPatternElement() {
         // '$a' is the regexp for the character past the end of the input,
         // which will never match!! In practice this is a never matching regexp.
         super(0, "$a");

@@ -9,20 +9,20 @@ import com.fillumina.calculator.GrammarElementType;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class CloseParentheses<T,C>
+public class PatternCloseParentheses<T,C>
         extends UnevaluablePatternElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    public static final CloseParentheses<?,?> ROUND =
-            new CloseParentheses<>("\\)");
+    public static final PatternCloseParentheses<?,?> ROUND =
+            new PatternCloseParentheses<>("\\)");
 
-    public static final CloseParentheses<?,?> ROUND_SQUARE =
-            new CloseParentheses<>("\\)\\]");
+    public static final PatternCloseParentheses<?,?> ROUND_SQUARE =
+            new PatternCloseParentheses<>("\\)\\]");
 
-    public static final CloseParentheses<?,?> ROUND_SQUARE_CURLY =
-            new CloseParentheses<>("\\)\\]\\}");
+    public static final PatternCloseParentheses<?,?> ROUND_SQUARE_CURLY =
+            new PatternCloseParentheses<>("\\)\\]\\}");
 
-    public CloseParentheses(final String symbolRegexp) {
+    public PatternCloseParentheses(final String symbolRegexp) {
         super(symbolRegexp, 0);
     }
 
