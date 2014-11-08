@@ -16,6 +16,7 @@ public class ContextedGrammarBuilder<T> extends GrammarBuilder<T,Map<String,T>> 
     private static final long serialVersionUID = 1L;
 
     public ContextedGrammarBuilder() {
+        super();
     }
 
     public ContextedGrammarBuilder(

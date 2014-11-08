@@ -17,6 +17,7 @@ public class SettableContextedGrammarBuilder<T>
     private static final long serialVersionUID = 1L;
 
     public SettableContextedGrammarBuilder() {
+        super();
     }
 
     public SettableContextedGrammarBuilder(

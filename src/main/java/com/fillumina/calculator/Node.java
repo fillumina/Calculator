@@ -123,10 +123,6 @@ public class Node<T,C> implements Cloneable, Serializable {
         return children.size() == 1;
     }
 
-    public boolean isChildrenNumber(final int number) {
-        return children.size() == number;
-    }
-
     public GrammarElementType getType() {
         return grammarElement.getType();
     }

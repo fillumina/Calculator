@@ -97,9 +97,6 @@ public abstract class AbstractDoubleOperand<T,C> extends AbstractOperand<T,C> {
         final char last = carray[end - 1];
         if (last == 'e' || last == 'E' || last == decimalSeparator) {
             end--;
-            if (start == end) {
-                return ElementMatcher.NOT_FOUND;
-            }
         }
         if (start > 0 &&
                 isPreceededByASignumAndAnOperatorOrParentheses(carray, start)) {
