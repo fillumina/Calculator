@@ -46,4 +46,24 @@ public class AbstractQuotedStringFastElementTest extends GrammarElementTestBase 
     public void shouldRecognizeAnEscapedQuote() {
         recognize("'123\\'4'", "  '123\\'4' ");
     }
+
+    @Test
+    public void shouldIgnoreSingleQuotesInsideDoubleQuotes() {
+        recognize("\"hello 'world' this\"",  " \"hello 'world' this\" is me");
+    }
+
+    @Test
+    public void shouldIgnoreDoubleQuotesInsideSignleQuotes() {
+        recognize("'hello \"world\" this'",  " 'hello \"world\" this' is me");
+    }
+
+    @Test
+    public void shouldNotRecognizeAnEmptyElement() {
+        notRecognize("");
+    }
+
+    @Test
+    public void shouldNotRecognizeAStringWithoutQuotes() {
+        notRecognize("there are no quotes");
+    }
 }

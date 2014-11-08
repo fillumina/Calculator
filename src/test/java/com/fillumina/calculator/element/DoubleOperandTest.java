@@ -61,6 +61,11 @@ public class DoubleOperandTest extends GrammarElementTestBase {
     }
 
     @Test
+    public void shouldNotRecognizeTwoConsecutivePoints() {
+        recognize("10", "10..12");
+    }
+
+    @Test
     public void shouldRecognizeABigNumberWithSpacesAround() {
         recognize("0100.12345", "  0100.12345 ");
     }

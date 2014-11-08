@@ -5,8 +5,10 @@ import static com.fillumina.calculator.element.CharacterUtil.isDigit;
 import java.text.DecimalFormatSymbols;
 
 /**
- * This way of managing numbers is at least 2 times faster than
- * {@link AbstractOperand}.
+ * Parse floating point numbers trying to establish if the eventual preceeding
+ * sign is part of it.
+ *
+ * @see AbstractSignedDoubleOperand
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
@@ -129,16 +131,5 @@ public abstract class AbstractDoubleOperand<T,C> extends AbstractOperand<T,C> {
             }
         }
         return false;
-    }
-
-    private int findFirstDigitOrPointIndex(final char[] carray,
-            final int start) {
-        for (int i=start; i<carray.length; i++) {
-            final char c = carray[i];
-            if (isDigit(c) || c == decimalSeparator) {
-                return i;
-            }
-        }
-        return -1;
     }
 }

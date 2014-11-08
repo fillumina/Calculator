@@ -4,7 +4,7 @@ import com.fillumina.calculator.GrammarElementMatcher;
 import static java.lang.Character.isWhitespace;
 
 /**
- * Extracts strings surrounded by single or double quotes.
+ * Extracts unquoted strings.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

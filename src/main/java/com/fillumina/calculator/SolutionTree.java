@@ -1,5 +1,6 @@
 package com.fillumina.calculator;
 
+import com.fillumina.calculator.util.Mapper;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class SolutionTree<T, C> implements Cloneable {
         this.solutionTree = solutionTree;
     }
 
+    /** Deep cloning constructor. */
     public SolutionTree(final SolutionTree<T, C> original) {
         this.solver = original.solver;
         this.solutionTree = new LinkedList<>();
@@ -67,6 +69,23 @@ public class SolutionTree<T, C> implements Cloneable {
     public List<T> solve(final C context) {
         this.solution = solver.solve(solutionTree, context);
         return this.solution;
+    }
+
+    /**
+     * Solves the solution tree using the specified variables. This works
+     * only if the context is of type {@code Map<String,T>}.<br>
+     * Usage:
+     * <code><pre>
+     * List&lt;Double> l = solutionTree.solveWithVariables("x", 10);
+     * </pre></code>
+     *
+     * @param <T>     the type of the values in the map
+     * @param objects the objects (must conform to types in pairs)
+     * @return        the solution if found otherwise {@code null}.
+     */
+    @SuppressWarnings("unchecked")
+    public List<T> solveWithVariables(final Object... objects) {
+        return solve((C)Mapper.<T>create(objects));
     }
 
     /** @return a list of the undefined variables found in the solution tree. */

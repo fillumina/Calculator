@@ -9,7 +9,7 @@ package com.fillumina.calculator.grammar;
 public abstract class AbstractComparableGrammarOperand<T, C>
         extends AbstractComparableGrammarElement<T, C> {
     private static final long serialVersionUID = 1L;
-    private static final String ERROR_MESSAGE = "Not supported on operands.";
+    private static final String ERROR_MESSAGE = "Not supported.";
 
     /** Higher number is higher priority. */
     public AbstractComparableGrammarOperand(final int priority) {

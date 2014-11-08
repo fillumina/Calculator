@@ -86,4 +86,19 @@ public class AbstractDateOperandTest extends GrammarElementTestBase {
     public void shouldGetDateFollowedByNumber() {
         recognize("1/12/14", "1/12/14 1");
     }
+
+    @Test
+    public void shouldNotRecognizeAnEmptyString() {
+        notRecognize("");
+    }
+
+    @Test
+    public void shouldNotRecognizeAStringNotRepresentingADate() {
+        notRecognize("not a date");
+    }
+
+    @Test
+    public void shouldNotRecognizeAAllNumberString() {
+        notRecognize("123456");
+    }
 }

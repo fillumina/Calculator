@@ -79,6 +79,7 @@ public abstract class AbstractDateOperand<T,C> extends AbstractOperand<T,C> {
         return ElementMatcher.NOT_FOUND;
     }
 
+    /** Helper to evaluate a {@link Date} starting from the given pattern. */
     protected Date evaluateDate(final String val) {
         String value = val;
         try {

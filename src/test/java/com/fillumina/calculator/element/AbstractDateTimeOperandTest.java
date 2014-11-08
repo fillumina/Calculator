@@ -38,7 +38,7 @@ public class AbstractDateTimeOperandTest extends GrammarElementTestBase {
     }
 
     @Test
-    public void shouldNotGetTimeWithSingleDigitSecond() {
+    public void shouldGetTimeWithSingleDigitSecond() {
         recognize("1/12/14 1:0:0", "1/12/14 1:0:0");
     }
 
@@ -50,5 +50,20 @@ public class AbstractDateTimeOperandTest extends GrammarElementTestBase {
     @Test
     public void shouldNotGetDateFollowedByNumber() {
         notRecognize("1/12/14 1");
+    }
+
+    @Test
+    public void shouldNotRecognizeAnEmptyString() {
+        notRecognize("");
+    }
+
+    @Test
+    public void shouldNotRecognizeAStringNotRepresentingADate() {
+        notRecognize("not a date");
+    }
+
+    @Test
+    public void shouldNotRecognizeAAllNumberString() {
+        notRecognize("123456");
     }
 }

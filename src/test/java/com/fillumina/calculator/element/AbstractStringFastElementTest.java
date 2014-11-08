@@ -38,6 +38,11 @@ public class AbstractStringFastElementTest extends GrammarElementTestBase {
     }
 
     @Test
+    public void shouldRecognizeTheFirstString() {
+        recognize("123", " 123 abc");
+    }
+
+    @Test
     public void shouldRecognizeAnEscapedQuote() {
         recognize("123\\'4", "  123\\'4 ");
     }

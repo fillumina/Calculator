@@ -11,6 +11,11 @@ import org.junit.Test;
 public class AbstractSignedDoubleFastElementTest
         extends GrammarElementTestBase {
 
+    @Override
+    protected GrammarElement<Double, Void> getGrammarElement() {
+        return new SignedDoubleOperand(0);
+    }
+
     @Test
     public void shouldCaptureTheSign() {
         recognize("-1", "-1");
@@ -36,17 +41,19 @@ public class AbstractSignedDoubleFastElementTest
         recognize("1E-4", "1E-4");
     }
 
-    @Override
-    protected GrammarElement<Double, Void> getGrammarElement() {
-        return new AbstractSignedDoubleOperand<Double, Void>(0) {
-            private static final long serialVersionUID = 1L;
+    private static class SignedDoubleOperand
+            extends AbstractSignedDoubleOperand<Double, Void> {
+        private static final long serialVersionUID = 1L;
 
-            @Override
-            public Double evaluate(final String value,
-                    final List<Double> params,
-                    final Void context) {
-                return Double.valueOf(value);
-            }
-        };
+        public SignedDoubleOperand(int priority) {
+            super(priority);
+        }
+
+        @Override
+        public Double evaluate(final String value,
+                final List<Double> params,
+                final Void context) {
+            return null;//Double.valueOf(value);
+        }
     }
 }
