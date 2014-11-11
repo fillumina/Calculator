@@ -6,38 +6,31 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * This {@link Solver} runs in the same way as the {@link FastSolver} but
- * if it encounters an undefined variable it simply saves the calculation up to
- * that, prunes the solution tree, stops executing that branch
- * and passes over. This is useful to pre-optimize a solution tree before
- * executing it in a loop (i.e. when plotting).
+ * This {@link Solver} modifies the given {@link SolutionTree} by substituting
+ * calculations branches with results while processing the expression.
  * <p>
- * <b>NOTE:</b> this class modifies the solution tree.
- * <p>
- * <b>NOTE:</b> if you start using this class you should keep using this class
- * in your calculation because it makes use of some features of {@link Node}
- * that other {@link Solver}s might not understand.
+ * <b>NOTE:</b> this class <i>modifies</i> the solution tree.
  *
  * @param T the type of the elements
  * @param C the type of the context
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class PruningSolver implements Solver, Serializable {
+public class SimplifyingSolver implements Solver, Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final PruningSolver INSTANCE =
-            new PruningSolver(new DefaultEvaluator());
+    public static final SimplifyingSolver INSTANCE =
+            new SimplifyingSolver(new DefaultNodeEvaluator());
 
-    private final Evaluator evaluator;
+    private final NodeEvaluator evaluator;
 
-    public PruningSolver(final Evaluator evaluator) {
+    public SimplifyingSolver(final NodeEvaluator evaluator) {
         this.evaluator = evaluator;
     }
 
     /**
      * This solver tries to solve the expression and at the same time
-     * cuts the tree substituting the values that it founds into the nodes.
+     * modify the tree substituting the values that it solves into the nodes.
      * It's useful to pre-parse and optimize an expression that should be
      * executed several times.
      *

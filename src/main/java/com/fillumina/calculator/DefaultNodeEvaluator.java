@@ -8,10 +8,10 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class DefaultEvaluator implements Evaluator {
+public class DefaultNodeEvaluator implements NodeEvaluator {
     private static final long serialVersionUID = 1L;
 
-    public static final Evaluator INSTANCE = new DefaultEvaluator();
+    public static final NodeEvaluator INSTANCE = new DefaultNodeEvaluator();
 
     @Override
     public <T, C> T evaluate(final Node<T,C> node,

@@ -2,8 +2,8 @@ package com.fillumina.calculator.instance;
 
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.grammar.SettableContextedGrammarBuilder;
-import com.fillumina.calculator.grammar.StringEvaluator;
-import com.fillumina.calculator.grammar.StringParametricEvaluator;
+import com.fillumina.calculator.grammar.Evaluator;
+import com.fillumina.calculator.grammar.ParametricEvaluator;
 import static java.lang.Math.E;
 import static java.lang.Math.PI;
 import static java.lang.Math.acos;
@@ -34,7 +34,7 @@ public class ArithmeticGrammar {
 
     public static final Iterable<GrammarElement<Double,Map<String,Double>>> INSTANCE =
         new SettableContextedGrammarBuilder<Double>()
-                .addFloatOperand(new StringEvaluator<Double, Map<String, Double>>() {
+                .addFloatOperand(new Evaluator<Double, Map<String, Double>>() {
                     @Override
                     public Double evaluate(String value, Map<String, Double> context) {
                         return Double.valueOf(value);
@@ -46,7 +46,7 @@ public class ArithmeticGrammar {
                     .symbols("!")
                     .operandsBefore(1)
                     .operandsAfter(0)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -66,7 +66,7 @@ public class ArithmeticGrammar {
                     .symbols("asin")
                     .operandsBefore(0)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -80,7 +80,7 @@ public class ArithmeticGrammar {
                     .symbols("acos")
                     .operandsBefore(0)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -94,7 +94,7 @@ public class ArithmeticGrammar {
                     .symbols("atan")
                     .operandsBefore(0)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -108,7 +108,7 @@ public class ArithmeticGrammar {
                     .symbols("sin")
                     .operandsBefore(0)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -122,7 +122,7 @@ public class ArithmeticGrammar {
                     .symbols("cos")
                     .operandsBefore(0)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -136,7 +136,7 @@ public class ArithmeticGrammar {
                     .symbols("tan")
                     .operandsBefore(0)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -150,7 +150,7 @@ public class ArithmeticGrammar {
                     .symbols("log")
                     .operandsBefore(0)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -164,7 +164,7 @@ public class ArithmeticGrammar {
                     .symbols("ln")
                     .operandsBefore(0)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -178,7 +178,7 @@ public class ArithmeticGrammar {
                     .symbols("sqrt", "sqr")
                     .operandsBefore(0)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -192,7 +192,7 @@ public class ArithmeticGrammar {
                     .symbols("rnd")
                     .operandsBefore(0)
                     .operandsAfter(0)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -206,7 +206,7 @@ public class ArithmeticGrammar {
                     .symbols("avg")
                     .operandsBefore(0)
                     .allAvailableOperandsAfter()
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -228,7 +228,7 @@ public class ArithmeticGrammar {
                     .symbols("^")
                     .operandsBefore(1)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -242,7 +242,7 @@ public class ArithmeticGrammar {
                     .symbols("*")
                     .operandsBefore(1)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -256,7 +256,7 @@ public class ArithmeticGrammar {
                     .symbols("/")
                     .operandsBefore(1)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -270,7 +270,7 @@ public class ArithmeticGrammar {
                     .symbols("+")
                     .operandsBefore(1)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
@@ -284,7 +284,7 @@ public class ArithmeticGrammar {
                     .symbols("-")
                     .operandsBefore(1)
                     .operandsAfter(1)
-                    .evaluator(new StringParametricEvaluator<Double, Map<String, Double>>() {
+                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {

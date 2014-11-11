@@ -43,7 +43,7 @@ public class GrammarBuilder<T,C> {
      * {@link #addFloatOperand(int, StringEvaluator)}.
      */
     public GrammarBuilder<T,C> addIntOperand(
-            final StringEvaluator<T,C> evaluator) {
+            final Evaluator<T,C> evaluator) {
         if (doubleDefined) {
             throw new IllegalStateException(
                     "Define the integer operator before the double");
@@ -60,7 +60,7 @@ public class GrammarBuilder<T,C> {
     }
 
     public GrammarBuilder<T,C> addFloatOperand(
-            final StringEvaluator<T,C> evaluator) {
+            final Evaluator<T,C> evaluator) {
         elements.add(new AbstractDoubleOperand<T,C>(0) {
             private static final long serialVersionUID = 1L;
 
@@ -74,7 +74,7 @@ public class GrammarBuilder<T,C> {
     }
 
     public GrammarBuilder<T,C> addDateOperand(final String pattern,
-            final StringEvaluator<T,C> evaluator) {
+            final Evaluator<T,C> evaluator) {
         elements.add(new AbstractDateOperand<T,C>(0, pattern) {
             private static final long serialVersionUID = 1L;
 
@@ -107,7 +107,7 @@ public class GrammarBuilder<T,C> {
 
     /** Adds unquoted, single-quoted and double-quoted strings. */
     public GrammarBuilder<T,C> addStringOperand(
-            final StringEvaluator<T,C> evaluator) {
+            final Evaluator<T,C> evaluator) {
         elements.add(new AbstractStringOperand<T,C>(0) {
             private static final long serialVersionUID = 1L;
 
@@ -132,7 +132,7 @@ public class GrammarBuilder<T,C> {
         private int priority;
         private int operandsBefore;
         private int operandsAfter;
-        private StringParametricEvaluator<T,C> evaluator;
+        private ParametricEvaluator<T,C> evaluator;
         private String[] symbols;
 
         public OperatorBuilder priority(final int value) {
@@ -160,7 +160,7 @@ public class GrammarBuilder<T,C> {
             return this;
         }
 
-        public OperatorBuilder evaluator(final StringParametricEvaluator<T,C> value) {
+        public OperatorBuilder evaluator(final ParametricEvaluator<T,C> value) {
             this.evaluator = value;
             return this;
         }

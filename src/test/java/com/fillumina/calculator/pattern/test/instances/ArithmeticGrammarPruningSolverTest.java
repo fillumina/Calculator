@@ -1,7 +1,7 @@
 package com.fillumina.calculator.pattern.test.instances;
 
 import com.fillumina.calculator.Calculator;
-import com.fillumina.calculator.PruningSolver;
+import com.fillumina.calculator.SimplifyingSolver;
 import com.fillumina.calculator.pattern.instances.ArithmeticPatternGrammar;
 import java.util.Map;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class ArithmeticGrammarPruningSolverTest
     @SuppressWarnings("unchecked")
     public Calculator<Double, Map<String, Double>> getCalculator() {
         return new Calculator<>(
-                ArithmeticPatternGrammar.INSTANCE, PruningSolver.INSTANCE);
+                ArithmeticPatternGrammar.INSTANCE, SimplifyingSolver.INSTANCE);
     }
 
     @Test(expected=NullPointerException.class)

@@ -8,10 +8,10 @@ import java.util.Map;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastBooleanGrammarTest extends BooleanGrammarTestBase {
+public class BooleanGrammarTest extends BooleanGrammarTestBase {
 
     @Override
     public Calculator<Boolean,Map<String,Boolean>> getCalculator() {
-        return Calculator.createFast(BooleanGrammar.INSTANCE);
+        return new Calculator<>(BooleanGrammar.INSTANCE);
     }
 }

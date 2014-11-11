@@ -5,32 +5,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Simple {@link Solver} that doesn't modify the solution tree. It's
- * slightly faster than {@link PruningSolver} by an almost negligible amount but
- * it doesn't optimize it in any way and every time it's
- * called it executes every calculation in the solution tree again.
- * If you need to perform optimizations use {@link PruningSolver}. On the other
- * hand this solver is <i>thread safe</i> and doesn't modify the solution tree.
+ * Simple {@link Solver} that doesn't modify the solution tree.
  *
- * @see PruningSolver
+ * @see SimplifyingSolver
  *
- * @param T the type of the elements
+ * @param T the type of the result
  * @param C the type of the context
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastSolver implements Solver, Serializable {
+public class DefaultSolver implements Solver, Serializable {
     private static final long serialVersionUID = 1L;
 
-    public static final Solver INSTANCE = new FastSolver();
+    public static final Solver INSTANCE = new DefaultSolver();
 
-    private final Evaluator evaluator;
+    private final NodeEvaluator evaluator;
 
-    public FastSolver() {
-        this(new DefaultEvaluator());
+    public DefaultSolver() {
+        this(new DefaultNodeEvaluator());
     }
 
-    public FastSolver(final Evaluator evaluator) {
+    public DefaultSolver(final NodeEvaluator evaluator) {
         this.evaluator = evaluator;
     }
 

@@ -73,7 +73,7 @@ public class PruningSolverTest {
                      " 3 OPERAND\n", treePrint);
 
         final List<String> result =
-                PruningSolver.INSTANCE.solve(solution, context);
+                SimplifyingSolver.INSTANCE.solve(solution, context);
 
         assertNull(result);
 

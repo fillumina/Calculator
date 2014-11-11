@@ -12,7 +12,7 @@ import java.util.List;
  * <ol>Reads it again and returns an interpreted value.
  * </ul>
  *
- * @param T     the type of the expected result
+ * @param T     the type of the result
  * @param C     the type of the context
  *
  * @author Francesco Illuminati <fillumina@gmail.com>

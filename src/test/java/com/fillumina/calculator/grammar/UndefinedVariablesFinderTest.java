@@ -1,6 +1,8 @@
 package com.fillumina.calculator.grammar;
 
 import com.fillumina.calculator.Calculator;
+import com.fillumina.calculator.ContextCalculator;
+import com.fillumina.calculator.ContextSolutionTree;
 import com.fillumina.calculator.Interpreter;
 import com.fillumina.calculator.Node;
 import com.fillumina.calculator.SolutionTree;
@@ -47,14 +49,14 @@ public class UndefinedVariablesFinderTest {
 
     @Test
     public void shouldRecognizeOnlyTheUndefinedVariable() {
-        final Calculator<Double, Map<String,Double>> calculator =
-            Calculator.createPruning(ArithmeticPatternGrammar.INSTANCE);
+        final ContextCalculator<Double> calculator =
+            new ContextCalculator<>(ArithmeticPatternGrammar.INSTANCE);
 
-        final SolutionTree<Double,Map<String,Double>> solution =
+        final ContextSolutionTree<Double> solution =
                 calculator.createSolutionTree("x + 2 * y + sin(2 * pi)");
 
         final Map<String,Double> context = Mapper.create("x", 1.2d);
-        solution.solve(context);
+        solution.simplify(context);
 
         final List<String> undefinedVars = solution.getUndefinedVariables();
         assertEquals(1, undefinedVars.size());

@@ -1,7 +1,7 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.Calculator;
-import com.fillumina.calculator.FastSolver;
+import com.fillumina.calculator.DefaultSolver;
 import com.fillumina.calculator.instance.ArithmeticGrammar;
 import com.fillumina.calculator.pattern.instances.ArithmeticPatternGrammar;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
@@ -37,7 +37,7 @@ public class PatternVsFastArithmeticsPerformanceTest
         tests.addTest("pattern", new Runnable() {
             final Calculator<Double, Map<String,Double>> c =
                     new Calculator<>(ArithmeticPatternGrammar.INSTANCE,
-                            FastSolver.INSTANCE);
+                            DefaultSolver.INSTANCE);
 
             @Override
             public void run() {
@@ -48,7 +48,7 @@ public class PatternVsFastArithmeticsPerformanceTest
         tests.addTest("fast", new Runnable() {
             final Calculator<Double, Map<String,Double>> c =
                     new Calculator<>(ArithmeticGrammar.INSTANCE,
-                            FastSolver.INSTANCE);
+                            DefaultSolver.INSTANCE);
 
             @Override
             public void run() {

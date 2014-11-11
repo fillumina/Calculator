@@ -8,11 +8,9 @@ import java.util.List;
 
 /**
  * Represents a node in the solution tree.
- * This class is <i>mutable</i> and not <i>thread safe</i> but it allows
+ * This class is <i>mutable</i> but allows
  * <i>deep cloning</i> so that a cloned solution tree can be modified
  * without changing the original.
- *
- * @see UnmodifiableNode
  *
  * @param T     the type of the expected result
  * @param C     the type of the context

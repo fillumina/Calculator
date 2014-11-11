@@ -2,7 +2,7 @@ package com.fillumina.calculator.pattern.test.instances;
 
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.ContextException;
-import com.fillumina.calculator.FastSolver;
+import com.fillumina.calculator.DefaultSolver;
 import com.fillumina.calculator.pattern.instances.ArithmeticPatternGrammar;
 import java.util.Map;
 import org.junit.Test;
@@ -18,7 +18,7 @@ public class ArithmeticGrammarDefaultSolverTest
     @SuppressWarnings("unchecked")
     public Calculator<Double, Map<String, Double>> getCalculator() {
         return new Calculator<>(
-                ArithmeticPatternGrammar.INSTANCE, FastSolver.INSTANCE);
+                ArithmeticPatternGrammar.INSTANCE, DefaultSolver.INSTANCE);
     }
 
     @Test(expected=ContextException.class)

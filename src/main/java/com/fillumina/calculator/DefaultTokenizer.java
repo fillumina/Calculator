@@ -11,6 +11,8 @@ import java.util.Objects;
 /**
  * Uses a grammar to recognize the elements in a string expression.
  *
+ * @param T the type of the result
+ * @param C the type of the context
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class DefaultTokenizer<T,C> implements Serializable, Tokenizer<T, C> {
@@ -25,9 +27,6 @@ public class DefaultTokenizer<T,C> implements Serializable, Tokenizer<T, C> {
 
     @Override
     public List<Node<T,C>> tokenize(final String expression) {
-        // LinkedList is very efficient for this algorithm
-        // that needs to remove nodes a lot (which is inefficient in
-        // ArrayList).
         final List<Node<T,C>> list = new LinkedList<>();
         list.add(new Node<T,C>(expression));
 

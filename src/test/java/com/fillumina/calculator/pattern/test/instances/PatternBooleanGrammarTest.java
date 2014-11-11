@@ -12,6 +12,6 @@ public class PatternBooleanGrammarTest extends BooleanGrammarTestBase {
 
     @Override
     public Calculator<Boolean,Map<String,Boolean>> getCalculator() {
-        return Calculator.createFast(BooleanPatternGrammar.INSTANCE);
+        return new Calculator<>(BooleanPatternGrammar.INSTANCE);
     }
 }

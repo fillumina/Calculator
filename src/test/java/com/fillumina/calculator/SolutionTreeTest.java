@@ -12,85 +12,83 @@ import static org.junit.Assert.*;
  */
 public class SolutionTreeTest {
 
-    private Calculator<Double, Map<String,Double>> calculator =
-            Calculator.createPruning(ArithmeticPatternGrammar.INSTANCE);
+    private ContextCalculator<Double> calculator =
+            new ContextCalculator<>(ArithmeticPatternGrammar.INSTANCE);
 
     @Test
     public void shouldHaveAStaticSolution() {
-        final SolutionTree<Double, Map<String,Double>> solution =
+        final ContextSolutionTree<Double> solution =
                 calculator.createSolutionTree("x + 2");
-        solution.solve();
+        solution.simplify();
         assertFalse(solution.isSolved());
     }
 
     @Test
     public void shouldRecognizeTheVariable() {
-        final SolutionTree<Double, Map<String,Double>> solution =
+        final ContextSolutionTree<Double> solution =
                 calculator.createSolutionTree("x + 2");
 
-        solution.solve();
+        solution.simplify();
 
         assertTrue(solution.getUndefinedVariables().contains("x"));
     }
 
     @Test
     public void shouldSolveUsingTheVariable() {
-        final SolutionTree<Double, Map<String,Double>> solution =
+        final ContextSolutionTree<Double> solution =
                 calculator.createSolutionTree("x + 2");
 
-        solution.solve();
+        solution.simplify();
         List<Double> list = solution.solveWithVariables("x", 10d);
         assertEquals(12d, list.get(0), 0);
     }
 
     @Test
     public void shoudPartiallySolve() {
-        final SolutionTree<Double, Map<String,Double>> solution =
+        final ContextSolutionTree<Double> solution =
                 calculator.createSolutionTree("y + x + 2");
 
-        solution.solve();
-        List<Double> list = solution.solveWithVariables("x", 10);
+        solution.simplify();
+        List<Double> list = solution.simplifyWithVariables("x", 10);
         assertNull(list);
         assertFalse(solution.isSolved());
     }
 
     @Test
     public void shoudSolveForTwoVariablesAndClone() {
-        final SolutionTree<Double, Map<String,Double>> solution =
+        final ContextSolutionTree<Double> solution =
                 calculator.createSolutionTree("y + x + 2");
 
-        solution.solveWithVariables("x", 10d);
+        solution.simplifyWithVariables("x", 10d);
 
         final SolutionTree<Double, Map<String,Double>> clonedSolution =
                 solution.clone();
 
-        assertEquals(17, solution.solveWithVariables("y", 5d).get(0), 0);
+        assertEquals(17, solution.simplifyWithVariables("y", 5d).get(0), 0);
     }
 
     @Test
     public void shoudCloneThePartialSolution() {
-        final SolutionTree<Double, Map<String,Double>> solution =
+        final ContextSolutionTree<Double> solution =
                 calculator.createSolutionTree("y + x + 2");
 
-        solution.solveWithVariables("x", 10d);
+        solution.simplifyWithVariables("x", 10d);
 
-        final SolutionTree<Double, Map<String,Double>> clonedSolution =
-                solution.clone();
+        final ContextSolutionTree<Double> clonedSolution = solution.clone();
 
-        assertEquals(17, clonedSolution.solveWithVariables("y", 5d).get(0), 0);
+        assertEquals(17, clonedSolution.simplifyWithVariables("y", 5d).get(0), 0);
     }
 
     @Test
     public void shoudTheOriginalSolutionOfAClonedSolvedOneBeStillUnsolved() {
-        final SolutionTree<Double, Map<String,Double>> solution =
+        final ContextSolutionTree<Double> solution =
                 calculator.createSolutionTree("y + x + 2");
 
-        solution.solveWithVariables("x", 10d);
+        solution.simplifyWithVariables("x", 10d);
 
-        final SolutionTree<Double, Map<String,Double>> clonedSolution =
-                solution.clone();
+        final ContextSolutionTree<Double> clonedSolution = solution.clone();
 
-        clonedSolution.solveWithVariables("y", 5d);
+        clonedSolution.simplifyWithVariables("y", 5d);
 
         assertFalse(solution.isSolved());
     }
