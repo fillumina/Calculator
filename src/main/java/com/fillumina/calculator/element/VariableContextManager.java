@@ -4,7 +4,7 @@ import com.fillumina.calculator.ContextException;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.SyntaxErrorException;
-import com.fillumina.calculator.grammar.AbstractComparableGrammarOperand;
+import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +15,7 @@ import java.util.Map;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class VariableContextManager<T>
-        extends AbstractComparableGrammarOperand<T, Map<String, T>> {
+        extends AbstractComparableGrammarElement<T, Map<String, T>> {
     private static final long serialVersionUID = 1L;
 
     private static final VariableContextManager<?> INSTANCE =

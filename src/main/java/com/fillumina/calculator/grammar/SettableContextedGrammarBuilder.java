@@ -25,10 +25,15 @@ public class SettableContextedGrammarBuilder<T>
         super(grammar);
     }
 
+    /**
+     *
+     * @return a Grammar able to manage round parentheses, common white spaces,
+     *         a variable context manager and setter.
+     */
     @Override
     @SuppressWarnings("unchecked")
-    public Iterable<GrammarElement<T, Map<String, T>>> buildGrammar() {
+    public Iterable<GrammarElement<T, Map<String, T>>> buildDefaultGrammar() {
         add(VariableSetterOperator.<T>instance());
-        return super.buildGrammar();
+        return super.buildDefaultGrammar();
     }
 }

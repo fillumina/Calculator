@@ -3,7 +3,6 @@ package com.fillumina.calculator.element;
 import com.fillumina.calculator.GrammarElementType;
 
 /**
- * Faster than {@link AbstractOperatorName} but it cannot use REGEXP.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

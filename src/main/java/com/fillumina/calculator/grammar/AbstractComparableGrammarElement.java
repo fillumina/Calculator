@@ -12,6 +12,7 @@ import java.io.Serializable;
 public abstract class AbstractComparableGrammarElement<T, C>
         implements GrammarElement<T, C>, Serializable {
     private static final long serialVersionUID = 1L;
+    private static final String ERROR_MESSAGE = "Not supported.";
 
     protected final int priority;
 
@@ -22,6 +23,16 @@ public abstract class AbstractComparableGrammarElement<T, C>
 
     public int getPriority() {
         return priority;
+    }
+
+    @Override
+    public int getRequiredOperandsAfter() {
+        throw new UnsupportedOperationException(ERROR_MESSAGE);
+    }
+
+    @Override
+    public int getRequiredOperandsBefore() {
+        throw new UnsupportedOperationException(ERROR_MESSAGE);
     }
 
     @Override

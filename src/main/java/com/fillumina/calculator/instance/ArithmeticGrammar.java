@@ -298,6 +298,6 @@ public class ArithmeticGrammar {
 
                 .addConstant("e", E)
                 .addConstant("pi", PI)
-        .buildGrammar();
+        .buildDefaultGrammar();
 
 }

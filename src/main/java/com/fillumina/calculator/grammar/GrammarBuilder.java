@@ -189,9 +189,17 @@ public class GrammarBuilder<T,C> {
         return this;
     }
 
-    /** Intermediate results are independent between each other. */
-    @SuppressWarnings("unchecked")
+    /** @return the specified Grammar. */
     public Iterable<GrammarElement<T,C>> buildGrammar() {
+        return Collections.unmodifiableList(new ArrayList<>(elements));
+    }
+
+    /**
+     * @return a grammar able to manage round parentheses and
+     * common white spaces.
+     */
+    @SuppressWarnings("unchecked")
+    public Iterable<GrammarElement<T,C>> buildDefaultGrammar() {
         add(OpenParentheses.<T,C>round());
         add(CloseParentheses.<T,C>round());
         add(FastWhiteSpace.<T,C>instance());

@@ -3,7 +3,7 @@ package com.fillumina.calculator.element;
 import com.fillumina.calculator.EvaluationException;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
-import com.fillumina.calculator.grammar.AbstractComparableGrammarOperand;
+import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import java.util.List;
 
 /**
@@ -12,7 +12,8 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class WhiteSpace<T,C> extends AbstractComparableGrammarOperand<T,C> {
+public class WhiteSpace<T,C>
+        extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     private static final WhiteSpace<?,?> INSTANCE =
@@ -41,18 +42,24 @@ public class WhiteSpace<T,C> extends AbstractComparableGrammarOperand<T,C> {
     public GrammarElementMatcher match(final String expression) {
         final char[] carray = expression.toCharArray();
         int start = -1, end = carray.length;
+        char c;
+        boolean isWhiteSpace = false;
         FOR: for (int i=0; i<carray.length; i++) {
-            final char c = carray[i];
+            c = carray[i];
             for (int j=0; j<whitespaces.length; j++) {
                 if (c == whitespaces[j]) {
-                    if (start == -1) {
-                        start = i;
-                    }
+                    isWhiteSpace = true;
                     break;
-                } else {
-                    end = i;
-                    break FOR;
                 }
+            }
+            if (isWhiteSpace) {
+                if (start == -1) {
+                    start = i;
+                }
+                break;
+            } else {
+                end = i;
+                break FOR;
             }
         }
         if (start == -1) {

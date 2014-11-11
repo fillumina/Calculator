@@ -24,9 +24,13 @@ public class ContextedGrammarBuilder<T> extends GrammarBuilder<T,Map<String,T>> 
         super(grammar);
     }
 
+    /**
+     * @return a Grammar able to manage round parentheses, common white spaces
+     *         and a variable context manager.
+     */
     @Override
-    public Iterable<GrammarElement<T, Map<String, T>>> buildGrammar() {
+    public Iterable<GrammarElement<T, Map<String, T>>> buildDefaultGrammar() {
         add(VariableContextManager.<T>instance());
-        return super.buildGrammar();
+        return super.buildDefaultGrammar();
     }
 }

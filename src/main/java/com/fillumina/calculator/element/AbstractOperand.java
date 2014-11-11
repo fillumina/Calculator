@@ -1,14 +1,14 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElementType;
-import com.fillumina.calculator.grammar.AbstractComparableGrammarOperand;
+import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractOperand<T,C>
-        extends AbstractComparableGrammarOperand<T,C> {
+        extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     /**

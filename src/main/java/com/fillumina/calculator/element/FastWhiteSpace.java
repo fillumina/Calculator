@@ -3,7 +3,7 @@ package com.fillumina.calculator.element;
 import com.fillumina.calculator.EvaluationException;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
-import com.fillumina.calculator.grammar.AbstractComparableGrammarOperand;
+import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import java.util.List;
 
 /**
@@ -12,7 +12,7 @@ import java.util.List;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class FastWhiteSpace<T,C>
-        extends AbstractComparableGrammarOperand<T,C> {
+        extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
     private static final FastWhiteSpace<?,?> INSTANCE =

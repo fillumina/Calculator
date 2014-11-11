@@ -4,8 +4,7 @@ import com.fillumina.calculator.GrammarElementMatcher;
 import static com.fillumina.calculator.element.CharacterUtil.isDigit;
 
 /**
- * This way of managing numbers is at least 2 times faster than
- * {@link AbstractOperand}.
+ * Recognizes integers.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

@@ -1,5 +1,6 @@
 package com.fillumina.calculator;
 
+import com.fillumina.calculator.element.WhiteSpace;
 import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
 import com.fillumina.calculator.grammar.GrammarBuilder;
 import com.fillumina.calculator.grammar.SettableContextedGrammarBuilder;
@@ -74,7 +75,7 @@ public class CalculatorTest {
                             }
                         })
                     .buildOperator()
-                .buildGrammar());
+                .buildDefaultGrammar());
         assertEquals(109.0, calc.solveSingleValue("15+hundred-6"), 0);
     }
 
@@ -106,7 +107,7 @@ public class CalculatorTest {
                             }
                         })
                     .buildOperator()
-                .buildGrammar());
+                .buildDefaultGrammar());
 
         // defining a context
         final Map<String,Integer> context = new HashMap<>();
@@ -144,7 +145,7 @@ public class CalculatorTest {
                             }
                         })
                     .buildOperator()
-                .buildGrammar());
+                .buildDefaultGrammar());
 
         // defining a context
         final Map<String,Integer> context = new HashMap<>();
@@ -185,7 +186,7 @@ public class CalculatorTest {
                             }
                         })
                     .buildOperator()
-                .buildGrammar());
+                .buildDefaultGrammar());
 
         // defining a context
         final Map<String,Integer> context = new HashMap<>();
@@ -229,4 +230,23 @@ public class CalculatorTest {
 
         assertEquals(15, accumulator, 0);
     }
+
+    @Test(expected=EvaluationException.class)
+    public void shouldCallEvaluationExceptionIfEvaluationGoesWrong() {
+        final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
+            new SettableContextedGrammarBuilder<Integer>()
+                .addFloatOperand(new Evaluator
+                            <Integer, Map<String,Integer>>() {
+                        @Override
+                        public Integer evaluate(String value,
+                                Map<String,Integer> context) {
+                            // THIS IS AN ERROR !
+                            return Integer.valueOf(value);
+                        }
+                    })
+                .buildDefaultGrammar());
+
+        calc.solveSingleValue("12.34");
+    }
+
 }
