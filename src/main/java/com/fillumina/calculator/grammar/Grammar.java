@@ -16,6 +16,8 @@ import java.util.List;
  * name is {@code cons} and a variable which name is {@code constant}
  * the variable element should come first in the list.<p>
  *
+ * Grammar is designed to be not mutable.
+ *
  * <b>IMPORTANT:</b> There should be at most <b>one</b>
  * <code>UnrecognizedElement</code> defined in a grammar. Only
  * the first one will be considered.<p>
@@ -29,28 +31,23 @@ public class Grammar<T,C>
         implements Iterable<GrammarElement<T,C>>, Serializable {
     private static final long serialVersionUID = 1L;
 
-    private final List<GrammarElement<? extends T,? extends C>> elements;
+    private final List<GrammarElement<T,C>> elements;
 
-    public Grammar(final GrammarElement<? extends T,? extends C>... elementsArray) {
+    public Grammar(final GrammarElement<T,C>... elementsArray) {
         elements = Collections.unmodifiableList(
                 Arrays.asList(elementsArray.clone()));
     }
 
-    public Grammar(final Iterable<GrammarElement<? extends T,? extends C>> iterable) {
-        final List<GrammarElement<? extends T,? extends C>> list =
-                new ArrayList<>();
-        for (GrammarElement<? extends T,? extends C> element : iterable) {
-            list.add(element);
-        }
-        elements = Collections.unmodifiableList(list);
+    public Grammar(final Iterable<GrammarElement<T,C>>... iterables) {
+        elements = Collections.unmodifiableList(join(iterables));
     }
 
     /** Always returns an immutable {@link Iterator}. */
     @Override
     public Iterator<GrammarElement<T, C>> iterator() {
         return new Iterator<GrammarElement<T, C>>() {
-            private final Iterator<GrammarElement<? extends T, ? extends C>>
-                    iterator = elements.iterator();
+            private final Iterator<GrammarElement<T,C>> iterator =
+                    elements.iterator();
 
             @Override
             public boolean hasNext() {
@@ -74,10 +71,10 @@ public class Grammar<T,C>
      * Creates a <b>new</b> {@link Grammar} with the new elements added, in the
      * given order, <i>after</i> the elements already present in the grammar.
      */
-    public Grammar<T,C> join(final Grammar<? extends T,? extends C>... grammars) {
-        final List<GrammarElement<? extends T,? extends C>> list =
+    public Grammar<T,C> joinGrammar(final Grammar<T,C>... grammars) {
+        final List<GrammarElement<T,C>> list =
                 new ArrayList<>(elements);
-        for (final Grammar<? extends T,? extends C> g: grammars) {
+        for (final Grammar<T,C> g: grammars) {
             list.addAll(g.elements);
         }
         return new Grammar<>(list);
@@ -85,23 +82,11 @@ public class Grammar<T,C>
 
     public static <T,C> List<GrammarElement<T,C>> join(
             final Iterable<GrammarElement<T,C>>... iterables) {
-        final List<GrammarElement<T,C>> list =new ArrayList<>();
+        final List<GrammarElement<T,C>> list = new ArrayList<>();
         for (final Iterable<GrammarElement<T,C>> iterable: iterables) {
-            GrammarElement<T,C> ge = null;
-            for (Iterator<GrammarElement<T,C>> i = iterable.iterator();
-                    i.hasNext();
-                    ge = i.next()) {
+            for (final GrammarElement<T,C> ge: iterable) {
                 list.add(ge);
             }
-        }
-        return list;
-    }
-
-    public static <T,C> List<GrammarElement<T,C>> join(
-            final GrammarElement<T,C>... elements) {
-        final List<GrammarElement<T,C>> list =new ArrayList<>();
-        for (final GrammarElement<T,C> l: elements) {
-            list.add(l);
         }
         return list;
     }
