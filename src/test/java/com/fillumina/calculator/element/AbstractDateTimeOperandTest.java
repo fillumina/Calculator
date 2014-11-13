@@ -1,7 +1,7 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.DateFastOperand;
+import com.fillumina.calculator.grammar.DateOperand;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class AbstractDateTimeOperandTest extends GrammarElementTestBase {
 
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return DateFastOperand.DATE_TIME;
+        return DateOperand.DATE_TIME;
     }
 
     @Test

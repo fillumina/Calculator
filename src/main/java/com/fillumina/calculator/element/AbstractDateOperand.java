@@ -13,7 +13,6 @@ import java.util.Date;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-// TODO test
 public abstract class AbstractDateOperand<T,C> extends AbstractOperand<T,C> {
     private static final long serialVersionUID = 1L;
 
@@ -33,7 +32,8 @@ public abstract class AbstractDateOperand<T,C> extends AbstractOperand<T,C> {
         this.dateFormat = new SimpleDateFormat(pattern);
         this.cpattern = pattern.toCharArray();
         this.firstNonDigitPosition = getFirstNonDigitPosition(cpattern);
-        this.firstNonDigitChar = cpattern[firstNonDigitPosition];
+        this.firstNonDigitChar = firstNonDigitPosition == -1 ?
+                ' ' : cpattern[firstNonDigitPosition];
     }
 
     @Override
@@ -51,8 +51,9 @@ public abstract class AbstractDateOperand<T,C> extends AbstractOperand<T,C> {
         int start = -1;
         final int plength = cpattern.length;
         final int clength = carray.length;
+        char c;
         for (int i=startPos; i<clength; i++) {
-            final char c = carray[i];
+            c = carray[i];
             if (patternIndex == plength) {
                 return new ElementMatcher(start, i);
             } else if (isDigit(c)) {
@@ -72,9 +73,6 @@ public abstract class AbstractDateOperand<T,C> extends AbstractOperand<T,C> {
                 patternIndex = 0;
             }
         }
-        if (patternIndex == 0) {
-            return ElementMatcher.NOT_FOUND;
-        }
         if (patternIndex == cpattern.length ||
                 (cpattern[patternIndex] == cpattern[patternIndex - 1] &&
                 patternIndex + 1 == cpattern.length) ) {
@@ -84,8 +82,7 @@ public abstract class AbstractDateOperand<T,C> extends AbstractOperand<T,C> {
     }
 
     /** Helper to evaluate a {@link Date} starting from the given pattern. */
-    protected Date evaluateDate(final String val) {
-        String value = val;
+    protected Date evaluateDate(final String value) {
         try {
             return dateFormat.parse(value);
         } catch (final ParseException ex) {

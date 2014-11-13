@@ -1,9 +1,15 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.DateFastOperand;
+import com.fillumina.calculator.GrammarElementMatcher;
+import com.fillumina.calculator.grammar.DateOperand;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
@@ -14,7 +20,7 @@ public class AbstractDateOperandTest extends GrammarElementTestBase {
 
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return DateFastOperand.DATE;
+        return DateOperand.DATE;
     }
 
     @Test
@@ -100,5 +106,35 @@ public class AbstractDateOperandTest extends GrammarElementTestBase {
     @Test
     public void shouldNotRecognizeAAllNumberString() {
         notRecognize("123456");
+    }
+
+    private final GrammarElement<Date,Void> DATE_OPERAND =
+            new AbstractDateOperand<Date,Void>(0, "ddMMyy") {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public Date evaluate(String value, List<Date> params, Void context) {
+                    return evaluateDate(value);
+                }
+            };
+
+    private void assertMatch(final String expected, final String expression) {
+        GrammarElementMatcher matcher = DATE_OPERAND.match(null, expression);
+        assertEquals(expected,
+                expression.substring(matcher.getStart(), matcher.getEnd()));
+    }
+
+    @Test
+    public void shouldUnderstandADateOfOnlyDigits() {
+        assertMatch("120214", "bla bla 120214 pinco");
+    }
+
+    @Test
+    public void shouldConvertADateOfOnlyDigits() {
+        final String expression = "bla bla 120214 pinco";
+        GrammarElementMatcher matcher = DATE_OPERAND.match(null, expression);
+        String parsed = expression.substring(matcher.getStart(), matcher.getEnd());
+        Date date = DATE_OPERAND.evaluate(parsed, null, null);
+        assertEquals(new GregorianCalendar(2014, 1, 12).getTime(), date);
     }
 }
