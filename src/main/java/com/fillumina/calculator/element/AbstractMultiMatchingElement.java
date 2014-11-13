@@ -1,5 +1,6 @@
 package com.fillumina.calculator.element;
 
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import java.util.Arrays;
 
@@ -25,7 +26,9 @@ public abstract class AbstractMultiMatchingElement<T,C>
     }
 
     @Override
-    public GrammarElementMatcher match(final String expression) {
+    public GrammarElementMatcher match(
+            final GrammarElement<T,C> previousGrammarElement,
+            final String expression) {
         for (String symbol: symbols) {
             final GrammarElementMatcher matcher = matchSymbol(expression, symbol);
             if (matcher.isFound()) {

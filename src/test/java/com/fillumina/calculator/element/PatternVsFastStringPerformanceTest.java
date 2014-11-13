@@ -1,5 +1,6 @@
 package com.fillumina.calculator.element;
 
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
@@ -37,7 +38,9 @@ public class PatternVsFastStringPerformanceTest
         }
 
         @Override
-        public GrammarElementMatcher match(final String expression) {
+        public GrammarElementMatcher match(
+                final GrammarElement<Void,Void> previousGrammarElement,
+                final String expression) {
             Matcher matcher = PATTERN.matcher(expression);
             matcher.find();
             if (matcher.groupCount() == 2) {
@@ -91,7 +94,7 @@ public class PatternVsFastStringPerformanceTest
 
             @Override
             public Object sink() {
-                GrammarElementMatcher matcher = patternString.match(string);
+                GrammarElementMatcher matcher = patternString.match(null, string);
                 assertEquals(12, matcher.getStart());
                 assertEquals(23, matcher.getEnd());
                 return matcher;
@@ -102,7 +105,7 @@ public class PatternVsFastStringPerformanceTest
 
             @Override
             public Object sink() {
-                GrammarElementMatcher matcher = fastString.match(string);
+                GrammarElementMatcher matcher = fastString.match(null, string);
                 // this matcher returns the quotes too (which are needed!)
                 assertEquals(11, matcher.getStart());
                 assertEquals(24, matcher.getEnd());

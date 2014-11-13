@@ -1,6 +1,7 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.EvaluationException;
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
@@ -17,7 +18,7 @@ public class WhiteSpace<T,C>
     private static final long serialVersionUID = 1L;
 
     private static final WhiteSpace<?,?> INSTANCE =
-            new WhiteSpace<>(0, " \t\n");
+            new WhiteSpace<>(0, " \t\n\r");
 
     private final char[] whitespaces;
 
@@ -39,7 +40,9 @@ public class WhiteSpace<T,C>
     }
 
     @Override
-    public GrammarElementMatcher match(final String expression) {
+    public GrammarElementMatcher match(
+            final GrammarElement<T,C> previousGrammarElement,
+            final String expression) {
         final char[] carray = expression.toCharArray();
         int start = -1, end = carray.length;
         char c;

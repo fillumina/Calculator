@@ -4,9 +4,9 @@ import com.fillumina.calculator.DefaultTokenizer;
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.Node;
 import com.fillumina.calculator.Tokenizer;
+import com.fillumina.calculator.instance.ArithmeticGrammar;
 import com.fillumina.calculator.interpreter.UndefinedElementParser;
 import com.fillumina.calculator.interpreter.WhiteSpaceCleaner;
-import com.fillumina.calculator.pattern.instances.ArithmeticPatternGrammar;
 import com.fillumina.calculator.util.TreePrinter;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +21,7 @@ import org.junit.Test;
 public class UndefinedElementParserTest {
 
     private final Tokenizer<Double, Map<String, Double>> tokenizer =
-            new DefaultTokenizer<>(ArithmeticPatternGrammar.INSTANCE);
+            new DefaultTokenizer<>(ArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldRecognizeTheUndefinedVariable() {
@@ -33,7 +33,7 @@ public class UndefinedElementParserTest {
         assertEquals("boh", undefined.getExpression());
         assertNull(undefined.getGrammarElement());
 
-        new UndefinedElementParser(ArithmeticPatternGrammar.INSTANCE)
+        new UndefinedElementParser(ArithmeticGrammar.INSTANCE)
                 .executeOn(nodes);
 
         final Node<Double, Map<String,Double>> unrecognized = nodes.get(0);
@@ -56,7 +56,7 @@ public class UndefinedElementParserTest {
                     ") CLOSED_PAR\n",
                 TreePrinter.prettyPrintFull(nodes));
 
-        new UndefinedElementParser(ArithmeticPatternGrammar.INSTANCE)
+        new UndefinedElementParser(ArithmeticGrammar.INSTANCE)
                 .executeOn(nodes);
 
         assertEquals("sin OPERATOR\n" +
@@ -83,7 +83,7 @@ public class UndefinedElementParserTest {
                     ") CLOSED_PAR\n",
                 TreePrinter.prettyPrintFull(nodes));
 
-        new UndefinedElementParser(ArithmeticPatternGrammar.INSTANCE)
+        new UndefinedElementParser(ArithmeticGrammar.INSTANCE)
                 .executeOn(nodes);
 
         assertEquals("meh UNRECOGNIZED\n" +  // <-----[]

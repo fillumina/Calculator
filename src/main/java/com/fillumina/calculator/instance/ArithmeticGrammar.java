@@ -3,6 +3,7 @@ package com.fillumina.calculator.instance;
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.grammar.SettableContextedGrammarBuilder;
 import com.fillumina.calculator.grammar.Evaluator;
+import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.grammar.ParametricEvaluator;
 import static java.lang.Math.E;
 import static java.lang.Math.PI;
@@ -29,14 +30,12 @@ import java.util.Map;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ArithmeticGrammar {
+public class ArithmeticGrammar extends Grammar<Double,Map<String,Double>> {
     private static final long serialVersionUID = 1L;
 
-    private ArithmeticGrammar() {}
-
-    public static final Iterable<GrammarElement<Double,Map<String,Double>>> INSTANCE =
+    public static final Iterable<GrammarElement<Double,Map<String,Double>>> ITERABLE =
         new SettableContextedGrammarBuilder<Double>()
-                .addFloatOperand(new Evaluator<Double, Map<String, Double>>() {
+                .addFloatingPointOperand(new Evaluator<Double, Map<String, Double>>() {
                     @Override
                     public Double evaluate(String value, Map<String, Double> context) {
                         return Double.valueOf(value);
@@ -276,6 +275,10 @@ public class ArithmeticGrammar {
                         @Override
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
+                            if (params.size() == 1) {
+                                // + signum
+                                return params.get(0);
+                            }
                             return params.get(0) + params.get(1);
                         }
                     })
@@ -291,6 +294,7 @@ public class ArithmeticGrammar {
                         public Double evaluate(String value, List<Double> params,
                                 Map<String, Double> context) {
                             if (params.size() == 1) {
+                                // - signum
                                 return - params.get(0);
                             }
                             return params.get(0) - params.get(1);
@@ -302,4 +306,12 @@ public class ArithmeticGrammar {
                 .addConstant("PI", PI)
         .buildDefaultGrammar();
 
+    @SuppressWarnings("unchecked")
+    public static final ArithmeticGrammar INSTANCE =
+            new ArithmeticGrammar(ITERABLE);
+
+    private ArithmeticGrammar(
+            final Iterable<GrammarElement<Double, Map<String, Double>>>... iterables) {
+        super(iterables);
+    }
 }

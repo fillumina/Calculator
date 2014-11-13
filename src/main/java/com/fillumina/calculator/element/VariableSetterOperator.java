@@ -1,5 +1,6 @@
 package com.fillumina.calculator.element;
 
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
@@ -48,7 +49,9 @@ public class VariableSetterOperator<T>
 
     //"[A-Za-z\\d]+\\ *="
     @Override
-    public GrammarElementMatcher match(final String expression) {
+    public GrammarElementMatcher match(
+            final GrammarElement<T,Map<String,T>> previousGrammarElement,
+            final String expression) {
         final int idx = expression.indexOf('=');
         if (idx == -1 || idx == 0) {
             return ElementMatcher.NOT_FOUND;

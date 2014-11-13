@@ -34,13 +34,13 @@ public class InnerParenthesisFinderTest
         assertEquals(3, list.size());
     }
 
-    @Test(expected=ParenthesisMismatchedException.class)
+    @Test(expected=ParenthesesMismatchedException.class)
     public void shouldFireAnExceptionIfTheRightParenthesisIsMissing() {
         final List<Node<Long, Void>> list = buildNodeList("12(3");
         ipf.find(list);
     }
 
-    @Test(expected=ParenthesisMismatchedException.class)
+    @Test(expected=ParenthesesMismatchedException.class)
     public void shouldFireAnExceptionIfTheLeftParenthesisIsMissing() {
         final List<Node<Long, Void>> list = buildNodeList("12)3");
         ipf.find(list);

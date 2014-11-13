@@ -45,12 +45,16 @@ public class DefaultTokenizer<T,C> implements Serializable, Tokenizer<T, C> {
     private void recognizeGrammarElement(final GrammarElement<T,C> ge,
             final List<Node<T,C>> list) {
         final SplittingIterator<T,C> iterator = new SplittingIterator<>(list);
+        Node<T,C> node = null;
+        GrammarElement<T,C> previousGrammarElement;
         while (iterator.hasNext()) {
-            final Node<T,C> node = iterator.next();
+            previousGrammarElement = (node == null) ?
+                    null : node.getGrammarElement();
+            node = iterator.next();
 
             if (node.isUnassignedGrammarElement()) {
                 final GrammarElementMatcher matcher =
-                        ge.match(node.getExpression());
+                        ge.match(previousGrammarElement, node.getExpression());
                 if (matcher.isFound()) {
                     assertMatchingANotEmptyRegion(matcher, ge);
                     final Node<T, C> matchedNode =

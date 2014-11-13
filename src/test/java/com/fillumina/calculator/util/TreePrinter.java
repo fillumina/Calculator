@@ -58,7 +58,6 @@ public class TreePrinter implements Serializable {
         }
     };
 
-    // I cannot see a reason to extend this class
     private TreePrinter() {}
 
     private static class PrintTreeVisitor<T,C>

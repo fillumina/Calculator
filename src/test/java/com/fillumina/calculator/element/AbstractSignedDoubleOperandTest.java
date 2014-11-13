@@ -49,7 +49,7 @@ public class AbstractSignedDoubleOperandTest
     public void shouldUseADifferentSeparator() {
         final ContextCalculator<Double> calc = new ContextCalculator<>(
             new SettableContextedGrammarBuilder<Double>()
-                .add(new AbstractSignedDoubleOperand<Double,Map<String,Double>>(0, '?') {
+                .add(new AbstractDoubleOperand<Double,Map<String,Double>>(0, '?') {
                     private static final long serialVersionUID = 1L;
 
                     @Override
@@ -64,7 +64,7 @@ public class AbstractSignedDoubleOperandTest
     }
 
     private static class SignedDoubleOperand
-            extends AbstractSignedDoubleOperand<Double, Void> {
+            extends AbstractDoubleOperand<Double, Void> {
         private static final long serialVersionUID = 1L;
 
         public SignedDoubleOperand(int priority) {

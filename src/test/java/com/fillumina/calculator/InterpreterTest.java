@@ -1,12 +1,10 @@
 package com.fillumina.calculator;
 
+import com.fillumina.calculator.element.CloseParentheses;
+import com.fillumina.calculator.element.DefaultWhiteSpace;
+import com.fillumina.calculator.element.OpenParentheses;
 import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.interpreter.DefaultInterpreter;
-import com.fillumina.calculator.pattern.PatternCloseParentheses;
-import com.fillumina.calculator.pattern.PatternOpenParentheses;
-import com.fillumina.calculator.pattern.PatternWhiteSpace;
-import com.fillumina.calculator.pattern.test.TestOperand;
-import com.fillumina.calculator.pattern.test.TestOperator;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -124,16 +122,11 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateATreeWithTwoDualOperatorsAndParenthesys() {
-        final GrammarElement<String,Void> multiply =
-                new TestOperator("\\*", 1, 1, 1);
-        final GrammarElement<String,Void> minus =
-                new TestOperator("\\-", 0, 1, 1);
-        final GrammarElement<String,Void> number =
-                new TestOperand("\\d+", 0);
-        final GrammarElement<String,Void> openPar =
-                new PatternOpenParentheses<>("\\(");
-        final GrammarElement<String,Void> closePar =
-                new PatternCloseParentheses<>("\\)");
+        final GrammarElement<String,Void> multiply = new TestOperator("\\*", 1, 1, 1);
+        final GrammarElement<String,Void> minus = new TestOperator("\\-", 0, 1, 1);
+        final GrammarElement<String,Void> number = new TestOperand("\\d+", 0);
+        final GrammarElement<String,Void> openPar = new OpenParentheses<>("(");
+        final GrammarElement<String,Void> closePar = new CloseParentheses<>(")");
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar =
                 new Grammar<>(number, multiply, minus, openPar, closePar);
@@ -147,18 +140,12 @@ public class InterpreterTest {
 
     @Test
     public void shouldCreateATreeWithAFunction() {
-        final GrammarElement<String,Void> sin =
-                new TestOperator("sin", 3, 0, 1);
-        final GrammarElement<String,Void> multiply =
-                new TestOperator("\\*", 2, 1, 1);
-        final GrammarElement<String,Void> minus =
-                new TestOperator("\\-", 1, 1, 1);
-        final GrammarElement<String,Void> number =
-                new TestOperand("\\d+", 0);
-        final GrammarElement<String,Void> openPar =
-                new PatternOpenParentheses<>("\\(");
-        final GrammarElement<String,Void> closePar =
-                new PatternCloseParentheses<>("\\)");
+        final GrammarElement<String,Void> sin = new TestOperator("sin", 3, 0, 1);
+        final GrammarElement<String,Void> multiply = new TestOperator("\\*", 2, 1, 1);
+        final GrammarElement<String,Void> minus = new TestOperator("\\-", 1, 1, 1);
+        final GrammarElement<String,Void> number = new TestOperand("\\d+", 0);
+        final GrammarElement<String,Void> openPar = new OpenParentheses<>("(");
+        final GrammarElement<String,Void> closePar = new CloseParentheses<>(")");
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar =
                 new Grammar<>(number, multiply, sin, minus, openPar, closePar);
@@ -177,9 +164,9 @@ public class InterpreterTest {
         final GrammarElement<String,Void> sum = new TestOperator("\\+", 1, 1, 1);
         final GrammarElement<String,Void> minus = new TestOperator("\\-", 1, 1, 1);
         final GrammarElement<String,Void> number = new TestOperand("\\d+", 0);
-        final GrammarElement<String,Void> openPar = new PatternOpenParentheses<>("\\(");
-        final GrammarElement<String,Void> closePar = new PatternCloseParentheses<>("\\)");
-        final GrammarElement<String,Void> whiteSpace = new PatternWhiteSpace<>("[\\ ]+");
+        final GrammarElement<String,Void> openPar = new OpenParentheses<>("(");
+        final GrammarElement<String,Void> closePar = new CloseParentheses<>(")");
+        final GrammarElement<String,Void> whiteSpace = DefaultWhiteSpace.instance();
 
         @SuppressWarnings("unchecked")
         final Grammar<String,Void> grammar = new Grammar<>(number,

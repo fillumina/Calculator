@@ -32,26 +32,34 @@ public class SolutionTree<T, C> implements Cloneable {
         this.solution = original.solution; //doesn't make much sense but uh?
     }
 
+    /** @return {@code true} if the solution was found during the last
+     *          call to {@link #solve()} or {@link #solve(C)} or
+     *          {@link #solve(Solver,C)}.
+     * @return
+     */
     public boolean isSolved() {
         return solution != null;
     }
 
+    /**
+     * @return the first solution found or an {@link SyntaxException} if
+     *          something went wrong during parsing or solving the expression.
+     */
     public T getSingleSolution() {
-        if (isSolved()) {
-            return getSolution().get(0);
-        }
-        return null;
+        return getSolution().get(0);
     }
 
+    /** @return the last solution found. */
     public List<T> getSolution() {
         return solution;
     }
 
     /**
-     * Use in case there isn't any context.
+     * Solve the solution tree. Use in case there isn't any context.
      * @see #solve(java.lang.Object)
      *
      * @return the solution found or {@code null}.
+     * @throws SyntaxErrorException
      */
     public List<T> solve() {
         return solve(null);
@@ -64,12 +72,23 @@ public class SolutionTree<T, C> implements Cloneable {
      *
      * @param context the context (define the missing variables here)
      * @return the solution if found otherwise {@code null}.
+     * @throws SyntaxErrorException
      */
     public List<T> solve(final C context) {
         solve(solver, context);
         return this.solution;
     }
 
+    /**
+     * Try to solve the given solution tree using the passed {@link Solver}.
+     * If the solution cannot be found
+     * (there could be less variable defined than required) {@code null} is
+     * returned.
+     *
+     * @param context the context (define the missing variables here)
+     * @return the solution if found otherwise {@code null}.
+     * @throws SyntaxErrorException
+     */
     protected void solve(final Solver solver, final C context) {
         this.solution = solver.solve(solutionTree, context);
     }

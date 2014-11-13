@@ -1,6 +1,7 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.EvaluationException;
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
@@ -28,7 +29,9 @@ public class DefaultWhiteSpace<T,C>
     }
 
     @Override
-    public GrammarElementMatcher match(final String expression) {
+    public GrammarElementMatcher match(
+            final GrammarElement<T,C> previousGrammarElement,
+            final String expression) {
         final char[] carray = expression.toCharArray();
         int start = -1, end = carray.length;
         for (int i=0; i<carray.length; i++) {

@@ -38,7 +38,7 @@ public class CalculatorGrammarTest {
     public void shouldDefineAndUseASimpleGrammar() {
         final Calculator<Integer,Void> calc = new Calculator<>(
             new GrammarBuilder<Integer,Void>()
-                .addIntOperand(new Evaluator<Integer, Void>() {
+                .addIntegerOperand(new Evaluator<Integer, Void>() {
                         @Override
                         public Integer evaluate(String value, Void context) {
                             return Integer.valueOf(value);
@@ -81,7 +81,7 @@ public class CalculatorGrammarTest {
     public void shouldDefineAndUseASimpleGrammarWithContext() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
             new ContextedGrammarBuilder<Integer>()
-                .addIntOperand(new Evaluator
+                .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
                         public Integer evaluate(String value,
@@ -119,7 +119,7 @@ public class CalculatorGrammarTest {
     public void shouldDefineAndUseASimpleGrammarWithContextAndSetAVariable() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
             new SettableContextedGrammarBuilder<Integer>()
-                .addIntOperand(new Evaluator
+                .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
                         public Integer evaluate(String value,
@@ -161,7 +161,7 @@ public class CalculatorGrammarTest {
     public void shouldNotShadowALegitimateConstant() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
             new SettableContextedGrammarBuilder<Integer>()
-                .addIntOperand(new Evaluator
+                .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
                         public Integer evaluate(String value,
@@ -234,7 +234,7 @@ public class CalculatorGrammarTest {
     public void shouldCallEvaluationExceptionIfEvaluationGoesWrong() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
             new SettableContextedGrammarBuilder<Integer>()
-                .addFloatOperand(new Evaluator
+                .addFloatingPointOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
                         public Integer evaluate(String value,

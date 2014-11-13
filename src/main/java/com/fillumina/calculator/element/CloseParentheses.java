@@ -4,11 +4,14 @@ import com.fillumina.calculator.GrammarElementType;
 
 /**
  * Defines the symbol that close a parenthesis. It's about 20% faster than
- * {@link CloseParentheses}.
+ * {@link CloseParentheses}. Different symbols can be used by initializing
+ * different objects of this class, because parentheses must be properly
+ * nested there will be no difference at all (they could be even converted
+ * to the same type by a simple string preprocessor before actually parsing
+ * the expression).
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-//TODO use equals() to match symbol so to allow for different symbols
 public class CloseParentheses<T,C>
         extends UnevaluableElement<T,C> {
     private static final long serialVersionUID = 1L;

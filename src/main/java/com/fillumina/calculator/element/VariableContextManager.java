@@ -1,6 +1,7 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.ContextException;
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.SyntaxErrorException;
@@ -52,7 +53,9 @@ public class VariableContextManager<T>
     }
 
     @Override
-    public GrammarElementMatcher match(String expression) {
+    public GrammarElementMatcher match(
+            final GrammarElement<T,Map<String,T>> previousGrammarElement,
+            final String expression) {
         return ElementMatcher.NOT_FOUND;
     }
 }

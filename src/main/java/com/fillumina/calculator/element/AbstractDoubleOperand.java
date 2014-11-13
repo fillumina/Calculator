@@ -1,7 +1,9 @@
 package com.fillumina.calculator.element;
 
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import static com.fillumina.calculator.element.CharacterUtil.isDigit;
+import static com.fillumina.calculator.element.SignumFinder.isPreceededByASignum;
 import java.text.DecimalFormatSymbols;
 
 /**
@@ -28,7 +30,9 @@ public abstract class AbstractDoubleOperand<T,C> extends AbstractOperand<T,C> {
     }
 
     @Override
-    public GrammarElementMatcher match(final String expression) {
+    public GrammarElementMatcher match(
+            final GrammarElement<T,C> previousGrammarElement,
+            final String expression) {
         final char[] carray = expression.toCharArray();
 
         int start = 0;
@@ -99,34 +103,9 @@ public abstract class AbstractDoubleOperand<T,C> extends AbstractOperand<T,C> {
             end--;
         }
         if (start > 0 &&
-                isPreceededByASignumAndAnOperatorOrParentheses(carray, start)) {
+                isPreceededByASignum(previousGrammarElement, carray, start)) {
             start --; // includes the signum
         }
         return new ElementMatcher(start, end);
-    }
-
-    /**
-     * This method here is controversial. It is needed to see if the
-     * preceeding + or - should be part of the number, but this can be
-     * determined only in a standard arithmetic with some checks. I just
-     * assume here that the grammar defined is somewhat 'close' to the
-     * standard arithmetic.
-     */
-    protected boolean isPreceededByASignumAndAnOperatorOrParentheses(
-            final char[] carray,
-            final int start) {
-        final char sign = carray[start - 1];
-        if (sign == '+' || sign == '-') {
-            for (int j = start - 2; j >= 0; j--) {
-                final char cj = carray[j];
-                if (cj == '*' || cj == '/' || cj == '(' || cj == '+' ||
-                        cj == '-' || cj == '^') {
-                    return true;
-                } else if (cj != ' ' && cj != '\n' && cj != '\t') {
-                    return false;
-                }
-            }
-        }
-        return false;
     }
 }

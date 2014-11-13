@@ -1,5 +1,6 @@
 package com.fillumina.calculator.element;
 
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 
 /**
@@ -24,7 +25,9 @@ public abstract class AbstractElement<T,C>
     }
 
     @Override
-    public GrammarElementMatcher match(final String expression) {
+    public GrammarElementMatcher match(
+            final GrammarElement<T,C> previousGrammarElement,
+            final String expression) {
         return matchSymbol(expression, symbol);
     }
 

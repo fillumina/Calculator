@@ -62,14 +62,14 @@ class InnerParenthesisFinder {
     private <T,C> void assertAllOpenParenthesisAreClosed(
             final IndexedNode<T,C> openPar) {
         if (openPar != null) {
-            throw new ParenthesisMismatchedException();
+            throw new ParenthesesMismatchedException();
         }
     }
 
     private <T,C> void assertThereWasAnOpenParenthesisBefore(
             final IndexedNode<T,C> openPar) {
         if (openPar == null) {
-            throw new ParenthesisMismatchedException();
+            throw new ParenthesesMismatchedException();
         }
     }
 
@@ -102,7 +102,7 @@ class InnerParenthesisFinder {
                 // it belongs from (a sublist is a view of the belonging list)
                 innerParenthesisList.clear();
             } catch (IndexOutOfBoundsException e) {
-                throw new ParenthesisMismatchedException(e);
+                throw new ParenthesesMismatchedException(e);
             }
         }
     }

@@ -2,7 +2,7 @@ package com.fillumina.calculator.interpreter;
 
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.Node;
-import com.fillumina.calculator.treebuilder.ParenthesisMismatchedException;
+import com.fillumina.calculator.treebuilder.ParenthesesMismatchedException;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ListIterator;

@@ -90,7 +90,9 @@ public class GrammarTest {
         }
 
         @Override
-        public GrammarElementMatcher match(String expression) {
+        public GrammarElementMatcher match(
+                final GrammarElement<String,Void> previousGrammarElement,
+                final String expression) {
             return new ElementMatcher(0, expression.length());
         }
 

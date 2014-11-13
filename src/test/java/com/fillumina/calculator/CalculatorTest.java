@@ -1,6 +1,7 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.pattern.instances.ArithmeticPatternGrammar;
+import com.fillumina.calculator.instance.ArithmeticGrammar;
+import com.fillumina.calculator.treebuilder.ParenthesesMismatchedException;
 import com.fillumina.calculator.util.Mapper;
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,7 +24,7 @@ public class CalculatorTest {
             (Map<String,Double>)Collections.EMPTY_MAP;
 
     private Calculator<Double, Map<String,Double>> calc =
-            new Calculator<>(ArithmeticPatternGrammar.INSTANCE);
+            new Calculator<>(ArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldSolve() {
@@ -46,6 +47,21 @@ public class CalculatorTest {
         assertEquals(5d,
                 calc.solveSingleValue(Mapper.<Double>create("x", 2d), "x + 3"),
                 0);
+    }
+
+    @Test(expected=ContextException.class)
+    public void shouldThrowAnExceptionIfNoSolutionIsFound() {
+        calc.solve("x + 2");
+    }
+
+    @Test(expected=ParenthesesMismatchedException.class)
+    public void shouldThrowAnExceptionIfMismatchedParentheses() {
+        calc.solve("(2 +");
+    }
+
+    @Test(expected=EvaluationException.class)
+    public void shouldThrowAnExceoptionIfSyntaxError() {
+        calc.solve("+");
     }
 
     @Test

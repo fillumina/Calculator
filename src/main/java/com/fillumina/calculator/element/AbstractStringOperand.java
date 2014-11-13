@@ -1,5 +1,6 @@
 package com.fillumina.calculator.element;
 
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import static java.lang.Character.isWhitespace;
 
@@ -17,7 +18,9 @@ public abstract class AbstractStringOperand<T,C>
     }
 
     @Override
-    public GrammarElementMatcher match(final String expression) {
+    public GrammarElementMatcher match(
+            final GrammarElement<T,C> previousGrammarElement,
+            final String expression) {
         final char[] carray = expression.toCharArray();
         int start = -1;
         boolean escape = false;

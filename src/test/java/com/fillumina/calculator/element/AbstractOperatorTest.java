@@ -18,7 +18,7 @@ public class AbstractOperatorTest {
     public void shouldFilterOutCommonWhiteSpaces() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
             new SettableContextedGrammarBuilder<Integer>()
-                .addIntOperand(new Evaluator
+                .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
                         public Integer evaluate(String value,

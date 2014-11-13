@@ -2,9 +2,9 @@ package com.fillumina.calculator.treebuilder;
 
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.Node;
-import com.fillumina.calculator.pattern.AbstractPatternOperand;
-import com.fillumina.calculator.pattern.PatternCloseParentheses;
-import com.fillumina.calculator.pattern.PatternOpenParentheses;
+import com.fillumina.calculator.element.AbstractPatternElement;
+import com.fillumina.calculator.element.CloseParentheses;
+import com.fillumina.calculator.element.OpenParentheses;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -20,14 +20,19 @@ public class InnerParenthesisFinderTestHelper {
         private static final long serialVersionUID = 1L;
 
         public EvaluableNode(final String value) {
-            super(value, new AbstractPatternOperand<Long, Void>("\\" +value, 1) {
+            super(value, new AbstractPatternElement<Long, Void>(1, "\\" + value) {
 
                 private static final long serialVersionUID = 1L;
 
                 @Override
-                public Long evaluate(final String value,
-                        final Void context) {
+                public Long evaluate(String value, List<Long> params,
+                        Void context) {
                     return Long.parseLong(value);
+                }
+
+                @Override
+                public GrammarElementType getType() {
+                    return GrammarElementType.OPERAND;
                 }
             });
         }
@@ -37,7 +42,7 @@ public class InnerParenthesisFinderTestHelper {
         private static final long serialVersionUID = 1L;
 
         public OpenParNode() {
-            super("(", new PatternOpenParentheses<Long, Void>("\\("));
+            super("(", new OpenParentheses<Long, Void>("("));
         }
     }
 
@@ -45,7 +50,7 @@ public class InnerParenthesisFinderTestHelper {
         private static final long serialVersionUID = 1L;
 
         public CloseParNode() {
-            super(")", new PatternCloseParentheses<Long, Void>("\\)"));
+            super(")", new CloseParentheses<Long, Void>(")"));
         }
     }
 

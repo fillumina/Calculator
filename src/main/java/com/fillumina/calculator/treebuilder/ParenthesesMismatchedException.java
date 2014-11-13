@@ -6,14 +6,14 @@ import com.fillumina.calculator.SyntaxErrorException;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ParenthesisMismatchedException extends SyntaxErrorException {
+public class ParenthesesMismatchedException extends SyntaxErrorException {
     private static final long serialVersionUID = 1L;
 
-    public ParenthesisMismatchedException() {
+    public ParenthesesMismatchedException() {
         this(null);
     }
 
-    public ParenthesisMismatchedException(final Throwable cause) {
+    public ParenthesesMismatchedException(final Throwable cause) {
         super("mismatched parenthesis", cause);
     }
 

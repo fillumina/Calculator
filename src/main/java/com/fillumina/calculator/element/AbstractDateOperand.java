@@ -1,5 +1,6 @@
 package com.fillumina.calculator.element;
 
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import static com.fillumina.calculator.element.CharacterUtil.isDigit;
 import static com.fillumina.calculator.element.CharacterUtil.isAlphabetic;
@@ -12,6 +13,7 @@ import java.util.Date;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
+// TODO test
 public abstract class AbstractDateOperand<T,C> extends AbstractOperand<T,C> {
     private static final long serialVersionUID = 1L;
 
@@ -35,7 +37,9 @@ public abstract class AbstractDateOperand<T,C> extends AbstractOperand<T,C> {
     }
 
     @Override
-    public GrammarElementMatcher match(final String expression) {
+    public GrammarElementMatcher match(
+            final GrammarElement<T,C> previousGrammarElement,
+            final String expression) {
         final int startPos = getStartingPos(expression);
         if (startPos == -1) {
             // fast fail

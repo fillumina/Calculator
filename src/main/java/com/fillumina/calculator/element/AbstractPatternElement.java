@@ -1,5 +1,6 @@
 package com.fillumina.calculator.element;
 
+import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import java.util.regex.Pattern;
@@ -9,6 +10,7 @@ import java.util.regex.Pattern;
  * expression (REGEXP). Note that patterns are usually slower to evaluate than
  * a direct approach (about 3 times slower on average).
  *
+ * @see com.fillumina.calculator.util.PatternBuilder
  * @see <a href='http://www.regular-expressions.info/lookaround.html'>
  *      http://www.regular-expressions.info/lookaround.html</a>
  * @see <a href='http://ocpsoft.org/opensource/guide-to-regular-expressions-in-java-part-2/'>
@@ -54,7 +56,9 @@ public abstract class AbstractPatternElement<T,C>
     }
 
     @Override
-    public GrammarElementMatcher match(final String expression) {
+    public GrammarElementMatcher match(
+            final GrammarElement<T,C> previousGrammarElement,
+            final String expression) {
         return new ElementRegexpMatcher(pattern.matcher(expression));
     }
 

@@ -34,6 +34,7 @@ public class ContextSolutionTree<T>
      * @param <T>     the type of the values in the map
      * @param objects the objects (must conform to types in pairs)
      * @return        the solution if found otherwise {@code null}.
+     * @throws SyntaxErrorException
      */
     @SuppressWarnings(value = "unchecked")
     public List<T> solveWithVariables(final Object... objects) {
@@ -51,6 +52,7 @@ public class ContextSolutionTree<T>
      * @param <T>     the type of the values in the map
      * @param objects the objects (must conform to types in pairs)
      * @return        the solution if found otherwise {@code null}.
+     * @throws SyntaxErrorException
      */
     @SuppressWarnings(value = "unchecked")
     public List<T> simplifyWithVariables(final Object... objects) {

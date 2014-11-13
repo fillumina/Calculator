@@ -1,6 +1,6 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.pattern.instances.ArithmeticPatternGrammar;
+import com.fillumina.calculator.instance.ArithmeticGrammar;
 import java.util.List;
 import java.util.Map;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 public class SolutionTreeTest {
 
     private ContextCalculator<Double> calculator =
-            new ContextCalculator<>(ArithmeticPatternGrammar.INSTANCE);
+            new ContextCalculator<>(ArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldHaveAStaticSolution() {

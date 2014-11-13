@@ -4,8 +4,6 @@ import com.fillumina.calculator.element.ElementMatcher;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.grammar.GrammarException;
-import com.fillumina.calculator.pattern.test.TestOperand;
-import com.fillumina.calculator.pattern.test.TestOperator;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -68,7 +66,9 @@ public class DefaultTokenizerTest {
                     private static final long serialVersionUID = 1L;
 
                     @Override
-                    public GrammarElementMatcher match(final String expression) {
+                    public GrammarElementMatcher match(
+                            final GrammarElement<String,Void> previousGrammarElement,
+                            final String expression) {
                         return new ElementMatcher(0,0);
                     }
 

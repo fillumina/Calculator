@@ -82,7 +82,7 @@ public class DoubleOperandTest extends GrammarElementTestBase {
 
     @Test
     public void shouldNotRecognizeASignedDigitInAlphaStringWithoutParOrOperator() {
-        recognize("1", " -1_ string");
+        recognize("-1", " -1_ string");
     }
 
     @Test
@@ -131,8 +131,8 @@ public class DoubleOperandTest extends GrammarElementTestBase {
     }
 
     @Test
-    public void shoudNotRecognizeTheSignedScientificNotationWithSignumInExp() {
-        recognize("12.34E-567", " -12.34E-567 ");
+    public void shoudRecognizeTheSignedScientificNotationWithSignumInExp() {
+        recognize("-12.34E-567", " -12.34E-567 ");
     }
 
     @Test

@@ -2,8 +2,8 @@ package com.fillumina.calculator.util;
 
 import com.fillumina.calculator.Interpreter;
 import com.fillumina.calculator.Node;
+import com.fillumina.calculator.instance.ArithmeticGrammar;
 import com.fillumina.calculator.interpreter.DefaultInterpreter;
-import com.fillumina.calculator.pattern.instances.ArithmeticPatternGrammar;
 import java.util.Collection;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
@@ -20,7 +20,7 @@ public class TreePrinterTest {
 
     @Before
     public void init() {
-        final ArithmeticPatternGrammar grammar = ArithmeticPatternGrammar.INSTANCE;
+        final ArithmeticGrammar grammar = ArithmeticGrammar.INSTANCE;
         interpreter = new DefaultInterpreter<>(grammar);
     }
 

@@ -14,7 +14,7 @@ public abstract class GrammarElementTestBase {
 
     protected void recognize(final String expected, final String expression) {
         final GrammarElementMatcher matcher =
-                getGrammarElement().match(expression);
+                getGrammarElement().match(null, expression);
         if (!matcher.isFound()) {
             throw new AssertionError(expression + " not matches");
         }
@@ -25,7 +25,7 @@ public abstract class GrammarElementTestBase {
 
     protected void notRecognize(final String expression) {
         final GrammarElementMatcher matcher =
-                getGrammarElement().match(expression);
+                getGrammarElement().match(null, expression);
         if (matcher.isFound()) {
             throw new AssertionError("found: '" +
                     expression.substring(

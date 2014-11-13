@@ -19,8 +19,14 @@ import java.util.List;
  */
 public interface GrammarElement<T,C> extends Comparable<GrammarElement<T, C>> {
 
-    /** Searches for the element in the string expression and returns a matcher. */
-    GrammarElementMatcher match(final String expression);
+    /**
+     * Searches for the element in the string expression and returns a matcher.
+     * 
+     * @param previousNode  the previous parsed GrammarElement or null if none
+     * @param expression    the string expression to parse for matches
+     */
+    GrammarElementMatcher match(final GrammarElement<T,C> previousGrammarElement,
+            final String expression);
 
     /** Evaluates the string value given the parameters and context. **/
     T evaluate(final String value, final List<T> params, final C context);

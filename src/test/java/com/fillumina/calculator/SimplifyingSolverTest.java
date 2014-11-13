@@ -1,13 +1,11 @@
 package com.fillumina.calculator;
 
+import com.fillumina.calculator.element.CloseParentheses;
+import com.fillumina.calculator.element.OpenParentheses;
 import com.fillumina.calculator.element.VariableContextManager;
+import com.fillumina.calculator.element.WhiteSpace;
 import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.interpreter.DefaultInterpreter;
-import com.fillumina.calculator.pattern.PatternCloseParentheses;
-import com.fillumina.calculator.pattern.PatternOpenParentheses;
-import com.fillumina.calculator.pattern.PatternWhiteSpace;
-import com.fillumina.calculator.pattern.test.TestContextOperand;
-import com.fillumina.calculator.pattern.test.TestContextOperator;
 import com.fillumina.calculator.util.TreePrinter;
 import java.util.HashMap;
 import java.util.List;
@@ -20,12 +18,12 @@ import org.junit.Test;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class PruningSolverTest {
+public class SimplifyingSolverTest {
 
     @Test
     public void shouldPruneTheTree() {
         final GrammarElement<String,Map<String,String>> operator =
-                new TestContextOperator("\\@", 0, 0, 100);
+                new TestContextOperator("@", 0, 0, 100);
 
         final GrammarElement<String,Map<String,String>> number =
                 new TestContextOperand("\\d+", 0);
@@ -37,17 +35,15 @@ public class PruningSolverTest {
         @SuppressWarnings("unchecked")
         final GrammarElement<String,Map<String,String>> openPar =
                 (GrammarElement<String,Map<String,String>>)
-                PatternOpenParentheses.ROUND;
+                OpenParentheses.<String,Map<String,String>>round();
 
         @SuppressWarnings("unchecked")
         final GrammarElement<String,Map<String,String>> closePar =
                 (GrammarElement<String,Map<String,String>>)
-                PatternCloseParentheses.ROUND;
+                CloseParentheses.<String,Map<String,String>>round();
 
-        @SuppressWarnings("unchecked")
-        final PatternWhiteSpace<String, Map<String, String>> whitespace =
-                (PatternWhiteSpace<String,Map<String,String>>)
-                PatternWhiteSpace.INSTANCE;
+        final WhiteSpace<String, Map<String, String>> whitespace =
+                new WhiteSpace<>(0, " ");
 
         @SuppressWarnings("unchecked")
         final Grammar<String,Map<String,String>> grammar =
@@ -58,14 +54,14 @@ public class PruningSolverTest {
                 new DefaultInterpreter<>(grammar);
 
         final List<Node<String,Map<String,String>>> solution =
-                interpreter.buildSolutionTree("@ 1 a (@ 1 2) 3");
+                interpreter.buildSolutionTree("@ 0 a (@ 1 2) 3");
 
         final Map<String,String> context = new HashMap<>();
 
         final String treePrint = TreePrinter.prettyPrintFull(solution);
-//        System.out.println("treeprint\n" + treePrint);
+        System.out.println("treeprint\n" + treePrint);
         assertEquals("@ OPERATOR\n" +
-                     " 1 OPERAND\n" +
+                     " 0 OPERAND\n" +
                      " a UNRECOGNIZED\n" +
                      " @ OPERATOR\n" +
                      "  1 OPERAND\n" +
@@ -79,14 +75,14 @@ public class PruningSolverTest {
 
         final String prunedTreePrint = TreePrinter.prettyPrintFull(solution);
 
-//        System.out.println("result: " + result);
-//        System.out.println("pruned:\n" + prunedTreePrint);
+        System.out.println("result: " + result);
+        System.out.println("pruned:\n" + prunedTreePrint);
 
         assertEquals(
                 "@ OPERATOR\n" +
-                " 1 OPERAND -> 1\n" +
+                " 0 OPERAND -> 0\n" +
                 " a UNRECOGNIZED\n" +
-                " @ OPERATOR -> {@[1, 2]}\n" +
+                " @ OPERATOR -> @[1, 2]\n" +
                 " 3 OPERAND -> 3\n",
                 prunedTreePrint
         );

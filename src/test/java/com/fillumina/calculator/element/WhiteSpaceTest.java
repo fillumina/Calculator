@@ -17,7 +17,7 @@ public class WhiteSpaceTest {
     public void shouldFilterOutCommonWhiteSpaces() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
             new SettableContextedGrammarBuilder<Integer>()
-                .addIntOperand(new Evaluator
+                .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
                         public Integer evaluate(String value,
@@ -36,7 +36,7 @@ public class WhiteSpaceTest {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
             new SettableContextedGrammarBuilder<Integer>()
                 .add(new WhiteSpace<Integer,Map<String,Integer>>(0, "_#"))
-                .addIntOperand(new Evaluator
+                .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
                         public Integer evaluate(String value,

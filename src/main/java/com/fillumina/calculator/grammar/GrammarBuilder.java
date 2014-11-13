@@ -22,6 +22,7 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
+//TODO test untested elements
 public class GrammarBuilder<T,C> {
     private static final long serialVersionUID = 1L;
 
@@ -44,7 +45,7 @@ public class GrammarBuilder<T,C> {
      * Defines this operand <i>before</i>
      * {@link #addFloatOperand(int, StringEvaluator)}.
      */
-    public GrammarBuilder<T,C> addIntOperand(
+    public GrammarBuilder<T,C> addIntegerOperand(
             final Evaluator<T,C> evaluator) {
         if (doubleDefined) {
             throw new IllegalStateException(
@@ -61,7 +62,7 @@ public class GrammarBuilder<T,C> {
         return this;
     }
 
-    public GrammarBuilder<T,C> addFloatOperand(
+    public GrammarBuilder<T,C> addFloatingPointOperand(
             final Evaluator<T,C> evaluator) {
         elements.add(new AbstractDoubleOperand<T,C>(0) {
             private static final long serialVersionUID = 1L;
