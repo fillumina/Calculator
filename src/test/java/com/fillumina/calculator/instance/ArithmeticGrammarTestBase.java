@@ -1,4 +1,4 @@
-package com.fillumina.calculator.pattern.test.instances;
+package com.fillumina.calculator.instance;
 
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.SyntaxErrorException;
@@ -113,17 +113,17 @@ public abstract class ArithmeticGrammarTestBase {
 
     @Test
     public void shouldSolveAConstant() {
-        assertEvaluateTo(Math.PI, "pi");
+        assertEvaluateTo(Math.PI, "PI");
     }
 
     @Test
     public void shouldSolveAConstantAndAnOperator() {
-        assertEvaluateTo(Math.PI / 4, "pi/4");
+        assertEvaluateTo(Math.PI / 4, "PI/4");
     }
 
     @Test
     public void shouldSolveAFunction() {
-        assertEvaluateTo(1, "sin(pi/2)");
+        assertEvaluateTo(1, "sin(PI/2)");
     }
 
     @Test
@@ -137,7 +137,7 @@ public abstract class ArithmeticGrammarTestBase {
 
     @Test
     public void shouldSolveAMixOfFunctionAndOperators() {
-        assertEvaluateTo(1.7, "sin(pi/(4/2)) + 0.7");
+        assertEvaluateTo(1.7, "sin(PI/(4/2)) + 0.7");
     }
 
     @Test
@@ -209,7 +209,7 @@ public abstract class ArithmeticGrammarTestBase {
 
     @Test
     public void shouldManageOperatorsWithDifferentPriorities() {
-        assertEvaluateTo(-8, "-8*sin(+2*pi/4)");
+        assertEvaluateTo(-8, "-8*sin(+2*PI/4)");
     }
 
     @Test
@@ -229,17 +229,17 @@ public abstract class ArithmeticGrammarTestBase {
 
     @Test
     public void shouldCalculateTheExpression() {
-        assertEvaluateTo(-13, "-3 * sin(pi/2) -(8 + 2)");
+        assertEvaluateTo(-13, "-3 * sin(PI/2) -(8 + 2)");
     }
 
     @Test(expected = ParenthesisMismatchedException.class)
     public void shouldDetectTheMissingClosingParenthesis() {
-        assertEvaluateTo(-13, "-3 * sin(pi/2 -(8 + 2)");
+        assertEvaluateTo(-13, "-3 * sin(PI/2 -(8 + 2)");
     }
 
     @Test
     public void shouldCalculateTheExpressionAvoidingExtraParameters() {
-        assertEvaluateTo(-13, "-3 * sin(pi/2 9) -(8 + 2)");
+        assertEvaluateTo(-13, "-3 * sin(PI/2 9) -(8 + 2)");
     }
 
     @Test
@@ -274,12 +274,12 @@ public abstract class ArithmeticGrammarTestBase {
 
     @Test
     public void shouldCalculateTheComplexExpression() {
-        assertEvaluateTo(-1, "atan((5*sin(pi/4))/(cos(pi/4)*-5))*4/pi");
+        assertEvaluateTo(-1, "atan((5*sin(PI/4))/(cos(PI/4)*-5))*4/PI");
     }
 
     @Test
     public void shouldCalculateTheComplexExpression2() {
-        assertEvaluateTo(-82, "9^2*sin(6*pi/-12)-ln(e)");
+        assertEvaluateTo(-82, "9^2*sin(6*PI/-12)-ln(E)");
     }
 
     @Test
@@ -294,7 +294,7 @@ public abstract class ArithmeticGrammarTestBase {
 
     @Test
     public void shouldCalculateTheComplexExpression4() {
-        assertEvaluateTo(-5.0 / 4, "-(acos(0) + pi/4 - asin(   -1))/pi");
+        assertEvaluateTo(-5.0 / 4, "-(acos(0) + PI/4 - asin(   -1))/PI");
     }
 
     @Test
@@ -331,6 +331,11 @@ public abstract class ArithmeticGrammarTestBase {
     }
 
     @Test
+    public void shouldEvaluateTo0IfNoValues() {
+        assertEvaluateTo(0, "avg");
+    }
+
+    @Test
     public void shoudReadOnlyTheArgumentsOnParenthesis() {
         assertEvaluateTo(2.5, "avg(2 3) 1");
     }
@@ -358,12 +363,22 @@ public abstract class ArithmeticGrammarTestBase {
         context.put("elle", 2d);
         context.put("el", 3d);
         context.put("le", 4d);
-        assertEvaluateTo(1d + Math.E * 48d, "ellelle+2*elle*el*le*e");
+        assertEvaluateTo(1d + Math.E * 48d, "ellelle+2*elle*el*le*E");
     }
 
     @Test
     public void shouldDistinguishBetweenAVariableNameContainingAnOperator() {
         context.put("asintoto", Math.PI);
         assertEvaluateTo(0, "sin(asintoto)");
+    }
+
+    @Test
+    public void shouldEvaluateTan() {
+        assertEvaluateTo(1, "tan(PI/4)");
+    }
+
+    @Test
+    public void shouldEvaluateLog10() {
+        assertEvaluateTo(1, "log10(10)");
     }
 }

@@ -20,8 +20,8 @@ public class ContextedGrammarBuilder<T> extends GrammarBuilder<T,Map<String,T>> 
     }
 
     public ContextedGrammarBuilder(
-            Iterable<GrammarElement<T, Map<String, T>>> grammar) {
-        super(grammar);
+            Iterable<GrammarElement<T, Map<String, T>>>... grammars) {
+        super(grammars);
     }
 
     /**

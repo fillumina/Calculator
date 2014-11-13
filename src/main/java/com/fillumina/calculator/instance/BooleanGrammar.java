@@ -2,7 +2,7 @@ package com.fillumina.calculator.instance;
 
 import com.fillumina.calculator.element.AbstractMultiOperator;
 import com.fillumina.calculator.element.CloseParentheses;
-import com.fillumina.calculator.element.FastWhiteSpace;
+import com.fillumina.calculator.element.DefaultWhiteSpace;
 import com.fillumina.calculator.element.OpenParentheses;
 import com.fillumina.calculator.element.ValuedMultiConstant;
 import com.fillumina.calculator.element.VariableContextManager;
@@ -19,7 +19,6 @@ import java.util.Map;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-// TODO use the builders
 public class BooleanGrammar extends Grammar<Boolean, Map<String, Boolean>>
         implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -70,7 +69,7 @@ public class BooleanGrammar extends Grammar<Boolean, Map<String, Boolean>>
 
             CloseParentheses.<Boolean,Map<String,Boolean>>round(),
 
-            FastWhiteSpace.<Boolean,Map<String,Boolean>>instance(),
+            DefaultWhiteSpace.<Boolean,Map<String,Boolean>>instance(),
 
             new ValuedMultiConstant<Boolean,Map<String,Boolean>>(
                     true, 0, "true", "TRUE", "True"),

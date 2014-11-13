@@ -26,9 +26,6 @@ class OperatorParametersReader {
                 list.listIterator(operands.startIndex);
 
         for (int i=0; i<operands.before; i++) {
-            if (!iterator.hasNext()) {
-                break;
-            }
             node.addChildren(getNextAndRemove(iterator));
         }
 
@@ -76,7 +73,7 @@ class OperatorParametersReader {
 
             if (firstIndex < 0 ) {
                 startIndex = 0;
-                before = indexedNode.getIndex() - 1;
+                before = indexedNode.getIndex();
             } else {
                 startIndex = firstIndex;
                 before = leftOperands;

@@ -19,8 +19,6 @@ public class GrammarTest {
     private static final GrammarElementImpl TWO = new GrammarElementImpl(0);
     private static final GrammarElementImpl THREE = new GrammarElementImpl(0);
     private static final GrammarElementImpl FOUR = new GrammarElementImpl(0);
-    private static final GrammarElementImpl FIVE = new GrammarElementImpl(0);
-    private static final GrammarElementImpl SIX = new GrammarElementImpl(0);
 
     @Test
     public void shouldCreateAGrammarWithFixedPositions() {
@@ -45,6 +43,13 @@ public class GrammarTest {
         final Grammar<String,Void> g2 = new Grammar<>(THREE,FOUR);
         final Grammar<String,Void> g3 = new Grammar<String,Void>(g1,g2);
         assertContains(g3, ONE, TWO, THREE, FOUR);
+    }
+
+    @Test(expected=UnsupportedOperationException.class)
+    public void shouldBeUnmodifiable() {
+        final Grammar<String,Void> g1 = new Grammar<>(ONE,TWO);
+        final Iterator<GrammarElement<String,Void>> it = g1.iterator();
+        it.remove();
     }
 
     private static <T> void assertContains(Grammar<T,Void> grammar,

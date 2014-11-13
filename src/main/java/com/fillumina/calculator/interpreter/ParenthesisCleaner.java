@@ -30,8 +30,6 @@ public class ParenthesisCleaner implements SolutionTreeFilter, Serializable {
                     iterator.remove();
                     iterator.add(node.getChildren().get(0));
                     iterator = nodes.listIterator(); // restart the parsing
-                } else if (!node.hasChildren()) {
-                    throw new ParenthesisMismatchedException();
                 }
             } else {
                 executeOn(node.getChildren());

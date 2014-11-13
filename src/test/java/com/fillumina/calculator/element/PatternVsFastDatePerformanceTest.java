@@ -38,7 +38,7 @@ public class PatternVsFastDatePerformanceTest
     @Override
     public void init(ProgressionConfigurator config) {
         config.setTimeout(1, TimeUnit.MINUTES)
-                .setMaxStandardDeviation(3);
+                .setMaxStandardDeviation(4);
     }
 
     @Override

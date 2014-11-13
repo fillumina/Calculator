@@ -1,5 +1,6 @@
 package com.fillumina.calculator.pattern.test.instances;
 
+import com.fillumina.calculator.instance.ArithmeticGrammarTestBase;
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.SimplifyingSolver;
 import com.fillumina.calculator.pattern.instances.ArithmeticPatternGrammar;

@@ -3,13 +3,12 @@ package com.fillumina.calculator.interpreter;
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.Node;
-import com.fillumina.calculator.element.WhiteSpace;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ListIterator;
 
 /**
- * The {@link WhiteSpace} defines characters in the input that may be
+ * A white space defines characters in the input that may be
  * safely ignored. This class removes them from the list of tokens.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>

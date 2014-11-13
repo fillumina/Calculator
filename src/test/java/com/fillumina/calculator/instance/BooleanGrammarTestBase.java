@@ -1,4 +1,4 @@
-package com.fillumina.calculator.pattern.test.instances;
+package com.fillumina.calculator.instance;
 
 import com.fillumina.calculator.Calculator;
 import java.util.HashMap;

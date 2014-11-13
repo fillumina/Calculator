@@ -31,7 +31,7 @@ public class PatternVsFastArithmeticsPerformanceTest
 
     @Override
     public void addTests(TestContainer tests) {
-        final String expression = "atan( (5*sin(pi/4)) / (cos(pi/4)*-5) ) * 4/pi";
+        final String expression = "atan( (5*sin(PI/4)) / (cos(PI/4)*-5) ) * 4/PI";
         final double result = -1;
 
         tests.addTest("pattern", new Runnable() {

@@ -21,8 +21,8 @@ public class SettableContextedGrammarBuilder<T>
     }
 
     public SettableContextedGrammarBuilder(
-            Iterable<GrammarElement<T, Map<String, T>>> grammar) {
-        super(grammar);
+            Iterable<GrammarElement<T, Map<String, T>>>... grammars) {
+        super(grammars);
     }
 
     /**

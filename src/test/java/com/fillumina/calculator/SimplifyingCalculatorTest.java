@@ -1,70 +1,33 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.pattern.instances.ArithmeticPatternGrammar;
+import com.fillumina.calculator.instance.ArithmeticGrammar;
 import com.fillumina.calculator.util.Mapper;
-import java.util.Collections;
 import java.util.Map;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
- *
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class SimplifyingCalculatorTest {
 
-    @SuppressWarnings("unchecked")
-    private static final Map<String, Double> EMPTY_MAP =
-            (Map<String,Double>)Collections.EMPTY_MAP;
-
-    private Calculator<Double, Map<String,Double>> calculator =
-            new Calculator<>(ArithmeticPatternGrammar.INSTANCE);
+    private SimplifyingCalculator<Double, Map<String,Double>> calc =
+            new SimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
 
     @Test
-    public void shouldHaveAStaticSolution() {
-        final SolutionTree<Double, Map<String,Double>> solution =
-                calculator.createSolutionTree("(1 / 4)");
-        solution.solve();
-        assertTrue(solution.isSolved());
-        assertEquals(0.25d, solution.getSingleSolution(), 0.01);
-    }
-
-    @Test
-    public void shouldSolveAStaticSolutionAnyway() {
-        final SolutionTree<Double, Map<String,Double>> solution =
-                calculator.createSolutionTree("(1 / 4)");
-        solution.solve();
-        assertTrue(solution.isSolved());
-        assertEquals(0.25d, solution.solve(EMPTY_MAP).get(0), 0.01);
-    }
-
-    @Test
-    public void shouldNotHaveAStaticSolution() {
-        final SolutionTree<Double, Map<String,Double>> solution =
-                calculator.createSolutionTree("sin(x + 1 / 4)");
+    public void shouldBeAbleToSimplifyAnExpression() {
+        SimplifyingSolutionTree<Double, Map<String,Double>> solution =
+                calc.createSolutionTree("x + y + 3");
 
         assertFalse(solution.isSolved());
-    }
 
-    @Test
-    public void shouldCalculateTheSolutionOnceAVariableIsInserted() {
-        final SolutionTree<Double, Map<String,Double>> solution =
-                calculator.createSolutionTree("sin(x + 1 / 4)");
+        solution.simplify(Mapper.<Double>create("x", 2d));
 
-        final Map<String,Double> context = Mapper.create("x", 3.0/4.0);
-        assertEquals(0.8414709848078965, solution.solve(context).get(0), 0.001);
-    }
+        assertFalse(solution.isSolved());
 
-    @Test
-    public void shouldCalculateTheSolutionOnceASecondVariableIsInserted() {
-        final SolutionTree<Double, Map<String,Double>> solution =
-                calculator.createSolutionTree("sin(x + 1 / 4) + y");
+        solution.simplify(Mapper.<Double>create("y", 3d));
 
-        final Map<String,Double> context =
-                Mapper.create("x", 3.0/4.0, "y", 1.0);
-        assertEquals(1.8414709848078965, solution.solve(context).get(0), 0.001);
+        assertTrue(solution.isSolved());
     }
 }

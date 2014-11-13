@@ -32,6 +32,8 @@ import java.util.Map;
 public class ArithmeticGrammar {
     private static final long serialVersionUID = 1L;
 
+    private ArithmeticGrammar() {}
+
     public static final Iterable<GrammarElement<Double,Map<String,Double>>> INSTANCE =
         new SettableContextedGrammarBuilder<Double>()
                 .addFloatOperand(new Evaluator<Double, Map<String, Double>>() {
@@ -296,8 +298,8 @@ public class ArithmeticGrammar {
                     })
                     .buildOperator()
 
-                .addConstant("e", E)
-                .addConstant("pi", PI)
+                .addConstant("E", E)
+                .addConstant("PI", PI)
         .buildDefaultGrammar();
 
 }

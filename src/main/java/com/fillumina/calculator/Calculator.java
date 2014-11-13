@@ -54,20 +54,12 @@ public class Calculator<T,C> implements Serializable {
 
     /** Returns the first result or {@code null} if no solution can be found. */
     public T solveSingleValue(final String expression) {
-        final List<T> solutionList = solve(null, expression);
-        if (solutionList == null) {
-            return null;
-        }
-        return solutionList.get(0);
+        return solve(null, expression).get(0);
     }
 
     /** Returns the first result or {@code null} if no solution can be found. */
     public T solveSingleValue(final C context, final String expression) {
-        final List<T> solutionList = solve(context, expression);
-        if (solutionList == null) {
-            return null;
-        }
-        return solutionList.get(0);
+        return solve(context, expression).get(0);
     }
 
     /**

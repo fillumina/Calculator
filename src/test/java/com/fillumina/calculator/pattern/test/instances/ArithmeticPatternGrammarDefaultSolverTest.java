@@ -1,5 +1,6 @@
 package com.fillumina.calculator.pattern.test.instances;
 
+import com.fillumina.calculator.instance.ArithmeticGrammarTestBase;
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.ContextException;
 import com.fillumina.calculator.DefaultSolver;
@@ -11,7 +12,7 @@ import org.junit.Test;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ArithmeticGrammarDefaultSolverTest
+public class ArithmeticPatternGrammarDefaultSolverTest
         extends ArithmeticGrammarTestBase {
 
     @Override

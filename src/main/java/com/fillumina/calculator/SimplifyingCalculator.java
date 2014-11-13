@@ -46,7 +46,8 @@ public class SimplifyingCalculator<T,C> extends Calculator<T,C> {
     /**
      * @return a {@link SolutionTree} that can be used to get the actual solution.
      */
-    public SimplifyingSolutionTree<T,C> createSimplifyingSolutionTree(
+    @Override
+    public SimplifyingSolutionTree<T,C> createSolutionTree(
             final String expression) {
         final List<Node<T,C>> solutionTree = createSolutionTreeList(expression);
         return new SimplifyingSolutionTree<>(getSolver(), simplifier, solutionTree);

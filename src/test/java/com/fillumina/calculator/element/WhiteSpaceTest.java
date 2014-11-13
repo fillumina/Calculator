@@ -35,6 +35,7 @@ public class WhiteSpaceTest {
     public void shouldShouldFilterOutGivenWhiteSpaces() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
             new SettableContextedGrammarBuilder<Integer>()
+                .add(new WhiteSpace<Integer,Map<String,Integer>>(0, "_#"))
                 .addIntOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
@@ -43,10 +44,8 @@ public class WhiteSpaceTest {
                             return Integer.valueOf(value);
                         }
                     })
-                .add(new WhiteSpace<Integer,Map<String,Integer>>(0, "_#"))
                 .buildGrammar());
 
         assertEquals(12, calc.solveSingleValue("#___12__#"), 0);
     }
-
 }

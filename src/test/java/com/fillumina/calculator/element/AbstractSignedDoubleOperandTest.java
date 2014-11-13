@@ -1,14 +1,18 @@
 package com.fillumina.calculator.element;
 
+import com.fillumina.calculator.ContextCalculator;
 import com.fillumina.calculator.GrammarElement;
+import com.fillumina.calculator.grammar.SettableContextedGrammarBuilder;
 import java.util.List;
+import java.util.Map;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class AbstractSignedDoubleFastElementTest
+public class AbstractSignedDoubleOperandTest
         extends GrammarElementTestBase {
 
     @Override
@@ -39,6 +43,24 @@ public class AbstractSignedDoubleFastElementTest
     @Test
     public void shouldCaptureTheExponent() {
         recognize("1E-4", "1E-4");
+    }
+
+    @Test
+    public void shouldUseADifferentSeparator() {
+        final ContextCalculator<Double> calc = new ContextCalculator<>(
+            new SettableContextedGrammarBuilder<Double>()
+                .add(new AbstractSignedDoubleOperand<Double,Map<String,Double>>(0, '?') {
+                    private static final long serialVersionUID = 1L;
+
+                    @Override
+                    public Double evaluate(String value, List<Double> params,
+                            Map<String, Double> context) {
+                        final String v = value.replace("?", ".");
+                        return Double.valueOf(v);
+                    }
+                }).buildGrammar());
+
+        assertEquals(12.4, calc.solveSingleValue("12?4"), 0);
     }
 
     private static class SignedDoubleOperand

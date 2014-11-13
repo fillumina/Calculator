@@ -1,20 +1,20 @@
 package com.fillumina.calculator.grammar;
 
-import com.fillumina.calculator.element.AbstractQuotedStringOperand;
+import com.fillumina.calculator.element.AbstractStringOperand;
 import java.util.List;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class QuotedStringFastElement
-        extends AbstractQuotedStringOperand<Double,Void> {
+public class StringElement
+        extends AbstractStringOperand<Double,Void> {
     private static final long serialVersionUID = 1L;
 
-    public static final QuotedStringFastElement INSTANCE =
-            new QuotedStringFastElement();
+    public static final StringElement INSTANCE =
+            new StringElement();
 
-    public QuotedStringFastElement() {
+    public StringElement() {
         super(0);
     }
 

@@ -11,19 +11,19 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class FastWhiteSpace<T,C>
+public class DefaultWhiteSpace<T,C>
         extends AbstractComparableGrammarElement<T,C> {
     private static final long serialVersionUID = 1L;
 
-    private static final FastWhiteSpace<?,?> INSTANCE =
-            new FastWhiteSpace<>(0);
+    private static final DefaultWhiteSpace<?,?> INSTANCE =
+            new DefaultWhiteSpace<>(0);
 
     @SuppressWarnings("unchecked")
-    public static <T,C> FastWhiteSpace<T,C> instance() {
-        return (FastWhiteSpace<T, C>) INSTANCE;
+    public static <T,C> DefaultWhiteSpace<T,C> instance() {
+        return (DefaultWhiteSpace<T, C>) INSTANCE;
     }
 
-    public FastWhiteSpace(final int priority) {
+    public DefaultWhiteSpace(final int priority) {
         super(priority);
     }
 
@@ -37,11 +37,9 @@ public class FastWhiteSpace<T,C>
                 if (start == -1) {
                     start = i;
                 }
-            } else {
-                if (start != -1) {
-                    end = i;
-                    break;
-                }
+            } else if (start != -1) {
+                end = i;
+                break;
             }
         }
         if (start == -1) {

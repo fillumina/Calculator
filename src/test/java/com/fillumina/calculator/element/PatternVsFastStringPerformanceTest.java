@@ -3,7 +3,7 @@ package com.fillumina.calculator.element;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
-import com.fillumina.calculator.grammar.QuotedStringFastElement;
+import com.fillumina.calculator.grammar.QuotedStringElement;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.producer.timer.RunnableSink;
@@ -82,8 +82,8 @@ public class PatternVsFastStringPerformanceTest
         final AbstractComparableGrammarElement<Void,Void> patternString =
                 new PatternStringElement();
 
-        final QuotedStringFastElement fastString =
-                QuotedStringFastElement.INSTANCE;
+        final QuotedStringElement fastString =
+                QuotedStringElement.INSTANCE;
 
         final String string = "allkjldskjf'hello kitti'akl";
 

@@ -3,10 +3,8 @@ package com.fillumina.calculator.instance;
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.ContextException;
 import com.fillumina.calculator.DefaultSolver;
-import com.fillumina.calculator.pattern.test.instances.ArithmeticGrammarTestBase;
 import com.fillumina.calculator.treebuilder.ParenthesisMismatchedException;
 import java.util.Map;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**

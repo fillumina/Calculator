@@ -1,7 +1,7 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.QuotedStringFastElement;
+import com.fillumina.calculator.grammar.QuotedStringElement;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -9,17 +9,17 @@ import org.junit.Test;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class AbstractQuotedStringFastElementTest extends GrammarElementTestBase {
+public class AbstractQuotedStringElementTest extends GrammarElementTestBase {
 
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return QuotedStringFastElement.INSTANCE;
+        return QuotedStringElement.INSTANCE;
     }
 
     @Test
     public void shouldCleanTheEscapedCharactersFromTheString() {
         assertEquals("abcd\\fg",
-                QuotedStringFastElement.evaluateString("ab\\cd\\\\fg"));
+                QuotedStringElement.evaluateString("ab\\cd\\\\fg"));
     }
 
     @Test

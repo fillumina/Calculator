@@ -43,9 +43,10 @@ public class WhiteSpace<T,C>
         final char[] carray = expression.toCharArray();
         int start = -1, end = carray.length;
         char c;
-        boolean isWhiteSpace = false;
+        boolean isWhiteSpace;
         FOR: for (int i=0; i<carray.length; i++) {
             c = carray[i];
+            isWhiteSpace = false;
             for (int j=0; j<whitespaces.length; j++) {
                 if (c == whitespaces[j]) {
                     isWhiteSpace = true;
@@ -56,8 +57,7 @@ public class WhiteSpace<T,C>
                 if (start == -1) {
                     start = i;
                 }
-                break;
-            } else {
+            } else if (start != -1) {
                 end = i;
                 break FOR;
             }

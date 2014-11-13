@@ -1,7 +1,6 @@
 package com.fillumina.calculator.instance;
 
 import com.fillumina.calculator.Calculator;
-import com.fillumina.calculator.pattern.test.instances.BooleanGrammarTestBase;
 import java.util.Map;
 
 /**

@@ -252,8 +252,8 @@ public class ArithmeticPatternGrammar extends Grammar<Double, Map<String, Double
         (GrammarElement<Double,Map<String, Double>>)PatternCloseParentheses.ROUND,
         new PatternWhiteSpace<Double,Map<String, Double>>("[\\ ,]+"),
 
-        new PatternConstantElement<Double,Map<String, Double>>("e", E, 0),
-        new PatternConstantElement<Double,Map<String, Double>>("pi", PI,  0),
+        new PatternConstantElement<Double,Map<String, Double>>("E", E, 0),
+        new PatternConstantElement<Double,Map<String, Double>>("PI", PI,  0),
 
         new VariableContextManager<Double>()
         );

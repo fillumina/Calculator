@@ -67,7 +67,7 @@ public class PatternBuilder {
         this(false);
     }
 
-    /** *  Start a new {@link PatternBuilder} enclosed by groupentheses. */
+    /** *  Start a new {@link PatternBuilder} enclosed by parentheses. */
     public PatternBuilder(boolean parentheses) {
         this.parentheses = parentheses;
         if (parentheses) {

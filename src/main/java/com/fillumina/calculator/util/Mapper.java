@@ -8,6 +8,9 @@ import java.util.Map;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class Mapper {
+
+    private Mapper() {}
+
     /**
      * Helper to easily create a map.
      * <code><pre>

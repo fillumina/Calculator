@@ -29,7 +29,7 @@ public class UndefinedVariablesFinderTest {
     @Test
     public void shouldRecognizeTheUndefinedVariables() {
         final List<Node<Double, Map<String,Double>>> nodes =
-                interpreter.buildSolutionTree("x + 2 * y + sin(2 * pi)");
+                interpreter.buildSolutionTree("x + 2 * y + sin(2 * PI)");
         final List<String> vars =
                 UndefinedVariablesFinder.INSTANCE.find(nodes);
         assertEquals(2, vars.size());
@@ -41,7 +41,7 @@ public class UndefinedVariablesFinderTest {
     @Test
     public void shouldReturnAnEmptyListIfNoVariableIsUndefined() {
         final List<Node<Double, Map<String,Double>>> nodes =
-                interpreter.buildSolutionTree("2 + sin(2 * pi)");
+                interpreter.buildSolutionTree("2 + sin(2 * PI)");
         final List<String> vars =
                 UndefinedVariablesFinder.INSTANCE.find(nodes);
         assertTrue(vars.isEmpty());
@@ -53,7 +53,7 @@ public class UndefinedVariablesFinderTest {
             new ContextCalculator<>(ArithmeticPatternGrammar.INSTANCE);
 
         final ContextSolutionTree<Double> solution =
-                calculator.createSolutionTree("x + 2 * y + sin(2 * pi)");
+                calculator.createSolutionTree("x + 2 * y + sin(2 * PI)");
 
         final Map<String,Double> context = Mapper.create("x", 1.2d);
         solution.simplify(context);

@@ -1,19 +1,19 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.IntegerFastElement;
+import com.fillumina.calculator.grammar.IntegerElement;
 import org.junit.Test;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class IntegerFastElementTest
+public class IntegerElementTest
         extends GrammarElementTestBase {
 
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return (GrammarElement<Double, Void>) IntegerFastElement.INSTANCE;
+        return (GrammarElement<Double, Void>) IntegerElement.INSTANCE;
     }
 
     @Test

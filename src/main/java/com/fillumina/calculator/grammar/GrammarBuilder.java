@@ -8,7 +8,7 @@ import com.fillumina.calculator.element.AbstractMultiOperator;
 import com.fillumina.calculator.element.AbstractStringOperand;
 import com.fillumina.calculator.element.CloseParentheses;
 import com.fillumina.calculator.element.ConstantOperand;
-import com.fillumina.calculator.element.FastWhiteSpace;
+import com.fillumina.calculator.element.DefaultWhiteSpace;
 import com.fillumina.calculator.element.OpenParentheses;
 import com.fillumina.calculator.element.ValuedMultiConstant;
 import java.util.ArrayList;
@@ -32,9 +32,11 @@ public class GrammarBuilder<T,C> {
     }
 
     /** Extends an existing grammar. */
-    public GrammarBuilder(final Iterable<GrammarElement<T,C>> grammar) {
-        for (GrammarElement<T,C> ge : grammar) {
-            elements.add(ge);
+    public GrammarBuilder(final Iterable<GrammarElement<T,C>>... grammars) {
+        for (Iterable<GrammarElement<T,C>> grammar : grammars) {
+            for (GrammarElement<T,C> ge : grammar) {
+                elements.add(ge);
+            }
         }
     }
 
@@ -202,7 +204,7 @@ public class GrammarBuilder<T,C> {
     public Iterable<GrammarElement<T,C>> buildDefaultGrammar() {
         add(OpenParentheses.<T,C>round());
         add(CloseParentheses.<T,C>round());
-        add(FastWhiteSpace.<T,C>instance());
+        add(DefaultWhiteSpace.<T,C>instance());
 
         return Collections.unmodifiableList(new ArrayList<>(elements));
     }
