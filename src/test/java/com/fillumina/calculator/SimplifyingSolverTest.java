@@ -59,7 +59,7 @@ public class SimplifyingSolverTest {
         final Map<String,String> context = new HashMap<>();
 
         final String treePrint = TreePrinter.prettyPrintFull(solution);
-        System.out.println("treeprint\n" + treePrint);
+//        System.out.println("treeprint\n" + treePrint);
         assertEquals("@ OPERATOR\n" +
                      " 0 OPERAND\n" +
                      " a UNRECOGNIZED\n" +
@@ -75,8 +75,8 @@ public class SimplifyingSolverTest {
 
         final String prunedTreePrint = TreePrinter.prettyPrintFull(solution);
 
-        System.out.println("result: " + result);
-        System.out.println("pruned:\n" + prunedTreePrint);
+//        System.out.println("result: " + result);
+//        System.out.println("pruned:\n" + prunedTreePrint);
 
         assertEquals(
                 "@ OPERATOR\n" +
