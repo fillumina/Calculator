@@ -1,10 +1,12 @@
 package com.fillumina.calculator.grammar;
 
 import com.fillumina.calculator.GrammarElement;
+import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.element.AbstractDateOperand;
 import com.fillumina.calculator.element.AbstractDoubleOperand;
 import com.fillumina.calculator.element.AbstractIntegerOperand;
 import com.fillumina.calculator.element.AbstractMultiOperator;
+import com.fillumina.calculator.element.AbstractPatternElement;
 import com.fillumina.calculator.element.AbstractStringOperand;
 import com.fillumina.calculator.element.ConstantOperand;
 import com.fillumina.calculator.element.ValuedMultiConstant;
@@ -19,6 +21,7 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
+//TODO add here regexp operand and configurable whitespace
 public class GrammarBuilder<T,C> {
     private static final long serialVersionUID = 1L;
 
@@ -35,6 +38,26 @@ public class GrammarBuilder<T,C> {
                 elements.add(ge);
             }
         }
+    }
+
+    public GrammarBuilder<T,C> addPatternElement(final int priority,
+            final String pattern,
+            final GrammarElementType type,
+            final ParametricEvaluator<T,C> evaluator) {
+        elements.add(new AbstractPatternElement<T,C>(priority, pattern) {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public T evaluate(String value, List<T> params, C context) {
+                return evaluator.evaluate(value, params, context);
+            }
+
+            @Override
+            public GrammarElementType getType() {
+                return GrammarElementType.OPERAND;
+            }
+        });
+        return this;
     }
 
     /**

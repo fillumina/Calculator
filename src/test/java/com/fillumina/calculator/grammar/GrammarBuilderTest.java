@@ -2,7 +2,9 @@ package com.fillumina.calculator.grammar;
 
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.GrammarElement;
+import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.SyntaxErrorException;
+import java.util.List;
 import java.util.Map;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -64,6 +66,24 @@ public class GrammarBuilderTest {
                 builder.buildGrammar();
         calc = new Calculator<>(grammar);
         assertEquals("STRING='something'", calc.solveSingleValue("'something'"));
+    }
+
+    @Test
+    public void shouldAddAPatternOperand() {
+        builder.addPatternElement(0, "abc", GrammarElementType.OPERAND,
+                new ParametricEvaluator<String, Map<String, String>>() {
+
+            @Override
+            public String evaluate(String value, List<String> params,
+                    Map<String, String> context) {
+                return "PATTERN=" + value;
+            }
+        });
+        Iterable<GrammarElement<String,Map<String,String>>> grammar =
+                builder.buildGrammar();
+        calc = new Calculator<>(grammar);
+        assertEquals("PATTERN=abc", calc.solveSingleValue("abc"));
+        assertNotRecognized(calc, "xyz");
     }
 
     @Test
