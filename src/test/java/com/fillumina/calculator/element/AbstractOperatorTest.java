@@ -35,7 +35,7 @@ public class AbstractOperatorTest {
                             return params.get(0) + 1;
                         }
                     })
-                .buildDefaultGrammar());
+                .buildGrammar());
 
         assertEquals(13, calc.solveSingleValue("@ 12"), 0);
     }

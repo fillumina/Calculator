@@ -304,7 +304,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String,Double>> {
 
                 .addConstant("E", E)
                 .addConstant("PI", PI)
-        .buildDefaultGrammar();
+        .buildGrammar();
 
     @SuppressWarnings("unchecked")
     public static final ArithmeticGrammar INSTANCE =

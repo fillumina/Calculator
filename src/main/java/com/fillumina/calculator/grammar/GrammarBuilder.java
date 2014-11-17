@@ -6,10 +6,7 @@ import com.fillumina.calculator.element.AbstractDoubleOperand;
 import com.fillumina.calculator.element.AbstractIntegerOperand;
 import com.fillumina.calculator.element.AbstractMultiOperator;
 import com.fillumina.calculator.element.AbstractStringOperand;
-import com.fillumina.calculator.element.CloseParentheses;
 import com.fillumina.calculator.element.ConstantOperand;
-import com.fillumina.calculator.element.DefaultWhiteSpace;
-import com.fillumina.calculator.element.OpenParentheses;
 import com.fillumina.calculator.element.ValuedMultiConstant;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,7 +19,6 @@ import java.util.List;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-//TODO test untested elements
 public class GrammarBuilder<T,C> {
     private static final long serialVersionUID = 1L;
 
@@ -194,19 +190,6 @@ public class GrammarBuilder<T,C> {
 
     /** @return the specified Grammar. */
     public Iterable<GrammarElement<T,C>> buildGrammar() {
-        return Collections.unmodifiableList(new ArrayList<>(elements));
-    }
-
-    /**
-     * @return a grammar able to manage round parentheses and
-     * common white spaces.
-     */
-    @SuppressWarnings("unchecked")
-    public Iterable<GrammarElement<T,C>> buildDefaultGrammar() {
-        add(OpenParentheses.<T,C>round());
-        add(CloseParentheses.<T,C>round());
-        add(DefaultWhiteSpace.<T,C>instance());
-
         return Collections.unmodifiableList(new ArrayList<>(elements));
     }
 }

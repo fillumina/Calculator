@@ -19,8 +19,8 @@ import java.util.List;
  * Grammar is designed to be not mutable.
  *
  * <b>IMPORTANT:</b> There should be at most <b>one</b>
- * <code>UnrecognizedElement</code> defined in a grammar. Only
- * the first one will be considered.<p>
+ * {@link com.fillumina.calculator.GrammarElementType#UNRECOGNIZED} element
+ * defined in a grammar. <i>Only the first one will be considered</i>.<p>
  *
  * <b>NOTE:</b> This class is just an helper and every method that works
  * with grammars should accept an {@link Iterable} over {@link GrammarElement}s.

@@ -38,7 +38,7 @@ public abstract class AbstractComparableGrammarElement<T, C>
     @Override
     public int compareTo(final GrammarElement<T, C> grammarElement) {
         if (!(grammarElement instanceof AbstractComparableGrammarElement)) {
-            throw new IllegalStateException(
+            throw new ClassCastException(
                     "Cannot compare with different objects: " +
                             grammarElement.getClass().getCanonicalName());
         }

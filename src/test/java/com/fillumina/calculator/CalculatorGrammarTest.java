@@ -73,7 +73,7 @@ public class CalculatorGrammarTest {
                             }
                         })
                     .buildOperator()
-                .buildDefaultGrammar());
+                .buildGrammar());
         assertEquals(109.0, calc.solveSingleValue("15+hundred-6"), 0);
     }
 
@@ -105,7 +105,7 @@ public class CalculatorGrammarTest {
                             }
                         })
                     .buildOperator()
-                .buildDefaultGrammar());
+                .buildGrammar());
 
         // defining a context
         final Map<String,Integer> context = new HashMap<>();
@@ -143,7 +143,7 @@ public class CalculatorGrammarTest {
                             }
                         })
                     .buildOperator()
-                .buildDefaultGrammar());
+                .buildGrammar());
 
         // defining a context
         final Map<String,Integer> context = new HashMap<>();
@@ -185,7 +185,7 @@ public class CalculatorGrammarTest {
                             }
                         })
                     .buildOperator()
-                .buildDefaultGrammar());
+                .buildGrammar());
 
         // defining a context
         final Map<String,Integer> context = new HashMap<>();
@@ -243,7 +243,7 @@ public class CalculatorGrammarTest {
                             return Integer.valueOf(value);
                         }
                     })
-                .buildDefaultGrammar());
+                .buildGrammar());
 
         calc.solveSingleValue("12.34");
     }
@@ -296,7 +296,7 @@ public class CalculatorGrammarTest {
                         }
                     })
                     .buildOperator()
-                .buildDefaultGrammar());
+                .buildGrammar());
 
         assertEquals(0, calc.solveSingleValue(expression), 0);
     }

@@ -12,7 +12,8 @@ import java.util.Map;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ContextedGrammarBuilder<T> extends GrammarBuilder<T,Map<String,T>> {
+public class ContextedGrammarBuilder<T>
+        extends DefaultGrammarBuilder<T,Map<String,T>> {
     private static final long serialVersionUID = 1L;
 
     public ContextedGrammarBuilder() {
@@ -20,7 +21,7 @@ public class ContextedGrammarBuilder<T> extends GrammarBuilder<T,Map<String,T>> 
     }
 
     public ContextedGrammarBuilder(
-            Iterable<GrammarElement<T, Map<String, T>>>... grammars) {
+            final Iterable<GrammarElement<T, Map<String, T>>>... grammars) {
         super(grammars);
     }
 
@@ -29,8 +30,8 @@ public class ContextedGrammarBuilder<T> extends GrammarBuilder<T,Map<String,T>> 
      *         and a variable context manager.
      */
     @Override
-    public Iterable<GrammarElement<T, Map<String, T>>> buildDefaultGrammar() {
+    public Iterable<GrammarElement<T, Map<String, T>>> buildGrammar() {
         add(VariableContextManager.<T>instance());
-        return super.buildDefaultGrammar();
+        return super.buildGrammar();
     }
 }

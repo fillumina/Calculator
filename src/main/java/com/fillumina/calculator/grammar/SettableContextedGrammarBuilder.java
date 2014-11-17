@@ -21,7 +21,7 @@ public class SettableContextedGrammarBuilder<T>
     }
 
     public SettableContextedGrammarBuilder(
-            Iterable<GrammarElement<T, Map<String, T>>>... grammars) {
+            final Iterable<GrammarElement<T, Map<String, T>>>... grammars) {
         super(grammars);
     }
 
@@ -32,8 +32,8 @@ public class SettableContextedGrammarBuilder<T>
      */
     @Override
     @SuppressWarnings("unchecked")
-    public Iterable<GrammarElement<T, Map<String, T>>> buildDefaultGrammar() {
+    public Iterable<GrammarElement<T, Map<String, T>>> buildGrammar() {
         add(VariableSetterOperator.<T>instance());
-        return super.buildDefaultGrammar();
+        return super.buildGrammar();
     }
 }

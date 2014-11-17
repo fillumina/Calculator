@@ -3,7 +3,7 @@ package com.fillumina.calculator.grammar;
 import com.fillumina.calculator.SyntaxErrorException;
 
 /**
- * Misconfigured grammar elements.
+ * Misconfigured grammar element.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

@@ -34,7 +34,7 @@ public class SettableContextedGrammarBuilderTest {
                         }
                     })
                 .buildOperator()
-            .buildDefaultGrammar());
+            .buildGrammar());
 
         final Calculator<Boolean, Map<String,Boolean>> calc =
                 new Calculator<>(grammar);
