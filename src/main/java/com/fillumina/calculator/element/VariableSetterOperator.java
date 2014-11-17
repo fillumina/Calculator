@@ -56,15 +56,15 @@ public class VariableSetterOperator<T>
         if (idx == -1 || idx == 0) {
             return ElementMatcher.NOT_FOUND;
         }
-        //if (true) throw new RuntimeException("GOTCHA");
         final char[] carray = expression.toCharArray();
         boolean variable = false;
+        char c;
         for (int i=idx-1; i>=0; i--) {
-            final char c = carray[i];
-            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') ||
-                    (c >= '0' && c <= '9')) {
+            c = carray[i];
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
                 variable = true;
-            } else if (c == ' ' || c == '\t' || c == '\n' || c == '\r') {
+            } else if (c == ' ' || c == '\t' || c == '\n' || c == '\r' ||
+                    (c >= '0' && c <= '9')) {
                 if (variable) {
                     return new ElementMatcher(i + 1, idx + 1);
                 }

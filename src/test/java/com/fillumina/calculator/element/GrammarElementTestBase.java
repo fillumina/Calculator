@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
  */
 public abstract class GrammarElementTestBase {
 
-    protected abstract GrammarElement<Double, Void> getGrammarElement();
+    protected abstract GrammarElement<?,?> getGrammarElement();
 
     protected void recognize(final String expected, final String expression) {
         final GrammarElementMatcher matcher =

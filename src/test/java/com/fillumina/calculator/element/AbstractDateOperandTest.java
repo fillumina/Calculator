@@ -3,7 +3,6 @@ package com.fillumina.calculator.element;
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.grammar.DateOperand;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
