@@ -4,7 +4,6 @@ import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
-import com.fillumina.calculator.grammar.QuotedStringElement;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.producer.timer.RunnableSink;
@@ -85,8 +84,16 @@ public class PatternVsFastStringPerformanceTest
         final AbstractComparableGrammarElement<Void,Void> patternString =
                 new PatternStringElement();
 
-        final QuotedStringElement fastString =
-                QuotedStringElement.INSTANCE;
+        final AbstractQuotedStringOperand<Void,Void> fastString =
+                new AbstractQuotedStringOperand<Void,Void>(0) {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public Void evaluate(String value, List<Void> params, Void context) {
+                return null;
+            }
+        };
+
 
         final String string = "allkjldskjf'hello kitti'akl";
 

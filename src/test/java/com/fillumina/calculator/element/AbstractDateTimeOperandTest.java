@@ -1,9 +1,9 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.DateOperand;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import org.junit.Test;
 
 /**
@@ -12,9 +12,20 @@ import org.junit.Test;
  */
 public class AbstractDateTimeOperandTest extends GrammarElementTestBase {
 
+    private static final GrammarElement<Double,Void> DATE_TIME =
+            new AbstractDateOperand<Double,Void>(0, "dd/MM/yy HH:mm:ss") {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Double evaluate(String value, List<Double> params,
+                Void context) {
+            return null;
+        }
+    };
+
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return DateOperand.DATE_TIME;
+        return DATE_TIME;
     }
 
     @Test

@@ -2,7 +2,6 @@ package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
-import com.fillumina.calculator.grammar.DateOperand;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,9 +16,20 @@ import org.junit.Test;
  */
 public class AbstractDateOperandTest extends GrammarElementTestBase {
 
+    private static final GrammarElement<Double,Void> DATE =
+            new AbstractDateOperand<Double,Void>(0, "dd/MM/yy") {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Double evaluate(String value, List<Double> params,
+                Void context) {
+            return null;
+        }
+    };
+
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return DateOperand.DATE;
+        return DATE;
     }
 
     @Test

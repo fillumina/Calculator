@@ -24,35 +24,35 @@ public abstract class AbstractPatternElement<T,C>
     public static final String NOT_STARTING_WITH_ALPHA = "(?<![a-zA-Z])";
     public static final String NOT_ENDING_WITH_ALPHA = "(?![a-zA-Z])";
 
-    private final String symbolRegexp;
+    private final String regexp;
     private final Pattern pattern;
 
     /**
      *
      *
-     * @param symbolRegexp  A regular expression used to recognize the element
+     * @param regexp  A regular expression used to recognize the element
      *                      in a string. Consider using
      *                      {@link #transform(java.lang.String) }.
      * @param priority      the highest the number, the more priority has
      *                      the element.
      */
-    public AbstractPatternElement(final int priority, final String symbolRegexp) {
+    public AbstractPatternElement(final int priority, final String regexp) {
         super(priority);
-        this.symbolRegexp = symbolRegexp;
-        this.pattern = Pattern.compile(symbolRegexp);
+        this.regexp = regexp;
+        this.pattern = Pattern.compile(regexp);
     }
 
     public Pattern getPattern() {
         return pattern;
     }
 
-    public String getSymbolRegexp() {
-        return symbolRegexp;
+    public String getRegexp() {
+        return regexp;
     }
 
     @Override
     public String toString() {
-        return symbolRegexp;
+        return regexp;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.StringElement;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
@@ -11,15 +11,25 @@ import org.junit.Test;
  */
 public class AbstractStringElementTest extends GrammarElementTestBase {
 
+    private static final AbstractStringOperand<Double,Void> STRING_OPERAND =
+            new AbstractStringOperand<Double,Void>(0) {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Double evaluate(String value, List<Double> params, Void context) {
+            return null;
+        }
+    };
+
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return StringElement.INSTANCE;
+        return STRING_OPERAND;
     }
 
     @Test
     public void shouldCleanTheEscapedCharactersFromTheString() {
         assertEquals("abcd\\fg",
-                StringElement.evaluateString("ab\\cd\\\\fg"));
+                STRING_OPERAND.evaluateString("ab\\cd\\\\fg"));
     }
 
     @Test

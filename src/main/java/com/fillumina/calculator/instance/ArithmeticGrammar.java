@@ -26,7 +26,6 @@ import java.util.Map;
  * on double values. It supports variables that can be passed through a
  * context. It can even define its own variables directly in the
  * expression using the equal symbol.
- * It uses the faster alternatives to most of its components.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

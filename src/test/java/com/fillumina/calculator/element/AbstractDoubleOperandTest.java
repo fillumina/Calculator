@@ -1,18 +1,28 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.DoubleOperand;
+import java.util.List;
 import org.junit.Test;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class DoubleOperandTest extends GrammarElementTestBase {
+public class AbstractDoubleOperandTest extends GrammarElementTestBase {
+
+    private static final GrammarElement<Double,Void> DOUBLE_OPERAND =
+            new AbstractDoubleOperand<Double, Void>(0) {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Double evaluate(String value, List<Double> params, Void context) {
+            return Double.valueOf(value);
+        }
+    };
 
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return (GrammarElement<Double, Void>) DoubleOperand.INSTANCE;
+        return DOUBLE_OPERAND;
     }
 
     @Test

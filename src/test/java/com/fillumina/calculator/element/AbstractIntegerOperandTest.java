@@ -1,19 +1,29 @@
 package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.IntegerElement;
+import java.util.List;
 import org.junit.Test;
 
 /**
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class IntegerElementTest
+public class AbstractIntegerOperandTest
         extends GrammarElementTestBase {
+
+    private static final GrammarElement<Double, Void> INTEGER_OPERAND =
+            new AbstractIntegerOperand<Double, Void>(0) {
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public Double evaluate(String value, List<Double> params, Void context) {
+            return Double.valueOf(value);
+        }
+    };
 
     @Override
     protected GrammarElement<Double, Void> getGrammarElement() {
-        return (GrammarElement<Double, Void>) IntegerElement.INSTANCE;
+        return INTEGER_OPERAND;
     }
 
     @Test

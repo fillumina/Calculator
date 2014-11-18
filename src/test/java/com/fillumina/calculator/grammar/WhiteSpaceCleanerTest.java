@@ -6,7 +6,6 @@ import com.fillumina.calculator.Node;
 import com.fillumina.calculator.TestOperand;
 import com.fillumina.calculator.TestOperator;
 import com.fillumina.calculator.Tokenizer;
-import com.fillumina.calculator.element.DefaultWhiteSpace;
 import com.fillumina.calculator.element.WhiteSpace;
 import com.fillumina.calculator.interpreter.WhiteSpaceCleaner;
 import java.util.List;
