@@ -1,8 +1,7 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
 import com.fillumina.calculator.grammar.GrammarBuilder;
-import com.fillumina.calculator.grammar.SettableContextedGrammarBuilder;
+import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
 import com.fillumina.calculator.grammar.Evaluator;
 import com.fillumina.calculator.grammar.ParametricEvaluator;
 import com.fillumina.calculator.instance.ArithmeticGrammar;
@@ -37,7 +36,7 @@ public class CalculatorGrammarTest {
     @Test
     public void shouldDefineAndUseASimpleGrammar() {
         final Calculator<Integer,Void> calc = new Calculator<>(
-            new GrammarBuilder<Integer,Void>()
+            GrammarBuilder.<Integer,Void>create()
                 .addIntegerOperand(new Evaluator<Integer, Void>() {
                         @Override
                         public Integer evaluate(String value, Void context) {
@@ -105,7 +104,7 @@ public class CalculatorGrammarTest {
                             }
                         })
                     .buildOperator()
-                .buildGrammar());
+                .buildDefaultGrammarWithVariables());
 
         // defining a context
         final Map<String,Integer> context = new HashMap<>();
@@ -118,7 +117,7 @@ public class CalculatorGrammarTest {
     @Test
     public void shouldDefineAndUseASimpleGrammarWithContextAndSetAVariable() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
-            new SettableContextedGrammarBuilder<Integer>()
+            new ContextedGrammarBuilder<Integer>()
                 .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
@@ -143,7 +142,7 @@ public class CalculatorGrammarTest {
                             }
                         })
                     .buildOperator()
-                .buildGrammar());
+                .buildDefaultGrammarWithSettableVariables());
 
         // defining a context
         final Map<String,Integer> context = new HashMap<>();
@@ -160,7 +159,7 @@ public class CalculatorGrammarTest {
     @Test
     public void shouldNotShadowALegitimateConstant() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
-            new SettableContextedGrammarBuilder<Integer>()
+            new ContextedGrammarBuilder<Integer>()
                 .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
@@ -233,7 +232,7 @@ public class CalculatorGrammarTest {
     @Test(expected=EvaluationException.class)
     public void shouldCallEvaluationExceptionIfEvaluationGoesWrong() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
-            new SettableContextedGrammarBuilder<Integer>()
+            new ContextedGrammarBuilder<Integer>()
                 .addFloatingPointOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
@@ -281,7 +280,7 @@ public class CalculatorGrammarTest {
     private void assertRetrieveBeforeParameter(final int parameterNumber,
             final String expression) {
         final ContextCalculator<Double> calc = new ContextCalculator<>(
-            new SettableContextedGrammarBuilder<>(ArithmeticGrammar.INSTANCE)
+            new ContextedGrammarBuilder<>(ArithmeticGrammar.INSTANCE)
                 .addOperator()
                     .priority(1)
                     .symbols("@")

@@ -8,7 +8,10 @@ import com.fillumina.calculator.element.AbstractIntegerOperand;
 import com.fillumina.calculator.element.AbstractMultiOperator;
 import com.fillumina.calculator.element.AbstractPatternElement;
 import com.fillumina.calculator.element.AbstractStringOperand;
+import com.fillumina.calculator.element.CloseParentheses;
 import com.fillumina.calculator.element.ConstantOperand;
+import com.fillumina.calculator.element.DefaultWhiteSpace;
+import com.fillumina.calculator.element.OpenParentheses;
 import com.fillumina.calculator.element.ValuedMultiConstant;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,14 +22,38 @@ import java.util.List;
  * Helps building {@link Grammar}s with predefined components: round
  * parentheses and white spaces.
  *
+ * @param T the type of the result
+ * @param C the type of the context
+ *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-//TODO add here regexp operand and configurable whitespace
-public class GrammarBuilder<T,C> {
+public class GrammarBuilder<T,C,B extends GrammarBuilder<T,C,?>> {
     private static final long serialVersionUID = 1L;
 
     private final List<GrammarElement<T,C>> elements = new ArrayList<>();
     private boolean doubleDefined;
+
+    /**
+     * Allows to create a {@link GrammarBuilder} specifying only the
+     * useful parameters.
+     * @param <T> the type of the result
+     * @param <C> the type of the context
+     */
+    public static <T,C> GrammarBuilder<T,C,GrammarBuilder<T,C,?>>
+            create() {
+        return new GrammarBuilder<>();
+    }
+
+    /**
+     * Allows to create a {@link GrammarBuilder} specifying only the
+     * useful parameters.
+     * @param <T> the type of the result
+     * @param <C> the type of the context
+     */
+    public static <T,C> GrammarBuilder<T,C,GrammarBuilder<T,C,?>>
+            createFrom(final Iterable<GrammarElement<T,C>>... grammars) {
+        return new GrammarBuilder<>(grammars);
+    }
 
     public GrammarBuilder() {
     }
@@ -40,7 +67,8 @@ public class GrammarBuilder<T,C> {
         }
     }
 
-    public GrammarBuilder<T,C> addPatternElement(final int priority,
+    @SuppressWarnings("unchecked")
+    public B addPatternElement(final int priority,
             final String pattern,
             final GrammarElementType type,
             final ParametricEvaluator<T,C> evaluator) {
@@ -57,14 +85,15 @@ public class GrammarBuilder<T,C> {
                 return GrammarElementType.OPERAND;
             }
         });
-        return this;
+        return (B) this;
     }
 
     /**
      * Defines this operand <i>before</i>
      * {@link #addFloatOperand(int, StringEvaluator)}.
      */
-    public GrammarBuilder<T,C> addIntegerOperand(
+    @SuppressWarnings("unchecked")
+    public B addIntegerOperand(
             final Evaluator<T,C> evaluator) {
         if (doubleDefined) {
             throw new IllegalStateException(
@@ -78,10 +107,11 @@ public class GrammarBuilder<T,C> {
                 return evaluator.evaluate(value, context);
             }
         });
-        return this;
+        return (B)this;
     }
 
-    public GrammarBuilder<T,C> addFloatingPointOperand(
+    @SuppressWarnings("unchecked")
+    public B addFloatingPointOperand(
             final Evaluator<T,C> evaluator) {
         elements.add(new AbstractDoubleOperand<T,C>(0) {
             private static final long serialVersionUID = 1L;
@@ -92,10 +122,11 @@ public class GrammarBuilder<T,C> {
             }
         });
         doubleDefined = true;
-        return this;
+        return (B)this;
     }
 
-    public GrammarBuilder<T,C> addDateOperand(final String pattern,
+    @SuppressWarnings("unchecked")
+    public B addDateOperand(final String pattern,
             final Evaluator<T,C> evaluator) {
         elements.add(new AbstractDateOperand<T,C>(0, pattern) {
             private static final long serialVersionUID = 1L;
@@ -105,7 +136,7 @@ public class GrammarBuilder<T,C> {
                 return evaluator.evaluate(value, context);
             }
         });
-        return this;
+        return (B)this;
     }
 
     /**
@@ -118,17 +149,19 @@ public class GrammarBuilder<T,C> {
      * @param trueValue     sets the constant to return in case of {@code true}
      * @param falseValue    sets the constant to return in case of {@code false}
      */
-    public GrammarBuilder<T,C> addBooleanOperand(final T trueValue,
+    @SuppressWarnings("unchecked")
+    public B addBooleanOperand(final T trueValue,
             final T falseValue) {
         elements.add(new ValuedMultiConstant<T,C>(
                     trueValue, 0, "true", "TRUE", "True"));
         elements.add(new ValuedMultiConstant<T,C>(
                     falseValue, 0, "false", "FALSE", "False"));
-        return this;
+        return (B)this;
     }
 
     /** Adds unquoted, single-quoted and double-quoted strings. */
-    public GrammarBuilder<T,C> addStringOperand(
+    @SuppressWarnings("unchecked")
+    public B addStringOperand(
             final Evaluator<T,C> evaluator) {
         elements.add(new AbstractStringOperand<T,C>(0) {
             private static final long serialVersionUID = 1L;
@@ -138,12 +171,13 @@ public class GrammarBuilder<T,C> {
                 return evaluator.evaluate(value, context);
             }
         });
-        return this;
+        return (B)this;
     }
 
-    public GrammarBuilder<T,C> addConstant(final String symbol, final T constant) {
+    @SuppressWarnings("unchecked")
+    public B addConstant(final String symbol, final T constant) {
         elements.add(new ConstantOperand<T,C>(symbol, constant, 0));
-        return this;
+        return (B)this;
     }
 
     public OperatorBuilder addOperator() {
@@ -192,7 +226,8 @@ public class GrammarBuilder<T,C> {
             return this;
         }
 
-        public GrammarBuilder<T,C> buildOperator() {
+        @SuppressWarnings("unchecked")
+        public B buildOperator() {
             elements.add(new AbstractMultiOperator<T, C>(priority,
                     operandsBefore, operandsAfter, symbols) {
                         private static final long serialVersionUID = 1L;
@@ -202,17 +237,30 @@ public class GrammarBuilder<T,C> {
                             return evaluator.evaluate(value, params, context);
                         }
                     });
-            return GrammarBuilder.this;
+            return (B)GrammarBuilder.this;
         }
     }
 
-    public GrammarBuilder<T,C> add(final GrammarElement<T,C> ge) {
+    public B add(final GrammarElement<T,C> ge) {
         elements.add(ge);
-        return this;
+        return (B)this;
     }
 
-    /** @return the specified Grammar. */
+    /** @return the specified Grammar (no extra elements added). */
     public Iterable<GrammarElement<T,C>> buildGrammar() {
         return Collections.unmodifiableList(new ArrayList<>(elements));
+    }
+
+    /**
+     * @return a grammar able to manage round parentheses and
+     * common white spaces.
+     */
+    @SuppressWarnings("unchecked")
+    public Iterable<GrammarElement<T,C>> buildDefaultGrammar() {
+        add(OpenParentheses.<T,C>round());
+        add(CloseParentheses.<T,C>round());
+        add(DefaultWhiteSpace.<T,C>instance());
+
+        return buildGrammar();
     }
 }

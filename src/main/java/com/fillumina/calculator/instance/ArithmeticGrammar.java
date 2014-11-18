@@ -1,7 +1,7 @@
 package com.fillumina.calculator.instance;
 
 import com.fillumina.calculator.GrammarElement;
-import com.fillumina.calculator.grammar.SettableContextedGrammarBuilder;
+import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
 import com.fillumina.calculator.grammar.Evaluator;
 import com.fillumina.calculator.grammar.Grammar;
 import com.fillumina.calculator.grammar.ParametricEvaluator;
@@ -34,7 +34,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String,Double>> {
     private static final long serialVersionUID = 1L;
 
     public static final Iterable<GrammarElement<Double,Map<String,Double>>> ITERABLE =
-        new SettableContextedGrammarBuilder<Double>()
+        new ContextedGrammarBuilder<Double>()
                 .addFloatingPointOperand(new Evaluator<Double, Map<String, Double>>() {
                     @Override
                     public Double evaluate(String value, Map<String, Double> context) {
@@ -304,7 +304,7 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String,Double>> {
 
                 .addConstant("E", E)
                 .addConstant("PI", PI)
-        .buildGrammar();
+        .buildDefaultGrammarWithSettableVariables();
 
     @SuppressWarnings("unchecked")
     public static final ArithmeticGrammar INSTANCE =

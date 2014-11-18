@@ -2,7 +2,7 @@ package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.grammar.Evaluator;
-import com.fillumina.calculator.grammar.SettableContextedGrammarBuilder;
+import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
 import java.util.Map;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -16,7 +16,7 @@ public class WhiteSpaceTest {
     @Test
     public void shouldFilterOutCommonWhiteSpaces() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
-            new SettableContextedGrammarBuilder<Integer>()
+            new ContextedGrammarBuilder<Integer>()
                 .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
@@ -34,7 +34,7 @@ public class WhiteSpaceTest {
     @Test
     public void shouldShouldFilterOutGivenWhiteSpaces() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
-            new SettableContextedGrammarBuilder<Integer>()
+            new ContextedGrammarBuilder<Integer>()
                 .add(new WhiteSpace<Integer,Map<String,Integer>>(0, "_#"))
                 .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {

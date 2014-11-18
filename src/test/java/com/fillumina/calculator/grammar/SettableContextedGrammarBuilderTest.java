@@ -16,7 +16,7 @@ public class SettableContextedGrammarBuilderTest {
     @Test
     public void shouldCreateAGrammarStrartingFromAGivenOne() {
         final Grammar<Boolean,Map<String,Boolean>> grammar = new Grammar<>(
-            new SettableContextedGrammarBuilder<>(BooleanGrammar.INSTANCE)
+            new ContextedGrammarBuilder<>(BooleanGrammar.INSTANCE)
                 .addOperator()
                     .symbols("x")
                     .priority(1)

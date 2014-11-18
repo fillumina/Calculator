@@ -2,6 +2,7 @@ package com.fillumina.calculator.grammar;
 
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.element.VariableContextManager;
+import com.fillumina.calculator.element.VariableSetterOperator;
 import java.util.Map;
 
 
@@ -13,7 +14,7 @@ import java.util.Map;
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class ContextedGrammarBuilder<T>
-        extends DefaultGrammarBuilder<T,Map<String,T>> {
+        extends GrammarBuilder<T, Map<String,T>, ContextedGrammarBuilder<T> > {
     private static final long serialVersionUID = 1L;
 
     public ContextedGrammarBuilder() {
@@ -29,9 +30,21 @@ public class ContextedGrammarBuilder<T>
      * @return a Grammar able to manage round parentheses, common white spaces
      *         and a variable context manager.
      */
-    @Override
-    public Iterable<GrammarElement<T, Map<String, T>>> buildGrammar() {
+    public Iterable<GrammarElement<T, Map<String, T>>>
+                buildDefaultGrammarWithVariables() {
         add(VariableContextManager.<T>instance());
-        return super.buildGrammar();
+        return super.buildDefaultGrammar();
+    }
+
+    /**
+     *
+     * @return a Grammar able to manage round parentheses, common white spaces,
+     *         a variable context manager and setter.
+     */
+    @SuppressWarnings("unchecked")
+    public Iterable<GrammarElement<T, Map<String, T>>>
+                buildDefaultGrammarWithSettableVariables() {
+        add(VariableSetterOperator.<T>instance());
+        return buildDefaultGrammarWithVariables();
     }
 }

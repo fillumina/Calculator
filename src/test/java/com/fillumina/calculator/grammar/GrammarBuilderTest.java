@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  */
 public class GrammarBuilderTest {
 
-    private GrammarBuilder<String,Map<String,String>> builder =
+    private GrammarBuilder<String,Map<String,String>,?> builder =
             new GrammarBuilder<>();
 
     private Calculator<String,Map<String,String>> calc;

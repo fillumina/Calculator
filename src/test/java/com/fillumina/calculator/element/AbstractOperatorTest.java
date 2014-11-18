@@ -2,7 +2,7 @@ package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.Calculator;
 import com.fillumina.calculator.grammar.Evaluator;
-import com.fillumina.calculator.grammar.SettableContextedGrammarBuilder;
+import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
 import java.util.List;
 import java.util.Map;
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class AbstractOperatorTest {
     @Test
     public void shouldFilterOutCommonWhiteSpaces() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
-            new SettableContextedGrammarBuilder<Integer>()
+            new ContextedGrammarBuilder<Integer>()
                 .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
@@ -35,7 +35,7 @@ public class AbstractOperatorTest {
                             return params.get(0) + 1;
                         }
                     })
-                .buildGrammar());
+                .buildDefaultGrammar());
 
         assertEquals(13, calc.solveSingleValue("@ 12"), 0);
     }
