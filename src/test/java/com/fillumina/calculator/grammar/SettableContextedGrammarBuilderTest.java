@@ -1,11 +1,11 @@
 package com.fillumina.calculator.grammar;
 
 import com.fillumina.calculator.Calculator;
-import com.fillumina.calculator.instance.BooleanGrammar;
+import com.fillumina.calculator.grammar.instance.BooleanGrammar;
 import java.util.List;
 import java.util.Map;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

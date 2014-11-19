@@ -4,8 +4,8 @@ import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

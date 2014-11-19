@@ -1,6 +1,6 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
 import com.fillumina.calculator.treebuilder.ParenthesesMismatchedException;
 import com.fillumina.calculator.util.Mapper;
 import java.util.Arrays;
@@ -27,7 +27,7 @@ public class CalculatorTest {
             new Calculator<>(ArithmeticGrammar.INSTANCE);
 
     @Test
-    public void shouldSolve() {
+    public void shouldSolveMultipleResults() {
         assertEquals(Arrays.asList(3d, 5d), calc.solve("2 + 1 5"));
     }
 
@@ -49,6 +49,16 @@ public class CalculatorTest {
                 0);
     }
 
+    @Test(expected=SyntaxErrorException.class)
+    public void shouldThrowAnExceptionIfEmptyExpression() {
+        calc.solve("");
+    }
+
+    @Test(expected=SyntaxErrorException.class)
+    public void shouldThrowAnExceptionIfNullExpression() {
+        calc.solve(null);
+    }
+
     @Test(expected=ContextException.class)
     public void shouldThrowAnExceptionIfNoSolutionIsFound() {
         calc.solve("x + 2");
@@ -62,6 +72,56 @@ public class CalculatorTest {
     @Test(expected=EvaluationException.class)
     public void shouldThrowAnExceoptionIfSyntaxError() {
         calc.solve("+");
+    }
+
+    @Test(expected=SyntaxErrorException.class)
+    public void shouldThrowAnExceptionIfEmptyExpressionInSingleValue() {
+        calc.solveSingleValue("");
+    }
+
+    @Test(expected=SyntaxErrorException.class)
+    public void shouldThrowAnExceptionIfNullExpressionInSingleValue() {
+        calc.solveSingleValue(null);
+    }
+
+    @Test(expected=ContextException.class)
+    public void shouldThrowAnExceptionIfNoSolutionIsFoundInSingleValue() {
+        calc.solveSingleValue("x + 2");
+    }
+
+    @Test(expected=ParenthesesMismatchedException.class)
+    public void shouldThrowAnExceptionIfMismatchedParenthesesInSingleValue() {
+        calc.solveSingleValue("(2 +");
+    }
+
+    @Test(expected=EvaluationException.class)
+    public void shouldThrowAnExceoptionIfSyntaxErrorInSingleValue() {
+        calc.solveSingleValue("+");
+    }
+
+    @Test(expected=SyntaxErrorException.class)
+    public void shouldThrowAnExceptionIfEmptyExpressionInCreateSolutionTree() {
+        calc.createSolutionTree("");
+    }
+
+    @Test(expected=SyntaxErrorException.class)
+    public void shouldThrowAnExceptionIfNullExpressionInCreateSolutionTree() {
+        calc.createSolutionTree(null);
+    }
+
+    @Test
+    public void should_NOT_ThrowAContextExceptionIfNoSolutionIsFoundInCreateSolutionTree() {
+        calc.createSolutionTree("x + 2");
+    }
+
+    @Test(expected=ParenthesesMismatchedException.class)
+    public void shouldThrowAnExceptionIfMismatchedParenthesesInCreateSolutionTree() {
+        calc.createSolutionTree("(2 +");
+    }
+
+    @Test
+    public void should_NOT_ThrowAnEvaluationExceoptionIfSyntaxErrorInCreateSolutionTree() {
+        calc.createSolutionTree("+");
     }
 
     @Test

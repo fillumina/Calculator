@@ -7,9 +7,8 @@ import java.util.List;
  * This {@link Calculator} adds the possibility to specify a simplifying
  * {@link Solver} which is a {@link Solver} able to modify the solution
  * tree substituting a result to inner parentheses when possible.
- * It is useful to minimize the
- * amount of operations to do in case of iterations on the same expression
- * with an incognita (i.e. plotting).
+ * This is useful to minimize the mount of operations to do in case of
+ * iterations on the same expression with an incognita (i.e. plotting).
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
@@ -18,6 +17,16 @@ public class SimplifyingCalculator<T,C> extends Calculator<T,C> {
 
     private final Solver simplifier;
 
+    /**
+     * Uses the default {@link Interpreter} initialized with
+     * the given {@param grammar}, a {@link DefaultSolver} and a
+     * {@link SimplifyingSolver}.
+     *
+     * @see com.fillumina.calculator.grammar.instance.ArithmeticGrammar
+     * @see com.fillumina.calculator.grammar.instance.BooleanGrammar
+     *
+     * @param grammar   the grammar that will be used to parse the expression
+     */
     public SimplifyingCalculator(final Iterable<GrammarElement<T,C>> grammar) {
         this(new DefaultInterpreter<>(grammar),
                 DefaultSolver.INSTANCE,
@@ -44,7 +53,18 @@ public class SimplifyingCalculator<T,C> extends Calculator<T,C> {
     }
 
     /**
-     * @return a {@link SolutionTree} that can be used to get the actual solution.
+     * A {@link SimplifyingSolutionTree} encapsulates a solution that can be
+     * queried for unsolved variables (incognita) and solved iteratively.
+     *
+     * @return a {@link SolutionTree} that can be used to get the actual
+     *         solution.
+     * @throws SyntaxErrorException (<b>parent of all related exceptions</b>)
+     *                      in case of empty expression
+     * @throws com.fillumina.calculator.treebuilder.ParenthesesMismatchedException
+     *                      for parentheses mismatch
+     * @throws EvaluationException for errors in the expression
+     * @throws com.fillumina.calculator.grammar.GrammarException
+     *                      for errors in the {@link GrammarElement}s.
      */
     @Override
     public SimplifyingSolutionTree<T,C> createSolutionTree(

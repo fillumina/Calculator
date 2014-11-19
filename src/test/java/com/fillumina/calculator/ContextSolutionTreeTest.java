@@ -1,10 +1,13 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
 import java.util.List;
 import java.util.Map;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -12,12 +15,12 @@ import static org.junit.Assert.*;
  */
 public class ContextSolutionTreeTest {
 
-    private ContextCalculator<Double> calculator =
-            new ContextCalculator<>(ArithmeticGrammar.INSTANCE);
+    private MappedContextSimplifyingCalculator<Double> calculator =
+            new MappedContextSimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldHaveAStaticSolution() {
-        final ContextSolutionTree<Double> solution =
+        final MappedContextSimplifyingSolutionTree<Double> solution =
                 calculator.createSolutionTree("x + 2");
         solution.simplify();
         assertFalse(solution.isSolved());
@@ -25,7 +28,7 @@ public class ContextSolutionTreeTest {
 
     @Test
     public void shouldRecognizeTheVariable() {
-        final ContextSolutionTree<Double> solution =
+        final MappedContextSimplifyingSolutionTree<Double> solution =
                 calculator.createSolutionTree("x + 2");
 
         solution.simplify();
@@ -35,7 +38,7 @@ public class ContextSolutionTreeTest {
 
     @Test
     public void shouldSolveUsingTheVariable() {
-        final ContextSolutionTree<Double> solution =
+        final MappedContextSimplifyingSolutionTree<Double> solution =
                 calculator.createSolutionTree("x + 2");
 
         solution.simplify();
@@ -45,7 +48,7 @@ public class ContextSolutionTreeTest {
 
     @Test
     public void shoudPartiallySolve() {
-        final ContextSolutionTree<Double> solution =
+        final MappedContextSimplifyingSolutionTree<Double> solution =
                 calculator.createSolutionTree("y + x + 2");
 
         solution.simplify();
@@ -56,7 +59,7 @@ public class ContextSolutionTreeTest {
 
     @Test
     public void shoudSolveForTwoVariablesAndClone() {
-        final ContextSolutionTree<Double> solution =
+        final MappedContextSimplifyingSolutionTree<Double> solution =
                 calculator.createSolutionTree("y + x + 2");
 
         solution.simplifyWithVariables("x", 10d);
@@ -69,24 +72,24 @@ public class ContextSolutionTreeTest {
 
     @Test
     public void shoudCloneThePartialSolution() {
-        final ContextSolutionTree<Double> solution =
+        final MappedContextSimplifyingSolutionTree<Double> solution =
                 calculator.createSolutionTree("y + x + 2");
 
         solution.simplifyWithVariables("x", 10d);
 
-        final ContextSolutionTree<Double> clonedSolution = solution.clone();
+        final MappedContextSimplifyingSolutionTree<Double> clonedSolution = solution.clone();
 
         assertEquals(17, clonedSolution.simplifyWithVariables("y", 5d).get(0), 0);
     }
 
     @Test
     public void shoudTheOriginalSolutionOfAClonedSolvedOneBeStillUnsolved() {
-        final ContextSolutionTree<Double> solution =
+        final MappedContextSimplifyingSolutionTree<Double> solution =
                 calculator.createSolutionTree("y + x + 2");
 
         solution.simplifyWithVariables("x", 10d);
 
-        final ContextSolutionTree<Double> clonedSolution = solution.clone();
+        final MappedContextSimplifyingSolutionTree<Double> clonedSolution = solution.clone();
 
         clonedSolution.simplifyWithVariables("y", 5d);
 

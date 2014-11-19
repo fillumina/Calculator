@@ -4,7 +4,7 @@ import com.fillumina.calculator.DefaultTokenizer;
 import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.Node;
 import com.fillumina.calculator.Tokenizer;
-import com.fillumina.calculator.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
 import com.fillumina.calculator.interpreter.UndefinedElementParser;
 import com.fillumina.calculator.interpreter.WhiteSpaceCleaner;
 import com.fillumina.calculator.util.TreePrinter;

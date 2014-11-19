@@ -2,7 +2,7 @@ package com.fillumina.calculator.util;
 
 import com.fillumina.calculator.Interpreter;
 import com.fillumina.calculator.Node;
-import com.fillumina.calculator.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
 import com.fillumina.calculator.interpreter.DefaultInterpreter;
 import java.util.Collection;
 import java.util.Map;

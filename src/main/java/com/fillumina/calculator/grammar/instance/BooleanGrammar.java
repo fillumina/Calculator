@@ -1,4 +1,4 @@
-package com.fillumina.calculator.instance;
+package com.fillumina.calculator.grammar.instance;
 
 import com.fillumina.calculator.element.AbstractMultiOperator;
 import com.fillumina.calculator.element.CloseParentheses;

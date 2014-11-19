@@ -2,8 +2,8 @@ package com.fillumina.calculator.element;
 
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
-import static com.fillumina.calculator.element.CharacterUtil.isDigit;
 import static com.fillumina.calculator.element.CharacterUtil.isAlphabetic;
+import static com.fillumina.calculator.element.CharacterUtil.isDigit;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

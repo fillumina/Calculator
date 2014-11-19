@@ -1,10 +1,10 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.grammar.GrammarBuilder;
 import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
 import com.fillumina.calculator.grammar.Evaluator;
+import com.fillumina.calculator.grammar.GrammarBuilder;
 import com.fillumina.calculator.grammar.ParametricEvaluator;
-import com.fillumina.calculator.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -13,10 +13,12 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
+ * This is a tutorial to help understand how to use this API.
+ *
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class CalculatorGrammarTest {
+public class ATutorialTest {
 
     private Calculator<Double,Map<String,Double>> calculator =
             new Calculator<>(ArithmeticGrammar.INSTANCE);
@@ -197,16 +199,16 @@ public class CalculatorGrammarTest {
 
     @Test
     public void shouldUseDefaultArithmeticCalculatorToSolveSimpleExpression() {
-        final ContextCalculator<Double> calc =
-                new ContextCalculator<>(ArithmeticGrammar.INSTANCE);
+        final MappedContextSimplifyingCalculator<Double> calc =
+                new MappedContextSimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
 
         assertEquals(1, calc.solveSingleValue("sin(PI/2)"), 0);
     }
 
     @Test
     public void shouldReturnResultsForSeparateExpressions() {
-        final ContextCalculator<Double> calc =
-                new ContextCalculator<>(ArithmeticGrammar.INSTANCE);
+        final MappedContextSimplifyingCalculator<Double> calc =
+                new MappedContextSimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
 
         assertEquals(Arrays.asList(1.0, 7.0, 2.0),
                 calc.solve("sin(PI/2) 5+2 14/7"));
@@ -214,10 +216,10 @@ public class CalculatorGrammarTest {
 
     @Test
     public void shouldPlotTheExpression() {
-        final ContextCalculator<Double> calc =
-                new ContextCalculator<>(ArithmeticGrammar.INSTANCE);
+        final MappedContextSimplifyingCalculator<Double> calc =
+                new MappedContextSimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
 
-        ContextSolutionTree<Double> solution =
+        MappedContextSimplifyingSolutionTree<Double> solution =
                 calc.createSolutionTree("x");
 
         double accumulator = 0;
@@ -245,58 +247,5 @@ public class CalculatorGrammarTest {
                 .buildGrammar());
 
         calc.solveSingleValue("12.34");
-    }
-
-    @Test
-    public void shouldEvaluateFiveParametersBefore() {
-        assertRetrieveBeforeParameter(5, "0 1 2 3 4 @");
-    }
-
-    @Test
-    public void shouldEvaluateTheOnlyFourParametersBefore() {
-        assertRetrieveBeforeParameter(4, "0 1 2 3 @");
-    }
-
-    @Test
-    public void shouldEvaluateTheOnlyThreeParametersBefore() {
-        assertRetrieveBeforeParameter(3, "0 1 2 @");
-    }
-
-    @Test
-    public void shouldEvaluateTheOnlyTwoParametersBefore() {
-        assertRetrieveBeforeParameter(2, "0 1 @");
-    }
-
-    @Test
-    public void shouldEvaluateTheOnlyParametersBefore() {
-        assertRetrieveBeforeParameter(1, "0 @");
-    }
-
-    @Test
-    public void shouldEvaluateZeroParameterBefore() {
-        assertRetrieveBeforeParameter(0, " @");
-    }
-
-    private void assertRetrieveBeforeParameter(final int parameterNumber,
-            final String expression) {
-        final ContextCalculator<Double> calc = new ContextCalculator<>(
-            new ContextedGrammarBuilder<>(ArithmeticGrammar.INSTANCE)
-                .addOperator()
-                    .priority(1)
-                    .symbols("@")
-                    .operandsBefore(5)
-                    .operandsAfter(0)
-                    .evaluator(new ParametricEvaluator<Double, Map<String, Double>>() {
-                        @Override
-                        public Double evaluate(String value, List<Double> params,
-                                Map<String, Double> context) {
-                            assertEquals(parameterNumber, params.size());
-                            return 0d;
-                        }
-                    })
-                    .buildOperator()
-                .buildGrammar());
-
-        assertEquals(0, calc.solveSingleValue(expression), 0);
     }
 }

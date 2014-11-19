@@ -1,6 +1,6 @@
 package com.fillumina.calculator.element;
 
-import com.fillumina.calculator.ContextCalculator;
+import com.fillumina.calculator.MappedContextSimplifyingCalculator;
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
 import java.util.List;
@@ -47,7 +47,7 @@ public class AbstractSignedDoubleOperandTest
 
     @Test
     public void shouldUseADifferentSeparator() {
-        final ContextCalculator<Double> calc = new ContextCalculator<>(
+        final MappedContextSimplifyingCalculator<Double> calc = new MappedContextSimplifyingCalculator<>(
             new ContextedGrammarBuilder<Double>()
                 .add(new AbstractDoubleOperand<Double,Map<String,Double>>(0, '?') {
                     private static final long serialVersionUID = 1L;

@@ -6,8 +6,9 @@ import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.SyntaxErrorException;
 import java.util.List;
 import java.util.Map;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

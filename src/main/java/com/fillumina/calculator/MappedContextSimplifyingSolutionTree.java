@@ -5,20 +5,22 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A solution tree that uses a map of type {@code Map<String,T>} as context.
+ * A {@link SimplifyingSolutionTree} that uses a map of type
+ * {@code Map<String,T>} as context.
  *
  * @param T the type of the result
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ContextSolutionTree<T>
+public class MappedContextSimplifyingSolutionTree<T>
         extends SimplifyingSolutionTree<T, Map<String, T>> {
 
-    public ContextSolutionTree(final Solver solver, final Solver simplifier,
+    public MappedContextSimplifyingSolutionTree(final Solver solver,
+            final Solver simplifier,
             final List<Node<T, Map<String, T>>> solutionTree) {
         super(solver, simplifier, solutionTree);
     }
 
-    public ContextSolutionTree(
+    public MappedContextSimplifyingSolutionTree(
             final SimplifyingSolutionTree<T, Map<String, T>> original) {
         super(original);
     }
@@ -60,7 +62,7 @@ public class ContextSolutionTree<T>
     }
 
     @Override
-    protected ContextSolutionTree<T> clone() {
-        return new ContextSolutionTree<>(this);
+    protected MappedContextSimplifyingSolutionTree<T> clone() {
+        return new MappedContextSimplifyingSolutionTree<>(this);
     }
 }

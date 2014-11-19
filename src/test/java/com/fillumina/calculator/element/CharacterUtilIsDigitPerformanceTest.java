@@ -1,6 +1,5 @@
 package com.fillumina.calculator.element;
 
-import com.fillumina.calculator.element.CharacterUtil;
 import com.fillumina.performance.consumer.assertion.PerformanceAssertion;
 import com.fillumina.performance.producer.TestContainer;
 import com.fillumina.performance.producer.timer.RunnableSink;

@@ -34,9 +34,6 @@ public class VariableContextManager<T>
     @Override
     public T evaluate(final String value, final List<T> params,
             final Map<String, T> context) {
-        if (value == null || value.isEmpty()) {
-            throw new SyntaxErrorException("empty expression.");
-        }
         if (context == null) {
             throw new ContextException(value);
         }
