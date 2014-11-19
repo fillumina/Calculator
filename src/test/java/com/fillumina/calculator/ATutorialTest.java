@@ -50,9 +50,13 @@ public class ATutorialTest {
      */
     @Test
     public void shouldDefineAndUseASimpleGrammar() {
+        // defines a calculator using a custom grammar
         final Calculator<Integer,Void> calc = new Calculator<>(
+            // let's create the grammar using a builder
+            // the grammar works over integers and doesn't manage a
+            // context (Void).
             GrammarBuilder.<Integer,Void>create()
-                // this grammar will read integer values
+                // this grammar will produce integer values
                 .addIntegerOperand(new Evaluator<Integer, Void>() {
                         @Override
                         public Integer evaluate(String value, Void context) {
@@ -63,7 +67,7 @@ public class ATutorialTest {
                 // let's add a constant
                 .addConstant("hundred", 100)
 
-                // and the operator +
+                // the operator +
                 .addOperator()
                     .priority(1)
                     .operandsBefore(1)
@@ -97,7 +101,7 @@ public class ATutorialTest {
                 // this basic builder doesn't include whitespaces management
                 .buildGrammar());
 
-        assertEquals(109.0, calc.solveSingleValue("15+hundred-6"), 0);
+        assertEquals(109, calc.solveSingleValue("15+hundred-6"), 0);
     }
 
     /**
@@ -105,8 +109,11 @@ public class ATutorialTest {
      */
     @Test
     public void shouldDefineAndUseASimpleGrammarWithContext() {
+        // creates a calcualtor based on a custom gramamr
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
+            // creates a grammar over integers with a string mapped context
             new ContextedGrammarBuilder<Integer>()
+                // this defines the base operand
                 .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
@@ -115,7 +122,9 @@ public class ATutorialTest {
                             return Integer.valueOf(value);
                         }
                     })
+                // let's add a constant
                 .addConstant("hundred", 100)
+                // and the + operator
                 .addOperator()
                     .priority(1)
                     .operandsBefore(1)
@@ -139,14 +148,18 @@ public class ATutorialTest {
         context.put("thousand", 1_000);
 
         // we are now ready to do a calculation
-        assertEquals(1121.0,
-                calc.solveSingleValue(context, "15 + (hundred + 6) + thousand"), 0);
+        assertEquals(1121,
+                calc.solveSingleValue(context, "15 + (hundred + 6) + thousand"),
+                0);
     }
 
     @Test
     public void shouldDefineAndUseASimpleGrammarWithContextAndSetAVariable() {
+        // creates a calculator with a custom grammar
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
+            // creates a custom grammar with a string mapped context over integer
             new ContextedGrammarBuilder<Integer>()
+                // creates the operand
                 .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
@@ -155,7 +168,9 @@ public class ATutorialTest {
                             return Integer.valueOf(value);
                         }
                     })
+                // defines a constant
                 .addConstant("hundred", 100)
+                // defines the + operator
                 .addOperator()
                     .priority(1)
                     .operandsBefore(1)
@@ -171,15 +186,15 @@ public class ATutorialTest {
                             }
                         })
                     .buildOperator()
-                // let's craate a grammar with settable variables now
+                // craates a grammar with settable variables
                 .buildDefaultGrammarWithSettableVariables());
 
-        // defining a context
+        // defining a context and putting a variable in it
         final Map<String,Integer> context = new HashMap<>();
         context.put("thousand", 1_000);
 
         // we can set a variable and get it after the calculation from the context
-        assertEquals(1121.0,
+        assertEquals(1121,
                 calc.solveSingleValue(context,
                         "(x = 15 + hundred) + 6 + thousand"), 0);
 
@@ -222,14 +237,15 @@ public class ATutorialTest {
         final Map<String,Integer> context = new HashMap<>();
         context.put("hundred", 1_000);
 
-        assertEquals(100.0,
+        // hundred still value 100
+        assertEquals(100,
                 calc.solveSingleValue(context, "hundred"),
                 0);
     }
 
     /**
-     * The solver understands many heads for the solution tree and so
-     * it can return different values.
+     * The solution tree can be a multi-headed tree so the calculator
+     * can return different values each a solution of a different subtree.
      */
     @Test
     public void shouldReturnResultsForSeparateExpressions() {
@@ -241,19 +257,25 @@ public class ATutorialTest {
     }
 
     /**
-     * Using the {@link SolutionTree} it is possible to solve
+     * Using the {@link SolutionTree} it is possible to do a plot using
+     * a partially solved tree (with simplify) and then solving it in the loop.
      */
     @Test
     public void shouldPlotTheExpression() {
+        // creating a calculator with the default arithmetic grammar
         final MappedContextSimplifyingCalculator<Double> calc =
                 new MappedContextSimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
 
+        // create a solution from an expression
         MappedContextSimplifyingSolutionTree<Double> solution =
                 calc.createSolutionTree("x + y");
 
+        // simplify a solution giving to it a value for one of the two variables
         Map<String,Double> context = Mapper.<Double>create("y", 3d);
         solution.simplify(context); // solve the solution substituting 3 to y
 
+        // solve the other variable in a loop (this solution doesn't modify
+        // the solution tree).
         double accumulator = 0;
         for (double x = 1; x <= 5; x++) {
             // solve the solution substituting different values of x to it

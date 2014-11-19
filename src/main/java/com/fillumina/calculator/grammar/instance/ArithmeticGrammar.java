@@ -32,6 +32,7 @@ import java.util.Map;
 public class ArithmeticGrammar extends Grammar<Double,Map<String,Double>> {
     private static final long serialVersionUID = 1L;
 
+    //TODO substitute static constants with static methods and lazy constructors to avoid creating unnecessary objects
     public static final Iterable<GrammarElement<Double,Map<String,Double>>> ITERABLE =
         new ContextedGrammarBuilder<Double>()
                 .addFloatingPointOperand(new Evaluator<Double, Map<String, Double>>() {
