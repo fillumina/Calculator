@@ -7,7 +7,9 @@ import java.util.List;
 
 /**
  * This {@link Solver} modifies the given {@link SolutionTree} by substituting
- * calculations branches with results while processing the expression.
+ * nodes with results while solving the expression. It acts like an
+ * expression simplifier. It doesn't throw a {@link ContextException} in case
+ * of undefined variables.
  * <p>
  * <b>NOTE:</b> this class <i>modifies</i> the solution tree.
  *
@@ -20,10 +22,11 @@ public class SimplifyingSolver implements Solver, Serializable {
     private static final long serialVersionUID = 1L;
 
     public static final SimplifyingSolver INSTANCE =
-            new SimplifyingSolver(new DefaultNodeEvaluator());
+            new SimplifyingSolver(DefaultNodeEvaluator.INSTANCE);
 
     private final NodeEvaluator evaluator;
 
+    /** Evaluates {@link Node}s with a {@link NodeEvaluator}. */
     public SimplifyingSolver(final NodeEvaluator evaluator) {
         this.evaluator = evaluator;
     }
@@ -32,7 +35,10 @@ public class SimplifyingSolver implements Solver, Serializable {
      * This solver tries to solve the expression and at the same time
      * modify the tree substituting the values that it solves into the nodes.
      * It's useful to pre-parse and optimize an expression that should be
-     * executed several times.
+     * executed several times. Differently from
+     * {@link DefaultSolver#solve(List,Object)} it doesn't throw
+     * {@link ContextException} if a required variable is not present in
+     * the context.
      *
      * @param nodeTree  the solution tree
      * @param context   the context
@@ -64,7 +70,9 @@ public class SimplifyingSolver implements Solver, Serializable {
                     variableFound = true;
                 }
             }
-            results.add( evaluated);
+            if (!variableFound) {
+                results.add( evaluated);
+            }
         }
         // returns null if a variable has been found
         return variableFound ? null : results;

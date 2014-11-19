@@ -4,6 +4,7 @@ import com.fillumina.calculator.EvaluationException;
 import java.util.List;
 
 /**
+ * Base class for not-evaluable elements.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

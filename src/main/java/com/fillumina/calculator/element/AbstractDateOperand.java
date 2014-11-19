@@ -10,6 +10,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
+ * Recognizes dates according to the specified pattern. The pattern can
+ * contain any type of alphabetic characters, these are not important, only
+ * the not-digit, not-alpha characters are taken.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

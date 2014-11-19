@@ -4,8 +4,9 @@ import com.fillumina.calculator.GrammarElement;
 import java.io.Serializable;
 
 /**
+ * This abstract class provides a simple priority mechanism.
  * Priority is used when building the solution tree to put high priority
- * elements first. This abstract class provides a simple priority mechanism.
+ * elements first.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

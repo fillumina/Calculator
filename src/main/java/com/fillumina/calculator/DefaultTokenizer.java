@@ -50,9 +50,10 @@ public class DefaultTokenizer<T,C> implements Serializable, Tokenizer<T, C> {
         while (iterator.hasNext()) {
             previousGrammarElement = (node == null) ?
                     null : node.getGrammarElement();
+            
             node = iterator.next();
 
-            if (node.isUnassignedGrammarElement()) {
+            if (node.isGrammarElementUnassigned()) {
                 final GrammarElementMatcher matcher =
                         ge.match(previousGrammarElement, node.getExpression());
                 if (matcher.isFound()) {

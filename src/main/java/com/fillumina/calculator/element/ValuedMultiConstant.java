@@ -3,8 +3,8 @@ package com.fillumina.calculator.element;
 import java.util.List;
 
 /**
- * Allows to specify the value of the constant.
- * 
+ * Allows to specify the value of the constant with many different symbols.
+ *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public class ValuedMultiConstant<T,C>

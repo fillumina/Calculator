@@ -3,6 +3,7 @@ package com.fillumina.calculator.element;
 import com.fillumina.calculator.GrammarElementType;
 
 /**
+ * Base class for operators.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

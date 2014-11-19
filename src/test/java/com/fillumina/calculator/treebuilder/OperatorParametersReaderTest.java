@@ -6,8 +6,8 @@ import com.fillumina.calculator.grammar.ParametricEvaluator;
 import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
 import java.util.List;
 import java.util.Map;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

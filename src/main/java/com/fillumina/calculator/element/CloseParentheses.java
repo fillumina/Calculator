@@ -3,8 +3,8 @@ package com.fillumina.calculator.element;
 import com.fillumina.calculator.GrammarElementType;
 
 /**
- * Defines the symbol that close a parenthesis. It's about 20% faster than
- * {@link CloseParentheses}. Different symbols can be used by initializing
+ * Defines the symbol that close a parenthesis.
+ * Different symbols can be used by initializing
  * different objects of this class, because parentheses must be properly
  * nested there will be no difference at all (they could be even converted
  * to the same type by a simple string preprocessor before actually parsing

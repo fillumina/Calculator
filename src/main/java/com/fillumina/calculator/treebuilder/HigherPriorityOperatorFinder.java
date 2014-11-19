@@ -54,7 +54,7 @@ class HigherPriorityOperatorFinder {
 
     private <T,C> boolean isEmptyOperator(final Node<T,C> node) {
         final GrammarElementType type = node.getGrammarElement().getType();
-        return type == GrammarElementType.OPERATOR && node.hasNoChildren();
+        return type == GrammarElementType.OPERATOR && node.isChildless();
     }
 
     private <T,C> boolean isLessThan(final Node<T,C> a, final Node<T,C> b) {

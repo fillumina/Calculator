@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Solves an expression.
  * It uses two components: an {@link Interpreter} that parses the expression
- * and build a solution tree and a {@link Solver} that solves the solution tree.
+ * and builds a solution tree and a {@link Solver} that solves the solution tree.
  *
  * @param T the type of the result
  * @param C the type of the context
@@ -27,6 +27,7 @@ public class Calculator<T,C> implements Serializable {
      * Uses the default {@link Interpreter} initialized with
      * the given {@param grammar} and the {@link DefaultSolver}.
      *
+     * @see com.fillumina.calculator.grammar.Grammar
      * @see com.fillumina.calculator.grammar.instance.ArithmeticGrammar
      * @see com.fillumina.calculator.grammar.instance.BooleanGrammar
      *
@@ -40,6 +41,7 @@ public class Calculator<T,C> implements Serializable {
      * Uses the default {@link Interpreter} initialized with
      * the given {@param grammar} and the given {@link Solver}.
      *
+     * @see com.fillumina.calculator.grammar.Grammar
      * @see com.fillumina.calculator.grammar.instance.ArithmeticGrammar
      * @see com.fillumina.calculator.grammar.instance.BooleanGrammar
      * @see DefaultSolver
@@ -55,7 +57,7 @@ public class Calculator<T,C> implements Serializable {
     }
 
     /**
-     * The most basic constructor allows to build the {@link Calculator} based
+     * The most basic constructor allows to build a {@link Calculator} based
      * on a custom {@link Interpreter} and {@link Solver}.
      *
      * @see DefaultInterpreter

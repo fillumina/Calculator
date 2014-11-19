@@ -1,10 +1,14 @@
-package com.fillumina.calculator;
+package com.fillumina.calculator.interpreter;
 
+import com.fillumina.calculator.GrammarElement;
+import com.fillumina.calculator.Interpreter;
+import com.fillumina.calculator.Node;
+import com.fillumina.calculator.TestOperand;
+import com.fillumina.calculator.TestOperator;
 import com.fillumina.calculator.element.CloseParentheses;
 import com.fillumina.calculator.element.DefaultWhiteSpace;
 import com.fillumina.calculator.element.OpenParentheses;
 import com.fillumina.calculator.grammar.Grammar;
-import com.fillumina.calculator.interpreter.DefaultInterpreter;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -13,7 +17,7 @@ import org.junit.Test;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class InterpreterTest {
+public class DefaultInterpreterTest {
 
     @Test
     public void shouldCreateASingleNode() {

@@ -1,8 +1,8 @@
 package com.fillumina.calculator.grammar;
 
+import com.fillumina.calculator.Interpreter;
 import com.fillumina.calculator.MappedContextSimplifyingCalculator;
 import com.fillumina.calculator.MappedContextSimplifyingSolutionTree;
-import com.fillumina.calculator.Interpreter;
 import com.fillumina.calculator.Node;
 import com.fillumina.calculator.UndefinedVariablesFinder;
 import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;

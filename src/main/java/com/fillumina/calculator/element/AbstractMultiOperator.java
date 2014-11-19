@@ -3,7 +3,7 @@ package com.fillumina.calculator.element;
 import com.fillumina.calculator.GrammarElementType;
 
 /**
- *
+ * Matches an operator that can have multiple symbols (ie. AND, and, And, &&..).
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
 public abstract class AbstractMultiOperator<T,C>

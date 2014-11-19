@@ -4,6 +4,7 @@ import com.fillumina.calculator.GrammarElementType;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 
 /**
+ * Base class for operands.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

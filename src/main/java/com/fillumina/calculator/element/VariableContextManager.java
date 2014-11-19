@@ -4,12 +4,16 @@ import com.fillumina.calculator.ContextException;
 import com.fillumina.calculator.GrammarElement;
 import com.fillumina.calculator.GrammarElementMatcher;
 import com.fillumina.calculator.GrammarElementType;
-import com.fillumina.calculator.SyntaxErrorException;
 import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import java.util.List;
 import java.util.Map;
 
 /**
+ * If a element cannot be recognize in the grammar it is recognized as
+ * {@link GrammarElementType#UNRECOGNIZED} and assigned to this element if
+ * present. It is then searched in the context and its value is used here if
+ * found.
+ * <br>
  * Using this class requires the context to be of type
  * <code>Map&lt;String,T&gt;</code>.
  *

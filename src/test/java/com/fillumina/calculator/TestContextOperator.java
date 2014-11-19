@@ -11,7 +11,8 @@ public class TestContextOperator extends TestContextOperand {
     private static final long serialVersionUID = 1L;
     private final int before, after;
 
-    public TestContextOperator(String symbolRegexp, int priority, int before, int after) {
+    public TestContextOperator(String symbolRegexp, int priority,
+            int before, int after) {
         super(symbolRegexp, priority);
         this.before = before;
         this.after = after;

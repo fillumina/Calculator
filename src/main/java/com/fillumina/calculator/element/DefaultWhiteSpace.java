@@ -8,7 +8,7 @@ import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import java.util.List;
 
 /**
- * Ignores common white space characters (CR,LF,TAB,SPACE).
+ * Represents common ignorable white space characters (CR,LF,TAB,SPACE).
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

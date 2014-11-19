@@ -10,5 +10,6 @@ import java.util.List;
  */
 public interface Tokenizer<T, C> {
 
+    /** Parses a string expression into a {@link List} of {@link Node}s. */
     List<Node<T, C>> tokenize(final String expression);
 }

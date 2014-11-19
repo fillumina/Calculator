@@ -1,6 +1,7 @@
 package com.fillumina.calculator.element;
 
 /**
+ * Helper to check type of characters in a very fast way.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

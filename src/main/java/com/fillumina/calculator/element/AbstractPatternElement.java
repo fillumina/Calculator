@@ -6,7 +6,7 @@ import com.fillumina.calculator.grammar.AbstractComparableGrammarElement;
 import java.util.regex.Pattern;
 
 /**
- * Useful to write your own {@link GrammarElement} based on a regular
+ * Useful to write your own {@link GrammarElement}s based on a regular
  * expression (REGEXP). Note that patterns are usually slower to evaluate than
  * a direct approach (about 3 times slower on average).
  *

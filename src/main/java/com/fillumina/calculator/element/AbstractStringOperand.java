@@ -5,7 +5,7 @@ import com.fillumina.calculator.GrammarElementMatcher;
 import static java.lang.Character.isWhitespace;
 
 /**
- * Extracts unquoted strings.
+ * Extracts unquoted strings (that obviously cannot contain white spaces).
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

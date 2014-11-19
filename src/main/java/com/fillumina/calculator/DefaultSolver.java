@@ -2,6 +2,7 @@ package com.fillumina.calculator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class DefaultSolver implements Solver, Serializable {
     private final NodeEvaluator evaluator;
 
     public DefaultSolver() {
-        this(new DefaultNodeEvaluator());
+        this(DefaultNodeEvaluator.INSTANCE);
     }
 
     public DefaultSolver(final NodeEvaluator evaluator) {
@@ -35,7 +36,8 @@ public class DefaultSolver implements Solver, Serializable {
         final List<T> results = new ArrayList<>(solutionTree.size());
         for (final Node<T,C> node : solutionTree) {
             final List<Node<T, C>> children = node.getChildren();
-            final List<T> parameters = solve(children, context);
+            final List<T> parameters = children.isEmpty() ?
+                    Collections.<T>emptyList() : solve(children, context);
             final T evaluated = evaluator.evaluate(node, parameters, context);
             results.add(evaluated);
         }

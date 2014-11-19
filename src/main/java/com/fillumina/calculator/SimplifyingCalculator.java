@@ -5,8 +5,8 @@ import java.util.List;
 
 /**
  * This {@link Calculator} adds the possibility to specify a simplifying
- * {@link Solver} which is a {@link Solver} able to modify the solution
- * tree substituting a result to inner parentheses when possible.
+ * {@link Solver} which is able to modify the solution
+ * tree substituting a result value where possible.
  * This is useful to minimize the mount of operations to do in case of
  * iterations on the same expression with an incognita (i.e. plotting).
  *

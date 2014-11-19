@@ -77,7 +77,7 @@ class IndexedNode<T,C> implements Serializable {
     public boolean isAnEmptyOpenParenthesis() {
         final Node<T,C> n = getNode();
         return n.getGrammarElement().getType() == GrammarElementType.OPEN_PAR &&
-                n.hasNoChildren();
+                n.isChildless();
     }
 
     @Override

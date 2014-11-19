@@ -5,6 +5,7 @@ import com.fillumina.calculator.ContextException;
 import com.fillumina.calculator.DefaultSolver;
 import com.fillumina.calculator.SyntaxErrorException;
 import com.fillumina.calculator.treebuilder.ParenthesesMismatchedException;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
@@ -16,25 +17,51 @@ import org.junit.Test;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ArithmeticGrammarDefaultSolverTest {
+public class DecimalArithmeticGrammarTest {
 
-    private final Map<String, Double> context = new HashMap<>();
-    private Calculator<Double, Map<String, Double>> calculator;
+    private final Map<String, BigDecimal> context = new HashMap<>();
+    private Calculator<BigDecimal, Map<String, BigDecimal>> calculator;
 
     @Before
     public void init() {
         calculator = new Calculator<>(
-                ArithmeticGrammar.INSTANCE, DefaultSolver.INSTANCE);;
+                DecimalArithmeticGrammar.INSTANCE, DefaultSolver.INSTANCE);;
     }
 
     private void assertEvaluateTo(final double expected,
             final String expression) {
-        final Double result = calculate(expression);
-        assertEquals("\"" + expression + "\"", expected, result, 1E-7);
+        final BigDecimal result = calculate(expression);
+        assertEquals("\"" + expression + "\"",
+                expected, result.doubleValue(), 1E-7);
     }
 
-    public Double calculate(final String expression) {
+    public BigDecimal calculate(final String expression) {
         return calculator.solve(context, expression).get(0);
+    }
+
+    @Test
+    public void shouldUseTheMinusSign() {
+        assertEvaluateTo(-5, "10 / -2");
+    }
+
+    @Test
+    public void shouldUseThePlusSign() {
+        assertEvaluateTo(5, "10 / +2");
+    }
+
+    @Test
+    public void shoudUseTheMinusSignWithLoneOperand() {
+        assertEvaluateTo(-5, "- 5");
+    }
+
+    @Test
+    public void shoudUseThePlusSignWithLoneOperand() {
+        assertEvaluateTo(5, "+ 5");
+    }
+
+    @Test
+    public void shouldElevateAtThePowerOfZero() {
+        assertEvaluateTo(1, "12^0");
     }
 
     @Test(expected=ContextException.class)
@@ -168,8 +195,9 @@ public class ArithmeticGrammarDefaultSolverTest {
 
     @Test
     public void shouldSolveANoParameterOperator() {
-        final Double result = calculator.solve(context, "rnd()").get(0);
-        assertTrue(result > 0 && result < 1);
+        final BigDecimal result = calculator.solve(context, "rnd()").get(0);
+        assertTrue(result.compareTo(BigDecimal.ZERO) == 1 &&
+                result.compareTo(BigDecimal.ONE) == -1);
     }
 
     @Test
@@ -219,7 +247,7 @@ public class ArithmeticGrammarDefaultSolverTest {
 
     @Test
     public void shouldManageAVariableWithANegativeValue() {
-        context.put("a", 1d);
+        context.put("a", BigDecimal.valueOf(1d));
         assertEvaluateTo(0, "(a -1)");
     }
 
@@ -320,15 +348,15 @@ public class ArithmeticGrammarDefaultSolverTest {
 
     @Test
     public void shouldEvaluatedTheVariableGivenInTheContext() {
-        context.put("x", 123.0);
+        context.put("x", BigDecimal.valueOf(123.0));
         assertEvaluateTo(246.0, "x*2");
     }
 
     @Test
     public void shouldAssignTheVariableToTheContext() {
         assertEvaluateTo(35.0, "y = 5 *(x=7)");
-        assertEquals(7.0, context.get("x"), 1E-7);
-        assertEquals(35.0, context.get("y"), 1E-7);
+        assertEquals(7.0, context.get("x").doubleValue(), 1E-7);
+        assertEquals(35.0, context.get("y").doubleValue(), 1E-7);
     }
 
     @Test
@@ -373,23 +401,23 @@ public class ArithmeticGrammarDefaultSolverTest {
 
     @Test
     public void shouldDistinguishBetweenAVariableContainingAnOperator() {
-        context.put("sina", 0.5d);
-        context.put("osin", Math.PI);
+        context.put("sina", BigDecimal.valueOf(0.5d));
+        context.put("osin", BigDecimal.valueOf(Math.PI));
         assertEvaluateTo(Math.sin(Math.PI/2d), "sin(sina*osin)");
     }
 
     @Test
     public void shouldDistinguishBetweenAEAndAVariableNameContainingE() {
-        context.put("ellelle", 1d);
-        context.put("elle", 2d);
-        context.put("el", 3d);
-        context.put("le", 4d);
+        context.put("ellelle", BigDecimal.valueOf(1d));
+        context.put("elle", BigDecimal.valueOf(2d));
+        context.put("el", BigDecimal.valueOf(3d));
+        context.put("le", BigDecimal.valueOf(4d));
         assertEvaluateTo(1d + Math.E * 48d, "ellelle+2*elle*el*le*E");
     }
 
     @Test
     public void shouldDistinguishBetweenAVariableNameContainingAnOperator() {
-        context.put("asintoto", Math.PI);
+        context.put("asintoto", BigDecimal.valueOf(Math.PI));
         assertEvaluateTo(0, "sin(asintoto)");
     }
 

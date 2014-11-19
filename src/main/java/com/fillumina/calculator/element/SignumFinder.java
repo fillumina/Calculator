@@ -17,11 +17,9 @@ class SignumFinder {
     private SignumFinder() {}
 
     /**
-     * This method here is controversial. It is needed to see if the
-     * preceeding + or - should be part of the number, but this can be
-     * determined only in a standard arithmetic with some checks. I just
-     * assume here that the grammar defined is somewhat 'close' to the
-     * standard arithmetic.
+     * Checks if the sign should be part of the number or if it is an operator
+     * based on the preceeding characters or the type of the preceeding
+     * {@link GrammarElement}.
      */
     static <T,C> boolean isPreceededByASignum(
             final GrammarElement<T,C> previusGrammarElement,
@@ -34,10 +32,7 @@ class SignumFinder {
                 char c;
                 for (int i=start -2; i>=0; i--) {
                     c = carray[i];
-                    // would be already parsed by a previous application
-//                    if (CharacterUtil.isDigit(c)) {
-//                        return false;
-//                    }
+                    // a digit would be already parsed by a previous application
                     if (CharacterUtil.isAlphabetic(c)) {
                         return false;
                     } else if (CharacterUtil.isWhitespace(c)) {

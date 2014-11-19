@@ -1,4 +1,4 @@
-package com.fillumina.calculator.grammar;
+package com.fillumina.calculator.interpreter;
 
 import com.fillumina.calculator.DefaultTokenizer;
 import com.fillumina.calculator.GrammarElement;
@@ -7,7 +7,7 @@ import com.fillumina.calculator.TestOperand;
 import com.fillumina.calculator.TestOperator;
 import com.fillumina.calculator.Tokenizer;
 import com.fillumina.calculator.element.WhiteSpace;
-import com.fillumina.calculator.interpreter.WhiteSpaceCleaner;
+import com.fillumina.calculator.grammar.Grammar;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;

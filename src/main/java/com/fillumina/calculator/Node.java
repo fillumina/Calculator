@@ -7,7 +7,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Represents a node in the solution tree.
+ * Represents a node in the solution tree. A solution tree is a {@link List}
+ * of {@link Node}s where each node represents part of the initial expression
+ * and contains a {@link GrammarElement} and can
+ * be eventually solved using its children as parameters. The solution tree
+ * is built by an {@link Interpreter} and solved by a {@link Solver}.
+ * It can be manipulated by a
+ * {@link com.fillumina.calculator.interpreter.SolutionTreeFilter}.
+ * <br>
  * This class is <i>mutable</i> but allows
  * <i>deep cloning</i> so that a cloned solution tree can be modified
  * without changing the original.
@@ -24,9 +31,7 @@ public class Node<T,C> implements Cloneable, Serializable {
     private boolean hasValue;
     private T value;
     private GrammarElement<T,C> grammarElement;
-
-    @SuppressWarnings("unchecked")
-    private List<Node<T,C>> children = Collections.EMPTY_LIST;
+    private List<Node<T,C>> children = Collections.<Node<T,C>>emptyList();
 
     public Node(final String expression) {
         this.expression = expression;
@@ -56,20 +61,28 @@ public class Node<T,C> implements Cloneable, Serializable {
     }
 
     public Node<T,C> addChildren(final Node<T,C> node) {
-        if (children == Collections.EMPTY_LIST) {
-            children = new LinkedList<>();
-        }
+        createChildrenList();
         children.add(node);
         return this;
     }
 
     public Node<T,C> addAllChildren(final Collection<Node<T,C>> nodes) {
-        for (Node<T,C> node: nodes) {
-            addChildren(node);
+        if (nodes != null && !nodes.isEmpty()) {
+            createChildrenList();
+            for (Node<T,C> node: nodes) {
+                children.add(node);
+            }
         }
         return this;
     }
 
+    private void createChildrenList() {
+        if (children == Collections.EMPTY_LIST) {
+            children = new LinkedList<>();
+        }
+    }
+
+    /** @return a list of children that <i>can be modified</i>. */
     public List<Node<T,C>> getChildren() {
         return children;
     }
@@ -105,16 +118,16 @@ public class Node<T,C> implements Cloneable, Serializable {
         this.grammarElement = grammarElement;
     }
 
-    public boolean isUnassignedGrammarElement() {
+    public boolean isGrammarElementUnassigned() {
         return grammarElement == null;
     }
 
-    public boolean hasNoChildren() {
+    public boolean isChildless() {
         return children.isEmpty();
     }
 
     public boolean hasChildren() {
-        return !hasNoChildren();
+        return !isChildless();
     }
 
     public boolean hasOnlyOneChild() {

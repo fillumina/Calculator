@@ -4,6 +4,7 @@ import com.fillumina.calculator.GrammarElementMatcher;
 import java.io.Serializable;
 
 /**
+ * Implementation of {@link GrammarElementMatcher}.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

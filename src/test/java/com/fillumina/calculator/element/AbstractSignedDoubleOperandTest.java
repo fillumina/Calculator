@@ -1,7 +1,7 @@
 package com.fillumina.calculator.element;
 
-import com.fillumina.calculator.MappedContextSimplifyingCalculator;
 import com.fillumina.calculator.GrammarElement;
+import com.fillumina.calculator.MappedContextSimplifyingCalculator;
 import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
 import java.util.List;
 import java.util.Map;

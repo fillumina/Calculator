@@ -20,7 +20,9 @@ public class CharacterUtilIsAlphabeticPerformanceTest
 
     @Override
     public void init(ProgressionConfigurator config) {
-        config.setMaxStandardDeviation(3);
+        config
+                .setBaseIterations(10_000)
+                .setMaxStandardDeviation(3);
     }
 
     @Override

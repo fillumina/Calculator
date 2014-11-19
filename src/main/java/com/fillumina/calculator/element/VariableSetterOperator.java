@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Defines an operator that can create or set a variable in the context and
- * returns the value of the variable.
+ * Defines an operator that can create or set a variable in the context.
  * <p>
  * <code><pre>
  * (x = 4 / 2 + 1) * x

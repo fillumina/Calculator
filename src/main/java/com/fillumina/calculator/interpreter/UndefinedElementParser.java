@@ -34,7 +34,7 @@ public class UndefinedElementParser<T,C>
     @SuppressWarnings("unchecked")
     public <T,C> void executeOn(final List<Node<T,C>> nodes) {
         for (Node<T,C> node: nodes) {
-            if (node.isUnassignedGrammarElement()) {
+            if (node.isGrammarElementUnassigned()) {
                 assertUnrecognizedElementIsPresent(node);
                 node.setGrammarElement(
                         (GrammarElement<T, C>) unrecognizedElement);

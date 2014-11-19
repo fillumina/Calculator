@@ -7,10 +7,8 @@ import static com.fillumina.calculator.element.SignumFinder.isPreceededByASignum
 import java.text.DecimalFormatSymbols;
 
 /**
- * Parse floating point numbers trying to establish if the eventual preceeding
+ * Parse floating point numbers trying to establish if the eventually preceeding
  * sign is part of it.
- *
- * @see AbstractSignedDoubleOperand
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

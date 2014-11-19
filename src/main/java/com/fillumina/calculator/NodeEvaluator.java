@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Evaluates a node.
+ * Evaluates a {@link Node}.
  *
  * @param T the type of the result
  * @param C the type of the context

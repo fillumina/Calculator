@@ -4,7 +4,7 @@ import com.fillumina.calculator.GrammarElementType;
 import java.util.List;
 
 /**
- * Faster than {@link ConstantElement} but it cannot use REGEXP.
+ * Represents a constant that has a fixed value.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */

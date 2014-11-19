@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.regex.Matcher;
 
 /**
+ * Implementation of {@link GrammarElementMatcher} that wraps a
+ * REGEXP's {@link Matcher}.
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
