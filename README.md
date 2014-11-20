@@ -2,6 +2,11 @@
 
 An easy to configure, flexible, reasonably fast calculator API.
 
+> Do you need an easy way to create your own calculator in Java?
+> Ever wanted to add that strange function nobody cares about?
+> This is a very easy to configure and extend calculator API.
+> It can process strings and produce any type of solution you need.
+
 * It parses a string expression according to the rules given by a
 grammar (includes a boolean grammar, an arithmetic grammar based on doubles
 and an arithmetic grammar based on BigDecimal) and produces a solution.
