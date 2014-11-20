@@ -103,4 +103,4 @@ using a builder:
             .buildDefaultGrammarWithSettableVariables());
 ```
 
-Have fun! (and possibly let me know about what you think ;) )
+Have fun! (and possibly let me know about what do you think ;) )
