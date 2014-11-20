@@ -40,14 +40,15 @@ method.
 
 This example shows how to use variables:
 ```java
-        final MappedContextSimplifyingCalculator<Double> calc =
-                new MappedContextSimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
+    final MappedContextSimplifyingCalculator<Double> calc =
+            new MappedContextSimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
 
-        Map<String,Double> context = Mapper.<Double>create("hundred", 100.0);
+    // Mapper is an helper to easily create and set maps of type Map<String,T>
+    Map<String,Double> context = Mapper.<Double>create("hundred", 100.0);
 
-        assert 121 == calc.solveSingleValue(context, "(x = 15 + hundred) + 6");
+    assert 121 == calc.solveSingleValue(context, "(x = 15 + hundred) + 6");
 
-        assert 115 == context.get("x");
+    assert 115 == context.get("x");
 ```
 
 ## Creating your own grammar
@@ -91,9 +92,9 @@ own grammar (or maybe extending the provided ones) using a builder:
                     })
                 .buildOperator()
 
-            // craates a grammar with settable variables, white spaces
+            // creates a grammar with settable variables, white spaces
             // and parentheses
             .buildDefaultGrammarWithSettableVariables());
 ```
 
-Have fun!
+Have fun! (and possibly let me know about what you think ;) )
