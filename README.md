@@ -60,7 +60,7 @@ This example shows how to use variables:
 
 The calculator is extremely flexible and easy to configure and modify.
 You can create your own customized components using the constructors
-and implementig the interfaces. But the easier way of costumizeing it is by
+and implementig the interfaces. But the easier way of customizing it is by
 creating your own grammar (or maybe extending the provided ones)
 using a builder:
 
