@@ -29,7 +29,7 @@ import java.util.Map;
  *
  * @author Francesco Illuminati <fillumina@gmail.com>
  */
-public class ArithmeticGrammar extends Grammar<Double,Map<String,Double>> {
+public class DoubleArithmeticGrammar extends Grammar<Double,Map<String,Double>> {
     private static final long serialVersionUID = 1L;
 
     public static final Iterable<GrammarElement<Double,Map<String,Double>>> ITERABLE =
@@ -306,10 +306,10 @@ public class ArithmeticGrammar extends Grammar<Double,Map<String,Double>> {
         .buildDefaultGrammarWithSettableVariables();
 
     @SuppressWarnings("unchecked")
-    public static final ArithmeticGrammar INSTANCE =
-            new ArithmeticGrammar(ITERABLE);
+    public static final DoubleArithmeticGrammar INSTANCE =
+            new DoubleArithmeticGrammar(ITERABLE);
 
-    private ArithmeticGrammar(
+    private DoubleArithmeticGrammar(
             final Iterable<GrammarElement<Double, Map<String, Double>>>... iterables) {
         super(iterables);
     }

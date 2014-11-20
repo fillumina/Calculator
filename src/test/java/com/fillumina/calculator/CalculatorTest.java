@@ -1,6 +1,6 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.DoubleArithmeticGrammar;
 import com.fillumina.calculator.treebuilder.ParenthesesMismatchedException;
 import com.fillumina.calculator.util.Mapper;
 import java.util.Arrays;
@@ -24,7 +24,7 @@ public class CalculatorTest {
             (Map<String,Double>)Collections.EMPTY_MAP;
 
     private Calculator<Double, Map<String,Double>> calc =
-            new Calculator<>(ArithmeticGrammar.INSTANCE);
+            new Calculator<>(DoubleArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldSolveMultipleResults() {

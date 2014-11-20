@@ -3,7 +3,7 @@ package com.fillumina.calculator.treebuilder;
 import com.fillumina.calculator.MappedContextSimplifyingCalculator;
 import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
 import com.fillumina.calculator.grammar.ParametricEvaluator;
-import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.DoubleArithmeticGrammar;
 import java.util.List;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
@@ -99,7 +99,7 @@ public class OperatorParametersReaderTest {
             final String expression) {
         final MappedContextSimplifyingCalculator<Double> calc =
             new MappedContextSimplifyingCalculator<>(
-                new ContextedGrammarBuilder<>(ArithmeticGrammar.INSTANCE)
+                new ContextedGrammarBuilder<>(DoubleArithmeticGrammar.INSTANCE)
                 .addOperator()
                     .priority(1)
                     .symbols("@")

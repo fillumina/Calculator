@@ -1,6 +1,6 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.DoubleArithmeticGrammar;
 import com.fillumina.calculator.util.Mapper;
 import java.util.Arrays;
 import java.util.Map;
@@ -17,7 +17,7 @@ import org.junit.Test;
 public class SolutionTreeTest {
 
     private Calculator<Double,Map<String,Double>> calc =
-            new Calculator(ArithmeticGrammar.INSTANCE);
+            new Calculator(DoubleArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldCreateASolutionTree() {

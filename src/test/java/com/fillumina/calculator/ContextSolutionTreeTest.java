@@ -1,6 +1,6 @@
 package com.fillumina.calculator;
 
-import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.DoubleArithmeticGrammar;
 import java.util.List;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
@@ -16,7 +16,7 @@ import org.junit.Test;
 public class ContextSolutionTreeTest {
 
     private MappedContextSimplifyingCalculator<Double> calculator =
-            new MappedContextSimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
+            new MappedContextSimplifyingCalculator<>(DoubleArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldHaveAStaticSolution() {

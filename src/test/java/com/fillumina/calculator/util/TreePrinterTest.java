@@ -2,7 +2,7 @@ package com.fillumina.calculator.util;
 
 import com.fillumina.calculator.Interpreter;
 import com.fillumina.calculator.Node;
-import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.DoubleArithmeticGrammar;
 import com.fillumina.calculator.interpreter.DefaultInterpreter;
 import java.util.Collection;
 import java.util.Map;
@@ -20,7 +20,7 @@ public class TreePrinterTest {
 
     @Before
     public void init() {
-        final ArithmeticGrammar grammar = ArithmeticGrammar.INSTANCE;
+        final DoubleArithmeticGrammar grammar = DoubleArithmeticGrammar.INSTANCE;
         interpreter = new DefaultInterpreter<>(grammar);
     }
 

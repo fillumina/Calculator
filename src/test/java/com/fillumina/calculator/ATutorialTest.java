@@ -4,7 +4,7 @@ import com.fillumina.calculator.grammar.ContextedGrammarBuilder;
 import com.fillumina.calculator.grammar.Evaluator;
 import com.fillumina.calculator.grammar.GrammarBuilder;
 import com.fillumina.calculator.grammar.ParametricEvaluator;
-import com.fillumina.calculator.grammar.instance.ArithmeticGrammar;
+import com.fillumina.calculator.grammar.instance.DoubleArithmeticGrammar;
 import com.fillumina.calculator.util.Mapper;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class ATutorialTest {
     public void shouldCalculateASimpleExpression() {
         // Let's create a simple arithmetic calculator
         final Calculator<Double,Map<String,Double>> calculator =
-                new Calculator<>(ArithmeticGrammar.INSTANCE);
+                new Calculator<>(DoubleArithmeticGrammar.INSTANCE);
 
         // it's easy to make calculations and get results
         assertEquals(12.5, calculator.solve("(20 + 5)/2 ").get(0), 0);
@@ -46,7 +46,7 @@ public class ATutorialTest {
     }
 
     /**
-     * The provided {@link ArithmeticGrammar} has a component that manages
+     * The provided {@link DoubleArithmeticGrammar} has a component that manages
      * a string mapped context that can be used to store and retrieve variables.
      * If an expression contains a variable which is not defined in the
      * context the usual behavior of {@link Calculator#solve(java.lang.String)}
@@ -61,7 +61,7 @@ public class ATutorialTest {
     public void shouldRequireAVariable() {
         // Let's create a simple arithmetic calculator
         final Calculator<Double,Map<String,Double>> calculator =
-                new Calculator<>(ArithmeticGrammar.INSTANCE);
+                new Calculator<>(DoubleArithmeticGrammar.INSTANCE);
 
         // we can get a solution tree which can then be queried
         SolutionTree<Double,Map<String,Double>> solutionTree =
@@ -299,7 +299,7 @@ public class ATutorialTest {
     @Test
     public void shouldReturnResultsForSeparateExpressions() {
         final MappedContextSimplifyingCalculator<Double> calc =
-                new MappedContextSimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
+                new MappedContextSimplifyingCalculator<>(DoubleArithmeticGrammar.INSTANCE);
 
         assertEquals(Arrays.asList(1.0, 7.0, 2.0),
                 calc.solve("sin(PI/2) 5+2 14/7"));
@@ -313,7 +313,7 @@ public class ATutorialTest {
     public void shouldPlotTheExpression() {
         // creating a calculator with the default arithmetic grammar
         final MappedContextSimplifyingCalculator<Double> calc =
-                new MappedContextSimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
+                new MappedContextSimplifyingCalculator<>(DoubleArithmeticGrammar.INSTANCE);
 
         // create a solution from an expression
         MappedContextSimplifyingSolutionTree<Double> solution =

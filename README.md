@@ -7,23 +7,23 @@ An easy to configure, flexible, reasonably fast calculator API.
 > This is a very easy to configure and extend calculator API.
 > It can process strings and produce any type of solution you need.
 
-* It parses a string expression according to the rules given by a
+* Parses a string expression according to the rules given by a
 grammar (includes a boolean grammar, an arithmetic grammar based on doubles
-and an arithmetic grammar based on BigDecimal) and produces a solution.
-* It has the possibility to simplify an expression and solve incognita
-variables in the expression iteratively.
-* It has a grammar builder that helps building your own custom grammars in
-a very easy and intuitive way.
-* And at last is reasonably fast to use.
+and an arithmetic grammar based on BigDecimals) and calculates a solution;
+* Has the possibility to simplify an expression and solve incognita
+variables in the expression iteratively;
+* Has a grammar builder that helps building your own custom grammars in
+a very easy and intuitive way;
+* And, at last, it's reasonably fast.
 
-To get a glipse of how to use its API take a look at the tutorial unit test:
+To get a glipse of how to use it take a look at the tutorial unit test:
 [ATutorialTest.java]
 (/src/test/java/com/fillumina/calculator/ATutorialTest.java).
 
 
 ## Using the provided grammars to configure a ready to use calculator
 
-Using one of the three provided grammars it is possible to build a working
+Using one of the three provided grammars it is possible to build a
 calculator capable to parse expressions with whitespaces, infinite order of
 nested parentheses and settable variables. These are the provided grammars:
 * Double arithmetic;
@@ -34,7 +34,7 @@ This is an example of how to create and use a simple grammar:
 
 ```java
     final Calculator<Double,Map<String,Double>> calculator =
-            new Calculator<>(ArithmeticGrammar.INSTANCE);
+            new Calculator<>(DoubleArithmeticGrammar.INSTANCE);
     assert 12.5 == calculator.solveSingleValue("(20 + 5)/2 ");
 ```
 
@@ -46,7 +46,7 @@ method.
 This example shows how to use variables:
 ```java
     final MappedContextSimplifyingCalculator<Double> calc =
-            new MappedContextSimplifyingCalculator<>(ArithmeticGrammar.INSTANCE);
+        new MappedContextSimplifyingCalculator<>(DoubleArithmeticGrammar.INSTANCE);
 
     // Mapper is an helper to easily create and set maps of type Map<String,T>
     Map<String,Double> context = Mapper.<Double>create("hundred", 100.0);
@@ -60,12 +60,12 @@ This example shows how to use variables:
 
 The calculator is extremely flexible and easy to configure and modify.
 You can create your own customized components using the constructors
-and implementig the interfaces. But the easier way of customizing it is by
+and implementing the interfaces. But it's by far easier to customize it is by
 creating your own grammar (or maybe extending the provided ones)
 using a builder:
 
 ```java
-    // creates a calculator with a custom grammar
+    // creates a custom grammar
     Iterable<GrammarElement<Integer,Map<String,Integer>>> grammar =
         new ContextedGrammarBuilder<Integer>()
             // creates the operand

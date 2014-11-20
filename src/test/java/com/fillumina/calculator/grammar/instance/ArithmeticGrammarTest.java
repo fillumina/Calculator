@@ -24,7 +24,7 @@ public class ArithmeticGrammarTest {
     @Before
     public void init() {
         calculator = new Calculator<>(
-                ArithmeticGrammar.INSTANCE, DefaultSolver.INSTANCE);;
+                DoubleArithmeticGrammar.INSTANCE, DefaultSolver.INSTANCE);;
     }
 
     private void assertEvaluateTo(final double expected,
