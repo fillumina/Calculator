@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
 /**
@@ -20,7 +21,17 @@ import org.junit.Test;
  */
 public class ATutorialTest {
 
-
+    /**
+     * Let's see how easy is to use the calculator with one of the
+     * provided grammars.
+     * The results of an expression is usually a {@link List} because it can
+     * be comprised of different un-related sub expression: for example
+     * the expression {@code "5 + 3 2"} is composed of two separate arithmetic
+     * expression and the solution will be the list {@code [8, 2]}.
+     * If are interested in the first solution only there is a shortcut to
+     * using the {@link List#get(int)} method which is
+     * {@link Calculator#solveSingleValue(java.lang.String)}.
+     */
     @Test
     public void shouldCalculateASimpleExpression() {
         // Let's create a simple arithmetic calculator
@@ -28,9 +39,24 @@ public class ATutorialTest {
                 new Calculator<>(ArithmeticGrammar.INSTANCE);
 
         // it's easy to make calculations and get results
+        assertEquals(12.5, calculator.solve("(20 + 5)/2 ").get(0), 0);
+
+        // to avoid the get(0) there is a specialized solve method
         assertEquals(12.5, calculator.solveSingleValue("(20 + 5)/2 "), 0);
     }
 
+    /**
+     * The provided {@link ArithmeticGrammar} has a component that manages
+     * a string mapped context that can be used to store and retrieve variables.
+     * If an expression contains a variable which is not defined in the
+     * context the usual behavior of {@link Calculator#solve(java.lang.String)}
+     * methods is to throw a {@link ContextException}. If you need to know
+     * which variables are present you can use the method
+     * {@link Calculator#createSolutionTree(java.lang.String) } that
+     * returns a {@link SolutionTree} which
+     * has an helper method to enquire for undefined variables
+     * {@link SolutionTree#getUndefinedVariables()}.
+     */
     @Test
     public void shouldRequireAVariable() {
         // Let's create a simple arithmetic calculator
@@ -41,12 +67,21 @@ public class ATutorialTest {
         SolutionTree<Double,Map<String,Double>> solutionTree =
                 calculator.createSolutionTree("2 * x / 5");
 
+        assertFalse(solutionTree.isSolved());
+
         // it's possible to ask for undefined variables
         assertEquals("x", solutionTree.getUndefinedVariables().get(0));
     }
 
     /**
-     * Let's define a simple grammar and use it for a calculation
+     * The strength of this API is not so much into the provided grammars
+     * but in the ability to easily create and use your own. A grammar
+     * is an {@link Iterable} over {@link GrammarElement}s but there is an
+     * class called {@link com.fillumina.calculator.grammar.Grammar} to help
+     * creating a new one. It's probably even better to use one of the provided
+     * builders ({@link com.fillumina.calculator.grammar.GrammarBuilder}).
+     * Grammars can return whatever type it's needed and are very easy to built.
+     * Let's define a simple grammar and use it for a calculation.
      */
     @Test
     public void shouldDefineAndUseASimpleGrammar() {
@@ -56,7 +91,7 @@ public class ATutorialTest {
             // the grammar works over integers and doesn't manage a
             // context (Void).
             GrammarBuilder.<Integer,Void>create()
-                // this grammar will produce integer values
+                // this grammar will produce and operates over integer values
                 .addIntegerOperand(new Evaluator<Integer, Void>() {
                         @Override
                         public Integer evaluate(String value, Void context) {
@@ -105,7 +140,7 @@ public class ATutorialTest {
     }
 
     /**
-     * Let's create a more complex grammar using a mapped context
+     * Let's create a more complex grammar using a string mapped context.
      */
     @Test
     public void shouldDefineAndUseASimpleGrammarWithContext() {
@@ -113,7 +148,7 @@ public class ATutorialTest {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
             // creates a grammar over integers with a string mapped context
             new ContextedGrammarBuilder<Integer>()
-                // this defines the base operand
+                // this defines the base operand (integer)
                 .addIntegerOperand(new Evaluator
                             <Integer, Map<String,Integer>>() {
                         @Override
@@ -122,8 +157,10 @@ public class ATutorialTest {
                             return Integer.valueOf(value);
                         }
                     })
+
                 // let's add a constant
                 .addConstant("hundred", 100)
+
                 // and the + operator
                 .addOperator()
                     .priority(1)
@@ -140,6 +177,7 @@ public class ATutorialTest {
                             }
                         })
                     .buildOperator()
+
                 // this builder allows for whitespaces and variables
                 .buildDefaultGrammarWithVariables());
 
@@ -147,12 +185,17 @@ public class ATutorialTest {
         final Map<String,Integer> context = new HashMap<>();
         context.put("thousand", 1_000);
 
-        // we are now ready to do a calculation
+        // we are now ready to do a calculation of an expression with
+        // parentheses and whitespaces
         assertEquals(1121,
                 calc.solveSingleValue(context, "15 + (hundred + 6) + thousand"),
                 0);
     }
 
+    /**
+     * A variable can be implicitly defined in the expression and retrieved
+     * from the context.
+     */
     @Test
     public void shouldDefineAndUseASimpleGrammarWithContextAndSetAVariable() {
         // creates a calculator with a custom grammar
@@ -168,8 +211,10 @@ public class ATutorialTest {
                             return Integer.valueOf(value);
                         }
                     })
+
                 // defines a constant
                 .addConstant("hundred", 100)
+
                 // defines the + operator
                 .addOperator()
                     .priority(1)
@@ -186,6 +231,7 @@ public class ATutorialTest {
                             }
                         })
                     .buildOperator()
+
                 // craates a grammar with settable variables
                 .buildDefaultGrammarWithSettableVariables());
 
@@ -193,7 +239,8 @@ public class ATutorialTest {
         final Map<String,Integer> context = new HashMap<>();
         context.put("thousand", 1_000);
 
-        // we can set a variable and get it after the calculation from the context
+        // we can (implicitly) set a variable and get it after the calculation
+        // from the context
         assertEquals(1121,
                 calc.solveSingleValue(context,
                         "(x = 15 + hundred) + 6 + thousand"), 0);
@@ -202,7 +249,9 @@ public class ATutorialTest {
         assertEquals(115, context.get("x"), 0);
     }
 
-    /** Of course variables cannot shadow constants. */
+    /**
+     * Of course variables cannot shadow constants (they have higher priority).
+     */
     @Test
     public void shouldNotShadowALegitimateConstant() {
         final Calculator<Integer,Map<String,Integer>> calc = new Calculator<>(
@@ -244,8 +293,8 @@ public class ATutorialTest {
     }
 
     /**
-     * The solution tree can be a multi-headed tree so the calculator
-     * can return different values each a solution of a different subtree.
+     * The solution tree can be a multi-headed tree. The calculator
+     * can return different values each a solution of a different sub expression.
      */
     @Test
     public void shouldReturnResultsForSeparateExpressions() {
@@ -283,6 +332,7 @@ public class ATutorialTest {
             accumulator += y;
         }
 
+        // (1+3)+(2+3)+(3+3)+(4+3)+(5+3)=(1+2+3+4+5)+(3*5)=15+15
         assertEquals(15 + 15, accumulator, 0);
     }
 }
