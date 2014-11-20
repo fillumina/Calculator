@@ -58,10 +58,11 @@ This example shows how to use variables:
 
 ## Creating your own grammar
 
-The calculator is extremely flexible and easy to configure and modify by
-creating your own components using the constructors and implementig the
-interfaces but the most useful way of doing so is by creating your
-own grammar (or maybe extending the provided ones) using a builder:
+The calculator is extremely flexible and easy to configure and modify.
+You can create your own customized components using the constructors
+and implementig the interfaces. But the easier way of costumizeing it is by
+creating your own grammar (or maybe extending the provided ones)
+using a builder:
 
 ```java
     // creates a calculator with a custom grammar
