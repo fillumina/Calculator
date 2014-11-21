@@ -246,6 +246,20 @@ public class GrammarBuilder<T,C,B extends GrammarBuilder<T,C,?>> {
         return (B)this;
     }
 
+    public B addAll(final GrammarElement<T,C>... grammarElements) {
+        for (GrammarElement<T,C> ge : grammarElements) {
+            add(ge);
+        }
+        return (B)this;
+    }
+
+    public B addAll(final Iterable<GrammarElement<T,C>> grammarElements) {
+        for (GrammarElement<T,C> ge : grammarElements) {
+            add(ge);
+        }
+        return (B)this;
+    }
+
     /** @return the specified Grammar (no extra elements added). */
     public Iterable<GrammarElement<T,C>> buildGrammar() {
         return Collections.unmodifiableList(new ArrayList<>(elements));

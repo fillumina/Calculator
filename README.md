@@ -2,11 +2,6 @@
 
 An easy to configure, flexible, reasonably fast calculator API.
 
-> Do you need an easy way to create your own calculator in Java?
-> Ever wanted to add that strange function nobody cares about?
-> This is a very easy to configure and extend calculator API.
-> It can process strings and produce any type of solution you need.
-
 * Parses a string expression according to the rules given by a
 grammar (includes a boolean grammar, an arithmetic grammar based on doubles
 and an arithmetic grammar based on BigDecimals) and calculates a solution;
@@ -60,7 +55,7 @@ This example shows how to use variables:
 
 The calculator is extremely flexible and easy to configure and modify.
 You can create your own customized components using the constructors
-and implementing the interfaces. But it's by far easier to customize it is by
+and implementing the interfaces. But it's by far easier to customize it by
 creating your own grammar (or maybe extending the provided ones)
 using a builder:
 
