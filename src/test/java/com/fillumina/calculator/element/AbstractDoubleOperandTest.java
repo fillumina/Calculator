@@ -159,4 +159,15 @@ public class AbstractDoubleOperandTest extends GrammarElementTestBase {
     public void shouldNotRecognizeADoubleStartingWithADot() {
         recognize("-2", ".-2");
     }
+
+    /**
+     * The string here is not converted into an actual double but only
+     * recognized as such.
+     */
+    @Test
+    public void shouldReadAVeryLongDouble() {
+        final String veryLongNumber =
+                "123456789012345678901234567890.12345678901234567890";
+        recognize(veryLongNumber, veryLongNumber);
+    }
 }

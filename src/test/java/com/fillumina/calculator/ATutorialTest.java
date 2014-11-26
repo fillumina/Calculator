@@ -299,7 +299,8 @@ public class ATutorialTest {
     @Test
     public void shouldReturnResultsForSeparateExpressions() {
         final MappedContextSimplifyingCalculator<Double> calc =
-                new MappedContextSimplifyingCalculator<>(DoubleArithmeticGrammar.INSTANCE);
+                new MappedContextSimplifyingCalculator<>(
+                        DoubleArithmeticGrammar.INSTANCE);
 
         assertEquals(Arrays.asList(1.0, 7.0, 2.0),
                 calc.solve("sin(PI/2) 5+2 14/7"));
@@ -313,7 +314,8 @@ public class ATutorialTest {
     public void shouldPlotTheExpression() {
         // creating a calculator with the default arithmetic grammar
         final MappedContextSimplifyingCalculator<Double> calc =
-                new MappedContextSimplifyingCalculator<>(DoubleArithmeticGrammar.INSTANCE);
+                new MappedContextSimplifyingCalculator<>(
+                        DoubleArithmeticGrammar.INSTANCE);
 
         // create a solution from an expression
         MappedContextSimplifyingSolutionTree<Double> solution =

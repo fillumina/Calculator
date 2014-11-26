@@ -17,7 +17,7 @@ import org.junit.Test;
 public class SolutionTreeTest {
 
     private Calculator<Double,Map<String,Double>> calc =
-            new Calculator(DoubleArithmeticGrammar.INSTANCE);
+            new Calculator<>(DoubleArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldCreateASolutionTree() {

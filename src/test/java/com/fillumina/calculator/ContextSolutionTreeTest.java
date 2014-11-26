@@ -16,7 +16,8 @@ import org.junit.Test;
 public class ContextSolutionTreeTest {
 
     private MappedContextSimplifyingCalculator<Double> calculator =
-            new MappedContextSimplifyingCalculator<>(DoubleArithmeticGrammar.INSTANCE);
+            new MappedContextSimplifyingCalculator<>(
+                    DoubleArithmeticGrammar.INSTANCE);
 
     @Test
     public void shouldHaveAStaticSolution() {
@@ -77,7 +78,8 @@ public class ContextSolutionTreeTest {
 
         solution.simplifyWithVariables("x", 10d);
 
-        final MappedContextSimplifyingSolutionTree<Double> clonedSolution = solution.clone();
+        final MappedContextSimplifyingSolutionTree<Double> clonedSolution =
+                solution.clone();
 
         assertEquals(17, clonedSolution.simplifyWithVariables("y", 5d).get(0), 0);
     }
@@ -89,7 +91,8 @@ public class ContextSolutionTreeTest {
 
         solution.simplifyWithVariables("x", 10d);
 
-        final MappedContextSimplifyingSolutionTree<Double> clonedSolution = solution.clone();
+        final MappedContextSimplifyingSolutionTree<Double> clonedSolution =
+                solution.clone();
 
         clonedSolution.simplifyWithVariables("y", 5d);
 

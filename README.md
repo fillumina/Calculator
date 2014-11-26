@@ -1,6 +1,6 @@
 # Calculator
 
-An easy to configure, flexible, reasonably fast calculator API.
+An easy to configure, flexible, reasonably fast Java calculator API.
 
 * Parses a string expression according to the rules given by a
 grammar (includes a boolean grammar, an arithmetic grammar based on doubles
@@ -14,6 +14,13 @@ a very easy and intuitive way;
 To get a glipse of how to use it take a look at the tutorial unit test:
 [ATutorialTest.java]
 (/src/test/java/com/fillumina/calculator/ATutorialTest.java).
+
+
+## Version
+
+This is its first public release so it still has the 1.0-SNAPSHOT version tag.
+After a little bit of refiniment here it will be promoted to 1.0 and uploaded
+to maven central for general avaliability.
 
 
 ## Using the provided grammars to configure a ready to use calculator

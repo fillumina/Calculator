@@ -47,7 +47,8 @@ public class AbstractSignedDoubleOperandTest
 
     @Test
     public void shouldUseADifferentSeparator() {
-        final MappedContextSimplifyingCalculator<Double> calc = new MappedContextSimplifyingCalculator<>(
+        final MappedContextSimplifyingCalculator<Double> calc =
+                new MappedContextSimplifyingCalculator<>(
             new ContextedGrammarBuilder<Double>()
                 .add(new AbstractDoubleOperand<Double,Map<String,Double>>(0, '?') {
                     private static final long serialVersionUID = 1L;
